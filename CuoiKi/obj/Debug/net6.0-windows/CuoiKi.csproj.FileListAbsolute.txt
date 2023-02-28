@@ -19,3 +19,5 @@ C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\refint\CuoiK
 C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\CuoiKi.pdb
 C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\CuoiKi.genruntimeconfig.cache
 C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\ref\CuoiKi.dll
+C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\UI\Authentication\AuthenticationWindow.g.cs
+C:\Users\LENOVO\source\repos\CuoiKi\CuoiKi\obj\Debug\net6.0-windows\UI\Authentication\AuthenticationWindow.baml
