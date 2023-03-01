@@ -1,11 +1,5 @@
 ﻿using CuoiKi.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BCrypt.Net;
-using System.CodeDom;
 
 namespace CuoiKi.Models
 {
@@ -27,7 +21,7 @@ namespace CuoiKi.Models
             Birth = birth;
             Status = status;
             Gender = gender;
-            
+
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
