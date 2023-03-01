@@ -3,7 +3,7 @@ using System;
 
 namespace CuoiKi.Models
 {
-    class Employee
+    public class Employee
     {
         public String Id { get; set; }
         public String Name { get; set; }
