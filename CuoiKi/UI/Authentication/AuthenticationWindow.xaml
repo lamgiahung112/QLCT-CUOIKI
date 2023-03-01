@@ -8,6 +8,9 @@
         Title="TTH Corporation" Height="450" Width="800" WindowState="Maximized" WindowStyle="None">
     <Grid>
         <Button Height="30" Width="400">OK</Button>
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Login" 
+                   VerticalAlignment="Top" Background="Gray"
+                   Height="40" Width="800" TextAlignment="Center"
+                   FontSize="20" Foreground="Gold"/>
     </Grid>
 </Window>
