@@ -13,7 +13,9 @@ namespace CuoiKi.Models
         public DateTime StartingTime { get; set; }
         public DateTime? EndingTime { get; set;}
 
-        // Used when creating a new Session for an Employee
+        /// <summary>
+        /// Used when creating a new Session for an Employee 
+        /// </summary>
         public WorkSession(String employeeId) {
             Id = employeeId + DateTime.Now.ToShortDateString();
             EmployeeId = employeeId;
@@ -21,7 +23,9 @@ namespace CuoiKi.Models
             EndingTime = null;
         }
 
-        // Used when getting data from db
+        /// <summary>
+        /// Used when getting data from db
+        /// </summary>
         public WorkSession(String id, String employeeId, DateTime startingTime, DateTime endingTime) {
             Id = id;
             EmployeeId = employeeId;

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "B2mYRITm+bZKx5tz0Dy72qXQOQ5WcM/GHxYlzUShK8lcS2hu185fREueF27A6k3y4pifMLOwJktVsyQm4hG2Fw==",
+  "dgSpecHash": "Mfd7iYqj+KabtVX+Oj8gxIxZGJGS2HBDPr+89//YDd7mnVlXil+sbU75Cjngno2STkbUrPDq7TH4XGww09odXg==",
   "success": true,
   "projectFilePath": "C:\\Users\\LENOVO\\source\\repos\\CuoiKi\\CuoiKi\\CuoiKi.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\LENOVO\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
