@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using CuoiKi.States;
+using System;
+using System.Windows;
 
 namespace CuoiKi
 {
@@ -10,12 +12,6 @@ namespace CuoiKi
         public MainWindow()
         {
             InitializeComponent();
-
-            /*
-            Employee test = new Employee("Võ Trọng Tín", "Bình Định", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
-            EmployeeDAO eDAO = new EmployeeDAO();
-            eDAO.Add(test);
-            */
         }
     }
 }
