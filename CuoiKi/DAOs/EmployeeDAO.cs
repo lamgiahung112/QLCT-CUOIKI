@@ -17,7 +17,7 @@ namespace CuoiKi.DAOs
         public void Add(Employee entry)
         {
             // Not implement yet
-            string command = "";
+            string command = sqlConverter.GetAddCommandForEmployee(entry);
             dbc.Execute(command);
         }
         public void Delete(Employee entry)

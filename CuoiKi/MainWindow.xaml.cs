@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CuoiKi.Constants;
+using CuoiKi.DAOs;
+using CuoiKi.Models;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CuoiKi
 {
@@ -23,6 +14,10 @@ namespace CuoiKi
         public MainWindow()
         {
             InitializeComponent();
+
+            Employee test = new Employee("Võ Trọng", "Hồ Chí Minh", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
+            EmployeeDAO eDAO = new EmployeeDAO();
+            eDAO.Add(test);
         }
     }
 }
