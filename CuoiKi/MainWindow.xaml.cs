@@ -1,8 +1,4 @@
-﻿using CuoiKi.Constants;
-using CuoiKi.DAOs;
-using CuoiKi.Models;
-using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace CuoiKi
 {
@@ -15,9 +11,11 @@ namespace CuoiKi
         {
             InitializeComponent();
 
-            Employee test = new Employee("Võ Trọng322023", "Hồ Chí Minh", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
+            /*
+            Employee test = new Employee("Võ Trọng Tín", "Bình Định", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
             EmployeeDAO eDAO = new EmployeeDAO();
-            eDAO.Delete(test);
+            eDAO.Add(test);
+            */
         }
     }
 }

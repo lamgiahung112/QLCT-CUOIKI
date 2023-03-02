@@ -16,20 +16,17 @@ namespace CuoiKi.DAOs
         }
         public void Add(Employee entry)
         {
-            // Not implement yet
             string command = sqlConverter.GetAddCommandForEmployee(entry);
             dbc.Execute(command);
         }
-        public void Delete(Employee entry)
+        public void Delete(string id)
         {
-            // Not implement yet
-            string command = sqlConverter.GetDeleteCommandForEmployee(entry);
+            string command = sqlConverter.GetDeleteCommandForEmployee(id);
             dbc.Execute(command);
         }
-        public void Modify(Employee entry)
+        public void Modify(string id, Employee entry)
         {
-            // Not implement yet
-            string command = "";
+            string command = sqlConverter.GetUpdateCommandForEmployee(id, entry);
             dbc.Execute(command);
         }
         public List<Employee> GetAll()

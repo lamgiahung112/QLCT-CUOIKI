@@ -26,9 +26,29 @@ namespace CuoiKi.DAOs
                 employee.Password,
                 employee.Gender.ToString());
         }
-        public string GetDeleteCommandForEmployee(Employee employee)
+        public string GetDeleteCommandForEmployee(string id)
         {
-            return string.Format("DELETE FROM Employees WHERE ID = N'{0}'", employee.Id);
+            return string.Format("DELETE FROM Employees WHERE ID = N'{0}'", id);
+        }
+        public string GetUpdateCommandForEmployee(string id, Employee employee)
+        {
+            return string.Format(
+                "UPDATE Employees " +
+                "SET " +
+                "[Name] = N'{0}', " +
+                "[Address] = N'{1}', " +
+                "Birth = '{2}', " +
+                "EmployeeStatus = '{3}', " +
+                "[Password] = '{4}', " +
+                "Gender = '{5}' " +
+                "WHERE ID = N'{6}';",
+                employee.Name,
+                employee.Address,
+                employee.Birth.ToString("yyyy-MM-dd"),
+                employee.Status.ToString(),
+                employee.Password,
+                employee.Gender.ToString(),
+                id);
         }
     }
 }
