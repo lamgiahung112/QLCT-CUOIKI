@@ -5,7 +5,7 @@ namespace CuoiKi.DAOs
     public class SqlConverter
     {
         public SqlConverter() { }
-        public string GetAddCommandForEmployee(Employee employee)
+        public static string GetAddCommandForEmployee(Employee employee)
         {
             return string.Format(
                 "INSERT INTO Employees (" +
@@ -26,11 +26,11 @@ namespace CuoiKi.DAOs
                 employee.Password,
                 employee.Gender.ToString());
         }
-        public string GetDeleteCommandForEmployee(string id)
+        public static string GetDeleteCommandForEmployee(string id)
         {
             return string.Format("DELETE FROM Employees WHERE ID = N'{0}'", id);
         }
-        public string GetUpdateCommandForEmployee(string id, Employee employee)
+        public static string GetUpdateCommandForEmployee(string id, Employee employee)
         {
             return string.Format(
                 "UPDATE Employees " +

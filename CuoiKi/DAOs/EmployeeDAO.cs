@@ -8,25 +8,23 @@ namespace CuoiKi.DAOs
     class EmployeeDAO : IDAO<Employee>
     {
         private readonly DBConnection dbc;
-        private readonly SqlConverter sqlConverter;
         public EmployeeDAO()
         {
             dbc = new DBConnection();
-            sqlConverter = new SqlConverter();
         }
         public void Add(Employee entry)
         {
-            string command = sqlConverter.GetAddCommandForEmployee(entry);
+            string command = SqlConverter.GetAddCommandForEmployee(entry);
             dbc.Execute(command);
         }
         public void Delete(string id)
         {
-            string command = sqlConverter.GetDeleteCommandForEmployee(id);
+            string command = SqlConverter.GetDeleteCommandForEmployee(id);
             dbc.Execute(command);
         }
         public void Modify(string id, Employee entry)
         {
-            string command = sqlConverter.GetUpdateCommandForEmployee(id, entry);
+            string command = SqlConverter.GetUpdateCommandForEmployee(id, entry);
             dbc.Execute(command);
         }
         public List<Employee> GetAll()
