@@ -10,10 +10,11 @@ namespace CuoiKi.Models
         public String Address { get; set; }
         public DateTime Birth { get; set; }
         public EmployeeStatus Status { get; set; }
+        public Role Role { get; set; }
         public String Password { get; set; }
         public Gender Gender { get; set; }
 
-        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender)
+        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
         {
             Id = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
@@ -21,11 +22,11 @@ namespace CuoiKi.Models
             Birth = birth;
             Status = status;
             Gender = gender;
-
+            Role = role;
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
-        public Employee(string id, string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender)
+        public Employee(string id, string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
         {
             Id = id;
             Name = name;
@@ -34,6 +35,7 @@ namespace CuoiKi.Models
             Status = status;
             Password = password;
             Gender = gender;
+            Role = role;
         }
     }
 }

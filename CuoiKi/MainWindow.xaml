@@ -1,4 +1,4 @@
-﻿<Window x:Class="CuoiKi.MainWindow"
+<Window x:Class="CuoiKi.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -60,9 +60,6 @@
                         materialDesign:ElevationAssist.Elevation="Dp0"
                         Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="15"
                         FontSize="18" Content="Create Account" />-->
-
-
-
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>
