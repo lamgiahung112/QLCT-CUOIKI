@@ -23,7 +23,7 @@ namespace CuoiKi.DAOs
         public void Delete(Employee entry)
         {
             // Not implement yet
-            string command = "";
+            string command = sqlConverter.GetDeleteCommandForEmployee(entry);
             dbc.Execute(command);
         }
         public void Modify(Employee entry)

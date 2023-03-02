@@ -28,7 +28,7 @@ namespace CuoiKi.DAOs
         }
         public string GetDeleteCommandForEmployee(Employee employee)
         {
-            return "";
+            return string.Format("DELETE FROM Employees WHERE ID = N'{0}'", employee.Id);
         }
     }
 }

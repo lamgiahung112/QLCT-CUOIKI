@@ -50,6 +50,6 @@ VALUES ('032323', '01', '2023-12-22T08:15:00', '2023-12-22T18:05:10');
 INSERT INTO WorkSessions(ID, EmployeeID, StartingTime, EndingTime)
 VALUES ('313213', '02', '2023-12-21T08:08:00', '2023-12-21T17:00:10');
 -- Check if success
-SELECT * FROM Employees
+SELECT ID FROM Employees
 GO
 SELECT * FROM WorkSessions

@@ -15,9 +15,9 @@ namespace CuoiKi
         {
             InitializeComponent();
 
-            Employee test = new Employee("Võ Trọng", "Hồ Chí Minh", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
+            Employee test = new Employee("Võ Trọng322023", "Hồ Chí Minh", new DateTime(2003, 08, 08), EmployeeStatus.Active, "vovovo", Gender.Male);
             EmployeeDAO eDAO = new EmployeeDAO();
-            eDAO.Add(test);
+            eDAO.Delete(test);
         }
     }
 }
