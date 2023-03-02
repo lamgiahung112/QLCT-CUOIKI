@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace CuoiKi.DAOs
 {
@@ -50,7 +53,7 @@ namespace CuoiKi.DAOs
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("USE companyDB " + s, conn);
+                SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
                 int noRow = (int)command.ExecuteScalar();
                 conn.Close();
                 return noRow;
@@ -58,12 +61,51 @@ namespace CuoiKi.DAOs
             catch (Exception ex)
             {
                 MessageBox.Show("Tìm thất bại " + ex.Message);
+                conn.Close();
                 return 0;
             }
             finally
             {
                 conn.Close();
             }
+        }
+
+        public SqlDataReader? ExecuteReader(string s)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
+                return command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tìm thất bại " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
+
+        public object? ExecuteScalar(string s)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
+                return command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tìm thất bại " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
         }
     }
 }
