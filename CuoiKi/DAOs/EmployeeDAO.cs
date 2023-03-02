@@ -16,16 +16,19 @@ namespace CuoiKi.DAOs
         }
         public void Add(Employee entry)
         {
+            // Not implement yet
             string command = "";
             dbc.Execute(command);
         }
         public void Delete(Employee entry)
         {
+            // Not implement yet
             string command = "";
             dbc.Execute(command);
         }
         public void Modify(Employee entry)
         {
+            // Not implement yet
             string command = "";
             dbc.Execute(command);
         }
