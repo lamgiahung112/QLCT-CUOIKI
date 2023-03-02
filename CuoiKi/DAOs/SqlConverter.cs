@@ -50,5 +50,17 @@ namespace CuoiKi.DAOs
                 employee.Gender.ToString(),
                 id);
         }
+        public static string GetAddCommandForWorkSession(WorkSession workSession)
+        {
+            return string.Format("");
+        }
+        public static string GetDeleteCommandForWorkSession(string id)
+        {
+            return string.Format("");
+        }
+        public static string GetUpdateCommandForWorkSession(string id, WorkSession workSession)
+        {
+            return string.Format("");
+        }
     }
 }

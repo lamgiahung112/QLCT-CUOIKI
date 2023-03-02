@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CuoiKi.DAOs
 {
-    class EmployeeDAO : IDAO<Employee>
+    public class EmployeeDAO : IDAO<Employee>
     {
         private readonly DBConnection dbc;
         public EmployeeDAO()
