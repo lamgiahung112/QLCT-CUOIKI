@@ -1,15 +1,9 @@
 ﻿using CuoiKi.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BCrypt.Net;
-using System.CodeDom;
 
 namespace CuoiKi.Models
 {
-    class Employee
+    public class Employee
     {
         public String Id { get; set; }
         public String Name { get; set; }
@@ -21,13 +15,13 @@ namespace CuoiKi.Models
 
         public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender)
         {
-            Id = name.Trim() + DateTime.Now.ToShortDateString() + new Random().Next().ToString();
+            Id = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
             Address = address;
             Birth = birth;
             Status = status;
             Gender = gender;
-            
+
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
