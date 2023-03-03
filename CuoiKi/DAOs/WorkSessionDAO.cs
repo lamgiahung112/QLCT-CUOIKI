@@ -7,10 +7,10 @@ namespace CuoiKi.DAOs
 {
     public class WorkSessionDAO : IDAO<WorkSession>
     {
-        DBConnection dbc;
+        private readonly DBConnection<WorkSession> dbc;
         public WorkSessionDAO()
         {
-            dbc = new DBConnection();
+            dbc = new DBConnection<WorkSession>();
         }
         // Not implement yet
         public void Add(WorkSession entry)
@@ -29,21 +29,15 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForWorkSession(id, entry);
             dbc.Execute(command);
         }
-        public List<WorkSession> GetAll()
+        public List<WorkSession>? GetAll()
         {
-            string command = "";
-            SqlDataReader? reader = dbc.ExecuteReader(command);
-            if (reader == null)
-            {
-                return new List<WorkSession>();
-            }
-            return reader.Cast<WorkSession>().ToList();
+            return null;
         }
 
         public WorkSession? GetOne(string id)
         {
             string command = "";
-            return (WorkSession?)dbc.ExecuteScalar(command);
+            return null;
         }
 
     }

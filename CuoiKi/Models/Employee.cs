@@ -26,16 +26,19 @@ namespace CuoiKi.Models
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
         }
-        public Employee(string id, string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
+        /// <summary>
+        /// Constructor method used to map data from SQL to Employee
+        /// </summary>
+        public Employee(String ID, String Name, String Address, DateTime Birth, String EmployeeStatus, String Password, String Gender, String Role)
         {
-            Id = id;
-            Name = name;
-            Address = address;
-            Birth = birth;
-            Status = status;
-            Password = password;
-            Gender = gender;
-            Role = role;
+            this.Id = ID;
+            this.Name = Name;
+            this.Address = Address;
+            this.Birth = Birth;
+            this.Status = (EmployeeStatus)Enum.Parse(typeof(EmployeeStatus), EmployeeStatus);
+            this.Password = Password;
+            this.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
+            this.Role = (Role)Enum.Parse(typeof(Role), Role);
         }
     }
 }
