@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CuoiKi.Controllers
 {
@@ -20,10 +21,10 @@ namespace CuoiKi.Controllers
         /// Login a user
         /// </summary>
         /// <returns>Whether the operation was successful</returns>
-        public bool Login(string id, string password)
+        public Employee? Login(string id, string password)
         {
             Employee? foundEmployee = employeeDAO.GetOne(id);
-            return foundEmployee != null && BCrypt.Net.BCrypt.Verify(password, foundEmployee.Password);
+            return foundEmployee != null && BCrypt.Net.BCrypt.Verify(password, foundEmployee.Password) ? foundEmployee : null;
         }
     }
 }

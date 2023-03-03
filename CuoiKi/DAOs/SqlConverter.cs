@@ -1,4 +1,5 @@
-﻿using CuoiKi.Models;
+﻿using CuoiKi.Constants;
+using CuoiKi.Models;
 
 namespace CuoiKi.DAOs
 {
@@ -9,7 +10,7 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "INSERT INTO Employees (" +
-                "ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender) " +
+                "ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender, Role) " +
                 "VALUES (" +
                 "N'{0}', " +
                 "N'{1}', " +
@@ -17,14 +18,16 @@ namespace CuoiKi.DAOs
                 "'{3}', " +
                 "'{4}', " +
                 "'{5}', " +
-                "'{6}');",
+                "'{6}', " +
+                "'{7}');",
                 employee.Id,
                 employee.Name,
                 employee.Address,
                 employee.Birth.ToString("yyyy-MM-dd"),
-                employee.Status.ToString(),
+                EnumMapper.mapToString(employee.Status),
                 employee.Password,
-                employee.Gender.ToString());
+                EnumMapper.mapToString(employee.Gender),
+                EnumMapper.mapToString(employee.Role));
         }
         public static string GetDeleteCommandForEmployee(string id)
         {
@@ -45,9 +48,9 @@ namespace CuoiKi.DAOs
                 employee.Name,
                 employee.Address,
                 employee.Birth.ToString("yyyy-MM-dd"),
-                employee.Status.ToString(),
+                nameof(employee.Status),
                 employee.Password,
-                employee.Gender.ToString(),
+                nameof(employee.Gender),
                 id);
         }
         public static string GetAddCommandForWorkSession(WorkSession workSession)

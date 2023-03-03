@@ -26,7 +26,8 @@ CREATE TABLE Employees (
     Birth DATETIME NOT NULL,
     EmployeeStatus NVARCHAR(255) NOT NULL,
     [Password] NVARCHAR(255) NOT NULL,
-    Gender NVARCHAR(255) NOT NULL
+    Gender NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(255) NOT NULL
 );
 -- Create WorkSessions table
 CREATE TABLE WorkSessions (
@@ -35,21 +36,6 @@ CREATE TABLE WorkSessions (
     StartingTime DATETIME NOT NULL,
     EndingTime DATETIME
 );
--- Add records to Employees table
-INSERT INTO Employees (ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender)
-VALUES ('01', N'Phạm Chiến Thắng', N'Tp. Hồ Chí Minh', '1999-2-3', 'Active', 'victorydak', 'Male');
-INSERT INTO Employees (ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender)
-VALUES ('02', N'Võ Trọng Tín', N'Tp. Hồ Chí Minh', '1998-8-8', 'Active', 'tincuibap', 'Male');
-INSERT INTO Employees (ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender)
-VALUES ('03', N'Lâm Gia Hưng', N'Tp. Hồ Chí Minh', '1996-1-1', 'Active', 'trikohung', 'Male');
--- Add records to WorkSessions table
-INSERT INTO WorkSessions(ID, EmployeeID, StartingTime, EndingTime)
-VALUES ('013243', '03', '2023-12-23T08:25:10', '2023-12-23T17:05:10');
-INSERT INTO WorkSessions(ID, EmployeeID, StartingTime, EndingTime)
-VALUES ('032323', '01', '2023-12-22T08:15:00', '2023-12-22T18:05:10');
-INSERT INTO WorkSessions(ID, EmployeeID, StartingTime, EndingTime)
-VALUES ('313213', '02', '2023-12-21T08:08:00', '2023-12-21T17:00:10');
--- Check if success
-SELECT * FROM Employees
-GO
-SELECT * FROM WorkSessions
+
+-- Add admin
+Insert into Employees Values (N'admin', N'admin', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff');
