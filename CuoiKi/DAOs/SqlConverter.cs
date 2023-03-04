@@ -43,27 +43,40 @@ namespace CuoiKi.DAOs
                 "Birth = '{2}', " +
                 "EmployeeStatus = '{3}', " +
                 "[Password] = '{4}', " +
-                "Gender = '{5}' " +
-                "WHERE ID = N'{6}';",
+                "Gender = '{5}', " +
+                "[Role] = '{6}' " +
+                "WHERE ID = N'{7}';",
                 employee.Name,
                 employee.Address,
                 employee.Birth.ToString("yyyy-MM-dd"),
                 nameof(employee.Status),
                 employee.Password,
                 nameof(employee.Gender),
+                nameof(employee.Role),
                 id);
         }
         public static string GetAddCommandForWorkSession(WorkSession workSession)
         {
-            return string.Format("");
+            return string.Format(
+                "INSERT INTO WorkSessions(" +
+                "ID, EmployeeID, StartingTime, EndingTime) " +
+                "VALUES (" +
+                "N'{0}', " +
+                "N'{1}', " +
+                "'{2}', " +
+                "{3});",
+                workSession.Id,
+                workSession.EmployeeId,
+                workSession.StartingTime.ToString(),
+                workSession.EndingTime.HasValue ? "'" + workSession.EndingTime.ToString() + "'" : "NULL");
         }
         public static string GetDeleteCommandForWorkSession(string id)
         {
-            return string.Format("");
+            return string.Format("DELETE FROM WorkSessions WHERE ID = N'{0}'", id);
         }
         public static string GetUpdateCommandForWorkSession(string id, WorkSession workSession)
         {
-            return string.Format("");
+            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime.ToString(), id);
         }
     }
 }

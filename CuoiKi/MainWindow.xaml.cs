@@ -1,16 +1,10 @@
-using CuoiKi.Constants;
+﻿using CuoiKi.Constants;
 using CuoiKi.Controllers;
-using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Manager;
 using CuoiKi.UI.Staff;
 using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,7 +19,7 @@ namespace CuoiKi
         public MainWindow()
         {
             InitializeComponent();
-            _authController= new AuthenticationController();
+            _authController = new AuthenticationController();
         }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
@@ -60,6 +54,7 @@ namespace CuoiKi
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Employee? foundEmployee = _authController.Login(txtUsername.Text, txtPassword.Password);
+
             if (foundEmployee == null)
             {
                 MessageBox.Show("Invalid Credentials");
