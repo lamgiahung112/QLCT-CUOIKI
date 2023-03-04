@@ -54,19 +54,10 @@ namespace CuoiKi
             DragMove();
         }
 
-        private void onLoginButtonClick(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Employee? employee = _authController.Login(txtUsername.Text, txtPassword.Password);
-            
-            if (employee == null)
-            {
-                MessageBox.Show("Invalid Credentials");
-                return;
-            }
-            LoginInfoState.getInstance().Id = employee.Id;
-            LoginInfoState.getInstance().Name = employee.Name;
-            LoginInfoState.getInstance().Role = employee.Role;
-            MessageBox.Show("Logged In as " + LoginInfoState.getInstance().Name);
+            UI.Staff.UI_StaffForm uI_StaffForm = new UI.Staff.UI_StaffForm();
+            uI_StaffForm.Show();
         }
     }
 }
