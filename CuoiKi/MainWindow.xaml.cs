@@ -1,7 +1,10 @@
+using CuoiKi.Constants;
 using CuoiKi.Controllers;
 using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.Manager;
+using CuoiKi.UI.Staff;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -56,8 +59,27 @@ namespace CuoiKi
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            UI.Staff.UI_StaffForm uI_StaffForm = new UI.Staff.UI_StaffForm();
-            uI_StaffForm.Show();
+            Employee? foundEmployee = _authController.Login(txtUsername.Text, txtPassword.Password);
+            if (foundEmployee == null)
+            {
+                MessageBox.Show("Invalid Credentials");
+                return;
+            }
+
+            LoginInfoState.getInstance().Id = foundEmployee.Id;
+            LoginInfoState.getInstance().Name = foundEmployee.Name;
+            LoginInfoState.getInstance().Role = foundEmployee.Role;
+
+            if (foundEmployee.Role == Role.Staff)
+            {
+                UI_StaffForm uI_StaffForm = new UI_StaffForm();
+                uI_StaffForm.Show();
+            }
+            else if (foundEmployee.Role != Role.Staff)
+            {
+                UI_ManagerForm uI_ManagerForm = new UI_ManagerForm();
+                uI_ManagerForm.Show();
+            }
         }
     }
 }

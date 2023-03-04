@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="logo.png" />
     <None Remove="UI\logo.png" />
+    <None Remove="UI\Manager\manager.png" />
+    <None Remove="UI\Staff\account.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,8 @@
     <Resource Include="logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="UI\Manager\manager.png" />
+    <Resource Include="UI\Staff\account.png" />
   </ItemGroup>
 
 </Project>

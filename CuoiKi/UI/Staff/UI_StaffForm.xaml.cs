@@ -22,7 +22,7 @@ namespace CuoiKi.UI.Staff
             InitializeComponent();
         }
 
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
@@ -30,9 +30,9 @@ namespace CuoiKi.UI.Staff
             }
         }
 
-        private bool IsMaximized = false;
+        public bool IsMaximized = false;
 
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount ==2)
             {
