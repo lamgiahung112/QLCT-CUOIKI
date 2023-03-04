@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
@@ -7,7 +9,7 @@ using System.Windows.Documents;
 
 namespace CuoiKi.DAOs
 {
-    public class DBConnection
+    public class DBConnection<T>
     {
         private SqlConnection conn;
         public DBConnection()
@@ -70,32 +72,12 @@ namespace CuoiKi.DAOs
             }
         }
 
-        public SqlDataReader? ExecuteReader(string s)
+        public List<T>? ExecuteWithResults(string s)
         {
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
-                return command.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Tìm thất bại " + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
-        }
-
-        public object? ExecuteScalar(string s)
-        {
-            try
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
-                return command.ExecuteScalar();
+                return Dapper.SqlMapper.Query<T>(conn, "use companyDB;" + s).ToList();
             }
             catch (Exception ex)
             {

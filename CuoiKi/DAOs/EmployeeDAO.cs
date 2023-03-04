@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows;
 
 namespace CuoiKi.DAOs
 {
     public class EmployeeDAO : IDAO<Employee>
     {
-        private readonly DBConnection dbc;
+        private readonly DBConnection<Employee> dbc;
         public EmployeeDAO()
         {
-            dbc = new DBConnection();
+            dbc = new DBConnection<Employee>();
         }
         public void Add(Employee entry)
         {
@@ -27,20 +28,17 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForEmployee(id, entry);
             dbc.Execute(command);
         }
-        public List<Employee> GetAll()
+        public List<Employee>? GetAll()
         {
             string command = "";
-            SqlDataReader? reader = dbc.ExecuteReader(command);
-            if (reader == null)
-            {
-                return new List<Employee>();
-            }
-            return reader.Cast<Employee>().ToList();
+            return null;
         }
         public Employee? GetOne(string id)
         {
-            string command = "";
-            return (Employee?)dbc.ExecuteScalar(command);
+            string command = string.Format("SELECT * FROM Employees WHERE ID = '{0}'", id);
+            List<Employee>? list = dbc.ExecuteWithResults(command);
+            if (list == null || list.Count == 0) { return null; }
+            return list[0];
         }
     }
 }

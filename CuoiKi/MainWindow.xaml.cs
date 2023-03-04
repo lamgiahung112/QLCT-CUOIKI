@@ -1,3 +1,7 @@
+using CuoiKi.Controllers;
+using CuoiKi.DAOs;
+using CuoiKi.Models;
+using CuoiKi.States;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -14,9 +18,11 @@ namespace CuoiKi
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AuthenticationController _authController;
         public MainWindow()
         {
             InitializeComponent();
+            _authController= new AuthenticationController();
         }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
