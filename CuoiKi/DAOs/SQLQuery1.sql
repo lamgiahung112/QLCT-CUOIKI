@@ -27,8 +27,9 @@ CREATE TABLE Employees (
     EmployeeStatus NVARCHAR(255) NOT NULL,
     [Password] NVARCHAR(255) NOT NULL,
     Gender NVARCHAR(255) NOT NULL,
-    Role NVARCHAR(255) NOT NULL
+    [Role] NVARCHAR(255) NOT NULL
 );
+GO
 -- Create WorkSessions table
 CREATE TABLE WorkSessions (
     ID NVARCHAR(255) NOT NULL PRIMARY KEY,
@@ -36,6 +37,9 @@ CREATE TABLE WorkSessions (
     StartingTime DATETIME NOT NULL,
     EndingTime DATETIME
 );
-
+GO
+-- SELECT * FROM Employees
+-- SELECT * FROM WorkSessions
 -- Add admin
-Insert into Employees Values (N'admin', N'admin', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff');
+Insert into Employees(ID, [Name], [Address], Birth, EmployeeStatus, [Password], Gender, [Role])
+Values (N'admin', N'admin', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff');

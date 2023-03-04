@@ -1,8 +1,5 @@
 ﻿using CuoiKi.Models;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Windows;
 
 namespace CuoiKi.DAOs
 {
@@ -35,7 +32,7 @@ namespace CuoiKi.DAOs
         }
         public Employee? GetOne(string id)
         {
-            string command = string.Format("SELECT * FROM Employees WHERE ID = '{0}'", id);
+            string command = string.Format("SELECT * FROM Employees WHERE ID = N'{0}'", id);
             List<Employee>? list = dbc.ExecuteWithResults(command);
             if (list == null || list.Count == 0) { return null; }
             return list[0];

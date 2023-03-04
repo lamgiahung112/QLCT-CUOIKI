@@ -1,7 +1,5 @@
 ﻿using CuoiKi.Models;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
 
 namespace CuoiKi.DAOs
 {
@@ -36,9 +34,10 @@ namespace CuoiKi.DAOs
 
         public WorkSession? GetOne(string id)
         {
-            string command = "";
-            return null;
+            string command = string.Format("SELECT * FROM WorkSessions WHERE ID = N'{0}'", id);
+            List<WorkSession>? list = dbc.ExecuteWithResults(command);
+            if (list == null || list.Count == 0) { return null; }
+            return list[0];
         }
-
     }
 }

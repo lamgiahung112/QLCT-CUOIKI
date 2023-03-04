@@ -1,8 +1,9 @@
-using CuoiKi.Controllers;
+﻿using CuoiKi.Controllers;
 using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
 using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +18,17 @@ namespace CuoiKi
         public MainWindow()
         {
             InitializeComponent();
-            _authController= new AuthenticationController();
+            _authController = new AuthenticationController();
+
+            WorkSession workSession = new WorkSession("Võ Trọng Tín342023");
+            WorkSessionDAO wsDAO = new WorkSessionDAO();
+            WorkSession? foundWorkSession = wsDAO.GetOne("Võ Trọng Tín3420233/4/2023");
+            if (foundWorkSession is object)
+            {
+                foundWorkSession.EndingTime = DateTime.Now;
+                wsDAO.Modify("Võ Trọng Tín3420233/4/2023", foundWorkSession);
+            }
+
         }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
@@ -52,7 +63,7 @@ namespace CuoiKi
         private void onLoginButtonClick(object sender, RoutedEventArgs e)
         {
             Employee? employee = _authController.Login(txtUsername.Text, txtPassword.Password);
-            
+
             if (employee == null)
             {
                 MessageBox.Show("Invalid Credentials");
