@@ -1,4 +1,14 @@
-﻿namespace CuoiKi
+﻿using CuoiKi.Constants;
+using CuoiKi.Controllers;
+using CuoiKi.Models;
+using CuoiKi.States;
+using CuoiKi.UI.Manager;
+using CuoiKi.UI.Staff;
+using MaterialDesignThemes.Wpf;
+using System.Windows;
+using System.Windows.Input;
+
+namespace CuoiKi
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -43,9 +53,9 @@
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Employee? employee = _authController.Login(txtUsername.Text, txtPassword.Password);
+            Employee? foundEmployee = _authController.Login(txtUsername.Text, txtPassword.Password);
 
-            if (employee == null)
+            if (foundEmployee == null)
             {
                 MessageBox.Show("Invalid Credentials");
                 return;
