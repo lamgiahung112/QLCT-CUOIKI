@@ -54,7 +54,7 @@
                 <Button Margin="0 50 0 0" x:Name="btnLogin" Style="{StaticResource MaterialDesignFlatMidBgButton}" 
                         materialDesign:ElevationAssist.Elevation="Dp0" 
                         Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="15"
-                        FontSize="18" Content="LOGIN"/>
+                        FontSize="18" Content="LOGIN" Click="btnLogin_Click"/>
 
                 <!--<Button Margin="0 20 0 0" x:Name="btnSignup" Style="{StaticResource MaterialDesignFlatButton}" 
                         materialDesign:ElevationAssist.Elevation="Dp0"

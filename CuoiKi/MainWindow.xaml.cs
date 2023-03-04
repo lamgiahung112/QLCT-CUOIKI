@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CuoiKi
 {
@@ -45,6 +46,12 @@ namespace CuoiKi
         {
             base.OnMouseLeftButtonDown(e);
             DragMove();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Staff.UI_StaffForm uI_StaffForm = new UI.Staff.UI_StaffForm();
+            uI_StaffForm.Show();
         }
     }
 }
