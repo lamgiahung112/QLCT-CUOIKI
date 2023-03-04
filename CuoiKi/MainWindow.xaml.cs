@@ -1,11 +1,4 @@
-﻿using CuoiKi.Controllers;
-using CuoiKi.Models;
-using CuoiKi.States;
-using MaterialDesignThemes.Wpf;
-using System.Windows;
-using System.Windows.Input;
-
-namespace CuoiKi
+﻿namespace CuoiKi
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -48,7 +41,7 @@ namespace CuoiKi
             DragMove();
         }
 
-        private void onLoginButtonClick(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Employee? employee = _authController.Login(txtUsername.Text, txtPassword.Password);
 
@@ -57,10 +50,21 @@ namespace CuoiKi
                 MessageBox.Show("Invalid Credentials");
                 return;
             }
-            LoginInfoState.getInstance().Id = employee.Id;
-            LoginInfoState.getInstance().Name = employee.Name;
-            LoginInfoState.getInstance().Role = employee.Role;
-            MessageBox.Show("Logged In as " + LoginInfoState.getInstance().Name);
+
+            LoginInfoState.getInstance().Id = foundEmployee.Id;
+            LoginInfoState.getInstance().Name = foundEmployee.Name;
+            LoginInfoState.getInstance().Role = foundEmployee.Role;
+
+            if (foundEmployee.Role == Role.Staff)
+            {
+                UI_StaffForm uI_StaffForm = new UI_StaffForm();
+                uI_StaffForm.Show();
+            }
+            else if (foundEmployee.Role != Role.Staff)
+            {
+                UI_ManagerForm uI_ManagerForm = new UI_ManagerForm();
+                uI_ManagerForm.Show();
+            }
         }
     }
 }
