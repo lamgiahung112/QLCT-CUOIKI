@@ -1,9 +1,7 @@
 ﻿using CuoiKi.Controllers;
-using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
 using MaterialDesignThemes.Wpf;
-using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,16 +17,6 @@ namespace CuoiKi
         {
             InitializeComponent();
             _authController = new AuthenticationController();
-
-            WorkSession workSession = new WorkSession("Võ Trọng Tín342023");
-            WorkSessionDAO wsDAO = new WorkSessionDAO();
-            WorkSession? foundWorkSession = wsDAO.GetOne("Võ Trọng Tín3420233/4/2023");
-            if (foundWorkSession is object)
-            {
-                foundWorkSession.EndingTime = DateTime.Now;
-                wsDAO.Modify("Võ Trọng Tín3420233/4/2023", foundWorkSession);
-            }
-
         }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
