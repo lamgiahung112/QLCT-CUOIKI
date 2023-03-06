@@ -1,12 +1,52 @@
 ﻿using CuoiKi.Controllers;
 using CuoiKi.HelperClasses;
 using CuoiKi.States;
+using System;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
 {
     public class StaffFormViewModel : ViewModelBase
     {
+        private WorkSessionController workSessionController;
+        private string currentUserId = "";
+        public StaffFormViewModel()
+        {
+            workSessionController = new WorkSessionController();
+            InitializeInfo();
+        }
+
+        private void InitializeInfo()
+        {
+            currentUserId = LoginInfoState.getInstance().Id;
+        }
+
+        #region Binding CurrentDate
+        private string _currentDate = "Today is: " + DateTime.Now.ToString();
+        public string CurrentDate
+        {
+            get { return _currentDate; }
+            set
+            {
+                _currentDate = "Today is: " + value.ToString();
+                OnPropertyChanged(nameof(CurrentDate));
+            }
+        }
+        #endregion
+
+        #region Binding CurrentStatus
+        private string _currentStatus = "Your current status: ";
+        public string CurrentStatus
+        {
+            get { return _currentStatus; }
+            set
+            {
+                _currentStatus = value;
+                OnPropertyChanged(nameof(CurrentStatus));
+            }
+        }
+        #endregion
+
         #region Show check in/out button properties
         private bool _showCheckInButton = true;
         public bool ShowCheckInButton
@@ -34,7 +74,6 @@ namespace CuoiKi.ViewModels
         private ICommand? _checkInCommand;
         private void CheckIn()
         {
-            WorkSessionController workSessionController = new WorkSessionController();
             workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
         }
         private readonly bool canCheckIn = true;
@@ -57,7 +96,6 @@ namespace CuoiKi.ViewModels
         private ICommand? _checkOutCommand;
         private void CheckOut()
         {
-            WorkSessionController workSessionController = new WorkSessionController();
             workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
         }
         private readonly bool canCheckOut = true;
