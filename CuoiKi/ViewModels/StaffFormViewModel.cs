@@ -1,12 +1,13 @@
-﻿using CuoiKi.HelperClasses;
-using System.Windows;
+﻿using CuoiKi.Controllers;
+using CuoiKi.HelperClasses;
+using CuoiKi.States;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
 {
     public class StaffFormViewModel : ViewModelBase
     {
-        private bool _showCheckInButton = false;
+        private bool _showCheckInButton = true;
         public bool ShowCheckInButton
         {
             get { return _showCheckInButton; }
@@ -16,7 +17,7 @@ namespace CuoiKi.ViewModels
                 OnPropertyChanged(nameof(ShowCheckInButton));
             }
         }
-        private bool _showCheckOutButton = false;
+        private bool _showCheckOutButton = true;
         public bool ShowCheckOutButton
         {
             get { return _showCheckOutButton; }
@@ -30,7 +31,8 @@ namespace CuoiKi.ViewModels
         private ICommand? _checkInCommand;
         private void CheckIn()
         {
-            MessageBox.Show("Hi");
+            WorkSessionController workSessionController = new WorkSessionController();
+            workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
         }
         private readonly bool canCheckIn = true;
         public ICommand CheckInCommand

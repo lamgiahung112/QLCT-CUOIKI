@@ -27,14 +27,17 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForWorkSession(id, entry);
             dbc.Execute(command);
         }
-        public List<WorkSession>? GetAll()
+        public List<WorkSession>? GetAll(string id)
         {
-            return null;
+            string command = string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+            List<WorkSession>? list = dbc.ExecuteWithResults(command);
+            if (list == null || list.Count == 0) { return null; }
+            return list;
         }
 
         public WorkSession? GetOne(string id)
         {
-            string command = string.Format("SELECT * FROM WorkSessions WHERE ID = N'{0}'", id);
+            string command = string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
             List<WorkSession>? list = dbc.ExecuteWithResults(command);
             if (list == null || list.Count == 0) { return null; }
             return list[0];

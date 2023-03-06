@@ -25,7 +25,7 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForEmployee(id, entry);
             dbc.Execute(command);
         }
-        public List<Employee>? GetAll()
+        public List<Employee>? GetAll(string id)
         {
             string command = "";
             return null;

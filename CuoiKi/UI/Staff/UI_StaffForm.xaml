@@ -104,11 +104,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                
-                <Button Command ="{Binding CheckInCommand}" Visibility="{Binding ShowCheckInButton, Converter = {StaticResource BoolToVis}}" Grid.Row="0">
+                <Button Command ="{Binding CheckInCommand}" Visibility="{Binding ShowCheckInButton, Converter = {StaticResource BoolToVis}}" Grid.Row="2">
                     Check in
+                </Button>
+                <Button Visibility="{Binding ShowCheckOutButton, Converter = {StaticResource BoolToVis}}" Grid.Row="3">
+                    Check out
                 </Button>
             </Grid>
         </Grid>
