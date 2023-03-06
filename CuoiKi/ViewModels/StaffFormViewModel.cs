@@ -7,6 +7,7 @@ namespace CuoiKi.ViewModels
 {
     public class StaffFormViewModel : ViewModelBase
     {
+        #region Show check in/out button properties
         private bool _showCheckInButton = true;
         public bool ShowCheckInButton
         {
@@ -27,7 +28,9 @@ namespace CuoiKi.ViewModels
                 OnPropertyChanged(nameof(ShowCheckOutButton));
             }
         }
+        #endregion
 
+        #region Handle check in command
         private ICommand? _checkInCommand;
         private void CheckIn()
         {
@@ -48,5 +51,29 @@ namespace CuoiKi.ViewModels
                 return _checkInCommand;
             }
         }
+        #endregion
+
+        #region Handle check out command
+        private ICommand? _checkOutCommand;
+        private void CheckOut()
+        {
+            WorkSessionController workSessionController = new WorkSessionController();
+            workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
+        }
+        private readonly bool canCheckOut = true;
+        public ICommand CheckOutCommand
+        {
+            get
+            {
+                if (_checkOutCommand == null)
+                {
+                    _checkOutCommand = new RelayCommand(
+                        p => this.canCheckOut,
+                        p => this.CheckOut());
+                }
+                return _checkOutCommand;
+            }
+        }
+        #endregion
     }
 }

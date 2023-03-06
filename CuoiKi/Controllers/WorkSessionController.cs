@@ -50,7 +50,7 @@ namespace CuoiKi.Controllers
                 return false;
             }
             unfinishedWorkSessions[0].EndingTime = DateTime.Now;
-            workSessionDAO.Modify(employeeId, unfinishedWorkSessions[0]);
+            workSessionDAO.Modify(unfinishedWorkSessions[0].Id, unfinishedWorkSessions[0]);
             MessageBox.Show("Check out success");
             return true;
         }
