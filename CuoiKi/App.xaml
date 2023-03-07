@@ -49,7 +49,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                            <Border Background="{TemplateBinding Background}" >
                                 <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
