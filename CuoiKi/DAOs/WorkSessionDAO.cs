@@ -48,9 +48,10 @@ namespace CuoiKi.DAOs
             return dbc.ExecuteQuery<WorkSession>(command);
         }
 
-        public List<WorkSession>? GetUnfinished(string employeeID)
+        public WorkSession? GetUnfinished(string employeeID)
         {
-            throw new System.NotImplementedException();
+            string command = SqlConverter.GetCommandToGetUnfinishedsEmployeeWorkSession(employeeID);
+            return dbc.ExecuteQuery<WorkSession>(command);
         }
     }
 }

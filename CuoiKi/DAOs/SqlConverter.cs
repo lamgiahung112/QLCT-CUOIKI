@@ -88,5 +88,14 @@ namespace CuoiKi.DAOs
                 "ORDER BY EmployeeWorkSessions.StartingTime DESC",
                 employeeId);
         }
+
+        public static string GetCommandToGetUnfinishedsEmployeeWorkSession(string employeeID)
+        {
+            return string.Format(
+                "WITH EmployeeWorkSessions AS (" +
+                "SELECT * FROM WorkSessions WHERE WorkSessions.EmployeeID = N'{0}') " +
+                "SELECT * FROM WorkSessions WHERE EndingTime is NULL ",
+                employeeID);
+        }
     }
 }

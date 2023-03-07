@@ -47,6 +47,9 @@ GO
 WITH EmployeeWorkSessions AS (
     SELECT * FROM WorkSessions WHERE WorkSessions.EmployeeID = N'staff'
 ) SELECT TOP 1 * FROM EmployeeWorkSessions ORDER BY EmployeeWorkSessions.StartingTime DESC
+WITH EmployeeWorkSessions AS (
+    SELECT * FROM WorkSessions WHERE WorkSessions.EmployeeID = N'staff'
+) SELECT * FROM WorkSessions WHERE EndingTime is NULL 
 */
 -- Add admin
 Insert into Employees Values (N'staff', N'staff', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff');

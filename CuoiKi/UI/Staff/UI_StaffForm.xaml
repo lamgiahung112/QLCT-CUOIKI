@@ -113,8 +113,10 @@
                     <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Welcome to the new working day at our company!</TextBlock>
                     <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                     <StackPanel>
-
-                        <TextBlock FontStyle="Italic" Foreground="Blue" Text="{Binding CurrentDate}" FontSize="14"></TextBlock>
+                        <WrapPanel>
+                            <TextBlock FontStyle="Italic" Foreground="Blue" FontSize="14">Today is: </TextBlock>
+                            <TextBlock Padding="5 0 0 0" FontStyle="Italic" Foreground="Blue" Text="{Binding CurrentDate}" FontSize="14"></TextBlock>
+                        </WrapPanel>
                         <WrapPanel>
                             <TextBlock Padding="5 5 0 5" FontStyle="Italic" FontSize="14">Your current status:  </TextBlock>
                             <TextBlock Padding="5 5 0 5" Text="{Binding CurrentStatus}" FontSize="14" FontWeight="Bold"/>

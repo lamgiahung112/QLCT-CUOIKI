@@ -10,8 +10,8 @@ namespace CuoiKi.ViewModels
 {
     public class StaffFormViewModel : ViewModelBase
     {
-        private WorkSessionController workSessionController;
-        private string currentUserId = "";
+        private readonly WorkSessionController workSessionController;
+        private string _currentUserId = "";
         public StaffFormViewModel()
         {
             workSessionController = new WorkSessionController();
@@ -20,21 +20,20 @@ namespace CuoiKi.ViewModels
 
         private void InitializeInfo()
         {
-            currentUserId = LoginInfoState.getInstance().Id;
-            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            _currentUserId = LoginInfoState.getInstance().Id;
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
 
-
-
         #region Binding CurrentDate
-        private string _currentDate = "Today is: " + DateTime.Now.Date.ToString();
+        private string _currentDate = DateTime.Now.Date.ToString();
         public string CurrentDate
         {
             get { return _currentDate; }
             set
             {
-                _currentDate = "Today is: " + value.ToString();
+                string[] tokens = value.Split(new Char[] { '/', ' ', '.' });
+                _currentDate = tokens[1] + "/" + tokens[0] + "/" + tokens[2];
                 OnPropertyChanged(nameof(CurrentDate));
             }
         }
@@ -56,7 +55,9 @@ namespace CuoiKi.ViewModels
         #region Binding and update work session visible variables
         private void UpdateLastestWorkSessionPanelVariables()
         {
-            WorkSession? ws = workSessionController.GetLastestWorkSession(currentUserId);
+            CurrentDate = DateTime.Now.ToString();
+
+            WorkSession? ws = workSessionController.GetLastestWorkSession(_currentUserId);
             if (ws is not null)
             {
                 ShowEmptyWorkSession = false;
@@ -158,7 +159,7 @@ namespace CuoiKi.ViewModels
         private void CheckIn()
         {
             workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
-            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
         private readonly bool canCheckIn = true;
@@ -166,12 +167,9 @@ namespace CuoiKi.ViewModels
         {
             get
             {
-                if (_checkInCommand == null)
-                {
-                    _checkInCommand = new RelayCommand(
+                _checkInCommand ??= new RelayCommand(
                         p => this.canCheckIn,
                         p => this.CheckIn());
-                }
                 return _checkInCommand;
             }
         }
@@ -182,7 +180,7 @@ namespace CuoiKi.ViewModels
         private void CheckOut()
         {
             workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
-            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
         private readonly bool canCheckOut = true;
@@ -190,12 +188,9 @@ namespace CuoiKi.ViewModels
         {
             get
             {
-                if (_checkOutCommand == null)
-                {
-                    _checkOutCommand = new RelayCommand(
+                _checkOutCommand ??= new RelayCommand(
                         p => this.canCheckOut,
                         p => this.CheckOut());
-                }
                 return _checkOutCommand;
             }
         }

@@ -9,8 +9,8 @@ namespace CuoiKi.Controllers
 {
     public class WorkSessionController
     {
-        private EmployeeDAO employeeDAO;
-        private WorkSessionDAO workSessionDAO;
+        private readonly EmployeeDAO employeeDAO;
+        private readonly WorkSessionDAO workSessionDAO;
         public WorkSessionController()
         {
             employeeDAO = new EmployeeDAO();
@@ -22,6 +22,7 @@ namespace CuoiKi.Controllers
             Employee? foundEmployee = employeeDAO.GetOne(employeeId);
             if (foundEmployee is null)
             {
+                // Maybe admin deleted this account but client side didn't recornize it
                 MessageBox.Show("EmployeeId not found");
                 return false;
             }
@@ -30,7 +31,7 @@ namespace CuoiKi.Controllers
                 MessageBox.Show("You already checked in");
                 return false;
             }
-            WorkSession newWorkSession = new WorkSession(employeeId);
+            WorkSession newWorkSession = new(employeeId);
             workSessionDAO.Add(newWorkSession);
             MessageBox.Show("Check in success");
             return true;
@@ -40,17 +41,18 @@ namespace CuoiKi.Controllers
             Employee? foundEmployee = employeeDAO.GetOne(employeeId);
             if (foundEmployee is null)
             {
+                // Maybe admin deleted this account but client side didn't recornize it
                 MessageBox.Show("EmployeeId not found");
                 return false;
             }
-            List<WorkSession>? unfinishedWorkSessions = GetUnfinishedWorkSession(employeeId);
-            if (unfinishedWorkSessions is null)
+            WorkSession? unfinishedWorkSession = GetUnfinishedWorkSession(employeeId);
+            if (unfinishedWorkSession is null)
             {
                 MessageBox.Show("You already checked out");
                 return false;
             }
-            unfinishedWorkSessions[0].EndingTime = DateTime.Now;
-            workSessionDAO.Modify(unfinishedWorkSessions[0].Id, unfinishedWorkSessions[0]);
+            unfinishedWorkSession.EndingTime = DateTime.Now;
+            workSessionDAO.Modify(unfinishedWorkSession.Id, unfinishedWorkSession);
             MessageBox.Show("Check out success");
             return true;
         }
@@ -67,32 +69,17 @@ namespace CuoiKi.Controllers
             List<WorkSession>? workSessions = workSessionDAO.GetAll(employeeId);
             return workSessions;
         }
-        public List<WorkSession>? GetUnfinishedWorkSession(string employeeId)
+        public WorkSession? GetUnfinishedWorkSession(string employeeId)
         {
             // If employee not found return null
             Employee? foundEmployee = employeeDAO.GetOne(employeeId);
             if (foundEmployee is null)
             {
+                // Maybe admin deleted this account but client side didn't recornize it
                 MessageBox.Show("EmployeeId not found");
                 return null;
             }
-            // If employee doesn't have any work sessions then return null
-            List<WorkSession>? workSessions = workSessionDAO.GetAll(employeeId);
-            if (workSessions is null) return null;
-            // If have unfinished work session then append it to a list and return
-            List<WorkSession>? res = null;
-            for (int i = 0; i < workSessions.Count; i++)
-            {
-                if (workSessions[i].EndingTime == DateTime.MinValue)
-                {
-                    if (res is null)
-                    {
-                        res = new List<WorkSession>();
-                    }
-                    res.Add(workSessions[i]);
-                }
-            }
-            return res;
+            return workSessionDAO.GetUnfinished(employeeId);
         }
 
         public WorkSession? GetLastestWorkSession(string employeeID)
