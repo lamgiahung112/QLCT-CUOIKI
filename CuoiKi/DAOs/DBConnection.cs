@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace CuoiKi.DAOs
 {
@@ -50,21 +48,27 @@ namespace CuoiKi.DAOs
                 conn.Close();
             }
         }
-        public int ExecuteWithQuery(string s)
+        public T? ExecuteQuery<T>(string s) where T : class
         {
             try
             {
                 conn.Open();
                 SqlCommand command = new SqlCommand("USE companyDB; " + s, conn);
-                int noRow = (int)command.ExecuteScalar();
+                SqlDataReader reader = command.ExecuteReader();
+                var parser = reader.GetRowParser<T>(typeof(T));
+                T? myObject = null;
+                if (reader.Read())
+                {
+                    myObject = parser(reader);
+                }
                 conn.Close();
-                return noRow;
+                return myObject;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Tìm thất bại " + ex.Message);
                 conn.Close();
-                return 0;
+                return null;
             }
             finally
             {

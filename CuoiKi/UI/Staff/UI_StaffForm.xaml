@@ -123,9 +123,18 @@
                             <StackPanel>
                                 <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Your lastest work session</TextBlock>
                                 <StackPanel Visibility="{Binding ShowCurrentWorkSession, Converter = {StaticResource BoolToVis}}">
-                                    <TextBlock Padding="10 0 5 5">Work session ID: </TextBlock>
-                                    <TextBlock Padding="10 0 5 5">Starting time: </TextBlock>
-                                    <TextBlock Padding="10 0 5 5">Ending time: </TextBlock>
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Work session ID:</TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionID}" Padding="10 0 5 5"></TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Starting time:</TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionStartingTime}" Padding="5 0 5 5"></TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Ending time: </TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionEndingTime}" Padding="5 0 5 5"></TextBlock>
+                                    </WrapPanel>
                                 </StackPanel>
                                 <StackPanel Visibility="{Binding ShowEmptyWorkSession, Converter = {StaticResource BoolToVis}}">
                                     <Border BorderBrush="{x:Null}" Height="80">

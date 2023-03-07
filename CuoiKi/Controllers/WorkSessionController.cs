@@ -94,5 +94,10 @@ namespace CuoiKi.Controllers
             }
             return res;
         }
+
+        public WorkSession? GetLastestWorkSession(string employeeID)
+        {
+            return workSessionDAO.GetLastest(employeeID);
+        }
     }
 }

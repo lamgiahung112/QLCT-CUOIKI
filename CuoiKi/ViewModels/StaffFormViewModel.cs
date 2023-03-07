@@ -1,6 +1,7 @@
 ﻿using CuoiKi.Constants;
 using CuoiKi.Controllers;
 using CuoiKi.HelperClasses;
+using CuoiKi.Models;
 using CuoiKi.States;
 using System;
 using System.Windows.Input;
@@ -21,7 +22,7 @@ namespace CuoiKi.ViewModels
         {
             currentUserId = LoginInfoState.getInstance().Id;
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
-            UpdateWorkSessionVisibleVariables();
+            UpdateLastestWorkSessionPanelVariables();
         }
 
 
@@ -53,17 +54,58 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Binding and update work session visible variables
-        private void UpdateWorkSessionVisibleVariables()
+        private void UpdateLastestWorkSessionPanelVariables()
         {
-            if (workSessionController.GetAllWorkSessionOf(currentUserId) != null)
+            WorkSession? ws = workSessionController.GetLastestWorkSession(currentUserId);
+            if (ws is not null)
             {
                 ShowEmptyWorkSession = false;
                 ShowCurrentWorkSession = true;
+                WorkSessionID = ws.Id;
+                WorkSessionStartingTime = ws.StartingTime.Date.ToLongDateString();
+                if (ws.EndingTime == DateTime.MinValue)
+                {
+                    WorkSessionEndingTime = "You haven't checked out yet";
+                }
+                else
+                {
+                    WorkSessionEndingTime = ws.EndingTime?.Date.ToLongDateString();
+                }
             }
             else
             {
                 ShowEmptyWorkSession = true;
                 ShowCurrentWorkSession = false;
+            }
+        }
+        private string _workSessionID = "";
+        public string WorkSessionID
+        {
+            get { return _workSessionID; }
+            set
+            {
+                _workSessionID = value;
+                OnPropertyChanged(nameof(WorkSessionID));
+            }
+        }
+        private string _workSessionStartingTime = "";
+        public string WorkSessionStartingTime
+        {
+            get { return _workSessionStartingTime; }
+            set
+            {
+                _workSessionStartingTime = value;
+                OnPropertyChanged(nameof(WorkSessionStartingTime));
+            }
+        }
+        private string _workSessionEndingTime = "";
+        public string WorkSessionEndingTime
+        {
+            get { return _workSessionEndingTime; }
+            set
+            {
+                _workSessionEndingTime = value;
+                OnPropertyChanged(nameof(WorkSessionEndingTime));
             }
         }
         private bool _showEmptyWorkSession = true;
@@ -117,7 +159,7 @@ namespace CuoiKi.ViewModels
         {
             workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
-            UpdateWorkSessionVisibleVariables();
+            UpdateLastestWorkSessionPanelVariables();
         }
         private readonly bool canCheckIn = true;
         public ICommand CheckInCommand
@@ -141,6 +183,7 @@ namespace CuoiKi.ViewModels
         {
             workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            UpdateLastestWorkSessionPanelVariables();
         }
         private readonly bool canCheckOut = true;
         public ICommand CheckOutCommand
