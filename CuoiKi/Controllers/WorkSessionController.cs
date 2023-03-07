@@ -62,6 +62,11 @@ namespace CuoiKi.Controllers
             }
             return WorkSessionStatus.CheckedOut;
         }
+        public List<WorkSession>? GetAllWorkSessionOf(string employeeId)
+        {
+            List<WorkSession>? workSessions = workSessionDAO.GetAll(employeeId);
+            return workSessions;
+        }
         public List<WorkSession>? GetUnfinishedWorkSession(string employeeId)
         {
             // If employee not found return null

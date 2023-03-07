@@ -14,7 +14,8 @@ namespace CuoiKi.Models
         /// </summary>
         public WorkSession(String employeeId)
         {
-            Id = employeeId + DateTime.Now.ToShortDateString();
+            Random rnd = new Random();
+            Id = employeeId + DateTime.Now.ToShortDateString() + rnd.Next(1000, 9999);
             EmployeeId = employeeId;
             StartingTime = DateTime.Now;
             EndingTime = null;

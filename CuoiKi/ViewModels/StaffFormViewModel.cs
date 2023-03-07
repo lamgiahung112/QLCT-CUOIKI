@@ -1,4 +1,5 @@
-﻿using CuoiKi.Controllers;
+﻿using CuoiKi.Constants;
+using CuoiKi.Controllers;
 using CuoiKi.HelperClasses;
 using CuoiKi.States;
 using System;
@@ -19,10 +20,14 @@ namespace CuoiKi.ViewModels
         private void InitializeInfo()
         {
             currentUserId = LoginInfoState.getInstance().Id;
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            UpdateWorkSessionVisibleVariables();
         }
 
+
+
         #region Binding CurrentDate
-        private string _currentDate = "Today is: " + DateTime.Now.ToString();
+        private string _currentDate = "Today is: " + DateTime.Now.Date.ToString();
         public string CurrentDate
         {
             get { return _currentDate; }
@@ -35,7 +40,7 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Binding CurrentStatus
-        private string _currentStatus = "Your current status: ";
+        private string _currentStatus = "";
         public string CurrentStatus
         {
             get { return _currentStatus; }
@@ -43,6 +48,42 @@ namespace CuoiKi.ViewModels
             {
                 _currentStatus = value;
                 OnPropertyChanged(nameof(CurrentStatus));
+            }
+        }
+        #endregion
+
+        #region Binding and update work session visible variables
+        private void UpdateWorkSessionVisibleVariables()
+        {
+            if (workSessionController.GetAllWorkSessionOf(currentUserId) != null)
+            {
+                ShowEmptyWorkSession = false;
+                ShowCurrentWorkSession = true;
+            }
+            else
+            {
+                ShowEmptyWorkSession = true;
+                ShowCurrentWorkSession = false;
+            }
+        }
+        private bool _showEmptyWorkSession = true;
+        public bool ShowEmptyWorkSession
+        {
+            get { return _showEmptyWorkSession; }
+            set
+            {
+                _showEmptyWorkSession = value;
+                OnPropertyChanged(nameof(ShowEmptyWorkSession));
+            }
+        }
+        private bool _showCurrentWorkSession = false;
+        public bool ShowCurrentWorkSession
+        {
+            get { return _showCurrentWorkSession; }
+            set
+            {
+                _showCurrentWorkSession = value;
+                OnPropertyChanged(nameof(ShowCurrentWorkSession));
             }
         }
         #endregion
@@ -75,6 +116,8 @@ namespace CuoiKi.ViewModels
         private void CheckIn()
         {
             workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
+            UpdateWorkSessionVisibleVariables();
         }
         private readonly bool canCheckIn = true;
         public ICommand CheckInCommand
@@ -97,6 +140,7 @@ namespace CuoiKi.ViewModels
         private void CheckOut()
         {
             workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
+            CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(currentUserId));
         }
         private readonly bool canCheckOut = true;
         public ICommand CheckOutCommand

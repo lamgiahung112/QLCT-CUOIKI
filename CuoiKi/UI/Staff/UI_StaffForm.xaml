@@ -103,7 +103,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
@@ -114,8 +114,26 @@
                     <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                     <StackPanel>
 
-                        <TextBlock FontStyle="Italic" Text="{Binding CurrentDate}"></TextBlock>
-                        <TextBlock FontStyle="Italic" Text="{Binding CurrentStatus}"></TextBlock>
+                        <TextBlock FontStyle="Italic" Foreground="Blue" Text="{Binding CurrentDate}" FontSize="14"></TextBlock>
+                        <WrapPanel>
+                            <TextBlock Padding="5 5 0 5" FontStyle="Italic" FontSize="14">Your current status:  </TextBlock>
+                            <TextBlock Padding="5 5 0 5" Text="{Binding CurrentStatus}" FontSize="14" FontWeight="Bold"/>
+                        </WrapPanel>
+                        <Border CornerRadius="10" Background="GhostWhite" BorderBrush="Silver" BorderThickness="2,2,2,2">
+                            <StackPanel>
+                                <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Your lastest work session</TextBlock>
+                                <StackPanel Visibility="{Binding ShowCurrentWorkSession, Converter = {StaticResource BoolToVis}}">
+                                    <TextBlock Padding="10 0 5 5">Work session ID: </TextBlock>
+                                    <TextBlock Padding="10 0 5 5">Starting time: </TextBlock>
+                                    <TextBlock Padding="10 0 5 5">Ending time: </TextBlock>
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding ShowEmptyWorkSession, Converter = {StaticResource BoolToVis}}">
+                                    <Border BorderBrush="{x:Null}" Height="80">
+                                        <TextBlock TextWrapping="Wrap" Text="You don't have any work session right now" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </StackPanel>
 
