@@ -37,9 +37,7 @@ namespace CuoiKi.DAOs
         public WorkSession? GetOne(string id)
         {
             string command = string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
-            List<WorkSession>? list = dbc.ExecuteWithResults(command);
-            if (list == null || list.Count == 0) { return null; }
-            return list[0];
+            return dbc.ExecuteQuery<WorkSession>(command);
         }
 
         public WorkSession? GetLastest(string employeeID)

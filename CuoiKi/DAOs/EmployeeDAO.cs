@@ -33,9 +33,7 @@ namespace CuoiKi.DAOs
         public Employee? GetOne(string id)
         {
             string command = string.Format("SELECT * FROM Employees WHERE ID = N'{0}'", id);
-            List<Employee>? list = dbc.ExecuteWithResults(command);
-            if (list == null || list.Count == 0) { return null; }
-            return list[0];
+            return dbc.ExecuteQuery<Employee>(command);
         }
     }
 }
