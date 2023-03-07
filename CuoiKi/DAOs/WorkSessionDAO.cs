@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace CuoiKi.DAOs
 {
-    public class WorkSessionDAO : IDAO<WorkSession>
+    public class WorkSessionDAO : IDAO<WorkSession>, IWorkTaskRetriever
     {
         private readonly DBConnection<WorkSession> dbc;
         public WorkSessionDAO()
         {
             dbc = new DBConnection<WorkSession>();
         }
-        // Not implement yet
         public void Add(WorkSession entry)
         {
             string command = SqlConverter.GetAddCommandForWorkSession(entry);
@@ -27,17 +26,30 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForWorkSession(id, entry);
             dbc.Execute(command);
         }
-        public List<WorkSession>? GetAll()
+        public List<WorkSession>? GetAll(string id)
         {
-            return null;
+            string command = SqlConverter.GetCommandToGetAllWorkSessionOfAnEmployee(id);
+            List<WorkSession>? list = dbc.ExecuteWithResults(command);
+            if (list == null || list.Count == 0) { return null; }
+            return list;
         }
 
         public WorkSession? GetOne(string id)
         {
-            string command = string.Format("SELECT * FROM WorkSessions WHERE ID = N'{0}'", id);
-            List<WorkSession>? list = dbc.ExecuteWithResults(command);
-            if (list == null || list.Count == 0) { return null; }
-            return list[0];
+            string command = SqlConverter.GetCommandToGetOneWorkSession(id);
+            return dbc.ExecuteQuery<WorkSession>(command);
+        }
+
+        public WorkSession? GetLastest(string employeeID)
+        {
+            string command = SqlConverter.GetCommandToGetLastestEmployeeWorkSession(employeeID);
+            return dbc.ExecuteQuery<WorkSession>(command);
+        }
+
+        public WorkSession? GetUnfinished(string employeeID)
+        {
+            string command = SqlConverter.GetCommandToGetUnfinishedsEmployeeWorkSession(employeeID);
+            return dbc.ExecuteQuery<WorkSession>(command);
         }
     }
 }

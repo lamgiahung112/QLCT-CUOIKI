@@ -1,7 +1,13 @@
 ﻿<Window x:Class="CuoiKi.UI.Staff.UI_StaffForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:local="clr-namespace:CuoiKi.UI.Staff" 
+        xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:StaffFormViewModel}"
         Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         AllowsTransparency="True" Background="Transparent">
@@ -9,15 +15,15 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
-    
+
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <!-- Left Menu --> 
+
+            <!-- Left Menu -->
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -44,12 +50,12 @@
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
-                        
+
                         <!--Menu title-->
 
                         <TextBlock Text="Staff Account" Foreground="White" FontSize="22" FontWeight="SemiBold"
                                    DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
-                        
+
                         <!--Menu seprator-->
 
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
@@ -68,14 +74,7 @@
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Check in"/>
-                                </StackPanel>
-                            </Button>
-
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="AccountCheck"  Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Check out"/>
+                                    <TextBlock Text="Work session"/>
                                 </StackPanel>
                             </Button>
 
@@ -85,7 +84,7 @@
                                     <TextBlock Text="Leave of Absence"/>
                                 </StackPanel>
                             </Button>
-                            
+
                         </StackPanel>
 
                         <Button x:Name="btn_Logout" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="btn_Logout_Click">
@@ -99,18 +98,18 @@
                 </Border>
 
             </Grid>
-                 
+
             <!--Main Section-->
 
             <Grid Grid.Column="1" Margin="30 20 20 20">
+
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 
             <!--Search textbox-->
@@ -130,7 +129,6 @@
                     <Icon:PackIconMaterial Kind="Cog" Width="20" Height="20"/>
                 </Button>
             </Grid>
-            
         </Grid>
     </Border>
 </Window> 
