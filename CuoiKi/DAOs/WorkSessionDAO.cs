@@ -28,7 +28,7 @@ namespace CuoiKi.DAOs
         }
         public List<WorkSession>? GetAll(string id)
         {
-            string command = string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+            string command = SqlConverter.GetCommandToGetAllWorkSessionOfAnEmployee(id);
             List<WorkSession>? list = dbc.ExecuteWithResults(command);
             if (list == null || list.Count == 0) { return null; }
             return list;
@@ -36,7 +36,7 @@ namespace CuoiKi.DAOs
 
         public WorkSession? GetOne(string id)
         {
-            string command = string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+            string command = SqlConverter.GetCommandToGetOneWorkSession(id);
             return dbc.ExecuteQuery<WorkSession>(command);
         }
 

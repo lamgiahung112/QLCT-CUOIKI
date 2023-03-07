@@ -97,5 +97,20 @@ namespace CuoiKi.DAOs
                 "SELECT * FROM WorkSessions WHERE EndingTime is NULL ",
                 employeeID);
         }
+
+        public static string GetCommandToGetOneEmployee(string id)
+        {
+            return string.Format("SELECT * FROM Employees WHERE ID = N'{0}'", id);
+        }
+
+        public static string GetCommandToGetOneWorkSession(string id)
+        {
+            return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+        }
+
+        public static string GetCommandToGetAllWorkSessionOfAnEmployee(string id)
+        {
+            return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+        }
     }
 }
