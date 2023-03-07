@@ -25,17 +25,15 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForEmployee(id, entry);
             dbc.Execute(command);
         }
-        public List<Employee>? GetAll()
+        public List<Employee>? GetAll(string id)
         {
             string command = "";
             return null;
         }
         public Employee? GetOne(string id)
         {
-            string command = string.Format("SELECT * FROM Employees WHERE ID = N'{0}'", id);
-            List<Employee>? list = dbc.ExecuteWithResults(command);
-            if (list == null || list.Count == 0) { return null; }
-            return list[0];
+            string command = SqlConverter.GetCommandToGetOneEmployee(id);
+            return dbc.ExecuteQuery<Employee>(command);
         }
     }
 }

@@ -78,5 +78,39 @@ namespace CuoiKi.DAOs
         {
             return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime.ToString(), id);
         }
+        public static string GetCommandToGetLastestEmployeeWorkSession(string employeeId)
+        {
+            return string.Format(
+                "WITH EmployeeWorkSessions AS (" +
+                "SELECT * FROM WorkSessions WHERE WorkSessions.EmployeeID = N'{0}'" +
+                ") " +
+                "SELECT TOP 1 * FROM EmployeeWorkSessions " +
+                "ORDER BY EmployeeWorkSessions.StartingTime DESC",
+                employeeId);
+        }
+
+        public static string GetCommandToGetUnfinishedsEmployeeWorkSession(string employeeID)
+        {
+            return string.Format(
+                "WITH EmployeeWorkSessions AS (" +
+                "SELECT * FROM WorkSessions WHERE WorkSessions.EmployeeID = N'{0}') " +
+                "SELECT * FROM WorkSessions WHERE EndingTime is NULL ",
+                employeeID);
+        }
+
+        public static string GetCommandToGetOneEmployee(string id)
+        {
+            return string.Format("SELECT * FROM Employees WHERE ID = N'{0}'", id);
+        }
+
+        public static string GetCommandToGetOneWorkSession(string id)
+        {
+            return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+        }
+
+        public static string GetCommandToGetAllWorkSessionOfAnEmployee(string id)
+        {
+            return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
+        }
     }
 }
