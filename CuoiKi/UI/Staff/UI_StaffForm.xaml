@@ -9,7 +9,6 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:StaffFormViewModel}"
         Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         AllowsTransparency="True" Background="Transparent">
 
     <Window.Resources>
@@ -32,11 +31,9 @@
                 </Grid.RowDefinitions>
                 <!--Menu icon-->
 
-                <!--<Button HorizontalAlignment="Left" Margin="20,28,0,35" Style="{StaticResource topButton}">
+                <Button HorizontalAlignment="Left" Margin="20,28,0,35" Style="{StaticResource topButton}">
                     <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
-                </Button>-->
-
-                <Border Margin="0,50,0,50"/>
+                </Button>
 
                 <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
                     <DockPanel>
@@ -87,7 +84,7 @@
 
                         </StackPanel>
 
-                        <Button x:Name="btn_Logout" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="btn_Logout_Click">
+                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Log out"/>
@@ -111,22 +108,51 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                
-            <!--Search textbox-->
 
-                <!--<Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                               Panel.ZIndex="1" Text="Search..."
-                               Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>
-                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>-->
+                <StackPanel Grid.Row="1">
+                    <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Welcome to the new working day at our company!</TextBlock>
+                    <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                    <StackPanel>
+                        <WrapPanel>
+                            <TextBlock FontStyle="Italic" Foreground="Blue" FontSize="14">Today is:</TextBlock>
+                            <TextBlock Padding="5 0 0 0" FontStyle="Italic" Foreground="Blue" Text="{Binding CurrentDate}" FontSize="14"></TextBlock>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBlock Padding="5 5 0 5" FontStyle="Italic" FontSize="14">Your current status:</TextBlock>
+                            <TextBlock Padding="5 5 0 5" Text="{Binding CurrentStatus}" FontSize="14" FontWeight="Bold"/>
+                        </WrapPanel>
+                        <Border CornerRadius="10" Background="GhostWhite" BorderBrush="Silver" BorderThickness="2,2,2,2">
+                            <StackPanel>
+                                <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Your lastest work session</TextBlock>
+                                <StackPanel Visibility="{Binding ShowCurrentWorkSession, Converter = {StaticResource BoolToVis}}">
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Work session ID:</TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionID}" Padding="10 0 5 5"></TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Starting time:</TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionStartingTime}" Padding="5 0 5 5"></TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 5 5">Ending time:</TextBlock>
+                                        <TextBlock Text="{Binding WorkSessionEndingTime}" Padding="5 0 5 5"></TextBlock>
+                                    </WrapPanel>
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding ShowEmptyWorkSession, Converter = {StaticResource BoolToVis}}">
+                                    <Border BorderBrush="{x:Null}" Height="80">
+                                        <TextBlock TextWrapping="Wrap" Text="You don't have any work session right now" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
 
-                <!--Top Button-->
-
-                <Button HorizontalAlignment="Right" Margin="0 0 20 0" Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Cog" Width="20" Height="20"/>
+                <Button Command ="{Binding CheckInCommand}" Visibility="{Binding ShowCheckInButton, Converter = {StaticResource BoolToVis}}" Grid.Row="2">
+                    Check in
+                </Button>
+                <Button Command ="{Binding CheckOutCommand}" Visibility="{Binding ShowCheckOutButton, Converter = {StaticResource BoolToVis}}" Grid.Row="3">
+                    Check out
                 </Button>
             </Grid>
         </Grid>

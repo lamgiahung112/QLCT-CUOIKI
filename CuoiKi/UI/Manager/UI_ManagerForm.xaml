@@ -23,11 +23,11 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <!--Menu icon-->
 
-                <Border Margin="0,50,0,50"/>
-                <!--<Button HorizontalAlignment="Left" Margin="20,28,0,35" Style="{StaticResource topButton}">
+                <Button HorizontalAlignment="Left" Margin="20,28,0,35" Style="{StaticResource topButton}">
                     <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
-                </Button>-->
+                </Button>
 
                 <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
                     <DockPanel>
@@ -85,7 +85,7 @@
 
                         </StackPanel>
 
-                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="Button_Click">
+                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Log out"/>
@@ -123,8 +123,8 @@
 
                 <!--Top Button-->
 
-                <Button HorizontalAlignment="Right" Margin="0 0 20 0" Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Cog" Width="20" Height="20"/>
+                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
 
             </Grid>
