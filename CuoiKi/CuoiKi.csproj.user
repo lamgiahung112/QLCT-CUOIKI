@@ -10,7 +10,16 @@
     <Compile Update="UI\Manager\UI_ManagerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Staff\InformationForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Staff\LeaveOfAbsenceForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Staff\UI_StaffForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Staff\WorkSessionForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -21,7 +30,16 @@
     <Page Update="UI\Manager\UI_ManagerForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Staff\InformationForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Staff\LeaveOfAbsenceForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Staff\UI_StaffForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Staff\WorkSessionForm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
