@@ -10,28 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CuoiKi.UI.Manager
+namespace CuoiKi.UI.Staff
 {
     /// <summary>
-    /// Interaction logic for UI_ManagerForm.xaml
+    /// Interaction logic for LeaveOfAbsenceForm.xaml
     /// </summary>
-    public partial class UI_ManagerForm : Window
+    public partial class LeaveOfAbsenceForm : Page
     {
-        public UI_ManagerForm()
+        public LeaveOfAbsenceForm()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }
