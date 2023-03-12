@@ -96,10 +96,6 @@
 
             <!--Right menu-->
             <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
                 <Border Grid.Row="1" CornerRadius="0 0 5 0" Background="Transparent">
                     <Frame x:Name="frameContent" NavigationUIVisibility="Hidden" Margin="10"/>
                 </Border>
