@@ -1,5 +1,6 @@
 ﻿using CuoiKi.ViewModels;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace CuoiKi.UI.Staff
@@ -42,6 +43,26 @@ namespace CuoiKi.UI.Staff
                     IsMaximized = true;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btn_Information_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new InformationForm());
+        }
+
+        private void btn_WorkSession_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new WorkSessionForm());
+        }
+
+        private void btn_LeaveOfAbsence_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new LeaveOfAbsenceForm());
         }
     }
 }

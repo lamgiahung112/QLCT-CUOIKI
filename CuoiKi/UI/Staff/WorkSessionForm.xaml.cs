@@ -12,26 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CuoiKi.UI.Manager
+namespace CuoiKi.UI.Staff
 {
     /// <summary>
-    /// Interaction logic for UI_ManagerForm.xaml
+    /// Interaction logic for WorkSessionForm.xaml
     /// </summary>
-    public partial class UI_ManagerForm : Window
+    public partial class WorkSessionForm : Page
     {
-        public UI_ManagerForm()
+        public WorkSessionForm()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }
