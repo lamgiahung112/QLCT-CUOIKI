@@ -1,6 +1,5 @@
 ﻿using CuoiKi.Constants;
 using CuoiKi.Models;
-using System.Windows;
 
 namespace CuoiKi.DAOs
 {
@@ -58,6 +57,11 @@ namespace CuoiKi.DAOs
         }
         public static string GetAddCommandForWorkSession(WorkSession workSession)
         {
+            string endingTimeParam = "NULL";
+            if (workSession.EndingTime is not null)
+            {
+                endingTimeParam = workSession.EndingTime?.ToString("s");
+            }
             return string.Format(
                 "INSERT INTO WorkSessions(" +
                 "ID, EmployeeID, StartingTime, EndingTime) " +
@@ -68,8 +72,8 @@ namespace CuoiKi.DAOs
                 "{3});",
                 workSession.Id,
                 workSession.EmployeeId,
-                workSession.StartingTime.ToString("yyyy-MM-dd"),
-                workSession.EndingTime.HasValue ? "'" + workSession.EndingTime?.ToString("yyyy-MM-dd") + "'" : "NULL");
+                workSession.StartingTime.ToString("s"),
+                endingTimeParam);
         }
         public static string GetDeleteCommandForWorkSession(string id)
         {
@@ -77,7 +81,7 @@ namespace CuoiKi.DAOs
         }
         public static string GetUpdateCommandForWorkSession(string id, WorkSession workSession)
         {
-            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime?.ToString("yyyy-MM-dd"), id);
+            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime?.ToString("s"), id);
         }
         public static string GetCommandToGetLastestEmployeeWorkSession(string employeeId)
         {
