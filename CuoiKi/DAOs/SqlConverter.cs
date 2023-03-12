@@ -58,7 +58,6 @@ namespace CuoiKi.DAOs
         }
         public static string GetAddCommandForWorkSession(WorkSession workSession)
         {
-            MessageBox.Show(workSession.StartingTime.ToString("yyyy-MM-dd"));
             return string.Format(
                 "INSERT INTO WorkSessions(" +
                 "ID, EmployeeID, StartingTime, EndingTime) " +
