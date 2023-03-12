@@ -63,14 +63,14 @@ namespace CuoiKi.ViewModels
                 ShowEmptyWorkSession = false;
                 ShowCurrentWorkSession = true;
                 WorkSessionID = ws.Id;
-                WorkSessionStartingTime = ws.StartingTime.Date.ToLongDateString();
+                WorkSessionStartingTime = ws.StartingTime.ToString("F");
                 if (ws.EndingTime == DateTime.MinValue)
                 {
                     WorkSessionEndingTime = "You haven't checked out yet";
                 }
                 else
                 {
-                    WorkSessionEndingTime = ws.EndingTime?.Date.ToLongDateString();
+                    WorkSessionEndingTime = ws.EndingTime?.ToString("F");
                 }
             }
             else
