@@ -69,7 +69,7 @@
             Check out
         </Button>
         <Viewbox Grid.Row="4">
-            <Calendar DisplayDate="{Binding CalendarSelectedDate, Mode=TwoWay}" Name="dteSelectedMonth" DisplayMode="Year" SelectionMode="SingleDate" 
+            <Calendar DisplayDate="{Binding CalendarSelectedDate}" Name="dteSelectedMonth" DisplayMode="Year" SelectionMode="SingleDate" 
           DisplayModeChanged="dteSelectedMonth_DisplayModeChanged"  Width="800"> 
             </Calendar>
         </Viewbox>
