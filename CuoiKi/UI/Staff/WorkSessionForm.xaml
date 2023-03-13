@@ -95,9 +95,9 @@
         <ListView ItemsSource="{Binding WorkSessionsInSelectedMonth}" Style="{DynamicResource ListViewStyle1}" Grid.Row="4" Grid.Column="2" Width="375" Height="180">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="75" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Starting time" Width="150" DisplayMemberBinding="{Binding StartingTime}"/>
-                    <GridViewColumn Header="Ending time" Width="150" DisplayMemberBinding="{Binding EndingTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                    <GridViewColumn Header="Id" Width="115" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Starting time" Width="130" DisplayMemberBinding="{Binding StartingTime}"/>
+                    <GridViewColumn Header="Ending time" Width="130" DisplayMemberBinding="{Binding EndingTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Height"  Value="20"  />

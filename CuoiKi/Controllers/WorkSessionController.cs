@@ -3,6 +3,7 @@ using CuoiKi.DAOs;
 using CuoiKi.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace CuoiKi.Controllers
@@ -64,11 +65,6 @@ namespace CuoiKi.Controllers
             }
             return WorkSessionStatus.CheckedOut;
         }
-        public List<WorkSession>? GetAllWorkSessionOf(string employeeId)
-        {
-            List<WorkSession>? workSessions = workSessionDAO.GetAll();
-            return workSessions;
-        }
         public WorkSession? GetUnfinishedWorkSession(string employeeId)
         {
             // If employee not found return null
@@ -81,7 +77,28 @@ namespace CuoiKi.Controllers
             }
             return workSessionDAO.GetUnfinished(employeeId);
         }
-
+        public List<WorkSession>? GetAllWorkSessions()
+        {
+            return workSessionDAO.GetAll();
+        }
+        public List<WorkSession>? GetAllWorkSessionsOfAnEmployee(string employeeID)
+        {
+            var result = from workSession in workSessionDAO.GetAll()
+                         where workSession.EmployeeId == employeeID
+                         select workSession;
+            return result.ToList();
+        }
+        public List<WorkSession>? GetAllWorkSessionOfAnEmployeeInSelectedMonth(string employeeID, DateTime dateInMonth)
+        {
+            var startDate = new DateTime(dateInMonth.Year, dateInMonth.Month, 1);
+            var endDate = startDate.Date.AddMonths(1).AddDays(-1);
+            var result = from workSession in workSessionDAO.GetAll()
+                         where workSession.EmployeeId == employeeID &&
+                         workSession.StartingTime >= startDate &&
+                         workSession.StartingTime <= endDate
+                         select workSession;
+            return result.ToList();
+        }
         public WorkSession? GetLastestWorkSession(string employeeID)
         {
             return workSessionDAO.GetLastest(employeeID);

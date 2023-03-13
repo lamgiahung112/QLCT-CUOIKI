@@ -120,13 +120,11 @@ namespace CuoiKi.DAOs
         {
             return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
         }
-
-        public static string GetCommandToGetAllWorkSessionOfAnEmployee(string id)
-        {
-            return string.Format("SELECT * FROM WorkSessions WHERE EmployeeID = N'{0}'", id);
-        }
         #endregion
-
+        public static string GetCommandToGetAllWorkSession()
+        {
+            return string.Format("SELECT * FROM WorkSessions");
+        }
         #region Department
         public static string GetAddDepartmentCommand(Department dep)
         {
@@ -140,7 +138,8 @@ namespace CuoiKi.DAOs
         {
             return "SELECT * FROM Departments";
         }
-        public static string GetOneDepartmentByIdCommand(string id) {
+        public static string GetOneDepartmentByIdCommand(string id)
+        {
             return string.Format("SELECT * FROM Departments where ID = '{0}'", id);
         }
         #endregion

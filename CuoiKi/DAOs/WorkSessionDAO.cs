@@ -28,11 +28,10 @@ namespace CuoiKi.DAOs
         }
         public List<WorkSession>? GetAll()
         {
-            //string command = SqlConverter.GetCommandToGetAllWorkSessionOfAnEmployee(id);
-            //List<WorkSession>? list = dbc.ExecuteWithResults(command);
-            //if (list == null || list.Count == 0) { return null; }
-            //return list;
-            return null;
+            string command = SqlConverter.GetCommandToGetAllWorkSession();
+            List<WorkSession>? list = dbc.ExecuteWithResults(command);
+            if (list == null || list.Count == 0) { return null; }
+            return list;
         }
 
         public WorkSession? GetOne(string id)

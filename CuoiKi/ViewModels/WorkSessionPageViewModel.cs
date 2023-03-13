@@ -4,8 +4,8 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -14,34 +14,43 @@ namespace CuoiKi.ViewModels
     {
         private readonly WorkSessionController workSessionController;
         private string _currentUserId = "";
-        private ObservableCollection<WorkSession> workSessionsInSelectedMonth;
+        private ObservableCollection<WorkSession> _workSessionsInSelectedMonth;
         public WorkSessionPageViewModel()
         {
             workSessionController = new WorkSessionController();
+            _workSessionsInSelectedMonth = new ObservableCollection<WorkSession>();
             InitializeInfo();
-            workSessionsInSelectedMonth = new ObservableCollection<WorkSession>();
-            workSessionsInSelectedMonth.Add(new WorkSession("abc"));
-            workSessionsInSelectedMonth.Add(new WorkSession("def"));
         }
         private void InitializeInfo()
         {
             _currentUserId = LoginInfoState.getInstance().Id;
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
+            UpdateWorkSessionsInSelectedMonth(_currentUserId, DateTime.Now);
         }
 
         #region Binding work session list in month
-
         public ObservableCollection<WorkSession> WorkSessionsInSelectedMonth
         {
-            get { return workSessionsInSelectedMonth; }
+            get { return _workSessionsInSelectedMonth; }
             set
             {
-                workSessionsInSelectedMonth = value;
+                _workSessionsInSelectedMonth = value;
                 OnPropertyChanged(nameof(WorkSessionsInSelectedMonth));
             }
         }
         #endregion
+
+        private void UpdateWorkSessionsInSelectedMonth(string employeeID, DateTime dateInMonth)
+        {
+            _workSessionsInSelectedMonth.Clear();
+            List<WorkSession>? workSessions =
+                workSessionController.GetAllWorkSessionOfAnEmployeeInSelectedMonth(employeeID, dateInMonth);
+            foreach (var item in workSessions)
+            {
+                _workSessionsInSelectedMonth.Add(item);
+            }
+        }
 
         #region Binding calendar current selected date
         private DateTime _calendarSelectedDate = DateTime.Today;
@@ -52,7 +61,7 @@ namespace CuoiKi.ViewModels
             {
                 _calendarSelectedDate = value;
                 OnPropertyChanged(nameof(CalendarSelectedDate));
-                MessageBox.Show(value.ToString());
+                UpdateWorkSessionsInSelectedMonth(_currentUserId, value);
             }
         }
         #endregion
