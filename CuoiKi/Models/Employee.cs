@@ -13,8 +13,9 @@ namespace CuoiKi.Models
         public Role Role { get; set; }
         public String Password { get; set; }
         public Gender Gender { get; set; }
+        public String DepartmentId { get; set; }
 
-        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
+        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role, string departmentId)
         {
             Id = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
@@ -25,11 +26,12 @@ namespace CuoiKi.Models
             Role = role;
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
+            DepartmentId = departmentId;
         }
         /// <summary>
         /// Constructor method used to map data from SQL to Employee
         /// </summary>
-        public Employee(String ID, String Name, String Address, DateTime Birth, String EmployeeStatus, String Password, String Gender, String Role)
+        public Employee(String ID, String Name, String Address, DateTime Birth, String EmployeeStatus, String Password, String Gender, String Role, String DepartmentId)
         {
             this.Id = ID;
             this.Name = Name;
@@ -39,6 +41,7 @@ namespace CuoiKi.Models
             this.Password = Password;
             this.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
             this.Role = (Role)Enum.Parse(typeof(Role), Role);
+            this.DepartmentId = DepartmentId;
         }
     }
 }

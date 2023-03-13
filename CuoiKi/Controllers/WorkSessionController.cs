@@ -66,7 +66,7 @@ namespace CuoiKi.Controllers
         }
         public List<WorkSession>? GetAllWorkSessionOf(string employeeId)
         {
-            List<WorkSession>? workSessions = workSessionDAO.GetAll(employeeId);
+            List<WorkSession>? workSessions = workSessionDAO.GetAll();
             return workSessions;
         }
         public WorkSession? GetUnfinishedWorkSession(string employeeId)
