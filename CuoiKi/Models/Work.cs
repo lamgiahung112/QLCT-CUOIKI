@@ -9,7 +9,7 @@ namespace CuoiKi.Models
 {
     public class Work
     {
-        public String Id { get; set; }
+        public String ID { get; set; }
         public String Assignee { get; set; }
         public String Assigner { get; set; }
         public String Description { get; set; }
@@ -23,17 +23,17 @@ namespace CuoiKi.Models
         /// <summary>
         /// Constructor method used to map data from SQL to Work
         /// </summary>
-        public Work(String Id, String Assignee, String Assigner, 
+        public Work(String ID, String Assignee, String Assigner, 
             String Description, String Title, DateTime StartingTime, 
-            DateTime EndingTime, WorkStatus Status, DateTime CreatedAt, DateTime UpdatedAt) { 
-            this.Id = Id;
+            DateTime EndingTime, String Status, DateTime CreatedAt, DateTime UpdatedAt) { 
+            this.ID = ID;
             this.Assignee = Assignee;
             this.Assigner = Assigner;
             this.Description = Description;
             this.Title = Title;
             this.StartingTime = StartingTime;
             this.EndingTime = EndingTime;
-            this.Status = Status;
+            this.Status = (WorkStatus)Enum.Parse(typeof(WorkStatus), Status);
             this.CreatedAt = CreatedAt;
             this.UpdatedAt = UpdatedAt;
         }
@@ -49,8 +49,8 @@ namespace CuoiKi.Models
         /// <returns>A new instance of Work</returns>
         public static Work CreateNewWork(String Assignee, String Assigner, String Description, String Title, DateTime StartingTime, DateTime EndingTime)
         {
-            String workId = Assignee + new Random().NextInt64().ToString();
-            Work work = new Work(workId, Assignee, Assigner, Description, Title, StartingTime, EndingTime, WorkStatus.WIP, DateTime.Now, DateTime.Now);
+            String workId = Assigner + "-" + Title + "-" + new Random().Next().ToString();
+            Work work = new(workId, Assignee, Assigner, Description, Title, StartingTime, EndingTime, nameof(WorkStatus.WIP), DateTime.Now, DateTime.Now);
             return work;
         }
     }

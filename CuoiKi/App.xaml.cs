@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using CuoiKi.Models;
+using System;
+using System.Windows;
 
 namespace CuoiKi
 {
@@ -9,8 +11,6 @@ namespace CuoiKi
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //Employee hung = new Employee("trikohung", "address", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Staff);
-            //new EmployeeDAO().Add(hung);
             base.OnStartup(e);
         }
     }

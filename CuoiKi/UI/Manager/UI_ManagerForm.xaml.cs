@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CuoiKi.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace CuoiKi.UI.Manager
         public UI_ManagerForm()
         {
             InitializeComponent();
+            txtManagerName.Text = LoginInfoState.getInstance().Name;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

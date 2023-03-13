@@ -46,6 +46,20 @@ CREATE TABLE WorkSessions (
     StartingTime DATETIME NOT NULL,
     EndingTime DATETIME
 );
+GO
+-- Create Work table
+CREATE TABLE Works (
+    ID NVARCHAR(255) NOT NULL PRIMARY KEY,
+    Assignee NVARCHAR(255) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    Assigner NVARCHAR(255) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    [Description] NVARCHAR(255) NOT NULL,
+    Title NVARCHAR(255) NOT NULL,
+    StartingTime DateTime NOT NULL,
+    EndingTime DateTime NOT NULL,
+    [Status] NVARCHAR(20) NOT NULL,
+    CreatedAt DateTime NOT NULL,
+    UpdatedAt DateTime NOT NULL,    
+);
 
 -- Add Department
 Insert into Departments Values ('MKT', 'Marketing');

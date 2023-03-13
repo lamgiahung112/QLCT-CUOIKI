@@ -27,8 +27,17 @@ namespace CuoiKi.Constants
         public static String mapToString(WorkSessionStatus status)
         {
             return status == WorkSessionStatus.CheckedIn
-                    ? "CHECKED IN"
-                    : "CHECKED OUT";
+                    ? nameof(WorkSessionStatus.CheckedIn)
+                    : nameof(WorkSessionStatus.CheckedOut);
+        }
+
+        public static String mapToString(WorkStatus status)
+        {
+            return status == WorkStatus.WIP
+                ? nameof(WorkStatus.WIP)
+                : status == WorkStatus.NeedsReview
+                ? nameof(WorkStatus.NeedsReview)
+                : nameof(WorkStatus.Done);
         }
     }
 }

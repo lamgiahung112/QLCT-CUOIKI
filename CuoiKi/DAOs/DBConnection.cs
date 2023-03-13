@@ -81,7 +81,7 @@ namespace CuoiKi.DAOs
             try
             {
                 conn.Open();
-                return Dapper.SqlMapper.Query<T>(conn, "use companyDB;" + s).ToList();
+                return SqlMapper.Query<T>(conn, "use companyDB;" + s).ToList();
             }
             catch (Exception ex)
             {

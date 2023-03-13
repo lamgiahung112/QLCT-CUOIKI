@@ -48,7 +48,7 @@
 
                         <!--Menu title-->
 
-                        <TextBlock Text="Staff Account" Foreground="White" FontSize="22" FontWeight="SemiBold"
+                        <TextBlock Name="txtStaffName" Foreground="White" FontSize="22" FontWeight="SemiBold"
                                    DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
 
                         <!--Menu seprator-->

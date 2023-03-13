@@ -75,6 +75,7 @@ namespace CuoiKi
                 UI_ManagerForm uI_ManagerForm = new UI_ManagerForm();
                 uI_ManagerForm.Show();
             }
+            this.Close();
         }
     }
 }

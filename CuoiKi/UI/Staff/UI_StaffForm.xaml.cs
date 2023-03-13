@@ -1,4 +1,5 @@
-﻿using CuoiKi.ViewModels;
+﻿using CuoiKi.States;
+using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace CuoiKi.UI.Staff
         {
             InitializeComponent();
             this.DataContext = new StaffFormViewModel();
+            txtStaffName.Text = LoginInfoState.getInstance().Name;
         }
 
         public void Border_MouseDown(object sender, MouseButtonEventArgs e)
