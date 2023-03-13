@@ -7,7 +7,7 @@ namespace CuoiKi.DAOs
         void Add(T entry);
         void Delete(string id);
         void Modify(string id, T entry);
-        List<T>? GetAll(string id);
+        List<T>? GetAll();
         T? GetOne(string id);
     }
 }

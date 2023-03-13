@@ -26,30 +26,31 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetUpdateCommandForWorkSession(id, entry);
             dbc.Execute(command);
         }
-        public List<WorkSession>? GetAll(string id)
+        public List<WorkSession>? GetAll()
         {
-            string command = SqlConverter.GetCommandToGetAllWorkSessionOfAnEmployee(id);
-            List<WorkSession>? list = dbc.ExecuteWithResults(command);
-            if (list == null || list.Count == 0) { return null; }
-            return list;
+            //string command = SqlConverter.GetCommandToGetAllWorkSessionOfAnEmployee(id);
+            //List<WorkSession>? list = dbc.ExecuteWithResults(command);
+            //if (list == null || list.Count == 0) { return null; }
+            //return list;
+            return null;
         }
 
         public WorkSession? GetOne(string id)
         {
             string command = SqlConverter.GetCommandToGetOneWorkSession(id);
-            return dbc.ExecuteQuery<WorkSession>(command);
+            return dbc.ExecuteQuery(command);
         }
 
         public WorkSession? GetLastest(string employeeID)
         {
             string command = SqlConverter.GetCommandToGetLastestEmployeeWorkSession(employeeID);
-            return dbc.ExecuteQuery<WorkSession>(command);
+            return dbc.ExecuteQuery(command);
         }
 
         public WorkSession? GetUnfinished(string employeeID)
         {
             string command = SqlConverter.GetCommandToGetUnfinishedsEmployeeWorkSession(employeeID);
-            return dbc.ExecuteQuery<WorkSession>(command);
+            return dbc.ExecuteQuery(command);
         }
     }
 }
