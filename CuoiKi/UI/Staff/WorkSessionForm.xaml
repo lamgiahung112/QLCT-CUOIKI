@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         d:DesignHeight="720" d:DesignWidth="800"
         Title="WorkSessionForm" >
+    <Page.Resources>
+        <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+            <Setter Property="ItemContainerStyle" Value="{Binding View, Converter={StaticResource MaterialDesignListViewItemContainerStyleConverter}, RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="OverridesDefaultStyle" Value="False"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{Binding View, Converter={StaticResource MaterialDesignListViewTemplateConverter}, RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Grid.Column="1" Margin="30 20 20 20">
 
@@ -73,5 +92,19 @@
           DisplayModeChanged="dteSelectedMonth_DisplayModeChanged"  Width="800"> 
             </Calendar>
         </Viewbox>
+        <ListView ItemsSource="{Binding WorkSessionsInSelectedMonth}" Style="{DynamicResource ListViewStyle1}" Grid.Row="4" Grid.Column="2" Width="375" Height="180">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="75" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Starting time" Width="150" DisplayMemberBinding="{Binding StartingTime}"/>
+                    <GridViewColumn Header="Ending time" Width="150" DisplayMemberBinding="{Binding EndingTime, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Height"  Value="20"  />
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

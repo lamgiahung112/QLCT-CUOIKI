@@ -4,6 +4,7 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,10 +14,14 @@ namespace CuoiKi.ViewModels
     {
         private readonly WorkSessionController workSessionController;
         private string _currentUserId = "";
+        private ObservableCollection<WorkSession> workSessionsInSelectedMonth;
         public StaffFormViewModel()
         {
             workSessionController = new WorkSessionController();
             InitializeInfo();
+            workSessionsInSelectedMonth = new ObservableCollection<WorkSession>();
+            workSessionsInSelectedMonth.Add(new WorkSession("abc"));
+            workSessionsInSelectedMonth.Add(new WorkSession("def"));
         }
 
         private void InitializeInfo()
@@ -25,6 +30,19 @@ namespace CuoiKi.ViewModels
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
+
+        #region Binding work session list in month
+
+        public ObservableCollection<WorkSession> WorkSessionsInSelectedMonth
+        {
+            get { return workSessionsInSelectedMonth; }
+            set
+            {
+                workSessionsInSelectedMonth = value;
+                OnPropertyChanged(nameof(WorkSessionsInSelectedMonth));
+            }
+        }
+        #endregion
 
         #region Binding calendar current selected date
         private DateTime _calendarSelectedDate = DateTime.Today;
