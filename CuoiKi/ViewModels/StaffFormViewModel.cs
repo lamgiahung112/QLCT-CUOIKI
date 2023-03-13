@@ -4,6 +4,7 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -24,6 +25,20 @@ namespace CuoiKi.ViewModels
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
+
+        #region Binding calendar current selected date
+        private DateTime _calendarSelectedDate = DateTime.Today;
+        public DateTime CalendarSelectedDate
+        {
+            get { return _calendarSelectedDate; }
+            set
+            {
+                _calendarSelectedDate = value;
+                OnPropertyChanged(nameof(CalendarSelectedDate));
+                MessageBox.Show(value.ToString());
+            }
+        }
+        #endregion
 
         #region Binding CurrentDate
         private string _currentDate = DateTime.Now.Date.ToString();

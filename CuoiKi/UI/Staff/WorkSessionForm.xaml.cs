@@ -13,5 +13,10 @@ namespace CuoiKi.UI.Staff
             InitializeComponent();
             this.DataContext = new StaffFormViewModel();
         }
+
+        private void dteSelectedMonth_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
+        {
+            dteSelectedMonth.DisplayMode = CalendarMode.Year;
+        }
     }
 }
