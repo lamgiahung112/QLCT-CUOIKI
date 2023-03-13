@@ -65,6 +65,11 @@ namespace CuoiKi.DAOs
         #region Work Session
         public static string GetAddCommandForWorkSession(WorkSession workSession)
         {
+            string endingTimeParam = "NULL";
+            if (workSession.EndingTime is not null)
+            {
+                endingTimeParam = workSession.EndingTime?.ToString("s");
+            }
             return string.Format(
                 "INSERT INTO WorkSessions(" +
                 "ID, EmployeeID, StartingTime, EndingTime) " +
@@ -75,8 +80,8 @@ namespace CuoiKi.DAOs
                 "{3});",
                 workSession.Id,
                 workSession.EmployeeId,
-                workSession.StartingTime.ToString(),
-                workSession.EndingTime.HasValue ? "'" + workSession.EndingTime.ToString() + "'" : "NULL");
+                workSession.StartingTime.ToString("s"),
+                endingTimeParam);
         }
         public static string GetDeleteCommandForWorkSession(string id)
         {
@@ -84,7 +89,7 @@ namespace CuoiKi.DAOs
         }
         public static string GetUpdateCommandForWorkSession(string id, WorkSession workSession)
         {
-            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime.ToString(), id);
+            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime?.ToString("s"), id);
         }
         public static string GetCommandToGetLastestEmployeeWorkSession(string employeeId)
         {
