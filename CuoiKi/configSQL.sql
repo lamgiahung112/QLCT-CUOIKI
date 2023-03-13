@@ -61,3 +61,17 @@ Insert into Employees Values (N'managermkt', N'manager1', N'UTE', '2023-03-04', 
 Insert into Employees Values (N'manageracc', N'manager2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager', 'ACC');
 Insert into Employees Values (N'managerhrd', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager', 'HRD');
 Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr', 'HRD');
+
+-- Add WorkSessions
+INSERT INTO WorkSessions VALUES(N'wsTDebug1', N'staffmkt1', '2023-01-24T01:00:00', '2023-01-24T16:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug2', N'staffmkt1', '2023-01-24T08:00:00', '2023-01-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug3', N'staffmkt1', '2023-01-24T09:00:00', '2023-01-24T18:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug4', N'staffmkt1', '2023-02-24T07:00:00', '2023-02-24T16:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug5', N'staffmkt1', '2023-02-24T06:00:00', '2023-02-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug6', N'staffmkt1', '2023-03-24T08:00:00', '2023-03-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug7', N'staffmkt1', '2023-04-24T08:00:00', '2023-04-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug8', N'staffmkt1', '2023-05-24T08:00:00', '2023-05-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug9', N'staffmkt1', '2023-06-24T08:00:00', '2023-06-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug10', N'staffmkt1', '2023-07-24T08:00:00', '2023-07-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug11', N'staffmkt1', '2023-07-24T09:00:00', '2023-07-24T17:00:00');
+INSERT INTO WorkSessions VALUES(N'wsTDebug12', N'staffmkt1', '2023-08-24T08:00:00', '2023-08-24T17:00:00');
