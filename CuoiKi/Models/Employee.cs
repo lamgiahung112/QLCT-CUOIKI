@@ -5,19 +5,18 @@ namespace CuoiKi.Models
 {
     public class Employee
     {
-        public String Id { get; set; }
-        public String Name { get; set; }
-        public String Address { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
         public DateTime Birth { get; set; }
         public EmployeeStatus Status { get; set; }
         public Role Role { get; set; }
-        public String Password { get; set; }
+        public string Password { get; set; }
         public Gender Gender { get; set; }
-        public String DepartmentId { get; set; }
 
-        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role, string departmentId)
+        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
         {
-            Id = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
+            ID = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
             Address = address;
             Birth = birth;
@@ -26,14 +25,13 @@ namespace CuoiKi.Models
             Role = role;
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             Password = BCrypt.Net.BCrypt.HashPassword(password, salt);
-            DepartmentId = departmentId;
         }
         /// <summary>
         /// Constructor method used to map data from SQL to Employee
         /// </summary>
-        public Employee(String ID, String Name, String Address, DateTime Birth, String EmployeeStatus, String Password, String Gender, String Role, String DepartmentId)
+        public Employee(string ID, string Name, string Address, DateTime Birth, string EmployeeStatus, string Password, string Gender, string Role)
         {
-            this.Id = ID;
+            this.ID = ID;
             this.Name = Name;
             this.Address = Address;
             this.Birth = Birth;
@@ -41,7 +39,6 @@ namespace CuoiKi.Models
             this.Password = Password;
             this.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
             this.Role = (Role)Enum.Parse(typeof(Role), Role);
-            this.DepartmentId = DepartmentId;
         }
     }
 }

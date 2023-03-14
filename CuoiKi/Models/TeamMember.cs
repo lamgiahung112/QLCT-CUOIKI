@@ -8,11 +8,13 @@ namespace CuoiKi.Models
 {
     public class TeamMember
     {
-        public String TeamID { get; }
-        public String EmployeeID { get; }
+        public string ID { get; set; }
+        public string TeamID { get; }
+        public string EmployeeID { get; }
 
-        public TeamMember(string TeamID, string EmployeeID)
+        public TeamMember(string ID, string TeamID, string EmployeeID)
         {
+            this.ID = ID;
             this.TeamID = TeamID;
             this.EmployeeID = EmployeeID;
         }

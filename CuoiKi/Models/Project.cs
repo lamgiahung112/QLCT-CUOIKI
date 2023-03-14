@@ -9,12 +9,12 @@ namespace CuoiKi.Models
 {
     public class Project
     {
-        public String ID { get; }
-        public String Name { get; set; }
-        public String Description { get; set; }
-        public String ManagerID { get; }
+        public string ID { get; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ManagerID { get; }
 
-        public Project(String ID, String Name, String Description, String ManagerID)
+        public Project(string ID, string Name, string Description, string ManagerID)
         {
             this.ID = ID;
             this.Name = Name;
@@ -22,7 +22,7 @@ namespace CuoiKi.Models
             this.ManagerID = ManagerID;
         }
 
-        public static Project CreateNewProject(String ID, String Name, String Description)
+        public static Project CreateNewProject(string ID, string Name, string Description)
         {
             return new(ID, Name, Description, LoginInfoState.getInstance().Id);
         }
