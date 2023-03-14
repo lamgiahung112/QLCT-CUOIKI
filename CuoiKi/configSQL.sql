@@ -20,15 +20,9 @@ CREATE DATABASE companyDB
 USE companyDB;
 
 GO
--- Create Departments table
-CREATE TABLE Departments (
-    ID NVARCHAR(255) NOT NULL PRIMARY KEY,
-    EmployeeID NVARCHAR(255)
-);
-GO
 -- Create Employees table
 CREATE TABLE Employees (
-    ID NVARCHAR(255) NOT NULL PRIMARY KEY,
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL,
     [Address] NVARCHAR(255) NOT NULL,
     Birth DATETIME NOT NULL,
@@ -36,42 +30,72 @@ CREATE TABLE Employees (
     [Password] NVARCHAR(255) NOT NULL,
     Gender NVARCHAR(255) NOT NULL,
     [Role] NVARCHAR(255) NOT NULL,
-    [DepartmentId] NVARCHAR(255) NOT NULL FOREIGN KEY REFERENCES Departments(ID)
 );
 GO
 -- Create WorkSessions table
 CREATE TABLE WorkSessions (
-    ID NVARCHAR(255) NOT NULL PRIMARY KEY,
-    EmployeeID NVARCHAR(255) FOREIGN KEY REFERENCES Employees(ID),
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    EmployeeID NVARCHAR(50) FOREIGN KEY REFERENCES Employees(ID),
     StartingTime DATETIME NOT NULL,
     EndingTime DATETIME
 );
+GO
+-- Create Tasks table
+CREATE TABLE Tasks (
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    [Description] NVARCHAR(255) NOT NULL,
+    Title NVARCHAR(255) NOT NULL,
+    StartingTime DateTime NOT NULL,
+    EndingTime DateTime NOT NULL,
+    [Status] NVARCHAR(255) NOT NULL,
+    CreatedAt DateTime NOT NULL,
+    UpdatedAt DateTime NOT NULL
+);
 
--- Add Department
-Insert into Departments Values ('MKT', 'Marketing');
-Insert into Departments Values ('ACC', 'Accounting');
-Insert into Departments Values ('HRD', 'Human Resources');
+GO
+-- Create Projects table
+CREATE TABLE Projects (
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    [Name] NVARCHAR(255) NOT NULL,
+    [Description] NVARCHAR(255) NOT NULL,
+    ManagerId NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID)
+);
+
+GO
+-- Create Stages table
+CREATE TABLE Stages (
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    ProjectID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Projects(ID),
+    [Description] NVARCHAR(255) NOT NULL,
+);
+
+GO
+-- Create Teams table
+CREATE TABLE Teams (
+    TeamID NVARCHAR(50) NOT NULL,
+    StageID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Stages(ID),
+    [Description] NVARCHAR(255) NOT NULL,
+    PRIMARY KEY(TeamID, StageID)
+);
+
+GO
+-- Create TeamMembers table
+CREATE TABLE TeamMembers (
+    TeamID NVARCHAR(50) NOT NULL,
+    EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    PRIMARY KEY (TeamID, EmployeeID)
+);
 
 -- Add Employees
-Insert into Employees Values (N'staffmkt1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff', 'MKT');
-Insert into Employees Values (N'staffmkt2', N'staff2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff', 'MKT');
-Insert into Employees Values (N'staffacc1', N'staff3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff', 'ACC');
-Insert into Employees Values (N'staffacc2', N'staff4', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Staff', 'ACC');
-Insert into Employees Values (N'managermkt', N'manager1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager', 'MKT');
-Insert into Employees Values (N'manageracc', N'manager2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager', 'ACC');
-Insert into Employees Values (N'managerhrd', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager', 'HRD');
-Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr', 'HRD');
-
--- Add WorkSessions
-INSERT INTO WorkSessions VALUES(N'wsTDebug1', N'staffmkt1', '2023-01-24T01:00:00', '2023-01-24T16:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug2', N'staffmkt1', '2023-01-24T08:00:00', '2023-01-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug3', N'staffmkt1', '2023-01-24T09:00:00', '2023-01-24T18:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug4', N'staffmkt1', '2023-02-24T07:00:00', '2023-02-24T16:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug5', N'staffmkt1', '2023-02-24T06:00:00', '2023-02-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug6', N'staffmkt1', '2023-03-24T08:00:00', '2023-03-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug7', N'staffmkt1', '2023-04-24T08:00:00', '2023-04-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug8', N'staffmkt1', '2023-05-24T08:00:00', '2023-05-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug9', N'staffmkt1', '2023-06-24T08:00:00', '2023-06-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug10', N'staffmkt1', '2023-07-24T08:00:00', '2023-07-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug11', N'staffmkt1', '2023-07-24T09:00:00', '2023-07-24T17:00:00');
-INSERT INTO WorkSessions VALUES(N'wsTDebug12', N'staffmkt1', '2023-08-24T08:00:00', '2023-08-24T17:00:00');
+Insert into Employees Values (N'dev1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
+Insert into Employees Values (N'dev2', N'staff2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
+Insert into Employees Values (N'dev3', N'staff2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
+Insert into Employees Values (N'des', N'staff3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Designer');
+Insert into Employees Values (N'tester', N'staff4', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Tester');
+Insert into Employees Values (N'tl1', N'manager1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'TechLead');
+Insert into Employees Values (N'tl2', N'manager2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'TechLead');
+Insert into Employees Values (N'mng1', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
+Insert into Employees Values (N'mng2', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
+Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr');
