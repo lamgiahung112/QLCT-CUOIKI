@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CuoiKi.UI.Staff;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,29 @@ namespace CuoiKi.UI.Manager
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LogOut_click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btn_information_click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            frameContent.Navigate(new InformationManagerForm());
+        }
+
+        private void btn_CalcSalary_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new CalcSalaryForm());
+        }
+
+        private void btn_AssignTask_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new AssignTaskForm());
+        }
+
+        private void btn_KPI_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new KPIForm());
         }
     }
 }

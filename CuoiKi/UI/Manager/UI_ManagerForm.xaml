@@ -55,28 +55,28 @@
 
                         <StackPanel DockPanel.Dock="Top">
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="btn_Information" Style="{StaticResource menuButton}" Click="btn_information_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Information" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Information"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="btn_CalcSalary" Style="{StaticResource menuButton}" Click="btn_CalcSalary_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Sale" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Calculate Salary"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="btn_AssignTask" Style="{StaticResource menuButton}" Click="btn_AssignTask_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Assistant"  Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Assigning Tasks"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="btn_KPI" Style="{StaticResource menuButton}" Click="btn_KPI_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Walk" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="KPI"/>
@@ -85,7 +85,7 @@
 
                         </StackPanel>
 
-                        <Button x:Name="btnLogOut" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="Button_Click_1">
+                        <Button x:Name="btnLogOut" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="LogOut_click">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Log out"/>
@@ -99,36 +99,12 @@
 
             <!--Main Section-->
 
-            <Grid Grid.Column="1" Margin="30 20 20 20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <!--Search textbox-->
-
-                <!--<Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                               Panel.ZIndex="1" Text="Search..."
-                               Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>
-                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>-->
-
-                <!--Top Button-->
-
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Cog"/>
-                </Button>
-
+            <Grid Grid.Column="1">
+                <Border Grid.Row="1" CornerRadius="0 0 5 0" Background="Transparent">
+                    <Frame x:Name="frameContent" NavigationUIVisibility="Hidden" Margin="10"/>
+                </Border>
             </Grid>
-
+            
         </Grid>
     </Border>
 </Window> 
