@@ -7,6 +7,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\Manager\AssignTaskForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Manager\CalcSalaryForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Manager\InformationManagerForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Manager\KPIForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Manager\UI_ManagerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +37,18 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\AssignTaskForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\CalcSalaryForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\InformationManagerForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\KPIForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\UI_ManagerForm.xaml">

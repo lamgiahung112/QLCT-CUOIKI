@@ -45,11 +45,6 @@ namespace CuoiKi.UI.Staff
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void btn_Information_click(object sender, RoutedEventArgs e)
         {
             frameContent.Navigate(new InformationForm());
@@ -63,6 +58,11 @@ namespace CuoiKi.UI.Staff
         private void btn_LeaveOfAbsence_Click(object sender, RoutedEventArgs e)
         {
             frameContent.Navigate(new LeaveOfAbsenceForm());
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
