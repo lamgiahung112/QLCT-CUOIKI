@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
-    public class Work
+    public class Task
     {
         public String Id { get; set; }
         public String Assignee { get; set; }
@@ -16,17 +15,17 @@ namespace CuoiKi.Models
         public String Title { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime EndingTime { get; set; }
-        public WorkStatus Status { get; set; }
+        public TaskStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Constructor method used to map data from SQL to Work
         /// </summary>
-        public Work(String Id, String Assignee, String Assigner, 
+        public Task(String ID, String Assignee, String Assigner, 
             String Description, String Title, DateTime StartingTime, 
-            DateTime EndingTime, WorkStatus Status, DateTime CreatedAt, DateTime UpdatedAt) { 
-            this.Id = Id;
+            DateTime EndingTime, TaskStatus Status, DateTime CreatedAt, DateTime UpdatedAt) { 
+            this.Id = ID;
             this.Assignee = Assignee;
             this.Assigner = Assigner;
             this.Description = Description;
@@ -47,10 +46,10 @@ namespace CuoiKi.Models
         /// <param name="StartingTime">Starting time of work</param>
         /// <param name="EndingTime">Ending time of Work</param>
         /// <returns>A new instance of Work</returns>
-        public static Work CreateNewWork(String Assignee, String Assigner, String Description, String Title, DateTime StartingTime, DateTime EndingTime)
+        public static Task CreateNewTask(String Assignee, String Assigner, String Description, String Title, DateTime StartingTime, DateTime EndingTime)
         {
             String workId = Assignee + new Random().NextInt64().ToString();
-            Work work = new Work(workId, Assignee, Assigner, Description, Title, StartingTime, EndingTime, WorkStatus.WIP, DateTime.Now, DateTime.Now);
+            Task work = new(workId, Assignee, Assigner, Description, Title, StartingTime, EndingTime, TaskStatus.WIP, DateTime.Now, DateTime.Now);
             return work;
         }
     }

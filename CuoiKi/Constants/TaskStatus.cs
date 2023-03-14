@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CuoiKi.Constants
 {
-    public enum WorkStatus
+    public enum TaskStatus
     {
         WIP, NeedsReview, Done
     }

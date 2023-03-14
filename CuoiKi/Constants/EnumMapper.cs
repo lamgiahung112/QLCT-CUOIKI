@@ -18,17 +18,31 @@ namespace CuoiKi.Constants
         }
         public static String mapToString(Role role)
         {
-            return role == Role.Staff
-                    ? nameof(Role.Staff)
-                    : role == Role.Hr
-                    ? nameof(Role.Hr)
-                    : nameof(Role.Manager);
+            return role == Role.Dev
+                ? nameof(Role.Dev)
+                : role == Role.Designer
+                ? nameof(Role.Designer)
+                : role == Role.Tester
+                ? nameof(Role.Tester)
+                : role == Role.TechLead
+                ? nameof(Role.TechLead)
+                : role == Role.Manager
+                ? nameof(Role.Manager)
+                : nameof(Role.Hr);
         }
         public static String mapToString(WorkSessionStatus status)
         {
             return status == WorkSessionStatus.CheckedIn
                     ? "CHECKED IN"
                     : "CHECKED OUT";
+        }
+        public static String mapToString(TaskStatus status)
+        {
+            return status == TaskStatus.WIP
+                ? nameof(TaskStatus.WIP)
+                : status == TaskStatus.NeedsReview
+                ? nameof(TaskStatus.NeedsReview)
+                : nameof(TaskStatus.Done);
         }
     }
 }
