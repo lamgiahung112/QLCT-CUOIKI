@@ -14,8 +14,6 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColDefinitions>
-            
-        </Grid.ColDefinitions>
-     </Grid>
+        
+    </Grid>
 </Page>
