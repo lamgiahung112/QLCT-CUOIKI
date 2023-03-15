@@ -37,13 +37,35 @@ namespace CuoiKi.UI.Manager
         {
             frameContent.Navigate(new KPIForm());
         }
-
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        public void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-
-            // Begin dragging the window
-            this.DragMove();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
+
+        public bool IsMaximized = false;
+        public void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (IsMaximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 1080;
+                    this.Height = 720;
+
+                    IsMaximized = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    IsMaximized = true;
+                }
+            }
+        }
+
     }
 }

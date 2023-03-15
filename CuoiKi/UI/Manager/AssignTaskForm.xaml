@@ -21,21 +21,19 @@
         </Grid.ColumnDefinitions>
         <Label Content="Projects" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
-            <Button Width="300" Height="100"/>
+        <ScrollViewer Width="800" Height="350" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <WrapPanel  Width="800" Height="Auto">
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
+                <Button Margin="20 40 20 40" Width="300" Height="100"/>
 
-        </WrapPanel>
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
