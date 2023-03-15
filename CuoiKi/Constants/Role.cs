@@ -2,6 +2,6 @@
 {
     public enum Role
     {
-        Dev, Designer, Tester, TechLead, Manager, Hr
+        Dev, Designer, Tester, TechLead, Manager, Hr, Staff
     }
 }
