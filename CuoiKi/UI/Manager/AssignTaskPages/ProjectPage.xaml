@@ -1,0 +1,22 @@
+﻿<Page x:Class="CuoiKi.UI.Manager.AssignTaskPages.Project"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Project">
+
+    <Grid>
+        <TextBlock Text="Project" FontSize="30" HorizontalAlignment="Center" FontStyle="Italic" Foreground="Goldenrod"/>
+        <ListBoxItem Name="listBox"
+                     Background="Gold"
+                     Style="{DynamicResource styleListBoxItem}"
+                     Height="300"
+                     Width="500"
+                     HorizontalAlignment="Left"
+                     BorderThickness="12" Margin="33,119,0,31"/>
+        <Button x:Name="btn_Add" Content="+ Add" Height="30" Width="100" Margin="607,91,93,329"/>
+    </Grid>
+</Page>

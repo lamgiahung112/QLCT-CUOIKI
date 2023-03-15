@@ -27,8 +27,9 @@ namespace CuoiKi.DAOs
         }
         public List<Employee>? GetAll()
         {
-            string command = SqlConverter.GetSelectAllDepartmentCommand();
-            return dbc.ExecuteWithResults(command);
+            //string command = SqlConverter.getCommand();
+            //return dbc.ExecuteWithResults(command);
+            return null;
         }
         public Employee? GetOne(string id)
         {
