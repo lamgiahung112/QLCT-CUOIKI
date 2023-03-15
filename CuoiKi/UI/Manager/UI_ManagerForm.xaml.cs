@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using CuoiKi.Models;
+using System.Windows;
 using System.Windows.Input;
+using CuoiKi.UI.Manager.AssignTaskPages;
 
 namespace CuoiKi.UI.Manager
 {
@@ -37,13 +39,13 @@ namespace CuoiKi.UI.Manager
         {
             frameContent.Navigate(new KPIForm());
         }
-
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        public void Border_MouseDownS(object sender, MouseButtonEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-
-            // Begin dragging the window
-            this.DragMove();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
     }
+       
 }
