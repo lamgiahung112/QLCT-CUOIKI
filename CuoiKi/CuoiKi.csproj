@@ -45,4 +45,8 @@
     <Resource Include="UI\Staff\account.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UI\Manager\AssignTaskPages\" />
+  </ItemGroup>
+
 </Project>
