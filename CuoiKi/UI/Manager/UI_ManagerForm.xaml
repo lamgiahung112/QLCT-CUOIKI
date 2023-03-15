@@ -25,11 +25,9 @@
                 </Grid.RowDefinitions>
                 <!--Menu icon-->
 
-                <Button HorizontalAlignment="Left" Margin="20,28,0,35" Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
-                </Button>
+                <Border Margin="0 0 0 100"/>
 
-                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
+                <Border Grid.Row="1" Background="#127857" CornerRadius="0 50 0 30">
                     <DockPanel>
                         <!--Menu Logo-->
 
