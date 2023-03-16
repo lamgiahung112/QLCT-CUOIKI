@@ -37,7 +37,7 @@ CREATE TABLE WorkSessions (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     EmployeeID NVARCHAR(50) FOREIGN KEY REFERENCES Employees(ID),
     StartingTime DATETIME NOT NULL,
-    EndingTime DATETIME NOT NULL
+    EndingTime DATETIME
 );
 
 GO

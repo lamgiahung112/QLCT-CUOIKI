@@ -43,7 +43,7 @@ namespace CuoiKi.DAOs
             dbc.Execute(cmd);
         }
 
-        public List<Task>? GetTasksOfATeamMember(TeamMemberDAO member)
+        public List<Task>? GetTasksOfATeamMember(TeamMember member)
         {
             string cmd = SqlConverter.GetTasksOfATeamMemberCommand(member);
             return dbc.ExecuteWithResults<Task>(cmd);

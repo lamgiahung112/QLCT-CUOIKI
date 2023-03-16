@@ -35,7 +35,7 @@ namespace CuoiKi.Controllers
         /// <param name="entry">The entry to save</param>
         public void Save<T>(T entry) where T : ModelBase 
         {
-            dynamic? existingRecord = null;
+            dynamic? existingRecord;
             IDAO<T> dao;
             if (entry is Project)
             {

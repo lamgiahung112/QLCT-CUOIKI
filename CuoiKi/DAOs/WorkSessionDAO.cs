@@ -30,7 +30,6 @@ namespace CuoiKi.DAOs
         {
             string command = SqlConverter.GetCommandToGetAllWorkSession();
             List<WorkSession>? list = dbc.ExecuteWithResults<WorkSession>(command);
-            if (list == null || list.Count == 0) { return null; }
             return list;
         }
 

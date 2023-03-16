@@ -4,16 +4,16 @@ namespace CuoiKi.Models
 {
     public class WorkSession : ModelBase
     {
-        public String EmployeeId { get; set; }
+        public string EmployeeID { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime? EndingTime { get; set; }
 
         /// <summary>
         /// Used when creating a new Session for an Employee 
         /// </summary>
-        public WorkSession(String employeeId) : base(employeeId + DateTime.Now.ToShortDateString() + new Random().Next(1000, 9999))
+        public WorkSession(String EmployeeID) : base(EmployeeID + DateTime.Now.ToShortDateString() + new Random().Next(1000, 9999))
         {
-            EmployeeId = employeeId;
+            this.EmployeeID = EmployeeID;
             StartingTime = DateTime.Now;
             EndingTime = null;
         }
@@ -21,11 +21,11 @@ namespace CuoiKi.Models
         /// <summary>
         /// Used when getting data from db
         /// </summary>
-        public WorkSession(String ID, String employeeId, DateTime startingTime, DateTime endingTime) : base(ID)
+        public WorkSession(String ID, String employeeID, DateTime StartingTime, DateTime EndingTime) : base(ID)
         {
-            EmployeeId = employeeId;
-            StartingTime = startingTime;
-            EndingTime = endingTime;
+            this.EmployeeID = employeeID;
+            this.StartingTime = StartingTime;
+            this.EndingTime = EndingTime;
         }
     }
 }

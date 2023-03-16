@@ -84,7 +84,7 @@ namespace CuoiKi.Controllers
         public List<WorkSession>? GetAllWorkSessionsOfAnEmployee(string employeeID)
         {
             var result = from workSession in workSessionDAO.GetAll()
-                         where workSession.EmployeeId == employeeID
+                         where workSession.EmployeeID == employeeID
                          select workSession;
             return result.ToList();
         }
@@ -92,8 +92,8 @@ namespace CuoiKi.Controllers
         {
             var startDate = new DateTime(dateInMonth.Year, dateInMonth.Month, 1);
             var endDate = startDate.Date.AddMonths(1).AddDays(-1);
-            var result = from workSession in workSessionDAO.GetAll()
-                         where workSession.EmployeeId == employeeID &&
+            var result = from workSession in workSessionDAO.GetAll() ?? new List<WorkSession>()
+                         where workSession.EmployeeID == employeeID &&
                          workSession.StartingTime >= startDate &&
                          workSession.StartingTime <= endDate
                          select workSession;

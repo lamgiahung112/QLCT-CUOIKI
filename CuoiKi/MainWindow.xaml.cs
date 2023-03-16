@@ -76,7 +76,7 @@ namespace CuoiKi
                 UI_StaffForm uI_StaffForm = new();
                 uI_StaffForm.Show();
             }
-            this.Show();
+            this.Close();
         }
     }
 }

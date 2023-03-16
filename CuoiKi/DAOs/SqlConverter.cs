@@ -80,7 +80,7 @@ namespace CuoiKi.DAOs
                 "'{2}', " +
                 "{3});",
                 workSession.ID,
-                workSession.EmployeeId,
+                workSession.EmployeeID,
                 workSession.StartingTime.ToString("s"),
                 endingTimeParam);
         }
