@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
-    public class Project
+    public class Project : ModelBase
     {
-        public string ID { get; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ManagerID { get; }
+        public string ManagerID { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public Project(string ID, string Name, string Description, string ManagerID)
+        public Project(string ID, string Name, string Description, string ManagerID, DateTime CreatedAt) : base(ID)
         {
-            this.ID = ID;
             this.Name = Name;
             this.Description = Description;
             this.ManagerID = ManagerID;
+            this.CreatedAt = CreatedAt;
         }
 
         public static Project CreateNewProject(string ID, string Name, string Description)
         {
-            return new(ID, Name, Description, LoginInfoState.getInstance().Id);
+            return new(ID, Name, Description, LoginInfoState.getInstance().Id, DateTime.Now);
         }
     }
 }

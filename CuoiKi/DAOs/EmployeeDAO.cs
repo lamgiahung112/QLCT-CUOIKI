@@ -1,4 +1,5 @@
-﻿using CuoiKi.Models;
+﻿using CuoiKi.Constants;
+using CuoiKi.Models;
 using System.Collections.Generic;
 
 namespace CuoiKi.DAOs
@@ -30,6 +31,11 @@ namespace CuoiKi.DAOs
             //string command = SqlConverter.getCommand();
             //return dbc.ExecuteWithResults(command);
             return null;
+        }
+        public List<Employee>? GetAllManagers()
+        {
+            string cmd = SqlConverter.GetAllEmployeeOfARoleCommand(Role.Manager);
+            return dbc.ExecuteWithResults<Employee>(cmd);
         }
         public Employee? GetOne(string id)
         {

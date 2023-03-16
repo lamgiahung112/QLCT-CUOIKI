@@ -12,7 +12,7 @@ namespace CuoiKi.DAOs
 
         public TaskDAO()
         {
-            this.dbc = new DBConnection();
+            dbc = new DBConnection();
         }
         public void Add(Task entry)
         {
@@ -43,7 +43,7 @@ namespace CuoiKi.DAOs
             dbc.Execute(cmd);
         }
 
-        public List<Task>? GetTasksOfATeamMember(TeamMember member)
+        public List<Task>? GetTasksOfATeamMember(TeamMemberDAO member)
         {
             string cmd = SqlConverter.GetTasksOfATeamMemberCommand(member);
             return dbc.ExecuteWithResults<Task>(cmd);

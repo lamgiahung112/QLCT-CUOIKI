@@ -46,7 +46,7 @@ namespace CuoiKi.ViewModels
             _workSessionsInSelectedMonth.Clear();
             List<WorkSession>? workSessions =
                 workSessionController.GetAllWorkSessionOfAnEmployeeInSelectedMonth(employeeID, dateInMonth);
-            foreach (var item in workSessions)
+            foreach (var item in workSessions!)
             {
                 _workSessionsInSelectedMonth.Add(item);
             }
@@ -103,7 +103,7 @@ namespace CuoiKi.ViewModels
             {
                 ShowEmptyWorkSession = false;
                 ShowCurrentWorkSession = true;
-                WorkSessionID = ws.Id;
+                WorkSessionID = ws.ID;
                 WorkSessionStartingTime = ws.StartingTime.ToString("F");
                 if (ws.EndingTime == DateTime.MinValue)
                 {

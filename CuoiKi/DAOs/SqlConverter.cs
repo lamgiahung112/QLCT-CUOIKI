@@ -56,6 +56,11 @@ namespace CuoiKi.DAOs
                 nameof(employee.Role),
                 employee.ID);
         }
+
+        public static string GetAllEmployeeOfARoleCommand(Role role)
+        {
+            return string.Format("SELECT * FROM Employees WHERE Role='{0}'", EnumMapper.mapToString(role));
+        }
         #endregion
 
         #region Work Session
@@ -74,7 +79,7 @@ namespace CuoiKi.DAOs
                 "N'{1}', " +
                 "'{2}', " +
                 "{3});",
-                workSession.Id,
+                workSession.ID,
                 workSession.EmployeeId,
                 workSession.StartingTime.ToString("s"),
                 endingTimeParam);
@@ -85,7 +90,7 @@ namespace CuoiKi.DAOs
         }
         public static string GetUpdateCommandForWorkSession(WorkSession workSession)
         {
-            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime?.ToString("s"), workSession.Id);
+            return string.Format("UPDATE WorkSessions SET EndingTime = '{0}' WHERE ID = N'{1}'", workSession.EndingTime?.ToString("s"), workSession.ID);
         }
         public static string GetCommandToGetLastestEmployeeWorkSession(string employeeId)
         {
@@ -134,11 +139,11 @@ namespace CuoiKi.DAOs
                 task.Assigner,
                 task.Description,
                 task.Title,
-                task.StartingTime,
-                task.EndingTime,
-                task.Status,
-                task.CreatedAt,
-                task.UpdatedAt);
+                task.StartingTime.ToShortDateString(),
+                task.EndingTime.ToShortDateString(),
+                EnumMapper.mapToString(task.Status),
+                task.CreatedAt.ToShortDateString(),
+                task.UpdatedAt.ToShortDateString());
         }
         public static string GetDeleteCommandForTask(string id)
         {
@@ -170,10 +175,10 @@ namespace CuoiKi.DAOs
                 "WHERE ID = '{6}'",
                 task.Description,
                 task.Title,
-                task.StartingTime,
-                task.EndingTime,
-                task.Status,
-                task.UpdatedAt,
+                task.StartingTime.ToShortDateString(),
+                task.EndingTime.ToShortDateString(),
+                EnumMapper.mapToString(task.Status),
+                task.UpdatedAt.ToShortDateString(),
                 task.ID
                 );
         }
@@ -183,5 +188,190 @@ namespace CuoiKi.DAOs
             return string.Format("SELECT * FROM Tasks WHERE ID = '{0}'", id);
         }
         #endregion
+
+        #region Project
+        public static string GetAddCommandForProject(Project project)
+        {
+            return string.Format(
+                "INSERT INTO Projects " +
+                "(ID, [Name], [Description], ManagerID, CreatedAt) " +
+                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",
+                project.ID,
+                project.Name,
+                project.Description,
+                project.ManagerID,
+                project.CreatedAt.ToShortDateString()
+            );
+        }
+
+        public static string GetDeleteCommandForProject(string id)
+        {
+            return string.Format("DELETE FROM Projects WHERE ID = '{0}'", id);
+        }
+
+        public static string GetOneByIdCommandForProject(string id)
+        {
+            return string.Format("SELECT * FROM Projects WHERE ID = '{0}'", id);
+        }
+
+        public static string GetUpdateCommandForProject(Project project)
+        {
+            return string.Format(
+                "UPDATE Projects SET " +
+                "[Name] = '{0}', " +
+                "[Description] = '{1}', " +
+                "ManagerID = '{2}' " +
+                "WHERE ID = '{3}'",
+                project.Name,
+                project.Description,
+                project.ManagerID,
+                project.ID
+            );
+        }
+
+        public static string GetAllProjectsOfAManagerCommand(string managerID)
+        {
+            return string.Format(
+                "SELECT * FROM Projects WHERE ManagerID = '{0}'",
+                managerID
+            );
+        }
+
+        public static string GetAllProjectsOfEmployeeCommand(string employeeID)
+        {
+            return string.Format(
+                "SELECT Projects.ID, Projects.[Name], Projects.[Description], Project.ManagerID " +
+                "FROM TeamMembers " +
+                "INNER JOIN Teams " +
+                "ON TeamMembers.TeamID = Teams.ID and TeamMembers.EmployeeID = '{0}' " +
+                "INNER JOIN Stages " +
+                "ON Teams.StageID = Stages.ID " +
+                "INNER JOIN Projects " +
+                "ON Stages.ProjectID = Projects.ID",
+                employeeID
+            );
+        }
+
+        public static string GetAllProjectsOfTechleadCommand(string techleadID)
+        {
+            return string.Format(
+                "SELECT Projects.ID, Projects.[Name], Projects.[Description], Project.ManagerID " +
+                "FROM TeamMembers " +
+                "INNER JOIN Teams " +
+                "ON TeamMembers.TeamID = Teams.ID and Teams.TechLeadID = '{0}' " +
+                "INNER JOIN Stages " +
+                "ON Teams.StageID = Stages.ID " +
+                "INNER JOIN Projects " +
+                "ON Stages.ProjectID = Projects.ID",
+                techleadID
+            );
+        }
+        #endregion
+
+        #region Team
+        public static string GetAddCommandForTeam(Team team)
+        {
+            return string.Format(
+                "INSERT INTO Teams " +
+                "(ID, StageID, TechLeadID, [Name]) " +
+                "VALUES ('{0}', '{1}', '{2}', '{3}')",
+                team.ID, team.StageID, team.TechLeadID, team.Name
+            );
+        }
+
+        public static string GetDeleteCommandForTeam(string id)
+        {
+            return string.Format("DELETE From Teams WHERE ID = '{0}'", id);
+        }
+
+        public static string GetOneByIdCommandForTeam(string id)
+        {
+            return string.Format("SELECT * FROM Teams WHERE ID = '{0}'", id);
+        }
+
+        public static string GetUpdateCommandForTeam(Team team)
+        {
+            return string.Format(
+                "UPDATE Teams SET " +
+                "TechLeadID = '{0}', " +
+                "[Name] = '{1}' " +
+                "WHERE ID = '{2}'",
+                team.TechLeadID, team.Name, team.ID
+            );
+        }
+
+        public static string GetTeamsOfAStageCommand(Stage stage)
+        {
+            return string.Format("SELECT * FROM Teams WHERE StageID = '{0}'", stage.ID);
+        }
+        #endregion
+
+        #region Stage
+        public static string GetAddCommandForStage(Stage stage)
+        {
+            return string.Format(
+                "INSERT INTO Stages " +
+                "(ID, ProjectID, [Description) " +
+                "VALUES ('{0}', '{1}', '{2}')",
+                stage.ID, stage.ProjectID, stage.Description
+            );
+        }
+
+        public static string GetDeleteCommandForStage(string id)
+        {
+            return string.Format(
+                "DELETE FROM Stages WHERE ID = '{0}'", id    
+            );
+        }
+
+        public static string GetOneByIdCommandForStage(string id)
+        {
+            return string.Format("SELECT * FROM Stages WHERE ID = '{0}'", id);
+        }
+
+        public static string GetUpdateCommandForStage(Stage stage)
+        {
+            return string.Format(
+                "UPDATE Stages SET " +
+                "([Description]) " +
+                "VALUES ('{0}') " +
+                "WHERE ID = '{1}'",
+                stage.Description, stage.ID
+            );
+        }
+        
+        public static string GetStagesOfAProjectCommand(Project project)
+        {
+            return string.Format("SELECT * FROM Stages WHERE ProjectID = '{0}'", project.ID);
+        }
+        #endregion
+
+        #region TeamMember
+        public static string GetAddCommandForTeamMember(TeamMember tm)
+        {
+            return string.Format(
+                "INSERT INTO TeamMembers " +
+                "(ID, TeamID, EmployeeID) " +
+                "VALUES ('{0}', '{1}', '{2}')",
+                tm.ID, tm.TeamID, tm.EmployeeID
+            );
+        }
+
+        public static string GetDeleteCommandForTeamMember(string id)
+        {
+            return string.Format("DELETE FROM TeamMembers WHERE ID = '{0}'", id);
+        }
+
+        public static string GetOneByIdCommandForTeamMember(string id)
+        {
+            return string.Format("SELECT * FROM TeamMembers WHERE ID = '{0}'", id);
+        }
+
+        public static string GetAllMembersOfTeamCommand(Team team)
+        {
+            return string.Format("SELECT * FROM TeamMembers WHERE TeamID = '{0}'", team.ID);
+        }
+        #endregion
+
     }
 }

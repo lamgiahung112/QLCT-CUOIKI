@@ -3,9 +3,8 @@ using System;
 
 namespace CuoiKi.Models
 {
-    public class Employee
+    public class Employee : ModelBase
     {
-        public string ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime Birth { get; set; }
@@ -14,9 +13,9 @@ namespace CuoiKi.Models
         public string Password { get; set; }
         public Gender Gender { get; set; }
 
-        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
+        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role) 
+            : base(name.Trim() + DateTime.Now.ToShortDateString().Replace("/", ""))
         {
-            ID = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
             Address = address;
             Birth = birth;
@@ -29,9 +28,8 @@ namespace CuoiKi.Models
         /// <summary>
         /// Constructor method used to map data from SQL to Employee
         /// </summary>
-        public Employee(string ID, string Name, string Address, DateTime Birth, string EmployeeStatus, string Password, string Gender, string Role)
+        public Employee(string ID, string Name, string Address, DateTime Birth, string EmployeeStatus, string Password, string Gender, string Role) : base(ID)
         {
-            this.ID = ID;
             this.Name = Name;
             this.Address = Address;
             this.Birth = Birth;
