@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:StaffFormViewModel}"
         Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" Background="Transparent" WindowState="Minimized">
+        AllowsTransparency="True" Background="Transparent" WindowState="Normal">
 
 
 
