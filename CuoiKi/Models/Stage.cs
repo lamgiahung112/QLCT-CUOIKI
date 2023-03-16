@@ -6,22 +6,19 @@ using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
-    public class Stage
+    public class Stage : ModelBase
     {
-        public String ID { get; }
-        public String ProjectID { get; }
-        public String Description { get; set; }
+        public string ProjectID { get; }
+        public string Description { get; set; }
 
-        public Stage(String ID, String ProjectID, String Description)
+        public Stage(string ID, string ProjectID, string Description) : base(ID)
         {
-            this.ID = ID;
             this.ProjectID = ProjectID;
             this.Description = Description;
         }
 
-        public Stage(String ProjectID, String Description)
+        public Stage(string ProjectID, string Description) : base(ProjectID + "-" + Description.Trim())
         {
-            this.ID = ProjectID + "-" + Description.Trim();
             this.Description = Description;
             this.ProjectID = ProjectID;
         }

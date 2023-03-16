@@ -53,7 +53,7 @@ namespace CuoiKi.Controllers
                 return false;
             }
             unfinishedWorkSession.EndingTime = DateTime.Now;
-            workSessionDAO.Modify(unfinishedWorkSession.Id, unfinishedWorkSession);
+            workSessionDAO.Modify(unfinishedWorkSession);
             MessageBox.Show("Check out success");
             return true;
         }

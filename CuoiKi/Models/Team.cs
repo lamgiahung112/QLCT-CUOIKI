@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
-    public class Team
+    public class Team : ModelBase
     {
-        public String TeamID { get; }
-        public String StageID { get; }
-        public String TechLeadID { get; set; }
+        public string StageID { get; set; }
+        public string TechLeadID { get; set; }
+        public string Name { get; set; }
 
-        public Team(String TeamID, String StageID, String TechLeadID) 
+        public Team(string ID, string StageID, string TechLeadID, string Name) : base(ID)
         {
-            this.TeamID = TeamID;
             this.StageID = StageID;
             this.TechLeadID = TechLeadID;
+            this.Name = Name;
         }
     }
 }

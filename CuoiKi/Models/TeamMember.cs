@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
-    public class TeamMember
+    public class TeamMember : ModelBase
     {
-        public String TeamID { get; }
-        public String EmployeeID { get; }
+        public string TeamID { get; }
+        public string EmployeeID { get; }
 
-        public TeamMember(string TeamID, string EmployeeID)
+        public TeamMember(string ID, string TeamID, string EmployeeID) : base(ID)
         {
             this.TeamID = TeamID;
             this.EmployeeID = EmployeeID;

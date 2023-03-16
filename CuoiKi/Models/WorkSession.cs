@@ -2,9 +2,8 @@
 
 namespace CuoiKi.Models
 {
-    public class WorkSession
+    public class WorkSession : ModelBase
     {
-        public String Id { get; set; }
         public String EmployeeId { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime? EndingTime { get; set; }
@@ -12,10 +11,8 @@ namespace CuoiKi.Models
         /// <summary>
         /// Used when creating a new Session for an Employee 
         /// </summary>
-        public WorkSession(String employeeId)
+        public WorkSession(String employeeId) : base(employeeId + DateTime.Now.ToShortDateString() + new Random().Next(1000, 9999))
         {
-            Random rnd = new Random();
-            Id = employeeId + DateTime.Now.ToShortDateString() + rnd.Next(1000, 9999);
             EmployeeId = employeeId;
             StartingTime = DateTime.Now;
             EndingTime = null;
@@ -24,9 +21,8 @@ namespace CuoiKi.Models
         /// <summary>
         /// Used when getting data from db
         /// </summary>
-        public WorkSession(String id, String employeeId, DateTime startingTime, DateTime endingTime)
+        public WorkSession(String ID, String employeeId, DateTime startingTime, DateTime endingTime) : base(ID)
         {
-            Id = id;
             EmployeeId = employeeId;
             StartingTime = startingTime;
             EndingTime = endingTime;

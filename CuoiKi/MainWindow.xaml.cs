@@ -61,20 +61,22 @@ namespace CuoiKi
                 return;
             }
 
-            LoginInfoState.getInstance().Id = foundEmployee.Id;
+            LoginInfoState.getInstance().Id = foundEmployee.ID;
             LoginInfoState.getInstance().Name = foundEmployee.Name;
             LoginInfoState.getInstance().Role = foundEmployee.Role;
 
-            if (foundEmployee.Role == Role.Staff)
+            if (foundEmployee.Role == Role.Manager)
             {
-                UI_StaffForm uI_StaffForm = new UI_StaffForm();
+                UI_ManagerForm uI_ManagerForm = new();
+                uI_ManagerForm.Show();
+                
+            }
+            else 
+            {
+                UI_StaffForm uI_StaffForm = new();
                 uI_StaffForm.Show();
             }
-            else if (foundEmployee.Role != Role.Staff)
-            {
-                UI_ManagerForm uI_ManagerForm = new UI_ManagerForm();
-                uI_ManagerForm.Show();
-            }
+            this.Show();
         }
     }
 }

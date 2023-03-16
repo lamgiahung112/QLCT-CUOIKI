@@ -1,14 +1,15 @@
-﻿using CuoiKi.Models;
+﻿using CuoiKi.Constants;
+using CuoiKi.Models;
 using System.Collections.Generic;
 
 namespace CuoiKi.DAOs
 {
     public class EmployeeDAO : IDAO<Employee>
     {
-        private readonly DBConnection<Employee> dbc;
+        private readonly DBConnection dbc;
         public EmployeeDAO()
         {
-            dbc = new DBConnection<Employee>();
+            dbc = new DBConnection();
         }
         public void Add(Employee entry)
         {
@@ -20,9 +21,9 @@ namespace CuoiKi.DAOs
             string command = SqlConverter.GetDeleteCommandForEmployee(id);
             dbc.Execute(command);
         }
-        public void Modify(string id, Employee entry)
+        public void Modify(Employee entry)
         {
-            string command = SqlConverter.GetUpdateCommandForEmployee(id, entry);
+            string command = SqlConverter.GetUpdateCommandForEmployee(entry);
             dbc.Execute(command);
         }
         public List<Employee>? GetAll()
@@ -31,10 +32,15 @@ namespace CuoiKi.DAOs
             //return dbc.ExecuteWithResults(command);
             return null;
         }
+        public List<Employee>? GetAllManagers()
+        {
+            string cmd = SqlConverter.GetAllEmployeeOfARoleCommand(Role.Manager);
+            return dbc.ExecuteWithResults<Employee>(cmd);
+        }
         public Employee? GetOne(string id)
         {
             string command = SqlConverter.GetCommandToGetOneEmployee(id);
-            return dbc.ExecuteQuery(command);
+            return dbc.ExecuteQuery<Employee>(command);
         }
     }
 }

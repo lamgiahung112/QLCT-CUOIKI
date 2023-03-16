@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace CuoiKi.DAOs
 {
-    public class DBConnection<T> where T : class
+    public class DBConnection
     {
         private SqlConnection conn;
         public DBConnection()
@@ -48,7 +48,7 @@ namespace CuoiKi.DAOs
                 conn.Close();
             }
         }
-        public T? ExecuteQuery(string s)
+        public T? ExecuteQuery<T>(string s) where T : class
         {
             try
             {
@@ -76,7 +76,7 @@ namespace CuoiKi.DAOs
             }
         }
 
-        public List<T>? ExecuteWithResults(string s)
+        public List<T>? ExecuteWithResults<T>(string s) where T : class 
         {
             try
             {

@@ -37,21 +37,7 @@ CREATE TABLE WorkSessions (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     EmployeeID NVARCHAR(50) FOREIGN KEY REFERENCES Employees(ID),
     StartingTime DATETIME NOT NULL,
-    EndingTime DATETIME
-);
-GO
--- Create Tasks table
-CREATE TABLE Tasks (
-    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
-    Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
-    Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
-    [Description] NVARCHAR(255) NOT NULL,
-    Title NVARCHAR(255) NOT NULL,
-    StartingTime DateTime NOT NULL,
-    EndingTime DateTime NOT NULL,
-    [Status] NVARCHAR(255) NOT NULL,
-    CreatedAt DateTime NOT NULL,
-    UpdatedAt DateTime NOT NULL
+    EndingTime DATETIME NOT NULL
 );
 
 GO
@@ -60,7 +46,7 @@ CREATE TABLE Projects (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL,
     [Description] NVARCHAR(255) NOT NULL,
-    ManagerId NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID)
+    ManagerID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID)
 );
 
 GO
@@ -74,18 +60,34 @@ CREATE TABLE Stages (
 GO
 -- Create Teams table
 CREATE TABLE Teams (
-    TeamID NVARCHAR(50) NOT NULL,
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     StageID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Stages(ID),
-    [Description] NVARCHAR(255) NOT NULL,
-    PRIMARY KEY(TeamID, StageID)
+    TechLeadID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    [Name] NVARCHAR(255) NOT NULL
 );
+
 
 GO
 -- Create TeamMembers table
 CREATE TABLE TeamMembers (
-    TeamID NVARCHAR(50) NOT NULL,
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    TeamID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Teams(ID),
     EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
-    PRIMARY KEY (TeamID, EmployeeID)
+);
+
+GO
+-- Create Tasks table
+CREATE TABLE Tasks (
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES TeamMembers(ID),
+    Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    [Description] NVARCHAR(255) NOT NULL,
+    Title NVARCHAR(255) NOT NULL,
+    StartingTime DateTime NOT NULL,
+    EndingTime DateTime NOT NULL,
+    [Status] NVARCHAR(255) NOT NULL,
+    CreatedAt DateTime NOT NULL,
+    UpdatedAt DateTime NOT NULL
 );
 
 -- Add Employees
