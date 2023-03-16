@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using CuoiKi.UI.Manager.AssignTaskPages;
 
 namespace CuoiKi.UI.Manager
 {
@@ -61,6 +62,12 @@ namespace CuoiKi.UI.Manager
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            //(Application.Current.FindResource("frameContent") as System.Windows.Controls.Frame).Navigate(new ProjectPage());
+            NavigationService.Navigate(new ProjectPage()); 
         }
     }
 }
