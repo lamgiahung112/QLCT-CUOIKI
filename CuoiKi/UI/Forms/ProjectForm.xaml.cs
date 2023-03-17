@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CuoiKi.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuoiKi.UI.Forms
 {
@@ -19,9 +8,22 @@ namespace CuoiKi.UI.Forms
     /// </summary>
     public partial class ProjectForm : Window
     {
-        public ProjectForm()
+        public ProjectForm(ProjectsPageViewModel pgvm)
         {
             InitializeComponent();
+            this.DataContext = pgvm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            // save project
+            //(this.DataContext as ProjectsPageViewModel).SaveNewProject();
+            this.Close();
         }
     }
 }
