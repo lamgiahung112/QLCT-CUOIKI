@@ -1,28 +1,17 @@
 ﻿using CuoiKi.UI.Forms;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CuoiKi.UI.Manager.AssignTaskPages
 {
     /// <summary>
-    /// Interaction logic for ProjectPage.xaml
+    /// Interaction logic for StagesPage.xaml
     /// </summary>
-    public partial class ProjectPage : Page
+    public partial class StagesPage : Page
     {
-        public ProjectPage()
+        public StagesPage()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -33,17 +22,17 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             private string _leaderName;
             public Stage(string stageName, string leaderName)
             {
-                _stageName= stageName;
-                _leaderName= leaderName;   
+                _stageName = stageName;
+                _leaderName = leaderName;
             }
             public string StageName
             {
-                get { return _stageName;}
+                get { return _stageName; }
                 set { _stageName = value; }
             }
             public string LeaderName
             {
-                get { return _leaderName;}  
+                get { return _leaderName; }
                 set { _leaderName = value; }
             }
         }

@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CuoiKi.UI.Manager.AssignTaskPages;
+using System.Windows;
 using System.Windows.Input;
-
 namespace CuoiKi.UI.Manager
 {
     /// <summary>
@@ -30,7 +30,7 @@ namespace CuoiKi.UI.Manager
 
         private void btn_AssignTask_click(object sender, RoutedEventArgs e)
         {
-            frameContent.Navigate(new AssignTaskForm());
+            frameContent.Navigate(new ProjectsPage());
         }
 
         private void btn_KPI_click(object sender, RoutedEventArgs e)
