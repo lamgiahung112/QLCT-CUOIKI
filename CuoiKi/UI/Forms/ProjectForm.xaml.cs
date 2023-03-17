@@ -21,8 +21,6 @@ namespace CuoiKi.UI.Forms
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            // save project
-            //(this.DataContext as ProjectsPageViewModel).SaveNewProject();
             this.Close();
         }
     }

@@ -65,7 +65,7 @@
             Width="200" 
             Height="32"
             FontSize="16"
-            Text="{Binding ToBeSavedProjectName}"
+            Text="{Binding ToBeSavedProjectName, UpdateSourceTrigger=PropertyChanged}"
         />
         <Label
             Grid.Row="3"
@@ -91,7 +91,7 @@
             MaxLength="255"
             FontSize="16"
             Margin="0 -20 0 -20"
-            Text="{Binding ToBeSavedProjectDescription}"
+            Text="{Binding ToBeSavedProjectDescription, UpdateSourceTrigger=PropertyChanged}"
         />
         <Grid
             Grid.Row="5"

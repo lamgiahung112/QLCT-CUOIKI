@@ -78,7 +78,7 @@ namespace CuoiKi.ViewModels
             fetchProjectListToObservableCollection();
         }
 
-        private bool canSaveNewProject = true;
+        private bool canSaveNewProject = false;
         private ICommand? _saveNewProjectCommand;
         public ICommand SaveNewProjectCommand
         {
@@ -90,10 +90,11 @@ namespace CuoiKi.ViewModels
                 return _saveNewProjectCommand;
             }
         }
-        private void CheckValidProjectInput()
+        public void CheckValidProjectInput()
         {
             canSaveNewProject = !string.IsNullOrEmpty(ToBeSavedProjectName);
             canSaveNewProject = !string.IsNullOrEmpty(ToBeSavedProjectDescription);
+            // TODO: check if project name existed...
         }
         #endregion
     }
