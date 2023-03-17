@@ -17,7 +17,7 @@ namespace CuoiKi.Models
             this.Description = Description;
         }
 
-        public Stage(string ProjectID, string Description) : base(ProjectID + "-" + Description.Trim())
+        public Stage(string ProjectID, string Description) : base(ProjectID + "-" + new Random().Next(9999).ToString())
         {
             this.Description = Description;
             this.ProjectID = ProjectID;
