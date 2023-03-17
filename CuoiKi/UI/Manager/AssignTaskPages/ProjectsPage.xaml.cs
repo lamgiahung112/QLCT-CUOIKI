@@ -1,14 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using CuoiKi.UI.Manager.AssignTaskPages;
 
-namespace CuoiKi.UI.Manager
+namespace CuoiKi.UI.Manager.AssignTaskPages
 {
     /// <summary>
-    /// Interaction logic for AssignTaskForm.xaml
+    /// Interaction logic for ProjectsForm.xaml
     /// </summary>
-    public partial class AssignTaskForm : Page
+    public partial class ProjectsPage : Page
     {
         // This code for testing while waiting for view model
         public class Project
@@ -53,7 +52,7 @@ namespace CuoiKi.UI.Manager
             }
         }
 
-        public AssignTaskForm()
+        public ProjectsPage()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -67,7 +66,7 @@ namespace CuoiKi.UI.Manager
         private void btn_Click(object sender, RoutedEventArgs e)
         {
             //(Application.Current.FindResource("frameContent") as System.Windows.Controls.Frame).Navigate(new ProjectPage());
-            NavigationService.Navigate(new ProjectPage()); 
+            NavigationService.Navigate(new StagesPage());
         }
     }
 }
