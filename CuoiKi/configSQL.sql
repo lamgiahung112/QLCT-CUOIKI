@@ -46,7 +46,8 @@ CREATE TABLE Projects (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL,
     [Description] NVARCHAR(255) NOT NULL,
-    ManagerID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID)
+    ManagerID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    CreatedAt DateTime NOT NULL
 );
 
 GO
@@ -101,3 +102,14 @@ Insert into Employees Values (N'tl2', N'manager2', N'UTE', '2023-03-04', 'Active
 Insert into Employees Values (N'mng1', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'mng2', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr');
+
+-- Add Projects
+INSERT INTO Projects VALUES (N'GD01', N'Gamedev Project', 'desc1', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'DA02', N'Desktop App Project', 'desc2', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'AA03', N'Android App Project', 'desc3', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'W04', N'Web Project', 'desc4', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'AI05', N'AI Project', 'desc5', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'E06', N'Embedded Project', 'desc6', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'S07', N'Security Project', 'desc7', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'WPF08', N'WPF Project', 'desc8', N'mng1', '2023-03-17');
+INSERT INTO Projects VALUES (N'IOS09', N'IOS App Project', 'desc9', N'mng1', '2023-03-17');
