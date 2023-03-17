@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CuoiKi.UI.Forms;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -64,10 +65,10 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         {
             NavigationService.GoBack();
         }
-
-        private void btn_Click(object sender, RoutedEventArgs e)
+        private void BtnAddStage_Click(object sender, RoutedEventArgs e)
         {
-            //new Page
+            var stageEditorWindow = new StageForm();
+            stageEditorWindow.Show();
         }
     }
 }
