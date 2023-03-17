@@ -20,10 +20,19 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ScrollViewer Width="800" Height="350" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,5,0,5">
-            <ItemsControl ItemsSource="{Binding TestList}">
+        <Label Content="Stages" 
+               FontSize="36" 
+               Grid.ColumnSpan="2" 
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Column="3" 
+                Content="Add" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ScrollViewer Width="800" Height="350" 
+                      Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" 
+                      x:Name="MyScrollViewer" 
+                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
+                      Margin="0,5,0,5">
+            <ItemsControl ItemsSource="{Binding StageList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -31,10 +40,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 20 10 20" Width="200" Height="100">
+                        <Button Margin="10 20 10 20" Width="200" Height="100" Click="btn_Click">
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
-                                <TextBlock Text="{Binding Name}" Margin="5,0"></TextBlock>
+                                <TextBlock Text="{Binding StageName}" Margin="5,0"></TextBlock>
+                                <TextBlock Text="{Binding LeaderName}" Margin="5,0"></TextBlock>
                             </StackPanel>
                         </Button>
                     </DataTemplate>
