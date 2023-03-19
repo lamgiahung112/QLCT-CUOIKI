@@ -2,10 +2,7 @@
 using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CuoiKi.Controllers
 {
@@ -33,7 +30,7 @@ namespace CuoiKi.Controllers
         /// </summary>
         /// <typeparam name="T">A class inheriting ModelBase</typeparam>
         /// <param name="entry">The entry to save</param>
-        public void Save<T>(T entry) where T : ModelBase 
+        public void Save<T>(T entry) where T : ModelBase
         {
             dynamic? existingRecord;
             IDAO<T> dao;
@@ -60,7 +57,7 @@ namespace CuoiKi.Controllers
 
             if (existingRecord != null)
             {
-                dao.Modify(existingRecord);
+                dao.Modify(entry);
             }
             else dao.Add(entry);
         }
@@ -84,7 +81,7 @@ namespace CuoiKi.Controllers
             {
                 dao = (IDAO<T>)taskDAO;
             }
-            else if (entry is Team) 
+            else if (entry is Team)
             {
                 dao = (IDAO<T>)teamDAO;
             }
@@ -109,7 +106,7 @@ namespace CuoiKi.Controllers
                 _ => null,
             };
         }
-        
+
         /// <summary>
         /// Get all stages in a project
         /// </summary>
@@ -129,7 +126,7 @@ namespace CuoiKi.Controllers
         {
             return teamDAO.GetTeamOfAStage(stg);
         }
-    
+
         /// <summary>
         /// Get all members of a team
         /// </summary>
