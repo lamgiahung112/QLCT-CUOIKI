@@ -23,7 +23,7 @@ namespace CuoiKi.ViewModels
         }
         private void InitializeInfo()
         {
-            _currentUserId = LoginInfoState.getInstance().Id;
+            _currentUserId = LoginInfoState.Id!;
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
             UpdateWorkSessionsInSelectedMonth(_currentUserId, DateTime.Now);
@@ -199,7 +199,7 @@ namespace CuoiKi.ViewModels
         private ICommand? _checkInCommand;
         private void CheckIn()
         {
-            workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
+            workSessionController.CheckInAndReturnSuccessOrNot(LoginInfoState.Id!);
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }
@@ -220,7 +220,7 @@ namespace CuoiKi.ViewModels
         private ICommand? _checkOutCommand;
         private void CheckOut()
         {
-            workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.getInstance().Id);
+            workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.Id!);
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
         }

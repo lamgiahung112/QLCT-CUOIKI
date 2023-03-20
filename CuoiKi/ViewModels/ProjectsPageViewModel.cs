@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows;
 using System.Windows.Navigation;
 using System;
+using System.Windows.Controls;
 
 namespace CuoiKi.ViewModels
 {
@@ -21,7 +22,7 @@ namespace CuoiKi.ViewModels
         public ProjectsPageViewModel()
         {
             kpiController = new KpiController();
-            _currentManagerID = LoginInfoState.getInstance().Id;
+            _currentManagerID = LoginInfoState.Id!;
             _projectList = new ObservableCollection<Project>();
             fetchProjectListToObservableCollection();
         }
@@ -123,8 +124,7 @@ namespace CuoiKi.ViewModels
         {
             if (parameter == null) { return; }
             var projectId = parameter as string;
-            TaskAssignmentState.getInstance().SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
-            MessageBox.Show(projectId);
+            TaskAssignmentState.SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
         }
         #endregion
 

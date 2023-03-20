@@ -22,5 +22,12 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             var projectEditorWindow = new ProjectForm(this.DataContext as ProjectsPageViewModel);
             projectEditorWindow.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            btn.Command.Execute(btn.CommandParameter);
+            NavigationService.Navigate(new StagesPage());
+        }
     }
 }

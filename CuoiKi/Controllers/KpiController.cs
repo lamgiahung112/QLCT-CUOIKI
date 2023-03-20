@@ -97,11 +97,11 @@ namespace CuoiKi.Controllers
         /// </summary>
         public List<Project>? GetProjectsOfCurrentAccount()
         {
-            return LoginInfoState.getInstance().Role switch
+            return LoginInfoState.Role switch
             {
-                Role.Manager => projectDAO.GetAllProjectsOfAManager(LoginInfoState.getInstance().Id),
-                Role.Dev or Role.Designer or Role.Tester => projectDAO.GetAllProjectsOfEmployee(LoginInfoState.getInstance().Id),
-                Role.TechLead => projectDAO.GetAllProjectsOfTechLead(LoginInfoState.getInstance().Id),
+                Role.Manager => projectDAO.GetAllProjectsOfAManager(LoginInfoState.Id!),
+                Role.Dev or Role.Designer or Role.Tester => projectDAO.GetAllProjectsOfEmployee(LoginInfoState.Id!),
+                Role.TechLead => projectDAO.GetAllProjectsOfTechLead(LoginInfoState.Id!),
                 Role.Hr => null,
                 _ => null,
             };

@@ -311,8 +311,8 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "INSERT INTO Stages " +
-                "(ID, ProjectID, [Description) " +
-                "VALUES ('{0}', '{1}', '{2}')",
+                "(ID, ProjectID, [Description]) " +
+                "VALUES ('{0}', '{1}', '{2}') ",
                 stage.ID, stage.ProjectID, stage.Description
             );
         }

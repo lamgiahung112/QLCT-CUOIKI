@@ -18,5 +18,11 @@ namespace CuoiKi.Models
             this.TeamID = TeamID;
             this.EmployeeID = EmployeeID;
         }
+
+        public static TeamMember CreateNewTeamMember(string TeamID, string EmployeeID)
+        {
+            string ID = "TeamMember" + TeamID + new Random().Next(1000, 9999).ToString();
+            return new(ID, TeamID, EmployeeID);
+        }
     }
 }

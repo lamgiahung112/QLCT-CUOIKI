@@ -20,5 +20,11 @@ namespace CuoiKi.Models
             this.TechLeadID = TechLeadID;
             this.Name = Name;
         }
+
+        public static Team CreateNewTeam(string StageID, string TechLeadID, string Name)
+        {
+            string ID = "Team-" + new Random().NextInt64().ToString();
+            return new(ID, StageID, TechLeadID, Name);
+        }
     }
 }

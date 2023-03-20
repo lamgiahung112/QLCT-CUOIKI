@@ -6,23 +6,9 @@ using System.Text;
 
 namespace CuoiKi.States
 {
-    public class TaskAssignmentState
+    public static class TaskAssignmentState
     {
-        private static TaskAssignmentState? _instance;
-        
-        public static TaskAssignmentState getInstance()
-        {
-            _instance ??= new TaskAssignmentState();
-            return _instance;
-        }
-
-        private TaskAssignmentState() 
-        {
-            SelectedProject = null;
-            SelectedStage = null;
-        }
-
-        public Project? SelectedProject;
-        public Stage? SelectedStage;
+        public static Project? SelectedProject { get; set; }
+        public static Stage? SelectedStage { get; set; }
     }
 }

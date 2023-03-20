@@ -61,9 +61,9 @@ namespace CuoiKi
                 return;
             }
 
-            LoginInfoState.getInstance().Id = foundEmployee.ID;
-            LoginInfoState.getInstance().Name = foundEmployee.Name;
-            LoginInfoState.getInstance().Role = foundEmployee.Role;
+            LoginInfoState.Id = foundEmployee.ID;
+            LoginInfoState.Name = foundEmployee.Name;
+            LoginInfoState.Role = foundEmployee.Role;
 
             if (foundEmployee.Role == Role.Manager)
             {

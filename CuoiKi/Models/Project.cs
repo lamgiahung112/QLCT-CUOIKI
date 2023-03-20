@@ -22,8 +22,8 @@ namespace CuoiKi.Models
 
         public static Project CreateNewProject(string Name, string Description)
         {
-            string ID = "Prj" + DateTime.Now.ToShortDateString() + new Random().Next(1000, 9999);
-            return new(ID, Name, Description, LoginInfoState.getInstance().Id, DateTime.Now);
+            string ID = "Prj" + DateTime.Now.ToShortDateString().Replace("/", "") + new Random().Next(1000, 9999);
+            return new(ID, Name, Description, LoginInfoState.Id!, DateTime.Now);
         }
     }
 }

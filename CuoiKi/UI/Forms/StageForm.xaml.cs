@@ -23,8 +23,8 @@ namespace CuoiKi.UI.Forms
     {
         public StageForm()
         {
-            DataContext = new StageFormViewModel();
             InitializeComponent();
+            this.DataContext = new StageFormViewModel();
         }
     }
 }

@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages"
+      xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:StagesPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProjectPage">
@@ -23,7 +23,7 @@
         <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnAddStage_Click"/>
         <ScrollViewer Width="800" Height="350" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,5,0,5">
-            <ItemsControl ItemsSource="{Binding TestList}">
+            <ItemsControl ItemsSource="{Binding StageList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -31,10 +31,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 20 10 20" Width="200" Height="100" Click="BtnAddStage_Click">
+                        <Button Margin="10 20 10 20" Width="200" Height="100">
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding StageName}" Margin="5,0"></TextBlock>
-                                <TextBlock Text="{Binding LeaderName}" Margin="5,0"></TextBlock>
+                                <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
+                                <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>
                             </StackPanel>
                         </Button>
                     </DataTemplate>
