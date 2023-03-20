@@ -5,6 +5,7 @@ namespace CuoiKi.Models
 {
     public class Employee : ModelBase
     {
+        public override string ID { get; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime Birth { get; set; }
@@ -14,8 +15,8 @@ namespace CuoiKi.Models
         public Gender Gender { get; set; }
 
         public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role) 
-            : base(name.Trim() + DateTime.Now.ToShortDateString().Replace("/", ""))
         {
+            ID = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
             Address = address;
             Birth = birth;
@@ -28,8 +29,9 @@ namespace CuoiKi.Models
         /// <summary>
         /// Constructor method used to map data from SQL to Employee
         /// </summary>
-        public Employee(string ID, string Name, string Address, DateTime Birth, string EmployeeStatus, string Password, string Gender, string Role) : base(ID)
+        public Employee(string ID, string Name, string Address, DateTime Birth, string EmployeeStatus, string Password, string Gender, string Role)
         {
+            this.ID = ID;
             this.Name = Name;
             this.Address = Address;
             this.Birth = Birth;

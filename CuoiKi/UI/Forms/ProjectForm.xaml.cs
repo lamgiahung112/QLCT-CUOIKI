@@ -4,14 +4,14 @@ using System.Windows;
 namespace CuoiKi.UI.Forms
 {
     /// <summary>
-    /// Interaction logic for StageForm.xaml
+    /// Interaction logic for ProjectForm.xaml
     /// </summary>
-    public partial class StageForm : Window
+    public partial class ProjectForm : Window
     {
-        public StageForm(StagesPageViewModel spvm)
+        public ProjectForm(ProjectsPageViewModel ppvm)
         {
             InitializeComponent();
-            this.DataContext = spvm;
+            this.DataContext = ppvm;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

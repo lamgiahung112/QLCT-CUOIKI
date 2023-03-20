@@ -8,6 +8,7 @@ namespace CuoiKi.Models
 {
     public class Task : ModelBase
     {
+        public override string ID { get; }
         public string Assignee { get; set; }
         public string Assigner { get; set; }
         public string Description { get; set; }
@@ -23,7 +24,8 @@ namespace CuoiKi.Models
         /// </summary>
         public Task(string ID, string Assignee, string Assigner, 
             string Description, string Title, DateTime StartingTime, 
-            DateTime EndingTime, string Status, DateTime CreatedAt, DateTime UpdatedAt) : base(ID) { 
+            DateTime EndingTime, string Status, DateTime CreatedAt, DateTime UpdatedAt) { 
+            this.ID = ID;
             this.Assignee = Assignee;
             this.Assigner = Assigner;
             this.Description = Description;

@@ -1,30 +1,29 @@
 ﻿using CuoiKi.States;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
     public class Project : ModelBase
     {
+        public override string ID { get; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ManagerID { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public Project(string ID, string Name, string Description, string ManagerID, DateTime CreatedAt) : base(ID)
+        public Project(string ID, string Name, string Description, string ManagerID, DateTime CreatedAt)
         {
+            this.ID = ID;
             this.Name = Name;
             this.Description = Description;
             this.ManagerID = ManagerID;
             this.CreatedAt = CreatedAt;
         }
 
-        public static Project CreateNewProject(string ID, string Name, string Description)
+        public static Project CreateNewProject(string Name, string Description)
         {
-            return new(ID, Name, Description, LoginInfoState.getInstance().Id, DateTime.Now);
+            string ID = "Prj" + DateTime.Now.ToShortDateString().Replace("/", "") + new Random().Next(1000, 9999);
+            return new(ID, Name, Description, LoginInfoState.Id!, DateTime.Now);
         }
     }
 }
