@@ -2,9 +2,13 @@
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.Manager.AssignTaskPages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
+using System.Windows;
+using System.Windows.Navigation;
 
 namespace CuoiKi.ViewModels
 {
@@ -48,6 +52,7 @@ namespace CuoiKi.ViewModels
                 OnPropertyChanged(nameof(CurrentManagerID));
             }
         }
+
         #region Save project logic
         private string _toBeSavedProjectName = "";
         public string ToBeSavedProjectName
@@ -97,5 +102,30 @@ namespace CuoiKi.ViewModels
             // TODO: check if project name existed...
         }
         #endregion
+
+        #region Project click logic
+        private bool canProjectItemClick = true;
+        private ICommand? _projectItemClickCommand;
+        public ICommand ProjectItemClickCommand
+        {
+            get
+            {
+                _projectItemClickCommand ??= new RelayCommand(
+                        obj => canProjectItemClick,
+                        obj => SaveProjectIdToState(obj)
+                    );
+                return _projectItemClickCommand;
+            }
+        }
+
+        private void SaveProjectIdToState(object parameter)
+        {
+            if (parameter == null) { return; }
+            var projectId = parameter as string;
+            TaskAssignmentState.getInstance().SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
+            MessageBox.Show(projectId);
+        }
+        #endregion
+
     }
 }

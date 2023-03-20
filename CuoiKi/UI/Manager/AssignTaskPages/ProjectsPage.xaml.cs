@@ -16,16 +16,6 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             this.DataContext = new ProjectsPageViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new StagesPage());
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var projectEditorWindow = new ProjectForm(this.DataContext as ProjectsPageViewModel);

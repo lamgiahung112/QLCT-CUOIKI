@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CuoiKi.Models;
+using CuoiKi.ViewModels.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,7 @@ namespace CuoiKi.UI.Forms
     {
         public StageForm()
         {
+            DataContext = new StageFormViewModel();
             InitializeComponent();
         }
     }

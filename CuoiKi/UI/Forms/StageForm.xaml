@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CuoiKi.UI.Forms"
+        xmlns:local="clr-namespace:CuoiKi.UI.Forms" xmlns:forms="clr-namespace:CuoiKi.ViewModels.Forms" d:DataContext="{d:DesignInstance Type=forms:StageFormViewModel}"
         mc:Ignorable="d"
         Title="Stage Editor" Height="600" Width="400"
         ResizeMode="NoResize" ShowInTaskbar="False"
@@ -26,11 +26,12 @@
             Grid.ColumnSpan="2"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Text="Stage Editor"
+            Text="{Binding Title}"
             FontSize="40"
             FontWeight="Bold" Height="54" Margin="85,0,0,0" Width="230"
          />
         <Label
+            Visibility="{Binding showID}"
             Grid.Row="1"
             Content="ID:"
             Margin="20,0,0,0"
@@ -41,7 +42,8 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Text="Null - creating a new Stage"
+            Visibility="{Binding showID}"
+            Text="{Binding StageID}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             IsEnabled="False"
@@ -60,7 +62,7 @@
         <TextBox
             Grid.Row="2"
             Grid.Column="1"
-            Text="Test"
+            Text="{Binding ProjectID}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             IsEnabled="False"
@@ -79,6 +81,7 @@
         <TextBox
             Grid.Row="4"
             Grid.ColumnSpan="2"
+            Text="{Binding Description}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             TextWrapping="Wrap"
