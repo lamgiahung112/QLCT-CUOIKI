@@ -1,4 +1,4 @@
-﻿using CuoiKi.UI.Forms;
+using CuoiKi.UI.Forms;
 using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;

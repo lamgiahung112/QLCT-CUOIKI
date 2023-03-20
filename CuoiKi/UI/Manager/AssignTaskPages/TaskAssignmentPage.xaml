@@ -1,13 +1,14 @@
-<Page x:Class="CuoiKi.UI.Manager.AssignTaskPages.StagesPage"
+﻿<Page x:Class="CuoiKi.UI.Manager.AssignTaskPages.TaskAssignmentPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:StagesPageViewModel}"
+      xmlns:local="clr-namespace:CuoiKi.UI.Manager"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProjectPage">
+      Title="TaskAssignmentPage">
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -20,10 +21,21 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnAddStage_Click"/>
-        <ScrollViewer Width="800" Height="350" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,5,0,5">
-            <ItemsControl ItemsSource="{Binding StageList}">
+        <Label Content="Stage Name" 
+               FontSize="36" 
+               Grid.ColumnSpan="2" 
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Column="3" 
+                Content="Add" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <ScrollViewer Width="800" Height="350" 
+                      Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" 
+                      x:Name="MyScrollViewer" 
+                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
+                      Margin="0,5,0,5">
+            
+            <ItemsControl ItemsSource="{Binding OnStagelist}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -31,10 +43,11 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 20 10 20" Width="200" Height="100" Click="BtnAddStage_Click">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
-                                <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>
+                        <Button Margin="10 10 10 10" Width="750" Height="50" 
+                                PreviewMouseRightButtonUp="Right_click">
+                            <StackPanel >
+                                <TextBlock Text="{Binding StaffID}"  Grid.Row="0"/>
+                                <TextBlock Text="{Binding StaffName}"  Grid.Row="0"/>
                             </StackPanel>
                         </Button>
                     </DataTemplate>
@@ -45,8 +58,7 @@
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Left"
                 Margin="40 0 0 0" Click="back_click">
-            <TextBlock Text="←" FontSize="30" Margin="0 -10 0 0"/>
+            <TextBlock Text="←" FontSize="30" Margin="0 -11 0 0"/>
         </Button>
-
     </Grid>
 </Page>
