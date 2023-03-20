@@ -104,7 +104,7 @@
             <Button 
                 Content="Save" 
                 Grid.Column="0"
-                Width="120" Click="Button_Click_1" Command="{Binding SaveNewProjectCommand}"
+                Width="120" Click="Button_Click_1" Command="{Binding SaveProjectCommand}"
             />
             <Button 
                 Content="Cancel" 
