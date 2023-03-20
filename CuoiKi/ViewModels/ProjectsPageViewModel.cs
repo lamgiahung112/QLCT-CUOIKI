@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Navigation;
+using System;
 
 namespace CuoiKi.ViewModels
 {
@@ -122,7 +123,7 @@ namespace CuoiKi.ViewModels
         {
             if (parameter == null) { return; }
             var projectId = parameter as string;
-            //TaskAssignmentState.getInstance().SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
+            TaskAssignmentState.getInstance().SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
             MessageBox.Show(projectId);
         }
         #endregion

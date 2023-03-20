@@ -10,12 +10,7 @@ namespace CuoiKi.Models
 {
     public abstract class ModelBase
     {
-        public string ID;
-
-        public ModelBase(string ID) 
-        { 
-            this.ID = ID;
-        }
+        public abstract string ID { get; }
 
     }
 }

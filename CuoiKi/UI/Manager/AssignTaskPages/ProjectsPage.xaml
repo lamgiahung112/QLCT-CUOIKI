@@ -34,7 +34,7 @@
                             Margin="10 20 10 20" 
                             Width="200" Height="100"
                             Command="{Binding Path=DataContext.ProjectItemClickCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                            CommandParameter="{Binding Description}"
+                            CommandParameter="{Binding ID}"
                         >
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" Margin="5,0"></TextBlock>

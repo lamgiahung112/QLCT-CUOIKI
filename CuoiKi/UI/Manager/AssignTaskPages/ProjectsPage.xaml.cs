@@ -2,6 +2,7 @@
 using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace CuoiKi.UI.Manager.AssignTaskPages
 {

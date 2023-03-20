@@ -5,12 +5,13 @@ namespace CuoiKi.Models
 {
     public class Project : ModelBase
     {
+        public override string ID { get; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ManagerID { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public Project(string ID, string Name, string Description, string ManagerID, DateTime CreatedAt) : base(ID)
+        public Project(string ID, string Name, string Description, string ManagerID, DateTime CreatedAt)
         {
             this.ID = ID;
             this.Name = Name;

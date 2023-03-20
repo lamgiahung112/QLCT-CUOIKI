@@ -14,10 +14,6 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
     {
         public StagesPage()
         {
-            if (TaskAssignmentState.getInstance().SelectedProject!= null)
-            {
-                MessageBox.Show("OK");
-            }
             InitializeComponent();
         }
         private void back_click(object sender, RoutedEventArgs e)
