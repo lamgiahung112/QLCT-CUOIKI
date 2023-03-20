@@ -32,7 +32,7 @@
             FontWeight="Bold" Height="54"
          />
         <Label
-            Visibility="{Binding showID}"
+            Visibility="{Binding ShowID}"
             Grid.Row="1"
             Content="ID:"
             Margin="20,0,0,0"
@@ -43,7 +43,7 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Visibility="{Binding showID}"
+            Visibility="{Binding ShowID}"
             Text="{Binding StageID}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -114,6 +114,7 @@
                 Grid.Column="1"
                 Width="120"
                 Background="Gray"
+                Command ="{Binding CloseCommand}"
                 Click="Button_Click_1"
             />
         </Grid>
