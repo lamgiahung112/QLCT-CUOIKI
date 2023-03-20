@@ -43,7 +43,12 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             new Stage("st03","Dang Van Bi"),
             new Stage("st04","Mai Chi Tho"),
             new Stage("st05","Tran Nao"),
-            new Stage("st06","Thao Dien")
+            new Stage("st06","Thao Dien"),
+            new Stage("st07","Phu Huu"),
+            new Stage("st08","Tang Nhon Phu"),
+            new Stage("st09","Nguyen Xi"),
+            new Stage("st10","Tran Duc Bo"),
+            new Stage("st11","Maria Ozw")
         };
         public ObservableCollection<Stage> StageList
         {
@@ -58,6 +63,11 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         {
             var stageEditorWindow = new StageForm();
             stageEditorWindow.Show();
+        }
+
+        private void btn_Stage_click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TaskAssignmentPage());
         }
     }
 }

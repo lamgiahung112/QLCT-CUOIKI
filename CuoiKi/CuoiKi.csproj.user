@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\Forms\AssignWorkForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\RightClickForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Forms\StageForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +20,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Manager\AssignTaskPages\StagesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Manager\AssignTaskPages\TaskAssignmentPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Manager\CalcSalaryForm.xaml.cs">
@@ -45,6 +54,12 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Forms\AssignWorkForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Forms\RightClickForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Forms\StageForm.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -52,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\AssignTaskPages\StagesPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\AssignTaskPages\TaskAssignmentPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\CalcSalaryForm.xaml">

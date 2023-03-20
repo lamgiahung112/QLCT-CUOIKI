@@ -63,9 +63,8 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
 
         }
 
-        private void btn_Click(object sender, RoutedEventArgs e)
+        private void Btn_Click(object sender, RoutedEventArgs e)
         {
-            //(Application.Current.FindResource("frameContent") as System.Windows.Controls.Frame).Navigate(new ProjectPage());
             NavigationService.Navigate(new StagesPage());
         }
     }
