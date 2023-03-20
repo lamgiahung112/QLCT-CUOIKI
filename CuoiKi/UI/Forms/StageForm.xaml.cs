@@ -1,18 +1,5 @@
-﻿using CuoiKi.Models;
-using CuoiKi.ViewModels.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CuoiKi.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuoiKi.UI.Forms
 {
@@ -21,10 +8,20 @@ namespace CuoiKi.UI.Forms
     /// </summary>
     public partial class StageForm : Window
     {
-        public StageForm()
+        public StageForm(StagesPageViewModel spvm)
         {
             InitializeComponent();
-            this.DataContext = new StageFormViewModel();
+            this.DataContext = spvm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

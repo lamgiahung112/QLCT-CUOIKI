@@ -1,7 +1,5 @@
-﻿using CuoiKi.States;
-using CuoiKi.UI.Forms;
+﻿using CuoiKi.UI.Forms;
 using CuoiKi.ViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -24,7 +22,7 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         }
         private void BtnAddStage_Click(object sender, RoutedEventArgs e)
         {
-            var stageEditorWindow = new StageForm();
+            var stageEditorWindow = new StageForm(this.DataContext as StagesPageViewModel);
             stageEditorWindow.Show();
         }
     }

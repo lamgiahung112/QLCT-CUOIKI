@@ -8,10 +8,10 @@ namespace CuoiKi.UI.Forms
     /// </summary>
     public partial class ProjectForm : Window
     {
-        public ProjectForm(ProjectsPageViewModel pgvm)
+        public ProjectForm(ProjectsPageViewModel ppvm)
         {
             InitializeComponent();
-            this.DataContext = pgvm;
+            this.DataContext = ppvm;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuoiKi.UI.Forms" 
-        xmlns:forms="clr-namespace:CuoiKi.ViewModels.Forms" 
-        d:DataContext="{d:DesignInstance Type=forms:StageFormViewModel}"
         mc:Ignorable="d"
         Title="Stage Editor" Height="600" Width="400"
         ResizeMode="NoResize" ShowInTaskbar="False"
@@ -84,7 +82,7 @@
         <TextBox
             Grid.Row="4"
             Grid.ColumnSpan="2"
-            Text="{Binding Description}"
+            Text="{Binding ToBeSavedStageDescription, UpdateSourceTrigger=PropertyChanged}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             TextWrapping="Wrap"
@@ -109,14 +107,14 @@
                 Content="Save" 
                 Grid.Column="0"
                 Width="120"
-                Command="{Binding SaveCommand}"
+                Command="{Binding SaveStageCommand}" Click="Button_Click"
             />
             <Button 
                 Content="Cancel" 
                 Grid.Column="1"
                 Width="120"
                 Background="Gray"
-                Command="{Binding CloseCommand}"
+                Click="Button_Click_1"
             />
         </Grid>
     </Grid>

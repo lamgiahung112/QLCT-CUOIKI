@@ -2,15 +2,10 @@
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
-using CuoiKi.UI.Manager.AssignTaskPages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows;
-using System.Windows.Navigation;
-using System;
-using System.Windows.Controls;
 
 namespace CuoiKi.ViewModels
 {
@@ -78,29 +73,29 @@ namespace CuoiKi.ViewModels
                 CheckValidProjectInput();
             }
         }
-        public void SaveNewProject()
+        public void SaveProject()
         {
             Project project = Project.CreateNewProject(ToBeSavedProjectName, ToBeSavedProjectDescription);
             kpiController.Save(project);
             fetchProjectListToObservableCollection();
         }
 
-        private bool canSaveNewProject = false;
-        private ICommand? _saveNewProjectCommand;
-        public ICommand SaveNewProjectCommand
+        private bool canSaveProject = false;
+        private ICommand? _saveProjectCommand;
+        public ICommand SaveProjectCommand
         {
             get
             {
-                _saveNewProjectCommand ??= new RelayCommand(
-                    p => this.canSaveNewProject,
-                    p => this.SaveNewProject());
-                return _saveNewProjectCommand;
+                _saveProjectCommand ??= new RelayCommand(
+                    p => this.canSaveProject,
+                    p => this.SaveProject());
+                return _saveProjectCommand;
             }
         }
         public void CheckValidProjectInput()
         {
-            canSaveNewProject = !string.IsNullOrEmpty(ToBeSavedProjectName);
-            canSaveNewProject = !string.IsNullOrEmpty(ToBeSavedProjectDescription);
+            canSaveProject = !string.IsNullOrEmpty(ToBeSavedProjectName);
+            canSaveProject = !string.IsNullOrEmpty(ToBeSavedProjectDescription);
             // TODO: check if project name existed...
         }
         #endregion
