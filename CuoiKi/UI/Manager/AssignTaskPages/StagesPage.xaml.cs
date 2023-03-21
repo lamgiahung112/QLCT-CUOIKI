@@ -20,11 +20,6 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         {
             NavigationService.GoBack();
         }
-        private void BtnAddStage_Click(object sender, RoutedEventArgs e)
-        {
-            var addStageForm = new StageForm(DataContext as StagesPageViewModel);
-            addStageForm.Show();
-        }
 
         private void BtnStageItem_Click(object sender, RoutedEventArgs e)
         {

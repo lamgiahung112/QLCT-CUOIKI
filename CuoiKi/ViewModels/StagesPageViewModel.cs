@@ -66,13 +66,6 @@ namespace CuoiKi.ViewModels
             else sToSave = new Stage(StageID, ProjectID, ToBeSavedStageDescription);
             _controller.Save(sToSave);
         }
-
-        public void SaveStage()
-        {
-            // Save logic here
-            //MessageBox.Show(ToBeSavedStageDescription);
-            SaveStageToDB();
-        }
         private ICommand? _saveStageToState;
         public ICommand CmdSaveStageToState
         {
@@ -123,18 +116,6 @@ namespace CuoiKi.ViewModels
             StageID = TaskAssignmentState.SelectedStage!.ID;
             ToBeSavedStageDescription = TaskAssignmentState.SelectedStage!.Description;
             ShowID = Visibility.Visible;
-        }
-
-        private void SaveStageToDB()
-        {
-            if (ToBeSavedStageDescription.Length == 0) return;
-            Stage sToSave;
-            if (StageID.Length == 0)
-            {
-                sToSave = new Stage(ProjectID, ToBeSavedStageDescription);
-            }
-            else sToSave = new Stage(StageID, ProjectID, ToBeSavedStageDescription);
-            _controller.Save(sToSave);
         }
 
         private void FetchStageList()

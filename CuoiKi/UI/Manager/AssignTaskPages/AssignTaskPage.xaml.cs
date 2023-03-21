@@ -76,10 +76,10 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
 
         private void Right_Click(object sender, MouseButtonEventArgs e)
         {
-            RightClickForm rightClickForm = new RightClickForm();
-            rightClickForm.Left = e.GetPosition(this).X + 440;
-            rightClickForm.Top = e.GetPosition(this).Y + 60;
-            rightClickForm.Show();
+            //rightClickForm rightClickForm = new RightClickForm();
+            //rightClickForm.Left = e.GetPosition(this).X + 440;
+            //rightClickForm.Top = e.GetPosition(this).Y + 60;
+            //rightClickForm.Show();
         }
     }
 }
