@@ -10,9 +10,6 @@
     <Compile Update="UI\Forms\AssignWorkForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\Forms\RightClickForm.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UI\Forms\ProjectForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

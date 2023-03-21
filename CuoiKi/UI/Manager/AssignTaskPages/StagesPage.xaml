@@ -31,7 +31,13 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 20 10 20" Width="200" Height="100" Click="btn_Stage_click">
+                        <Button 
+                            Margin="10 20 10 20" 
+                            Width="200" Height="100" 
+                            Click="BtnStageItem_Click"
+                            Command="{Binding Path=DataContext.CmdSaveStageToState, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                            CommandParameter="{Binding ID}"
+                            >
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
                                 <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>

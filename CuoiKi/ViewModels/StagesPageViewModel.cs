@@ -2,7 +2,9 @@
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.Forms;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,22 +17,10 @@ namespace CuoiKi.ViewModels
         {
             _controller = new KpiController();
             _stageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
-
-            // 
-            if (TaskAssignmentState.SelectedStage == null)
-            {
-                Title = "Add New Stage";
-                StageID = "";
-                _tobeSavedStageDescription = "";
-                ShowID = Visibility.Collapsed;
-            }
-            else
-            {
-                Title = "Edit Stage";
-                StageID = TaskAssignmentState.SelectedStage!.ID;
-                _tobeSavedStageDescription = TaskAssignmentState.SelectedStage!.Description;
-                ShowID = Visibility.Visible;
-            }
+            Title = "Add New Stage";
+            StageID = "";
+            _tobeSavedStageDescription = "";
+            ShowID = Visibility.Collapsed;
             ProjectID = TaskAssignmentState.SelectedProject!.ID;
         }
 
@@ -65,7 +55,6 @@ namespace CuoiKi.ViewModels
                 CheckValidStageInput();
             }
         }
-
         private void SaveStageToDB()
         {
             if (ToBeSavedStageDescription.Length == 0) return;
@@ -84,6 +73,18 @@ namespace CuoiKi.ViewModels
             //MessageBox.Show(ToBeSavedStageDescription);
             SaveStageToDB();
         }
+        private ICommand? _saveStageToState;
+        public ICommand CmdSaveStageToState
+        {
+            get 
+            {
+                _saveStageToState ??= new RelayCommand(
+                        obj => true,
+                        obj => SaveStageToState(obj)
+                    );
+                return _saveStageToState;
+            }
+        }
 
         private bool canSaveStage = false;
         private ICommand? _saveStageCommand;
@@ -96,6 +97,66 @@ namespace CuoiKi.ViewModels
                     p => this.SaveStage());
                 return _saveStageCommand;
             }
+        }
+
+        private ICommand? _AddStageClickCommand;
+        public ICommand AddStageClickCommand
+        {
+            get
+            {
+                _AddStageClickCommand ??= new RelayCommand(
+                        p => true,
+                        p => OpenAddStageForm()
+                    );
+                return _AddStageClickCommand;
+            }
+        }
+        #endregion
+
+        #region Utils
+        private void SaveStageToState(object param)
+        {
+            if (param == null) return;
+            string stageID = (param as string)!;
+            TaskAssignmentState.SelectedStage = StageList.Where(x => x.ID == stageID).FirstOrDefault();
+            Title = "Edit Stage";
+            StageID = TaskAssignmentState.SelectedStage!.ID;
+            ToBeSavedStageDescription = TaskAssignmentState.SelectedStage!.Description;
+            ShowID = Visibility.Visible;
+        }
+
+        private void SaveStageToDB()
+        {
+            if (ToBeSavedStageDescription.Length == 0) return;
+            Stage sToSave;
+            if (StageID.Length == 0)
+            {
+                sToSave = new Stage(ProjectID, ToBeSavedStageDescription);
+            }
+            else sToSave = new Stage(StageID, ProjectID, ToBeSavedStageDescription);
+            _controller.Save(sToSave);
+        }
+
+        private void FetchStageList()
+        {
+            StageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
+        }
+
+        public void SaveStage()
+        {
+            SaveStageToDB();
+            FetchStageList();
+        }
+
+        private void OpenAddStageForm()
+        {
+            TaskAssignmentState.SelectedStage = null;
+            Title = "Add New Stage";
+            StageID = "";
+            _tobeSavedStageDescription = "";
+            ShowID = Visibility.Collapsed;
+            var addStageForm = new StageForm(this);
+            addStageForm.Show();
         }
 
         private void CheckValidStageInput()

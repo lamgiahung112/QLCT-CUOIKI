@@ -5,8 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuoiKi.UI.Forms"
         mc:Ignorable="d"
-        Title="AssignWorkForm" Height="450" Width="800">
+        Title="Team Editor" Height="600" Width="400"
+        ResizeMode="NoResize" ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock Text="Assign Work" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Grid.ColumnSpan="2"
+            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text=""
+            FontSize="40"
+            FontWeight="Bold" Height="54"
+         />
+        <Label
+            Visibility="Visible"
+            Grid.Row="1"
+            Content="ID:"
+            Margin="20,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            FontSize="24" Height="40" Width="36"
+        />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Visibility="Visible"
+            Text=""
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsEnabled="False"
+            Width="200" 
+            Height="32"
+            FontSize="16"
+        />
+        <Label
+            Grid.Row="2"
+            Margin="20,0,0,0"
+            Content="Project ID:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            FontSize="24" Height="40" Width="116"
+        />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Text=""
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsEnabled="False"
+            Width="200" 
+            Height="32"
+            FontSize="16"
+        />
+        <Label
+            Grid.Row="3"
+            Margin="20,0,0,0"
+            Content="Description:"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            FontSize="24" Height="40"
+        />
+        <TextBox
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Text=""
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            VerticalScrollBarVisibility="Visible"
+            VerticalContentAlignment="Top"
+            Width="360"
+            Height="120"
+            Background="LightGray"
+            MaxLength="255"
+            FontSize="16"
+        />
+        <Grid
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+        >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button 
+                Content="Save" 
+                Grid.Column="0"
+                Width="120"
+            />
+            <Button 
+                Content="Cancel" 
+                Grid.Column="1"
+                Width="120"
+                Background="Gray"
+            />
+        </Grid>
     </Grid>
 </Window>

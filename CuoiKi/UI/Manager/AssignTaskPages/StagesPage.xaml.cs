@@ -22,12 +22,14 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         }
         private void BtnAddStage_Click(object sender, RoutedEventArgs e)
         {
-            var stageEditorWindow = new StageForm(this.DataContext as StagesPageViewModel);
-            stageEditorWindow.Show();
+            var addStageForm = new StageForm(DataContext as StagesPageViewModel);
+            addStageForm.Show();
         }
 
-        private void btn_Stage_click(object sender, RoutedEventArgs e)
+        private void BtnStageItem_Click(object sender, RoutedEventArgs e)
         {
+            var btn = sender as Button;
+            btn!.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new TaskAssignmentPage());
         }
     }
