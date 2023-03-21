@@ -27,48 +27,40 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             InitializeComponent();
             this.DataContext = this;
         }
-        public class OnStage
+        public class Team
         {
-            private string _idStaff;
-            private string _nameStaff;
-            public OnStage(string idStaff, string nameStaff)
+            private string _idTeam;
+            private string _nameTeam;
+            public Team(string idTeam, string nameTeam)
             {
-                _idStaff = idStaff;
-                _nameStaff = nameStaff;
+                _idTeam = idTeam;
+                _nameTeam = nameTeam;
             }
-            public string StaffID
+            public string TeamID
             {
-                get { return _idStaff; }
-                set { _idStaff = value; }
+                get { return _idTeam; }
+                set { _idTeam = value; }
             }
-            public string StaffName
+            public string TeamName
             {
-                get { return _nameStaff; }
-                set { _nameStaff = value; }
+                get { return _nameTeam; }
+                set { _nameTeam = value; }
             }
         }
-        private ObservableCollection<OnStage> onStagelist = new ObservableCollection<OnStage>()
+        private ObservableCollection<Team> teamlist = new ObservableCollection<Team>()
         {
-            new OnStage("1","Nguyen Van A"),
-            new OnStage("2","Nguyen Van B"),
-            new OnStage("3","Nguyen Van c"),
-            new OnStage("4","Nguyen Van d"),
-            new OnStage("5","Nguyen Van e"),
-            new OnStage("6","Nguyen Van f"),
-            new OnStage("7","Nguyen Van g"),
-            new OnStage("8","Nguyen Van h"),
-            new OnStage("9","Nguyen Van i"),
-            new OnStage("1","Nguyen Van A"),
-            new OnStage("2","Nguyen Van B"),
-            new OnStage("3","Nguyen Van c"),
-            new OnStage("4","Nguyen Van d"),
-            new OnStage("5","Nguyen Van e"),
-            new OnStage("10","Nguyen Van j")
+            new Team("1", "Pham Nguyen Van Dao"),
+            new Team("2", "BB"),
+            new Team("3", "CC"),
+            new Team("4", "DD"),
+            new Team("5", "EE"),
+            new Team("6", "FF"),
+            new Team("7", "GG")
         };
-        public ObservableCollection<OnStage> OnStagelist
+        public ObservableCollection<Team> TeamList
         {
-            get { return onStagelist; }
-            set { onStagelist = value; }
+            get { return teamlist; }
+            set { teamlist = value; }
         }
 
         private void back_click(object sender, RoutedEventArgs e)
@@ -84,6 +76,11 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             rightClickForm.Left = e.GetPosition(this).X+440;
             rightClickForm.Top = e.GetPosition(this).Y+60;
             rightClickForm.Show();
+        }
+
+        private void Team_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AssignTaskPage());
         }
     }
 }
