@@ -200,7 +200,7 @@ namespace CuoiKi.DAOs
                 project.Name,
                 project.Description,
                 project.ManagerID,
-                project.CreatedAt.ToShortDateString()
+                project.CreatedAt.ToString("s")
             );
         }
 
