@@ -35,5 +35,9 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             TaskAssignmentState.SelectedStage = null;
             NavigationService.GoBack(); 
         }
+        private void Team_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AssignTaskPage());
+        }
     }
 }

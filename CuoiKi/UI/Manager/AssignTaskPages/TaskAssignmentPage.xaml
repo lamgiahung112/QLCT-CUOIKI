@@ -37,7 +37,7 @@
                       HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
                       Margin="0,5,0,5">
             
-            <ItemsControl>
+            <ItemsControl ItemsSource="{Binding TeamList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -45,10 +45,28 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 10 10 10" Width="750" Height="50" >
-                            <StackPanel >
-                                <TextBlock Text="a"  Grid.Row="0"/>
-                                <TextBlock Text="b"  Grid.Row="0"/>
+                        <Button Margin="10 10 10 10" Width="300" Height="100" 
+                                Click="Team_Click">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <WrapPanel>
+                                    <TextBlock Text="ID:"  
+                                               Margin="5,0"
+                                               HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding TeamID}"  
+                                               Margin="5,0"
+                                               HorizontalAlignment="Left"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Text="Name:"  
+                                               Margin="5,0"
+                                               HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding TeamName}"  
+                                               Margin="5,0"
+                                               HorizontalAlignment="Left"/>
+                                </WrapPanel>
+                                <TextBlock Text="/Leader Name/" 
+                                           Margin="5,0"
+                                           HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Button>
                     </DataTemplate>

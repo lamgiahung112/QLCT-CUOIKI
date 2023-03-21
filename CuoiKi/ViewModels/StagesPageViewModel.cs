@@ -17,7 +17,6 @@ namespace CuoiKi.ViewModels
         {
             _controller = new KpiController();
             _stageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
-
             Title = "Add New Stage";
             StageID = "";
             _tobeSavedStageDescription = "";
@@ -56,7 +55,24 @@ namespace CuoiKi.ViewModels
                 CheckValidStageInput();
             }
         }
+        private void SaveStageToDB()
+        {
+            if (ToBeSavedStageDescription.Length == 0) return;
+            Stage sToSave;
+            if (StageID.Length == 0)
+            {
+                sToSave = new Stage(ProjectID, ToBeSavedStageDescription);
+            }
+            else sToSave = new Stage(StageID, ProjectID, ToBeSavedStageDescription);
+            _controller.Save(sToSave);
+        }
 
+        public void SaveStage()
+        {
+            // Save logic here
+            //MessageBox.Show(ToBeSavedStageDescription);
+            SaveStageToDB();
+        }
         private ICommand? _saveStageToState;
         public ICommand CmdSaveStageToState
         {
