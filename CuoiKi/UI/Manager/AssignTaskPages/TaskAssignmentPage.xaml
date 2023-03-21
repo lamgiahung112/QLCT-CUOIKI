@@ -45,9 +45,17 @@
                     <DataTemplate>
                         <Button Margin="10 10 10 10" Width="750" Height="50" 
                                 PreviewMouseRightButtonUp="Right_click">
-                            <StackPanel >
-                                <TextBlock Text="{Binding StaffID}"  Grid.Row="0"/>
-                                <TextBlock Text="{Binding StaffName}"  Grid.Row="0"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding StaffID}"  Grid.Column="0" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                    <TextBlock Text="{Binding StaffName}"  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                </Grid>
+                                
                             </StackPanel>
                         </Button>
                     </DataTemplate>
