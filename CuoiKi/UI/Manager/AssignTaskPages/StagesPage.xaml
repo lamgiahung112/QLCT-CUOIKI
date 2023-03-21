@@ -21,7 +21,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnAddStage_Click"/>
+        <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddStageClickCommand}"/>
         <ScrollViewer Width="800" Height="350" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,5,0,5">
             <ItemsControl ItemsSource="{Binding StageList}">
                 <ItemsControl.ItemsPanel>
@@ -31,7 +31,13 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 20 10 20" Width="200" Height="100" Click="BtnAddStage_Click">
+                        <Button 
+                            Margin="10 20 10 20" 
+                            Width="200" Height="100" 
+                            Click="BtnStageItem_Click"
+                            Command="{Binding Path=DataContext.CmdSaveStageToState, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                            CommandParameter="{Binding ID}"
+                            >
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
                                 <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>

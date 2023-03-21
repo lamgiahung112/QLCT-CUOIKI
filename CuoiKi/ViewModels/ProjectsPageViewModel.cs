@@ -2,9 +2,11 @@
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.Forms;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -13,6 +15,8 @@ namespace CuoiKi.ViewModels
     {
         private readonly KpiController kpiController;
         private ObservableCollection<Project> _projectList;
+        private string _projectID = "";
+        private Visibility _VisID = Visibility.Collapsed;
         private string _currentManagerID = "";
         public ProjectsPageViewModel()
         {
@@ -30,6 +34,24 @@ namespace CuoiKi.ViewModels
             {
                 _projectList.Add(project);
             }
+        }
+        public string ProjectID
+        {
+            get { return _projectID; }
+            set { 
+                _projectID = value;
+                if (value.Length > 0)
+                {
+                    _VisID = Visibility.Visible;
+                }
+                else _VisID = Visibility.Collapsed;
+                OnPropertyChanged(nameof(ProjectID));
+            }
+        }
+        public Visibility VisID
+        {
+            get { return _VisID; }
+            set { _VisID = value; OnPropertyChanged(nameof(VisID)); }
         }
         public ObservableCollection<Project> ProjectList
         {
@@ -120,6 +142,35 @@ namespace CuoiKi.ViewModels
             if (parameter == null) { return; }
             var projectId = parameter as string;
             TaskAssignmentState.SelectedProject = _projectList.Where(x => x.ID == projectId).ElementAt(0);
+            ToBeSavedProjectDescription = TaskAssignmentState.SelectedProject.Description;
+            ToBeSavedProjectName = TaskAssignmentState.SelectedProject.Name;
+            ProjectID = TaskAssignmentState.SelectedProject.ID;
+        }
+        #endregion
+
+        #region Add Project Click logic
+        private ICommand? _AddProjectClickCommand;
+
+        public ICommand AddProjectClickCommand
+        {
+            get
+            {
+                _AddProjectClickCommand ??= new RelayCommand(
+                        p => true,
+                        p => OpenAddProjectForm()
+                    );
+                return _AddProjectClickCommand;
+            }
+        }
+
+        private void OpenAddProjectForm()
+        {
+            TaskAssignmentState.SelectedProject = null;
+            ToBeSavedProjectName = "";
+            ToBeSavedProjectDescription = "";
+            ProjectID = "";
+            var prjForm = new ProjectForm(this);
+            prjForm.Show();
         }
         #endregion
 
