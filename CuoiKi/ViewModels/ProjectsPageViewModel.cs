@@ -184,6 +184,14 @@ namespace CuoiKi.ViewModels
         {
             MessageBox.Show("View project");
         }
+        private void EditProject()
+        {
+            MessageBox.Show("Edit project");
+        }
+        private void DeleteProject()
+        {
+            MessageBox.Show("Delete project");
+        }
         #endregion
 
         #region Context menu commands
@@ -197,6 +205,28 @@ namespace CuoiKi.ViewModels
                     p => ViewProject()
                 );
                 return _cmdViewProject;
+            }
+        }
+        private ICommand? _cmdEditProject;
+        public ICommand CmdEditProject
+        {
+            get
+            {
+                _cmdEditProject ??= new RelayCommand(
+                    p => canEditProject,
+                    p => EditProject());
+                return _cmdEditProject;
+            }
+        }
+        private ICommand? _cmdDeleteProject;
+        public ICommand CmdDeleteProject
+        {
+            get
+            {
+                _cmdDeleteProject ??= new RelayCommand(
+                    p => canDeleteProject,
+                    p => DeleteProject());
+                return _cmdDeleteProject;
             }
         }
         #endregion
