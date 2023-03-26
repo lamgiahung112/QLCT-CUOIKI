@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="880"
       Title="AssignTaskPage">
 
     <Grid>
@@ -15,9 +15,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="240"/>
         </Grid.RowDefinitions>
         <Label Content="Team Name"
                FontSize="36"
@@ -26,52 +27,51 @@
         <Button Grid.Column="3"
                 Content="Add"
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ScrollViewer Width="800" Height="350"
-                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2"
-                      x:Name="MyScrollViewer"
-                      HorizontalScrollBarVisibility="Visible"
-                      VerticalScrollBarVisibility="Visible"
-                      Margin="0 5 0 5">
-            <ItemsControl ItemsSource="{Binding OnStageList}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Width="800"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Margin="10" Width="750" Height="50"
-                                PreviewMouseRightButtonUp="Right_Click">
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="200"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding StaffID}" 
-                                               Grid.Column="0"
-                                               HorizontalAlignment="Left"
-                                               Margin="10 0 0 0"/>
-                                    <TextBlock Text="{Binding StaffName}"
-                                               Grid.Column="1"
-                                               HorizontalAlignment="Left"
-                                               Margin="10 0 0 0"/>
-                                </Grid>
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <Border Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                CornerRadius="20" Margin="20"
+                Background="BurlyWood">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="470"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Left"
+                            Grid.Row="0" Margin="649,0,0,0">
+                    <TextBlock Text="Leader ID" 
+                                            HorizontalAlignment="Left"
+                                            Margin="10 10 0 0"
+                                            FontSize="15"/>
+                    <TextBlock Text="Leader name"
+                                            HorizontalAlignment="Left"
+                                            Margin="10 0 0 0"
+                                            FontSize="15"/>
+                </StackPanel>
+                <Border Grid.Row="1" Grid.RowSpan="2" 
+                        Width="780" HorizontalAlignment="Left">
+                    <Grid Margin="0,0,0,90">
+                        <DataGrid x:Name="DataGridview" ItemsSource="{Binding OnStageList}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  Margin="35,0,0,0" Width="745" PreviewMouseRightButtonUp="MouseRight_Click">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding StaffID}" Width="100"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding StaffName}" Width="628"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+
+            </Grid>
+        </Border>
         <Button x:Name="Back_CLick"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="40 0 0 0"
                 Click="Back_Click">
-            <TextBlock Text="←" FontSize="30" Margin="0 -11 0 0"/> 
+            <TextBlock Text="←" FontSize="30" Margin="0 -11 0 0"/>
         </Button>
     </Grid>
 </Page>
