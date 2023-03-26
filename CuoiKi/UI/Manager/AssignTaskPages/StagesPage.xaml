@@ -37,7 +37,15 @@
                             Click="BtnStageItem_Click"
                             Command="{Binding Path=DataContext.CmdSaveStageToState, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                             CommandParameter="{Binding ID}"
+                            Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
                             >
+                            <Button.ContextMenu>
+                                <ContextMenu Name="cm" StaysOpen="true" DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                    <MenuItem Command="{Binding DataContext.CmdViewStage}" Header="View"/>
+                                    <MenuItem Command="{Binding DataContext.CmdEditStage}" Header="Edit"/>
+                                    <MenuItem Command="{Binding DataContext.CmdDeleteStage}" Header="Delete"/>
+                                </ContextMenu>
+                            </Button.ContextMenu>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
                                 <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>
