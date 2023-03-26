@@ -51,18 +51,18 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         private ObservableCollection<OnStage> onstagelist = new ObservableCollection<OnStage>()
         {
             new OnStage("1","Nguyen van a"),
-            new OnStage("2","Nguyen van a"),
-            new OnStage("3","Nguyen van a"),
-            new OnStage("4","Nguyen van a"),
-            new OnStage("5","Nguyen van a"),
-            new OnStage("6","Nguyen van a"),
-            new OnStage("7","Nguyen van a"),
-            new OnStage("8","Nguyen van a"),
-            new OnStage("9","Nguyen van a"),
-            new OnStage("10","Nguyen van a"),
-            new OnStage("11","Nguyen van a"),
-            new OnStage("12","Nguyen van a"),
-            new OnStage("13","Nguyen van a")
+            new OnStage("2","Nguyen van b"),
+            new OnStage("3","Nguyen van c"),
+            new OnStage("4","Nguyen van d"),
+            new OnStage("5","Nguyen van e"),
+            new OnStage("6","Nguyen van f"),
+            new OnStage("7","Nguyen van g"),
+            new OnStage("8","Nguyen van h"),
+            new OnStage("9","Nguyen van i"),
+            new OnStage("10","Nguyen van j"),
+            new OnStage("11","Nguyen van k"),
+            new OnStage("12","Nguyen van l"),
+            new OnStage("13","Nguyen van m")
         };
         public ObservableCollection<OnStage> OnStageList
         {
@@ -74,12 +74,13 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             NavigationService.GoBack(); 
         }
 
-        private void Right_Click(object sender, MouseButtonEventArgs e)
+        private void MouseRight_Click(object sender, MouseButtonEventArgs e)
         {
-            //rightClickForm rightClickForm = new RightClickForm();
-            //rightClickForm.Left = e.GetPosition(this).X + 440;
-            //rightClickForm.Top = e.GetPosition(this).Y + 60;
-            //rightClickForm.Show();
+                    RightClickForm rightClickForm = new RightClickForm();
+                    rightClickForm.Left = e.GetPosition(this).X + 440;
+                    rightClickForm.Top = e.GetPosition(this).Y + 60;
+                    rightClickForm.Show();
+            
         }
     }
 }

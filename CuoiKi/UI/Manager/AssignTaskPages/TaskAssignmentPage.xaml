@@ -36,8 +36,8 @@
                       x:Name="MyScrollViewer" 
                       HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
                       Margin="0,5,0,5">
-            
             <ItemsControl ItemsSource="{Binding TeamList}">
+                <Button Content="Btn to temporarily open Team" Click="Team_Click"/>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
