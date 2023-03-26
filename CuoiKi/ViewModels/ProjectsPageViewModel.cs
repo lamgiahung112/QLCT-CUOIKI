@@ -38,7 +38,8 @@ namespace CuoiKi.ViewModels
         public string ProjectID
         {
             get { return _projectID; }
-            set { 
+            set
+            {
                 _projectID = value;
                 if (value.Length > 0)
                 {
@@ -174,5 +175,60 @@ namespace CuoiKi.ViewModels
         }
         #endregion
 
+        #region Context menu command functions
+        // Can execute variables
+        private bool canViewProject = true;
+        private bool canEditProject = true;
+        private bool canDeleteProject = true;
+        private void ViewProject()
+        {
+            MessageBox.Show("View project");
+        }
+        private void EditProject()
+        {
+            MessageBox.Show("Edit project");
+        }
+        private void DeleteProject()
+        {
+            MessageBox.Show("Delete project");
+        }
+        #endregion
+
+        #region Context menu commands
+        private ICommand? _cmdViewProject;
+        public ICommand CmdViewProject
+        {
+            get
+            {
+                _cmdViewProject ??= new RelayCommand(
+                    p => canViewProject,
+                    p => ViewProject()
+                );
+                return _cmdViewProject;
+            }
+        }
+        private ICommand? _cmdEditProject;
+        public ICommand CmdEditProject
+        {
+            get
+            {
+                _cmdEditProject ??= new RelayCommand(
+                    p => canEditProject,
+                    p => EditProject());
+                return _cmdEditProject;
+            }
+        }
+        private ICommand? _cmdDeleteProject;
+        public ICommand CmdDeleteProject
+        {
+            get
+            {
+                _cmdDeleteProject ??= new RelayCommand(
+                    p => canDeleteProject,
+                    p => DeleteProject());
+                return _cmdDeleteProject;
+            }
+        }
+        #endregion
     }
 }

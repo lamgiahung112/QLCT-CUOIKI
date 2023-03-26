@@ -69,7 +69,7 @@ namespace CuoiKi.ViewModels
         private ICommand? _saveStageToState;
         public ICommand CmdSaveStageToState
         {
-            get 
+            get
             {
                 _saveStageToState ??= new RelayCommand(
                         obj => true,
@@ -145,6 +145,62 @@ namespace CuoiKi.ViewModels
             canSaveStage = !string.IsNullOrEmpty(ToBeSavedStageDescription);
         }
 
+        #endregion
+
+        #region Context menu command functions
+        // Can execute variables
+        private bool canViewStage = true;
+        private bool canEditStage = true;
+        private bool canDeleteStage = true;
+        private void ViewStage()
+        {
+            MessageBox.Show("View stage");
+        }
+        private void EditStage()
+        {
+            MessageBox.Show("Edit stage");
+        }
+        private void DeleteStage()
+        {
+            MessageBox.Show("Delete stage");
+        }
+        #endregion
+
+        #region Context menu commands
+        private ICommand? _cmdViewStage;
+        public ICommand CmdViewStage
+        {
+            get
+            {
+                _cmdViewStage ??= new RelayCommand(
+                    p => canViewStage,
+                    p => ViewStage()
+                );
+                return _cmdViewStage;
+            }
+        }
+        private ICommand? _cmdEditStage;
+        public ICommand CmdEditStage
+        {
+            get
+            {
+                _cmdEditStage ??= new RelayCommand(
+                    p => canEditStage,
+                    p => EditStage());
+                return _cmdEditStage;
+            }
+        }
+        private ICommand? _cmdDeleteStage;
+        public ICommand CmdDeleteStage
+        {
+            get
+            {
+                _cmdDeleteStage ??= new RelayCommand(
+                    p => canDeleteStage,
+                    p => DeleteStage());
+                return _cmdDeleteStage;
+            }
+        }
         #endregion
 
     }
