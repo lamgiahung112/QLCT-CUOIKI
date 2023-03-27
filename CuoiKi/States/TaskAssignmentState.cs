@@ -10,5 +10,6 @@ namespace CuoiKi.States
     {
         public static Project? SelectedProject { get; set; }
         public static Stage? SelectedStage { get; set; }
+        public static Team? SelectedTeam { get; set; }
     }
 }
