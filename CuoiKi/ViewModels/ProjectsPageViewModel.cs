@@ -180,8 +180,10 @@ namespace CuoiKi.ViewModels
         private bool canViewProject = true;
         private bool canEditProject = true;
         private bool canDeleteProject = true;
-        private void ViewProject()
+        private void ViewProject(object param)
         {
+            MessageBox.Show(param.ToString());
+            TaskAssignmentState.SelectedProject = ProjectList.Where(x => x.ID == param.ToString()).ElementAt(0);
             MessageBox.Show("View project");
         }
         private void EditProject()
@@ -202,7 +204,7 @@ namespace CuoiKi.ViewModels
             {
                 _cmdViewProject ??= new RelayCommand(
                     p => canViewProject,
-                    p => ViewProject()
+                    p => ViewProject(p)
                 );
                 return _cmdViewProject;
             }

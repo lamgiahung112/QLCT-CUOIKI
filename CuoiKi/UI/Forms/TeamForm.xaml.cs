@@ -34,10 +34,6 @@ namespace CuoiKi.UI.Forms
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn)
-            {
-                btn.Command.Execute(btn.CommandParameter);
-            }
             Close();
         }
 

@@ -41,10 +41,20 @@
                             Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
                         >
                             <Button.ContextMenu>
-                                <ContextMenu Name="cm" StaysOpen="true" DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                                    <MenuItem Command="{Binding DataContext.CmdViewProject}" Header="View"/>
-                                    <MenuItem Command="{Binding DataContext.CmdEditProject}" Header="Edit"/>
-                                    <MenuItem Command="{Binding DataContext.CmdDeleteProject}" Header="Delete"/>
+                                <ContextMenu Name="cm" StaysOpen="true" 
+                                             DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                    <MenuItem 
+                                        Name="ViewMenuItem"
+                                        Command="{Binding DataContext.CmdViewProject}"
+                                        CommandParameter="{Binding ID}"
+                                        Click="ViewMenuItem_Click"
+                                        Header="View"/>
+                                    <MenuItem 
+                                        Command="{Binding DataContext.CmdEditProject}" 
+                                        Header="Edit"/>
+                                    <MenuItem 
+                                        Command="{Binding DataContext.CmdDeleteProject}" 
+                                        Header="Delete"/>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Vertical">

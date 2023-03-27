@@ -69,7 +69,7 @@
             Width="200" 
             Height="32"
             FontSize="16"
-            ItemsSource="{Binding TechLeadsFromDB}"
+            ItemsSource="{Binding TechLeadsFromDB, UpdateSourceTrigger=PropertyChanged}"
             SelectionChanged="CbbTechLead_SelectionChanged"
             SelectedValuePath="ID"
         >

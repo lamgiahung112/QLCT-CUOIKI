@@ -29,5 +29,10 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             btn.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new StagesPage());
         }
+
+        private void ViewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.Navigate(new StagesPage());
+        }
     }
 }
