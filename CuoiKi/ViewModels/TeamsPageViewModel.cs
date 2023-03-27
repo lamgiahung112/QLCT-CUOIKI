@@ -22,16 +22,16 @@ namespace CuoiKi.ViewModels
 
         public TeamsPageViewModel()
         {
+            StageID = TaskAssignmentState.SelectedStage!.ID;
             _controller = new KpiController();
             _employeeDAO = new EmployeeDAO();
             _Title = "";
             _ID = "";
             _ShowID = Visibility.Collapsed;
-            _StageID = "";
             _TechLead = "";
             _TeamName = "";
-            _teamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
             _techLeadsFromDB = _employeeDAO.GetAllTechLeads() ?? new();
+            FetchTeamList();
         }
 
         #region List Team Binding
@@ -44,6 +44,11 @@ namespace CuoiKi.ViewModels
                 _teamList = value; 
                 OnPropertyChanged(nameof(TeamList)); 
             }
+        }
+
+        private void FetchTeamList()
+        {
+            _teamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
         }
         
         #endregion
@@ -80,7 +85,6 @@ namespace CuoiKi.ViewModels
         {
             get
             {
-
                 _CmdSave ??= new RelayCommand(
                         p => TechLead.Length > 0 && TeamName.Length > 0,
                         p => SaveTeam()
@@ -93,6 +97,7 @@ namespace CuoiKi.ViewModels
         {
             Team team = Team.CreateNewTeam(StageID, TechLead, TeamName);
             _controller.Save(team);
+            FetchTeamList();
         }
 
         private void OpenEditTeamForm(object cmdParam)
@@ -132,6 +137,7 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Team Form Bindings
+        public string StageID;
         private string _ID;
         public string ID
         {
@@ -165,17 +171,6 @@ namespace CuoiKi.ViewModels
             }
         }
 
-        private string _StageID;
-        public string StageID
-        {
-            get { return _StageID; }
-            set
-            {
-                _StageID = value;
-                OnPropertyChanged(nameof(StageID));
-            }
-        }
-
         private List<Employee> _techLeadsFromDB;
         public List<Employee> TechLeadsFromDB
         {
@@ -206,6 +201,19 @@ namespace CuoiKi.ViewModels
             {
                 _TeamName = value;
                 OnPropertyChanged(nameof(TeamName));
+            }
+        }
+
+        private ICommand? _CmdUpdateTechLead;
+        public ICommand CmdUpdateTechLead
+        {
+            get
+            {
+                _CmdUpdateTechLead ??= new RelayCommand(
+                        p => true,
+                        p => { TechLead = p.ToString()!; }
+                    );
+                return _CmdUpdateTechLead;
             }
         }
 

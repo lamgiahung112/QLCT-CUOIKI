@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CuoiKi.UI.Forms" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TeamsPageViewModel}"
+        xmlns:local="clr-namespace:CuoiKi.UI.Forms" 
+        xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:TeamsPageViewModel}"
         mc:Ignorable="d"
-        Title="Stage Editor" Height="560" Width="400"
+        Title="Stage Editor" Height="480" Width="400"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid>
@@ -15,7 +17,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
-            <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
@@ -54,39 +55,23 @@
         <Label
             Grid.Row="2"
             Margin="20,0,0,0"
-            Content="Stage ID:"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            FontSize="24" Height="40" Width="116"
-        />
-        <TextBox
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding StageID}"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            IsEnabled="False"
-            Width="200" 
-            Height="32"
-            FontSize="16"
-        />
-        <Label
-            Grid.Row="3"
-            Margin="20,0,0,0"
             Content="TechLead:"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             FontSize="24" Height="40"
         />
         <ComboBox
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="1"
+            x:Name="CbbTechLead"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Width="200" 
             Height="32"
             FontSize="16"
             ItemsSource="{Binding TechLeadsFromDB}"
+            SelectionChanged="CbbTechLead_SelectionChanged"
+            SelectedValuePath="ID"
         >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -97,7 +82,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label
-            Grid.Row="4"
+            Grid.Row="3"
             Margin="20,0,0,0"
             Content="Team Name:"
             HorizontalAlignment="Left"
@@ -105,7 +90,7 @@
             FontSize="24" Height="40"
         />
         <TextBox
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="1"
             Text="{Binding TeamName, UpdateSourceTrigger=PropertyChanged}"
             HorizontalAlignment="Center"
@@ -127,8 +112,8 @@
                 Name="BtnSave"
                 Grid.Column="0"
                 Width="120"
-                Command="{Binding CmdSave}" 
                 Click="BtnSave_Click"
+                Command="{Binding CmdSave}"
             />
             <Button 
                 Content="Cancel" 
