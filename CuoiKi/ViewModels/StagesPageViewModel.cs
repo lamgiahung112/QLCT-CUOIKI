@@ -154,11 +154,12 @@ namespace CuoiKi.ViewModels
         private bool canDeleteStage = true;
         private void ViewStage()
         {
-            MessageBox.Show("View stage");
+            TaskAssignmentState.SelectedStage = StageList.Where(x => x.ID == StageID).FirstOrDefault();
         }
         private void EditStage()
         {
-            MessageBox.Show("Edit stage");
+            var stgForm = new StageForm(this);
+            stgForm.Show();
         }
         private void DeleteStage()
         {

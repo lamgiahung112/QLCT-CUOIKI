@@ -38,6 +38,7 @@
                             Click="Button_Click"
                             Command="{Binding Path=DataContext.ProjectItemClickCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                             CommandParameter="{Binding ID}"
+                            PreviewMouseRightButtonDown="Button_PreviewMouseRightButtonDown"
                             Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
                         >
                             <Button.ContextMenu>
@@ -46,7 +47,6 @@
                                     <MenuItem 
                                         Name="ViewMenuItem"
                                         Command="{Binding DataContext.CmdViewProject}"
-                                        CommandParameter="{Binding ID}"
                                         Click="ViewMenuItem_Click"
                                         Header="View"/>
                                     <MenuItem 

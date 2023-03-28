@@ -333,8 +333,7 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "UPDATE Stages SET " +
-                "([Description]) " +
-                "VALUES ('{0}') " +
+                "[Description] = '{0}' " +
                 "WHERE ID = '{1}'",
                 stage.Description, stage.ID
             );

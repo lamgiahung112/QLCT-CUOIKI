@@ -32,7 +32,13 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
 
         private void ViewMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new StagesPage());
+            NavigationService.Navigate(new StagesPage());
+        }
+
+        private void Button_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var btn = sender as Button;
+            btn.Command.Execute(btn.CommandParameter);
         }
     }
 }
