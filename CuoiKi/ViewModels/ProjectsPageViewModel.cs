@@ -98,7 +98,9 @@ namespace CuoiKi.ViewModels
         }
         public void SaveProject()
         {
-            Project project = Project.CreateNewProject(ToBeSavedProjectName, ToBeSavedProjectDescription);
+            Project project = TaskAssignmentState.SelectedProject ?? Project.CreateNewProject(ToBeSavedProjectName, ToBeSavedProjectDescription);
+            project.Name = ToBeSavedProjectName;
+            project.Description = ToBeSavedProjectDescription;
             kpiController.Save(project);
             fetchProjectListToObservableCollection();
         }
@@ -182,11 +184,12 @@ namespace CuoiKi.ViewModels
         private bool canDeleteProject = true;
         private void ViewProject()
         {
-            MessageBox.Show("View project");
+            TaskAssignmentState.SelectedProject = ProjectList.Where(x => x.ID == ProjectID).ElementAt(0);
         }
         private void EditProject()
         {
-            MessageBox.Show("Edit project");
+            var prjForm = new ProjectForm(this); 
+            prjForm.Show();
         }
         private void DeleteProject()
         {
