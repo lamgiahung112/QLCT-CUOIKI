@@ -38,14 +38,24 @@
                 </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Left"
                             Grid.Row="0" Margin="30,0,0,0">
-                    <TextBlock Text="Leader ID" 
-                                            HorizontalAlignment="Left"
-                                            Margin="10 10 0 0"
-                                            FontSize="15"/>
-                    <TextBlock Text="Leader name"
-                                            HorizontalAlignment="Left"
-                                            Margin="10 0 0 0"
-                                            FontSize="15"/>
+                    <WrapPanel Margin="0 10 0 0">
+                        <TextBlock Text="Leader ID" 
+                                   HorizontalAlignment="Left"
+                                   FontSize="15"/>
+                        <TextBlock Text="{Binding CurrentLeaderID}"
+                                   HorizontalAlignment="Left"
+                                   Margin="10 0 0 0"
+                                   FontSize="15"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0 10 0 0">
+                        <TextBlock Text="Leader Name" 
+                                   HorizontalAlignment="Left"
+                                   FontSize="15"/>
+                        <TextBlock Text="{Binding CurrentLeaderName}"
+                                   HorizontalAlignment="Left"
+                                   Margin="10 0 0 0"
+                                   FontSize="15"/>
+                    </WrapPanel>
                 </StackPanel>
                 <Border Grid.Row="1" Grid.RowSpan="2" 
                         Width="780" HorizontalAlignment="Left">
