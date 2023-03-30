@@ -40,7 +40,7 @@ namespace CuoiKi.UI.Forms
         private void CbbTechLead_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is not ComboBox cbb) return;
-            (DataContext as TeamsPageViewModel)!.CmdUpdateTechLead.Execute(cbb.SelectedValue.ToString());
+            (DataContext as TeamsPageViewModel)!.CmdUpdateTechLead.Execute(cbb.SelectedValue?.ToString());
         }
     }
 }

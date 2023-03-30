@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CuoiKi.UI.Forms;
+using CuoiKi.States;
 
 namespace CuoiKi.UI.Manager.AssignTaskPages
 {
@@ -71,6 +72,7 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+            TaskAssignmentState.SelectedTeam = null;
             NavigationService.GoBack(); 
         }
 

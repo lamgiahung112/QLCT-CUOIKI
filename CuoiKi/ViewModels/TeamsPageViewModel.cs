@@ -28,7 +28,7 @@ namespace CuoiKi.ViewModels
             _Title = "";
             _ID = "";
             _ShowID = Visibility.Collapsed;
-            _TechLead = "";
+            _TechLead = null;
             _TeamName = "";
             _techLeadsFromDB = _employeeDAO.GetAllTechLeads() ?? new();
             FetchTeamList();
@@ -48,7 +48,7 @@ namespace CuoiKi.ViewModels
 
         private void FetchTeamList()
         {
-            _teamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
+            TeamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
         }
         
         #endregion
@@ -74,7 +74,7 @@ namespace CuoiKi.ViewModels
             {
                 _CmdEditTeam ??= new RelayCommand(
                         p => true,
-                        p => OpenEditTeamForm(p)
+                        p => OpenEditTeamForm()
                     );
                 return _CmdEditTeam;
             }
@@ -86,7 +86,7 @@ namespace CuoiKi.ViewModels
             get
             {
                 _CmdSave ??= new RelayCommand(
-                        p => TechLead.Length > 0 && TeamName.Length > 0,
+                        p => TechLead?.ID.Length > 0 && TeamName.Length > 0,
                         p => SaveTeam()
                     );
                 return _CmdSave;
@@ -95,28 +95,21 @@ namespace CuoiKi.ViewModels
 
         private void SaveTeam()
         {
-            Team team = Team.CreateNewTeam(StageID, TechLead, TeamName);
+            Team team = TaskAssignmentState.SelectedTeam ?? Team.CreateNewTeam(StageID, TechLead!.ID, TeamName);
+            team.TechLeadID = TechLead!.ID;
+            team.Name = TeamName;
             _controller.Save(team);
             FetchTeamList();
         }
 
-        private void OpenEditTeamForm(object cmdParam)
+        private void OpenEditTeamForm()
         {
-            if (cmdParam == null) 
-            { 
-                return; 
-            }
-
-            string teamID = (cmdParam as string)!;
-            Team? team = _teamList.Where(x => x.ID == teamID).FirstOrDefault();
-            if (team == null) { return; }
             Title = "Edit Team";
             ShowID = Visibility.Visible;
 
-            ID = team.ID;
-            StageID = team.StageID;
-            TechLead = team.TechLeadID;
-            TeamName = team.Name;
+            StageID = TaskAssignmentState.SelectedTeam!.StageID;
+            TechLead = TechLeadsFromDB.Where(x => x.ID == TaskAssignmentState.SelectedTeam!.TechLeadID).First();
+            TeamName = TaskAssignmentState.SelectedTeam!.Name;
 
             var f = new TeamForm(this);
             f.Show();
@@ -128,7 +121,7 @@ namespace CuoiKi.ViewModels
             ID = "";
             ShowID = Visibility.Collapsed;
             StageID = TaskAssignmentState.SelectedStage!.ID;
-            TechLead = "";
+            TechLead = null;
             TeamName = "";
             var f = new TeamForm(this);
             f.Show();
@@ -137,7 +130,7 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Team Form Bindings
-        public string StageID;
+        public string StageID { get; set; }
         private string _ID;
         public string ID
         {
@@ -182,8 +175,8 @@ namespace CuoiKi.ViewModels
             }
         }
 
-        private string _TechLead;
-        public string TechLead
+        private Employee? _TechLead;
+        public Employee? TechLead
         {
             get { return _TechLead; }
             set
@@ -211,7 +204,10 @@ namespace CuoiKi.ViewModels
             {
                 _CmdUpdateTechLead ??= new RelayCommand(
                         p => true,
-                        p => { TechLead = p.ToString()!; }
+                        p => 
+                        { 
+                            TechLead = TechLeadsFromDB.Where(x => x.ID == p.ToString()!).First(); 
+                        }
                     );
                 return _CmdUpdateTechLead;
             }
@@ -219,5 +215,30 @@ namespace CuoiKi.ViewModels
 
         #endregion
 
+        #region Context Menu Bindings
+        private ICommand? _CmdSaveTeamToState;
+        public ICommand CmdSaveTeamToState
+        {
+            get
+            {
+                _CmdSaveTeamToState ??= new RelayCommand(
+                        p => true,
+                        p => SaveTeamToState(p)
+                    );
+                return _CmdSaveTeamToState;
+            }
+        }
+
+        private void SaveTeamToState(object param)
+        {
+            if (param is not string id)
+            {
+                return;
+            }
+
+            TaskAssignmentState.SelectedTeam = TeamList.Where(x => x.ID == id).FirstOrDefault();
+            ID = id;
+        }        
+        #endregion
     }
 }

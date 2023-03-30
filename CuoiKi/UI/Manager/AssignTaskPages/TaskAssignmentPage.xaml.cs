@@ -39,5 +39,16 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         {
             NavigationService.Navigate(new AssignTaskPage());
         }
+
+        private void BtnTeamItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var btn = sender as Button;
+            btn!.Command.Execute(btn.CommandParameter);
+        }
+
+        private void ViewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AssignTaskPage());
+        }
     }
 }
