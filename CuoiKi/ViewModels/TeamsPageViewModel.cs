@@ -4,12 +4,8 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,7 +22,7 @@ namespace CuoiKi.ViewModels
             _controller = new KpiController();
             _employeeDAO = new EmployeeDAO();
             _Title = "";
-            _ID = "";
+            _TeamID = "";
             _ShowID = Visibility.Collapsed;
             _TechLead = null;
             _TeamName = "";
@@ -39,10 +35,10 @@ namespace CuoiKi.ViewModels
         public List<Team> TeamList
         {
             get { return _teamList; }
-            set 
-            { 
-                _teamList = value; 
-                OnPropertyChanged(nameof(TeamList)); 
+            set
+            {
+                _teamList = value;
+                OnPropertyChanged(nameof(TeamList));
             }
         }
 
@@ -50,7 +46,7 @@ namespace CuoiKi.ViewModels
         {
             TeamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
         }
-        
+
         #endregion
 
         #region Add/Edit Team Command Binding
@@ -118,7 +114,7 @@ namespace CuoiKi.ViewModels
         private void OpenAddTeamForm()
         {
             Title = "Add New Team";
-            ID = "";
+            TeamID = "";
             ShowID = Visibility.Collapsed;
             StageID = TaskAssignmentState.SelectedStage!.ID;
             TechLead = null;
@@ -131,14 +127,14 @@ namespace CuoiKi.ViewModels
 
         #region Team Form Bindings
         public string StageID { get; set; }
-        private string _ID;
-        public string ID
+        private string _TeamID;
+        public string TeamID
         {
-            get { return _ID; }
-            set 
-            { 
-                _ID = value;
-                OnPropertyChanged(nameof(ID));
+            get { return _TeamID; }
+            set
+            {
+                _TeamID = value;
+                OnPropertyChanged(nameof(TeamID));
             }
         }
 
@@ -146,8 +142,8 @@ namespace CuoiKi.ViewModels
         public string Title
         {
             get { return _Title; }
-            set 
-            { 
+            set
+            {
                 _Title = value;
                 OnPropertyChanged(nameof(Title));
             }
@@ -168,8 +164,8 @@ namespace CuoiKi.ViewModels
         public List<Employee> TechLeadsFromDB
         {
             get { return _techLeadsFromDB; }
-            set 
-            { 
+            set
+            {
                 _techLeadsFromDB = value;
                 OnPropertyChanged(nameof(TechLeadsFromDB));
             }
@@ -180,7 +176,7 @@ namespace CuoiKi.ViewModels
         {
             get { return _TechLead; }
             set
-            { 
+            {
                 _TechLead = value;
                 OnPropertyChanged(nameof(TechLead));
             }
@@ -204,9 +200,9 @@ namespace CuoiKi.ViewModels
             {
                 _CmdUpdateTechLead ??= new RelayCommand(
                         p => true,
-                        p => 
-                        { 
-                            TechLead = TechLeadsFromDB.Where(x => x.ID == p.ToString()!).First(); 
+                        p =>
+                        {
+                            TechLead = TechLeadsFromDB.Where(x => x.ID == p.ToString()!).First();
                         }
                     );
                 return _CmdUpdateTechLead;
@@ -237,8 +233,8 @@ namespace CuoiKi.ViewModels
             }
 
             TaskAssignmentState.SelectedTeam = TeamList.Where(x => x.ID == id).FirstOrDefault();
-            ID = id;
-        }        
+            TeamID = id;
+        }
         #endregion
     }
 }

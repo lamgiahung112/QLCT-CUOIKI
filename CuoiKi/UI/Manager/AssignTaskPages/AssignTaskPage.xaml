@@ -37,7 +37,7 @@
                     <RowDefinition Height="470"/>
                 </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Left"
-                            Grid.Row="0" Margin="649,0,0,0">
+                            Grid.Row="0" Margin="30,0,0,0">
                     <TextBlock Text="Leader ID" 
                                             HorizontalAlignment="Left"
                                             Margin="10 10 0 0"
