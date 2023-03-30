@@ -4,6 +4,7 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -212,6 +213,7 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Context Menu Bindings
+        public event Action CmdSaveTeamToStateCompleted;
         private ICommand? _CmdSaveTeamToState;
         public ICommand CmdSaveTeamToState
         {
@@ -231,9 +233,9 @@ namespace CuoiKi.ViewModels
             {
                 return;
             }
-
             TaskAssignmentState.SelectedTeam = TeamList.Where(x => x.ID == id).FirstOrDefault();
             TeamID = id;
+            CmdSaveTeamToStateCompleted?.Invoke();
         }
         #endregion
     }

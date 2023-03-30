@@ -50,14 +50,14 @@
                 <Border Grid.Row="1" Grid.RowSpan="2" 
                         Width="780" HorizontalAlignment="Left">
                     <Grid Margin="0,0,0,90">
-                        <DataGrid x:Name="DataGridview" ItemsSource="{Binding OnStageList}"
+                        <DataGrid x:Name="DataGridview" ItemsSource="{Binding TeamMemberList}"
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   Margin="35,0,0,0" Width="745" PreviewMouseRightButtonUp="MouseRight_Click">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding StaffID}" Width="100"/>
-                                <DataGridTextColumn Header="Name" Binding="{Binding StaffName}" Width="628"/>
+                                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="628"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

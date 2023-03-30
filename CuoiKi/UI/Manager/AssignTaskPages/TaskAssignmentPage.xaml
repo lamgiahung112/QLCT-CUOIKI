@@ -52,7 +52,6 @@
                                 Name="BtnTeamItem"
                                 Command="{Binding Path=DataContext.CmdSaveTeamToState, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                 CommandParameter="{Binding ID}"
-                                Click="Team_Click"
                                 PreviewMouseRightButtonDown="BtnTeamItem_PreviewMouseRightButtonDown"
                                 Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
                         >

@@ -15,7 +15,9 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
         public TaskAssignmentPage()
         {
             InitializeComponent();
-            this.DataContext = new TeamsPageViewModel();
+            TeamsPageViewModel viewModel = new TeamsPageViewModel();
+            this.DataContext = viewModel;
+            viewModel.CmdSaveTeamToStateCompleted += Team_Click;
         }
 
         private void back_click(object sender, RoutedEventArgs e)
@@ -23,7 +25,8 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             TaskAssignmentState.SelectedStage = null;
             NavigationService.GoBack();
         }
-        private void Team_Click(object sender, RoutedEventArgs e)
+
+        private void Team_Click()
         {
             NavigationService.Navigate(new AssignTaskPage());
         }
