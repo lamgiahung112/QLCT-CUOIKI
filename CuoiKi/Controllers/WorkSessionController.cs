@@ -91,7 +91,10 @@ namespace CuoiKi.Controllers
         public List<WorkSession>? GetAllWorkSessionOfAnEmployeeInSelectedMonth(string employeeID, DateTime dateInMonth)
         {
             var startDate = new DateTime(dateInMonth.Year, dateInMonth.Month, 1);
-            var endDate = startDate.Date.AddMonths(1).AddDays(-1);
+            DateTime endDate = new DateTime(dateInMonth.Year, dateInMonth.Month, DateTime.DaysInMonth(dateInMonth.Year, dateInMonth.Month));
+            TimeSpan ts = new TimeSpan(23, 59, 59);
+            endDate = endDate.Date + ts;
+            MessageBox.Show(endDate.ToString());
             var result = from workSession in workSessionDAO.GetAll() ?? new List<WorkSession>()
                          where workSession.EmployeeID == employeeID &&
                          workSession.StartingTime >= startDate &&
