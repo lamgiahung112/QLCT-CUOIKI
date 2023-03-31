@@ -45,6 +45,7 @@ namespace CuoiKi.ViewModels
             // Just curious, the app freeze a little when add a bunch of employee
             // I wonder is it because Bcrypt hash the password...
             _TeamMemberList.Add(new Employee("Nguyen Van A", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
+            /*
             _TeamMemberList.Add(new Employee("Nguyen Van B", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van C", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van D", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
@@ -56,6 +57,7 @@ namespace CuoiKi.ViewModels
             _TeamMemberList.Add(new Employee("Nguyen Van J", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van K", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van L", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
+            */
         }
         private ObservableCollection<Employee> _TeamMemberList;
         public ObservableCollection<Employee> TeamMemberList
