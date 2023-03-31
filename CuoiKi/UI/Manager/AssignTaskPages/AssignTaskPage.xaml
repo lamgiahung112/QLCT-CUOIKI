@@ -62,7 +62,7 @@
                     </WrapPanel>
                     
                 </StackPanel>
-                <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left">
+                <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Command="{Binding CmdOpenTaskAssignmentForm}">
                     Assign task
                 </Button>
                 <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 

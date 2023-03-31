@@ -1,10 +1,13 @@
 ﻿using CuoiKi.Controllers;
+using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
 {
@@ -13,6 +16,9 @@ namespace CuoiKi.ViewModels
         private KpiController _controller;
         private string _CurrentLeaderID = "";
         private string _CurrentLeaderName = "";
+        private string _CurrentManagerName = "";
+        private string _CurrentManagerID = "";
+
         public TeamMembersPageViewModel()
         {
             _controller = new KpiController();
@@ -28,7 +34,8 @@ namespace CuoiKi.ViewModels
                 CurrentLeaderID = currentLeader.ID;
                 CurrentLeaderName = currentLeader.Name;
             }
-
+            _CurrentManagerName = LoginInfoState.Name!;
+            _CurrentManagerID = LoginInfoState.Id!;
         }
         #region Team member list 
         void TeamMemberListInit()
@@ -70,7 +77,7 @@ namespace CuoiKi.ViewModels
             }
         }
         #endregion
-        #region Leader information property
+        #region Assignee and assigner information property
         public string CurrentLeaderID
         {
             get { return _CurrentLeaderID; }
@@ -88,6 +95,109 @@ namespace CuoiKi.ViewModels
                 _CurrentLeaderName = value;
                 OnPropertyChanged(nameof(CurrentLeaderName));
             }
+        }
+        public string CurrentManagerName
+        {
+            get { return _CurrentManagerName; }
+            set
+            {
+                _CurrentManagerName = value;
+                OnPropertyChanged(nameof(CurrentManagerName));
+            }
+        }
+        #endregion
+
+        #region Open task assigment form command
+        private ICommand? _CmdOpenTaskAssignmentForm;
+        public ICommand CmdOpenTaskAssignmentForm
+        {
+            get
+            {
+                _CmdOpenTaskAssignmentForm ??= new RelayCommand(
+                    p => true,
+                    p => OpenTaskAssignmentForm());
+                return _CmdOpenTaskAssignmentForm;
+            }
+        }
+        private void OpenTaskAssignmentForm()
+        {
+            var taskAssignmentForm = new ManagerTaskAssignmentForm(this);
+            taskAssignmentForm.Show();
+        }
+        #endregion
+        #region Form input
+        private string _ToBeSavedTaskTitle = "";
+        private string _ToBeSavedTaskDescription = "";
+        private DateTime? _ToBeSavedTaskStartingTime = DateTime.Now;
+        private DateTime? _ToBeSavedTaskEndingTime = DateTime.Now;
+        public string ToBeSavedTaskTitle
+        {
+            get { return _ToBeSavedTaskTitle; }
+            set
+            {
+                _ToBeSavedTaskTitle = value;
+                OnPropertyChanged(nameof(ToBeSavedTaskTitle));
+                CheckValidTaskInput();
+            }
+        }
+        public string ToBeSavedTaskDescription
+        {
+            get { return _ToBeSavedTaskDescription; }
+            set
+            {
+                _ToBeSavedTaskDescription = value;
+                OnPropertyChanged(nameof(ToBeSavedTaskDescription));
+                CheckValidTaskInput();
+            }
+        }
+        public DateTime ToBeSavedTaskStartingTime
+        {
+            get { return _ToBeSavedTaskStartingTime ?? DateTime.Now; }
+            set
+            {
+                _ToBeSavedTaskStartingTime = value;
+                OnPropertyChanged(nameof(ToBeSavedTaskStartingTime));
+            }
+        }
+        public DateTime ToBeSavedTaskEndingTime
+        {
+            get { return _ToBeSavedTaskEndingTime ?? DateTime.Now; }
+            set
+            {
+                _ToBeSavedTaskEndingTime = value;
+                OnPropertyChanged(nameof(ToBeSavedTaskEndingTime));
+            }
+        }
+        #endregion
+        #region Save task command
+        private ICommand? _CmdSaveTask;
+        public ICommand CmdSaveTask
+        {
+            get
+            {
+                _CmdSaveTask ??= new RelayCommand(
+                    p => _CanSaveTask,
+                    p => SaveTask());
+                return _CmdSaveTask;
+            }
+        }
+        private bool _CanSaveTask = false;
+        private void SaveTask()
+        {
+            /*
+            MessageBox.Show("Save task");
+            MessageBox.Show(ToBeSavedTaskTitle);
+            MessageBox.Show(ToBeSavedTaskDescription);
+            MessageBox.Show(ToBeSavedTaskStartingTime.ToString());
+            MessageBox.Show(ToBeSavedTaskEndingTime.ToString());
+            */
+            Task task = Task.CreateNewTask(CurrentLeaderID, _CurrentManagerID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
+            _controller.Save(task);
+        }
+        private void CheckValidTaskInput()
+        {
+            _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskTitle);
+            _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskDescription);
         }
         #endregion
     }
