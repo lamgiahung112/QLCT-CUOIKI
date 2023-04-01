@@ -80,7 +80,7 @@ GO
 -- Create Tasks table
 CREATE TABLE Tasks (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
-    Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES TeamMembers(ID),
+    Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
     Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
     [Description] NVARCHAR(255) NOT NULL,
     Title NVARCHAR(255) NOT NULL,
@@ -90,6 +90,9 @@ CREATE TABLE Tasks (
     CreatedAt DateTime NOT NULL,
     UpdatedAt DateTime NOT NULL
 );
+
+Use companyDB;
+SELECT * FROM Tasks;
 
 -- Add Employees
 Insert into Employees Values (N'dev1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');

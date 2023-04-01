@@ -144,5 +144,10 @@ namespace CuoiKi.Controllers
         {
             return employeeDAO.GetOne(teamMember.EmployeeID);
         }
+
+        public Employee? GetTechLeadOfTeam(Team team)
+        {
+            return employeeDAO.GetOne(team.TechLeadID);
+        }
     }
 }
