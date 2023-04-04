@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="MemberTask" Height="450" Width="800">
     <Grid>
-        <ScrollViewer  Width="800" Height="350" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="334.04"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Member" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <ScrollViewer  Width="800" Height="320" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
             <ItemsControl>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -19,9 +24,7 @@
                         <Button 
                             Margin="10 20 10 20" 
                             Width="200" Height="100" 
-                            Name="BtnStageItem"
-                            
-                            >
+                            Name="BtnMemberTask">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Task: " Margin="5,0"></TextBlock>
                             </StackPanel>

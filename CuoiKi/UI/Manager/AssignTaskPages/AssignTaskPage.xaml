@@ -60,7 +60,7 @@
                                    Margin="10 0 0 0"
                                    FontSize="15"/>
                     </WrapPanel>
-                    
+
                 </StackPanel>
                 <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Command="{Binding CmdOpenTaskAssignmentForm}">
                     Assign task
@@ -84,6 +84,9 @@
                         </DataGrid>
                     </Grid>
                 </Border>
+                <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Margin="288,19,0,19" 
+                        Content="open TaskMng" FontSize="10"
+                        Click="Open_TaskMng"/>
 
             </Grid>
         </Border>

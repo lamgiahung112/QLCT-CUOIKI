@@ -32,5 +32,11 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             rightClickForm.Show();
 
         }
+
+        private void Open_TaskMng(object sender, RoutedEventArgs e)
+        {
+            Forms.TaskMngToTechlead taskMngToTechlead = new Forms.TaskMngToTechlead();
+            taskMngToTechlead.Show();
+        }
     }
 }

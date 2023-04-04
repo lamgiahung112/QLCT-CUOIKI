@@ -13,7 +13,8 @@
 
 
 
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Background="#eff2f7" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
+            MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -29,15 +30,14 @@
                 </Grid.RowDefinitions>
                 <!--Menu icon-->
 
-                <Border Margin="0 0 0 100"/>
-
-                <Border Grid.Row="1" Background="#125178" CornerRadius="0 50 0 30">
+                <Border Grid.Row="1" Background="#125178" CornerRadius="30 10 10 30" Margin="5"
+                        BorderThickness="2" BorderBrush="DarkKhaki">
                     <DockPanel>
                         <!--Menu Logo-->
 
 
                         <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100"
-                                DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                                DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="50 55 0 0">
                             <Ellipse>
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="account.png"/>
@@ -47,8 +47,8 @@
 
                         <!--Menu title-->
 
-                        <TextBlock Text="Staff Account" Foreground="White" FontSize="22" FontWeight="SemiBold"
-                                   DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+                        <TextBlock Text="Staff Account" Foreground="White" FontSize="21" FontWeight="SemiBold"
+                                   DockPanel.Dock="Top" TextAlignment="Center" Margin="0 25 0 10"/>
 
                         <!--Menu seprator-->
 
@@ -61,21 +61,21 @@
                             <Button x:Name="btn_Information" Style="{StaticResource menuButton}" Click="btn_Information_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Information" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Information"/>
+                                    <TextBlock Text="Information" FontSize="15"/>
                                 </StackPanel>
                             </Button>
 
                             <Button x:Name="btn_WorkSession" Style="{StaticResource menuButton}" Click="btn_WorkSession_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Work session"/>
+                                    <TextBlock Text="Work session" FontSize="15"/>
                                 </StackPanel>
                             </Button>
 
                             <Button x:Name="btn_LeaveOfAbsence" Style="{StaticResource menuButton}" Click="btn_LeaveOfAbsence_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountCancelOutline" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Leave of Absence"/>
+                                    <TextBlock Text="Leave of Absence" FontSize="15"/>
                                 </StackPanel>
                             </Button>
 
@@ -84,7 +84,7 @@
                         <Button x:Name="btnLogOut" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="LogOut_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Log out"/>
+                                <TextBlock Text="Log out" FontSize="15"/>
                             </StackPanel>
                         </Button>
 
