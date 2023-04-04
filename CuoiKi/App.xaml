@@ -44,13 +44,12 @@
                 <Setter Property="Foreground" Value="#d0c0ff"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="Foreground" Value="#E8E0A7"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Margin" Value="15 3"/>
-                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Margin" Value="10 3"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" >
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
                                 <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -102,6 +101,39 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="ButtonInForm" TargetType="Button">
+                <Setter Property="Background" Value="#00A2E8"/>
+                
+                <Setter Property="Foreground" Value="Goldenrod"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Margin" Value="10 3"/>
+                <Setter Property="FontFamily" Value="Open Sans"/>
+                <Setter Property="Button.Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Button.Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="LightGoldenrodYellow" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="DodgerBlue"/>
+                        <Setter Property="Foreground" Value="Goldenrod"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
