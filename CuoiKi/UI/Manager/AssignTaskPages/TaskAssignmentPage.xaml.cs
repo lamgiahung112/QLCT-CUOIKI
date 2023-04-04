@@ -17,7 +17,6 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             InitializeComponent();
             TeamsPageViewModel viewModel = new TeamsPageViewModel();
             this.DataContext = viewModel;
-            viewModel.CmdSaveTeamToStateCompleted += Team_Click;
         }
 
         private void back_click(object sender, RoutedEventArgs e)
@@ -26,8 +25,13 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             NavigationService.GoBack();
         }
 
-        private void Team_Click()
+        public void Team_Click(object sender, RoutedEventArgs e)
         {
+            if (sender as Button is null) {
+                return;
+            }
+            var btn = sender as Button;
+            btn!.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new AssignTaskPage());
         }
 
