@@ -196,8 +196,7 @@ namespace CuoiKi.ViewModels
         }
         private void CheckValidTaskInput()
         {
-            _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskTitle);
-            _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskDescription);
+            _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskTitle) && !string.IsNullOrEmpty(ToBeSavedTaskDescription);
         }
         #endregion
     }
