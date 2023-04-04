@@ -10,6 +10,9 @@
     <Compile Update="UI\Forms\ManagerTaskAssignmentForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Forms\MemberTask.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Forms\ProjectForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Forms\StageForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\TaskMngToTechlead.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Forms\TeamForm.xaml.cs">
@@ -63,10 +69,16 @@
     <Page Update="UI\Forms\ManagerTaskAssignmentForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Forms\MemberTask.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Forms\RightClickForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Forms\StageForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Forms\TaskMngToTechlead.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Forms\TeamForm.xaml">
