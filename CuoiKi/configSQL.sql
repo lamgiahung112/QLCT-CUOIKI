@@ -91,9 +91,6 @@ CREATE TABLE Tasks (
     UpdatedAt DateTime NOT NULL
 );
 
-Use companyDB;
-SELECT * FROM Tasks;
-
 -- Add Employees
 Insert into Employees Values (N'dev1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
 Insert into Employees Values (N'dev2', N'staff2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');

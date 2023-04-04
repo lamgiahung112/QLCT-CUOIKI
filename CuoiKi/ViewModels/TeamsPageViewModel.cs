@@ -213,7 +213,6 @@ namespace CuoiKi.ViewModels
         #endregion
 
         #region Context Menu Bindings
-        public event Action CmdSaveTeamToStateCompleted;
         private ICommand? _CmdSaveTeamToState;
         public ICommand CmdSaveTeamToState
         {
@@ -235,7 +234,6 @@ namespace CuoiKi.ViewModels
             }
             TaskAssignmentState.SelectedTeam = TeamList.Where(x => x.ID == id).FirstOrDefault();
             TeamID = id;
-            CmdSaveTeamToStateCompleted?.Invoke();
         }
         #endregion
     }
