@@ -9,6 +9,5 @@
         Title="InformationForm" >
     <Grid Grid.Column="1" Margin="30 20 20 20">
         <Label Content="Informationnnnnnnnnnnnnn" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="30"/>
-
     </Grid>
 </Page>
