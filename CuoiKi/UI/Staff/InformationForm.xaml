@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CuoiKi.UI.Staff"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:CuoiKi.UI.Staff" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:UserInformationViewModel}"
+      mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800"
         Title="InformationForm" >
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -22,18 +21,24 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Border Width="100" Height="100" 
+                Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
+                HorizontalAlignment="Center" CornerRadius="60" 
+                BorderThickness="2" BorderBrush="Black">
+            <Image Stretch="UniformToFill" Source="{Binding ImageSrc}"/>
+        </Border>
         <TextBlock
             HorizontalAlignment="Center"
-            Text="bind ten"
+            Text="{Binding UserName}"
             FontSize="32"
-            Grid.Row="1" Grid.Column="1"
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
         />
         <TextBlock
             HorizontalAlignment="Center"
-            Text="bind role"
+            Text="{Binding UserRole}"
             FontWeight="Light"
             FontSize="20"
-            Grid.Row="2" Grid.Column="1"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
         />
         <Grid Grid.Row="3" Grid.Column="0"   
               Margin="10,0,0,0"
@@ -52,7 +57,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind ID"
+                Text="{Binding UserId}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -75,7 +80,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind name"
+                Text="{Binding UserName}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -98,7 +103,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind Address"
+                Text="{Binding UserAddress}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -121,7 +126,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind birth"
+                Text="{Binding UserBirth}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -144,7 +149,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind status"
+                Text="{Binding UserStatus}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -167,7 +172,7 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind role"
+                Text="{Binding UserRole}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -213,14 +218,11 @@
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="bind gender"
+                Text="{Binding UserGender}"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
             />
         </Grid>
-        <Border Width="100" Height="100" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Right" CornerRadius="60" BorderThickness="2" BorderBrush="Black">
-            <Image Stretch="UniformToFill" />
-        </Border>
     </Grid>
 </Page>
