@@ -6,7 +6,6 @@ using CuoiKi.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -28,6 +27,7 @@ namespace CuoiKi.ViewModels
         private void InitializeVariables()
         {
             TeamMemberListInit();
+            FetchEmployeeList();
             Employee? currentLeader = _controller.GetTechLeadOfTeam(TaskAssignmentState.SelectedTeam!);
             if (currentLeader is not null)
             {
@@ -42,7 +42,6 @@ namespace CuoiKi.ViewModels
         {
             _TeamMemberList = new ObservableCollection<Employee>();
             _TeamMemberList.Clear();
-            MessageBox.Show(TaskAssignmentState.SelectedTeam.Name);
             List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             foreach (TeamMember member in teamMembers)
             {
@@ -197,6 +196,47 @@ namespace CuoiKi.ViewModels
         private void CheckValidTaskInput()
         {
             _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskTitle) && !string.IsNullOrEmpty(ToBeSavedTaskDescription);
+        }
+        #endregion
+        #region Team management command
+        private ICommand? _CmdTeamManagement;
+        public ICommand CmdTeamManagement
+        {
+            get
+            {
+                _CmdTeamManagement ??= new RelayCommand(
+                    p => true,
+                    p => OpenTeamManagementWindow());
+                return _CmdTeamManagement;
+            }
+        }
+        private void OpenTeamManagementWindow()
+        {
+            var teamManagementWindow = new TeamManagementWindow(this);
+            teamManagementWindow.Show();
+            FetchEmployeeList();
+        }
+        #endregion
+        #region Team management window binding
+        private ObservableCollection<Employee> _EmployeeList;
+        public ObservableCollection<Employee> EmployeeList
+        {
+            get { return _EmployeeList; }
+            set
+            {
+                EmployeeList = value;
+                OnPropertyChanged(nameof(EmployeeList));
+            }
+        }
+        void FetchEmployeeList()
+        {
+            _EmployeeList = new ObservableCollection<Employee>();
+            EmployeeList.Clear();
+            List<Employee>? workers = _controller.GetAllWorkers();
+            foreach (Employee worker in workers)
+            {
+                _EmployeeList.Add(worker);
+            }
         }
         #endregion
     }

@@ -93,6 +93,7 @@ CREATE TABLE Tasks (
 
 Use companyDB;
 SELECT * FROM Tasks;
+SELECT * FROM Employees WHERE Role='Dev' OR Role='Designer' OR Role='Tester' OR Role='Staff'
 
 -- Add Employees
 Insert into Employees Values (N'dev1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');

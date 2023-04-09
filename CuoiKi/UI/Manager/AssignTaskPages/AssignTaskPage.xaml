@@ -26,7 +26,8 @@
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Grid.Column="3"
                 Content="Add"
-                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding CmdTeamManagement}"/>
         <Border Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"
                 Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
                 CornerRadius="20" Margin="20"

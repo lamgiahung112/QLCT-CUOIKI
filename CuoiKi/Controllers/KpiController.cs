@@ -149,5 +149,9 @@ namespace CuoiKi.Controllers
         {
             return employeeDAO.GetOne(team.TechLeadID);
         }
+        public List<Employee>? GetAllWorkers()
+        {
+            return employeeDAO.GetAllWorkers();
+        }
     }
 }
