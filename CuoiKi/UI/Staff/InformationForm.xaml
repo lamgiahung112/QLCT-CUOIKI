@@ -54,9 +54,10 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
+                Width="280"
                 Text="{Binding UserId}"
                 FontWeight="Light"
                 FontSize="20"
@@ -77,11 +78,12 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserName}"
                 FontWeight="Light"
+                Width="280"
                 FontSize="20"
                 Grid.Row="1"
             />
@@ -100,11 +102,12 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserAddress}"
                 FontWeight="Light"
+                Width="280"
                 FontSize="20"
                 Grid.Row="1"
             />
@@ -123,12 +126,13 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserBirth}"
                 FontWeight="Light"
                 FontSize="20"
+                Width="280"
                 Grid.Row="1"
             />
         </Grid>
@@ -146,10 +150,11 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserStatus}"
+                Width="280"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -169,12 +174,13 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserRole}"
                 FontWeight="Light"
                 FontSize="20"
+                Width="280"
                 Grid.Row="1"
             />
         </Grid>
@@ -192,10 +198,10 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <PasswordBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="**************"
+                Width="280"
                 FontWeight="Light"
                 FontSize="20"
                 Grid.Row="1"
@@ -215,11 +221,12 @@
                 FontWeight="SemiBold"
                 FontSize="20"
             />
-            <TextBlock
+            <TextBox
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="{Binding UserGender}"
                 FontWeight="Light"
+                Width="280"
                 FontSize="20"
                 Grid.Row="1"
             />
