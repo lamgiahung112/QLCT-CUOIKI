@@ -61,21 +61,21 @@
                             <Button x:Name="btn_Information" Style="{StaticResource menuButton}" Click="btn_Information_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Information" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Information" FontSize="15"/>
+                                    <TextBlock Text="Information" FontSize="14"/>
                                 </StackPanel>
                             </Button>
 
                             <Button x:Name="btn_WorkSession" Style="{StaticResource menuButton}" Click="btn_WorkSession_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Work session" FontSize="15"/>
+                                    <TextBlock Text="Work session" FontSize="14"/>
                                 </StackPanel>
                             </Button>
 
                             <Button x:Name="btn_LeaveOfAbsence" Style="{StaticResource menuButton}" Click="btn_LeaveOfAbsence_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountCancelOutline" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Leave of Absence" FontSize="15"/>
+                                    <TextBlock Text="Leave of Absence" FontSize="13"/>
                                 </StackPanel>
                             </Button>
 
