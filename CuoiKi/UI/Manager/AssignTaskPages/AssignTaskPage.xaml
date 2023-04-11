@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="880"
       Title="AssignTaskPage">
@@ -20,6 +21,7 @@
             <RowDefinition Height="180"/>
             <RowDefinition Height="240"/>
         </Grid.RowDefinitions>
+
         <Label Content="Team Name"
                FontSize="36"
                Grid.ColumnSpan="2"
@@ -27,69 +29,75 @@
         <Button Grid.Column="3"
                 Content="Add"
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Border Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"
-                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                CornerRadius="20" Margin="20"
-                Background="BurlyWood">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70" />
-                    <RowDefinition Height="470"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel HorizontalAlignment="Left"
-                            Grid.Row="0" Grid.ColumnSpan="2" Margin="30,0,0,0">
-                    <WrapPanel Margin="0 10 0 0">
-                        <TextBlock Text="Leader ID" 
-                                   HorizontalAlignment="Left"
-                                   FontSize="15"/>
-                        <TextBlock Text="{Binding CurrentLeaderID}"
-                                   HorizontalAlignment="Left"
-                                   Margin="10 0 0 0"
-                                   FontSize="15"/>
-                    </WrapPanel>
-                    <WrapPanel Margin="0 10 0 0">
-                        <TextBlock Text="Leader Name" 
-                                   HorizontalAlignment="Left"
-                                   FontSize="15"/>
-                        <TextBlock Text="{Binding CurrentLeaderName}"
-                                   HorizontalAlignment="Left"
-                                   Margin="10 0 0 0"
-                                   FontSize="15"/>
-                    </WrapPanel>
-
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="470"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.75*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource ButtonInForm}" 
+                    Grid.Row="0"
+                    Height="40" 
+                    Background="AntiqueWhite" Margin="137,15,213,15" 
+                    Click="btn_ViewTask_Click" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Width="114">
+                    <Icon:PackIconMaterial 
+                        Kind="ViewComfy" 
+                        Margin="10 2 10 0"
+                        Style="{StaticResource menuButtonIcon}"
+                        VerticalAlignment="Top"/>
+                    <TextBlock Text="View Task" FontSize="17"/>
                 </StackPanel>
-                <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Command="{Binding CmdOpenTaskAssignmentForm}">
-                    Assign task
-                </Button>
-                <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 
-                        Width="780" HorizontalAlignment="Left">
-                    <Grid Margin="0,0,0,90">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="23*"/>
-                        </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="DataGridview" ItemsSource="{Binding TeamMemberList}"
+            </Button>
+            <StackPanel HorizontalAlignment="Left"
+                            Grid.Row="0" Grid.ColumnSpan="2" Margin="30,0,0,0">
+                <WrapPanel Margin="0 10 0 0">
+                    <TextBlock Text="Leader ID" 
+                                   HorizontalAlignment="Left"
+                                   FontSize="15"/>
+                    <TextBlock Text="{Binding CurrentLeaderID}"
+                                   HorizontalAlignment="Left"
+                                   Margin="10 0 0 0"
+                                   FontSize="15"/>
+                </WrapPanel>
+                <WrapPanel Margin="0 10 0 0">
+                    <TextBlock Text="Leader Name" 
+                                   HorizontalAlignment="Left"
+                                   FontSize="15"/>
+                    <TextBlock Text="{Binding CurrentLeaderName}"
+                                   HorizontalAlignment="Left"
+                                   Margin="10 0 0 0"
+                                   FontSize="15"/>
+                </WrapPanel>
+
+            </StackPanel>
+
+            <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Command="{Binding CmdOpenTaskAssignmentForm}">
+                Assign task
+            </Button>
+            <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 
+                        Width="745" HorizontalAlignment="Left" Margin="45,0,0,90"
+                        BorderThickness="3" BorderBrush="DarkKhaki">
+                <DataGrid x:Name="DataGridview" ItemsSource="{Binding TeamMemberList}"
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
-                                  Margin="35,0,0,0" Width="745" PreviewMouseRightButtonUp="MouseRight_Click" Grid.ColumnSpan="2">
+                                   Width="745" PreviewMouseRightButtonUp="MouseRight_Click" Grid.ColumnSpan="2">
 
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="628"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </Border>
-                <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Margin="288,19,0,19" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="628"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Margin="288,19,0,19" 
                         Content="open TaskMng" FontSize="10"
                         Click="Open_TaskMng"/>
 
-            </Grid>
-        </Border>
+        </Grid>
         <Button x:Name="Back_CLick"
                 Grid.Column="0"
                 VerticalAlignment="Center"

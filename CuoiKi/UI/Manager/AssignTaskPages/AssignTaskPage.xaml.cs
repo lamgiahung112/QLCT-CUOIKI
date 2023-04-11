@@ -38,5 +38,10 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             Forms.TaskMngToTechlead taskMngToTechlead = new Forms.TaskMngToTechlead();
             taskMngToTechlead.Show();
         }
+
+        private void btn_ViewTask_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ViewTask());
+        }
     }
 }
