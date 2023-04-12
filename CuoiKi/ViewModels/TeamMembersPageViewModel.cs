@@ -53,11 +53,11 @@ namespace CuoiKi.ViewModels
             // Just curious, the app freeze a little when add a bunch of employee
             // I wonder is it because Bcrypt hash the password...
             _TeamMemberList.Add(new Employee("Nguyen Van A", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            /*
             _TeamMemberList.Add(new Employee("Nguyen Van B", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van C", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van D", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van E", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
+            /*
             _TeamMemberList.Add(new Employee("Nguyen Van F", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van G", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
             _TeamMemberList.Add(new Employee("Nguyen Van H", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
@@ -200,6 +200,61 @@ namespace CuoiKi.ViewModels
         {
             _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskTitle);
             _CanSaveTask = !string.IsNullOrEmpty(ToBeSavedTaskDescription);
+        }
+        #endregion
+
+        #region Assign member's task command
+        private ICommand? _CmdAssignMemberTask;
+        public ICommand CmdAssignMemberTask
+        {
+            get
+            {
+                _CmdAssignMemberTask ??= new RelayCommand(
+                    p => true,
+                    p => AssignTaskToMember());
+                return _CmdAssignMemberTask;
+            }
+        }
+        private void AssignTaskToMember()
+        {
+
+        }
+        #endregion
+
+        #region View member's task
+        private ICommand? _CmdViewMemberTask;
+        public ICommand CmdViewMemberTask
+        {
+            get
+            {
+                _CmdAssignMemberTask ??= new RelayCommand(
+                    p => true,
+                    p => ViewMemberTask());
+                return _CmdAssignMemberTask;
+            }
+        }
+        private void ViewMemberTask()
+        {
+
+        }
+        #endregion
+
+        #region View member's information
+        private ICommand? _CmdViewMemberInformation;
+        public ICommand CmdViewMemberInformation
+        {
+            get
+            {
+                _CmdViewMemberInformation ??= new RelayCommand(
+                    p => true,
+                    p => ViewMemberInformation(p));
+                return _CmdViewMemberInformation;
+            }
+        }
+        private void ViewMemberInformation(object p)
+        {
+            Employee e = (Employee)p;
+            MessageBox.Show("View member's information" + e.ID.ToString());
         }
         #endregion
     }

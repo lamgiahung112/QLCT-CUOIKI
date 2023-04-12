@@ -30,7 +30,8 @@
                 Content="Add"
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top">
+              Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"
+              >
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
                 <RowDefinition Height="470"/>
@@ -43,25 +44,92 @@
                         Width="745" HorizontalAlignment="Left" Margin="45,0,0,90"
                         BorderThickness="3" BorderBrush="DarkKhaki">
                 <ListView ItemsSource="{Binding TeamMemberList}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="ContextMenu">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#4CAF50"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Template">
                                 <Setter.Value>
-                                    <ContextMenu>
-                                        <MenuItem Header="Assign task" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
-                                        <MenuItem Header="See member's tasks" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
-                                        <MenuItem Header="View member's information" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
-                                    </ContextMenu>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#2bff00"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#2bff00"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                        </GridView>
-                    </ListView.View>
+                    </ListView.Resources>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="700">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                    <TextBlock Text="{Binding ID}" Margin="10"/>
+                                    <TextBlock Text="{Binding Name}" Margin="10"/>
+                                </StackPanel>
+                                <StackPanel x:Name="buttonStackPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Visibility="Collapsed">
+                                    <Button Content="Assign task" Margin="5 0 5 0"/>
+                                    <Button Content="View task" Margin="5 0 5 0"/>
+                                    <Button Content="View info" Margin="5 0 5 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStackPanel"
+                                                   Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="buttonStackPanel"
+                                     Storyboard.TargetProperty="(UIElement.Opacity)"
+                                     From="0" To="1" Duration="0:0:0.2"/>
+                                                <ThicknessAnimation Storyboard.TargetName="buttonStackPanel"
+                                         Storyboard.TargetProperty="Margin"
+                                         From="100,0,0,0" To="0" Duration="0:0:0.4"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="buttonStackPanel"
+                                     Storyboard.TargetProperty="(UIElement.Opacity)"
+                                     From="1" To="0" Duration="0:0:0.2"/>
+                                                <ThicknessAnimation Storyboard.TargetName="buttonStackPanel"
+                                         Storyboard.TargetProperty="Margin"
+                                         From="0" To="100,0,0,0" Duration="0:0:0.4"/>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStackPanel"
+                                                   Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Collapsed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </Border>
         </Grid>
