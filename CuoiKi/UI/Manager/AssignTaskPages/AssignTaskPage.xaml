@@ -39,71 +39,31 @@
                 <ColumnDefinition Width="0.75*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonInForm}" 
-                    Grid.Row="0"
-                    Height="40" 
-                    Background="AntiqueWhite" Margin="137,15,213,15" 
-                    Click="btn_ViewTask_Click" Grid.Column="1">
-                <StackPanel Orientation="Horizontal" Width="114">
-                    <Icon:PackIconMaterial 
-                        Kind="ViewComfy" 
-                        Margin="10 2 10 0"
-                        Style="{StaticResource menuButtonIcon}"
-                        VerticalAlignment="Top"/>
-                    <TextBlock Text="View Task" FontSize="17"/>
-                </StackPanel>
-            </Button>
-            <StackPanel HorizontalAlignment="Left"
-                            Grid.Row="0" Grid.ColumnSpan="2" Margin="30,0,0,0">
-                <WrapPanel Margin="0 10 0 0">
-                    <TextBlock Text="Leader ID" 
-                                   HorizontalAlignment="Left"
-                                   FontSize="15"/>
-                    <TextBlock Text="{Binding CurrentLeaderID}"
-                                   HorizontalAlignment="Left"
-                                   Margin="10 0 0 0"
-                                   FontSize="15"/>
-                </WrapPanel>
-                <WrapPanel Margin="0 10 0 0">
-                    <TextBlock Text="Leader Name" 
-                                   HorizontalAlignment="Left"
-                                   FontSize="15"/>
-                    <TextBlock Text="{Binding CurrentLeaderName}"
-                                   HorizontalAlignment="Left"
-                                   Margin="10 0 0 0"
-                                   FontSize="15"/>
-                </WrapPanel>
-
-            </StackPanel>
-
-            <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Command="{Binding CmdOpenTaskAssignmentForm}">
-                Assign task
-            </Button>
             <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 
                         Width="745" HorizontalAlignment="Left" Margin="45,0,0,90"
                         BorderThickness="3" BorderBrush="DarkKhaki">
                 <ListView ItemsSource="{Binding TeamMemberList}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding ID}"></TextBlock>
-                                <TextBlock Text="{Binding Name}">
-                                    <TextBlock.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
-                                            <MenuItem Header="Edit" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
-                                        </ContextMenu>
-                                    </TextBlock.ContextMenu>
-                                </TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu>
+                                        <MenuItem Header="Assign task" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                                        <MenuItem Header="See member's tasks" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                                        <MenuItem Header="View member's information" Command="{Binding DataContext.CorrectSponCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                        </GridView>
+                    </ListView.View>
                 </ListView>
             </Border>
-            <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Margin="288,19,0,19" 
-                        Content="open TaskMng" FontSize="10"
-                        Click="Open_TaskMng"/>
-
         </Grid>
         <Button x:Name="Back_CLick"
                 Grid.Column="0"
