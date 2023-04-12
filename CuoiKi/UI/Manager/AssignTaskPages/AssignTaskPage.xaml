@@ -82,16 +82,23 @@
             <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 
                         Width="745" HorizontalAlignment="Left" Margin="45,0,0,90"
                         BorderThickness="3" BorderBrush="DarkKhaki">
-                <DataGrid x:Name="DataGridview" ItemsSource="{Binding TeamMemberList}"
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True"
-                                   Width="745" PreviewMouseRightButtonUp="MouseRight_Click" Grid.ColumnSpan="2">
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="628"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ListView ItemsSource="{Binding TeamMemberList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ID}"></TextBlock>
+                                <TextBlock Text="{Binding Name}">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                                            <MenuItem Header="Edit" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Border>
             <Button Grid.Row="0" Grid.Column="1" Width="110" HorizontalAlignment="Left" Margin="288,19,0,19" 
                         Content="open TaskMng" FontSize="10"
