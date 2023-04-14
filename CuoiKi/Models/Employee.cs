@@ -14,7 +14,7 @@ namespace CuoiKi.Models
         public string Password { get; set; }
         public Gender Gender { get; set; }
 
-        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role) 
+        public Employee(string name, string address, DateTime birth, EmployeeStatus status, string password, Gender gender, Role role)
         {
             ID = name.Trim() + DateTime.Now.ToShortDateString().Replace("/", "");
             Name = name;
