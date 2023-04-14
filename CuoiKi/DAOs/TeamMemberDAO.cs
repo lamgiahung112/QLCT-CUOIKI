@@ -1,9 +1,6 @@
 ﻿using CuoiKi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.DAOs
 {
@@ -33,6 +30,7 @@ namespace CuoiKi.DAOs
 
         public TeamMember? GetOne(string id)
         {
+            // What is this?...
             string cmd = SqlConverter.GetDeleteCommandForTeamMember(id);
             return dbc.ExecuteQuery<TeamMember>(cmd);
         }

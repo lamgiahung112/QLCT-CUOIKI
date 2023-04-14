@@ -42,7 +42,11 @@ namespace CuoiKi.DAOs
             string cmd = SqlConverter.GetAllEmployeeOfARoleCommand(Role.TechLead);
             return dbc.ExecuteWithResults<Employee>(cmd);
         }
-
+        public List<Employee>? GetAllMemberOfARole(Role role)
+        {
+            string cmd = SqlConverter.GetAllEmployeeOfARoleCommand(role);
+            return dbc.ExecuteWithResults<Employee>(cmd);
+        }
         public Employee? GetOne(string id)
         {
             string command = SqlConverter.GetCommandToGetOneEmployee(id);

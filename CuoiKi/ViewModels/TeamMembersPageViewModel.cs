@@ -1,4 +1,5 @@
 ﻿using CuoiKi.Controllers;
+using CuoiKi.DTO;
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
@@ -6,6 +7,7 @@ using CuoiKi.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -39,33 +41,19 @@ namespace CuoiKi.ViewModels
             _CurrentManagerID = LoginInfoState.Id!;
         }
         #region Team member list 
-        void TeamMemberListInit()
+        private void TeamMemberListInit()
         {
             _TeamMemberList = new ObservableCollection<Employee>();
+            UpdateTeamMemberList();
+        }
+        private void UpdateTeamMemberList()
+        {
             _TeamMemberList.Clear();
-            MessageBox.Show(TaskAssignmentState.SelectedTeam.Name);
             List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             foreach (TeamMember member in teamMembers)
             {
                 _TeamMemberList.Add(_controller.GetTeamMemberDetails(member));
             }
-            // Temporary add some fake data to view some team members
-            // Just curious, the app freeze a little when add a bunch of employee
-            // I wonder is it because Bcrypt hash the password...
-            _TeamMemberList.Add(new Employee("Nguyen Van A", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van B", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van C", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van D", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van E", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            /*
-            _TeamMemberList.Add(new Employee("Nguyen Van F", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van G", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van H", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van I", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van J", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van K", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            _TeamMemberList.Add(new Employee("Nguyen Van L", "Ho Chi Minh", DateTime.Now, Constants.EmployeeStatus.Active, "123", Constants.Gender.Male, Constants.Role.Dev));
-            */
         }
         private ObservableCollection<Employee> _TeamMemberList;
         public ObservableCollection<Employee> TeamMemberList
@@ -185,13 +173,6 @@ namespace CuoiKi.ViewModels
         private bool _CanSaveTask = false;
         private void SaveTask()
         {
-            /*
-            MessageBox.Show("Save task");
-            MessageBox.Show(ToBeSavedTaskTitle);
-            MessageBox.Show(ToBeSavedTaskDescription);
-            MessageBox.Show(ToBeSavedTaskStartingTime.ToString());
-            MessageBox.Show(ToBeSavedTaskEndingTime.ToString());
-            */
             Task task = Task.CreateNewTask(CurrentLeaderID, _CurrentManagerID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
             _controller.Save(task);
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
@@ -255,6 +236,104 @@ namespace CuoiKi.ViewModels
         {
             Employee e = (Employee)p;
             MessageBox.Show("View member's information" + e.ID.ToString());
+        }
+        #endregion
+
+        #region Open team member management form
+        private ICommand? _CmdOpenTeamMemberManagementForm;
+        public ICommand CmdOpenTeamMemberManagementForm
+        {
+            get
+            {
+                _CmdOpenTeamMemberManagementForm ??= new RelayCommand(
+                    p => true,
+                    p => OpenTeamMemberManagementForm());
+                return _CmdOpenTeamMemberManagementForm;
+            }
+        }
+        private void OpenTeamMemberManagementForm()
+        {
+            UpdateWorkerList();
+            var teamMemberManagementForm = new ManageTeamMembersForm(this);
+            teamMemberManagementForm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            teamMemberManagementForm.Show();
+        }
+        #endregion
+
+        #region Team member management logic
+        private List<WorkerDTO>? _workerList;
+        public List<WorkerDTO>? WorkerList
+        {
+            get => _workerList;
+            set
+            {
+                _workerList = value;
+                OnPropertyChanged(nameof(WorkerList));
+            }
+        }
+
+        private void UpdateWorkerList()
+        {
+            List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
+            List<Employee>? allWorkers = _controller.GetAllWorkers();
+            _workerList = allWorkers.Select(x => new WorkerDTO()
+            {
+                Name = x.Name,
+                EmployeeID = x.ID,
+                IsSelected = teamMembers.Any(tm => tm.EmployeeID == x.ID)
+            })
+            .ToList();
+        }
+        #endregion
+        #region Save changes command
+        private ICommand? _CmdSaveChanges;
+        public ICommand CmdSaveChanges
+        {
+            get
+            {
+                _CmdSaveChanges ??= new RelayCommand(
+                    p => true,
+                    p => SaveTeamMemberChanges());
+                return _CmdSaveChanges;
+            }
+        }
+        private void SaveTeamMemberChanges()
+        {
+            List<TeamMember>? currentTeamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
+            // Get the IDs of selected workers who are not already team members
+            List<string> newMemberIDs = _workerList
+                .Where(w => w.IsSelected && !currentTeamMembers.Any(m => m.EmployeeID == w.EmployeeID))
+                .Select(w => w.EmployeeID)
+                .ToList();
+            // Get the IDs of deselected workers who are already team members
+            List<string> toBeRemovedTeamMemberIDs = _workerList
+                .Where(w => !w.IsSelected && currentTeamMembers.Any(m => m.EmployeeID == w.EmployeeID))
+                .Select(w => currentTeamMembers.First(m => m.EmployeeID == w.EmployeeID).ID)
+                .ToList();
+            _controller.AddTeamMembersToTeam(TaskAssignmentState.SelectedTeam!.ID, newMemberIDs);
+            _controller.RemoveTeamMembersFromTeam(toBeRemovedTeamMemberIDs);
+            UpdateWorkerList();
+            UpdateTeamMemberList();
+            Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
+        }
+        #endregion
+
+        #region Cancel command
+        private ICommand? _CmdCancelTeamManagementForm;
+        public ICommand CmdCancelTeamMenagementForm
+        {
+            get
+            {
+                _CmdCancelTeamManagementForm ??= new RelayCommand(
+                    p => true,
+                    p => CancelTeamManagementForm());
+                return _CmdCancelTeamManagementForm;
+            }
+        }
+        private void CancelTeamManagementForm()
+        {
+            Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
+
         }
         #endregion
     }
