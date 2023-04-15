@@ -169,12 +169,17 @@ namespace CuoiKi.Controllers
                 teamMemberDAO.Add(toBeSavedTeamMember);
             }
         }
-        public void RemoveTeamMembersFromTeam(List<string> toBeRemovedTeamMemberIDs)
+        public void RemoveTeamMembers(List<string> toBeRemovedTeamMemberIDs)
         {
             foreach (string teamMemberID in toBeRemovedTeamMemberIDs)
             {
                 teamMemberDAO.Delete(teamMemberID);
             }
+        }
+        public string? GetTeamName(string teamID)
+        {
+            Team currentTeam = teamDAO.GetOne(teamID);
+            return currentTeam?.Name;
         }
     }
 }

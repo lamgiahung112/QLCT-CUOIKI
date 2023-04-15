@@ -21,6 +21,16 @@ namespace CuoiKi.ViewModels
         private string _CurrentLeaderName = "";
         private string _CurrentManagerName = "";
         private string _CurrentManagerID = "";
+        private string? _CurrentTeamName = "";
+        public string? CurrentTeamName
+        {
+            get => _CurrentTeamName;
+            set
+            {
+                _CurrentTeamName = value;
+                OnPropertyChanged(nameof(CurrentTeamName));
+            }
+        }
 
         public TeamMembersPageViewModel()
         {
@@ -39,6 +49,7 @@ namespace CuoiKi.ViewModels
             }
             _CurrentManagerName = LoginInfoState.Name!;
             _CurrentManagerID = LoginInfoState.Id!;
+            _CurrentTeamName = _controller.GetTeamName(TaskAssignmentState.SelectedTeam!.ID);
         }
         #region Team member list 
         private void TeamMemberListInit()
@@ -280,6 +291,7 @@ namespace CuoiKi.ViewModels
             {
                 Name = x.Name,
                 EmployeeID = x.ID,
+                EmployeeRole = x.Role.ToString(),
                 IsSelected = teamMembers.Any(tm => tm.EmployeeID == x.ID)
             })
             .ToList();
@@ -311,7 +323,7 @@ namespace CuoiKi.ViewModels
                 .Select(w => currentTeamMembers.First(m => m.EmployeeID == w.EmployeeID).ID)
                 .ToList();
             _controller.AddTeamMembersToTeam(TaskAssignmentState.SelectedTeam!.ID, newMemberIDs);
-            _controller.RemoveTeamMembersFromTeam(toBeRemovedTeamMemberIDs);
+            _controller.RemoveTeamMembers(toBeRemovedTeamMemberIDs);
             UpdateWorkerList();
             UpdateTeamMemberList();
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();

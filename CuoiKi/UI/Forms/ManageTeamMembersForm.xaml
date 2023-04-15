@@ -26,7 +26,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Left"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock Text=" ("></TextBlock>
+                            <TextBlock Text="{Binding EmployeeRole}"></TextBlock>
+                            <TextBlock Text=")"></TextBlock>
+                        </StackPanel>
                         <CheckBox Grid.Column="1" IsChecked="{Binding IsSelected}" HorizontalAlignment="Right"></CheckBox>
                     </Grid>
                 </DataTemplate>
