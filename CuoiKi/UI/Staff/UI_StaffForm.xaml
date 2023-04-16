@@ -13,7 +13,7 @@
 
 
 
-    <Border Background="#eff2f7" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
+    <Border Background="Linen" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
             MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
