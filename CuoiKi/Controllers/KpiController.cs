@@ -136,6 +136,17 @@ namespace CuoiKi.Controllers
             return teamMemberDAO.GetAllMembersOfTeam(team);
         }
 
+        public List<Employee>? GetAllWorkers()
+        {
+            List<Employee>? workers = new List<Employee>();
+            workers.AddRange(employeeDAO.GetAllMemberOfARole(Role.TechLead));
+            workers.AddRange(employeeDAO.GetAllMemberOfARole(Role.Dev));
+            workers.AddRange(employeeDAO.GetAllMemberOfARole(Role.Designer));
+            workers.AddRange(employeeDAO.GetAllMemberOfARole(Role.Tester));
+            workers.AddRange(employeeDAO.GetAllMemberOfARole(Role.Staff));
+            return workers;
+        }
+
         /// <summary>
         /// Get Detail information of a team member
         /// </summary>
@@ -148,6 +159,27 @@ namespace CuoiKi.Controllers
         public Employee? GetTechLeadOfTeam(Team team)
         {
             return employeeDAO.GetOne(team.TechLeadID);
+        }
+
+        public void AddTeamMembersToTeam(string teamID, List<string> employeeIDs)
+        {
+            foreach (string eID in employeeIDs)
+            {
+                var toBeSavedTeamMember = TeamMember.CreateNewTeamMember(teamID, eID);
+                teamMemberDAO.Add(toBeSavedTeamMember);
+            }
+        }
+        public void RemoveTeamMembers(List<string> toBeRemovedTeamMemberIDs)
+        {
+            foreach (string teamMemberID in toBeRemovedTeamMemberIDs)
+            {
+                teamMemberDAO.Delete(teamMemberID);
+            }
+        }
+        public string? GetTeamName(string teamID)
+        {
+            Team currentTeam = teamDAO.GetOne(teamID);
+            return currentTeam?.Name;
         }
     }
 }

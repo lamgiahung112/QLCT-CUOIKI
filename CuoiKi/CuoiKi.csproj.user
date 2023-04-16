@@ -10,6 +10,9 @@
     <Compile Update="UI\Forms\ManagerTaskAssignmentForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Forms\ManageTeamMembersForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Forms\MemberTask.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Forms\ManagerTaskAssignmentForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Forms\ManageTeamMembersForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Forms\MemberTask.xaml">
