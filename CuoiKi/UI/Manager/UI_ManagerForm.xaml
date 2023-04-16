@@ -9,12 +9,13 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
-    <Border Background="#eff2f7" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
+    <Border Background="Linen" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
             MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="880"/>
+                <ColumnDefinition Width="854.939"/>
+                <ColumnDefinition Width="25.061"/>
             </Grid.ColumnDefinitions>
 
             <!-- Left Menu -->
@@ -97,12 +98,12 @@
 
             <!--Main Section-->
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Grid.ColumnSpan="2">
                 <Border Grid.Row="1" CornerRadius="0 0 5 0" Background="Transparent">
                     <Frame x:Name="frameContent" NavigationUIVisibility="Hidden" Margin="10"/>
                 </Border>
             </Grid>
-            
+
         </Grid>
     </Border>
 </Window> 
