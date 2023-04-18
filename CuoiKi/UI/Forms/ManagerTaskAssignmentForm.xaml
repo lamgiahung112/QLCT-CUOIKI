@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CuoiKi.UI.Forms"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:CuoiKi.UI.Forms" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TeamMembersPageViewModel}"
+        mc:Ignorable="d" 
              Title="Task assignment form"
              d:DesignHeight="800" d:DesignWidth="450" MaxWidth="450" MinHeight="600"
              WindowStartupLocation="CenterScreen">
@@ -30,7 +30,7 @@
         <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0">Description:</TextBlock>
         <TextBlock Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0">Starting time:</TextBlock>
         <TextBlock Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0">Ending time:</TextBlock>
-        <TextBox IsEnabled="False" Text="{Binding CurrentLeaderName}" Grid.Row="1" Grid.Column="1" Width="250" Height="50"></TextBox>
+        <TextBox IsEnabled="False" Text="{Binding CurrentEmployeeName}" Grid.Row="1" Grid.Column="1" Width="250" Height="50"></TextBox>
         <TextBox IsEnabled="False" Text="{Binding CurrentManagerName}" Grid.Row="2" Grid.Column="1" Width="250" Height="50"></TextBox>
         <TextBox Text="{Binding ToBeSavedTaskTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="250" Height="50"></TextBox>
 
