@@ -57,33 +57,18 @@ namespace CuoiKi.ViewModels
                 FakeTaskList.Add(temp);
             }
         }
-        private ICommand? _CmdDelete { get; set; }
-        public ICommand CmdDelete
+        private ICommand? _CmdEdit { get; set; }
+        public ICommand CmdEdit
         {
             get
             {
-                _CmdDelete ??= new RelayCommand(
+                _CmdEdit ??= new RelayCommand(
                     p => true,
-                    p => DeleteTask());
-                return _CmdDelete;
+                    p => EditTask());
+                return _CmdEdit;
             }
         }
-        private void DeleteTask()
-        {
-
-        }
-        private ICommand? _CmdReviewRequest { get; set; }
-        public ICommand CmdReviewRequest
-        {
-            get
-            {
-                _CmdReviewRequest ??= new RelayCommand(
-                    p => true,
-                    p => ReviewRequest());
-                return _CmdReviewRequest;
-            }
-        }
-        private void ReviewRequest()
+        private void EditTask()
         {
 
         }
