@@ -60,7 +60,7 @@
                          Margin="15 0 0 0"
                          FontSize="20"
                          Foreground="Goldenrod"
-                         Text="{Binding Name}"/>
+                         Text="{Binding EmployeeName}"/>
                 </StackPanel>
                 <StackPanel Height="60" Orientation="Horizontal"
                             Margin="30 0 0 0">
@@ -73,24 +73,122 @@
                          Margin="15 0 0 0"
                          FontSize="20"
                          Foreground="Goldenrod"
-                         Text="{Binding ID}"/>
+                         Text="{Binding EmployeeID}"/>
                 </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="DataGridview" ItemsSource="{Binding TeamMemberList}"
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True"
-                                  Grid.Row="1" Grid.RowSpan="2"
-                                  Width="745"
-                                  Background="LightGray">
-
+            <DataGrid x:Name="DataGridview" ItemsSource="{Binding FakeTaskList}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          Grid.Row="1" Grid.RowSpan="2"
+          Width="745"
+          Background="LightGray"
+          CanUserResizeColumns="False"
+          ScrollViewer.CanContentScroll="False"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          SelectedItem="{Binding SelectedTask}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Storyboard x:Key="SlideInFromRight">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                           Storyboard.TargetName="StackPanelButtons">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title"  Width="100"/>
-                    <DataGridTextColumn Header="Start date"  Width="100"/>
-                    <DataGridTextColumn Header="End date"  Width="100"/>
-                    <DataGridTextColumn Header="Status" Width="100"/>
-                    <DataGridTextColumn Header="Action" Width="100"/>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="100">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="15"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding StartingTime, StringFormat=d}" Width="100">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="15"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="End date" Binding="{Binding EndingTime, StringFormat=d}" Width="100">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="15"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Padding" Value="15"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Action" Width="500">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                Visibility="Collapsed"
+                                x:Name="StackPanelButtons">
+                                    <Button Content="Delete"
+                                            Command="{Binding DataContext.DeleteCommand, ElementName=DataGridview}"
+                                            CommandParameter="{Binding}" 
+                                            Margin="5, 0" />
+                                    <Button Content="Review Request"
+                                            Command="{Binding DataContext.ReviewRequestCommand, ElementName=DataGridview}"
+                                            CommandParameter="{Binding}" 
+                                            Margin="5, 0" />
+                                    <Button Content="Done"
+                                            Command="{Binding DataContext.DoneCommand, ElementName=DataGridview}"
+                                            CommandParameter="{Binding}" 
+                                            Margin="5, 0" />    
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"
+                                     Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard Name="SlideInFromRight_BeginStoryboard" Storyboard="{StaticResource SlideInFromRight}"/>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="SlideInFromRight_BeginStoryboard"/>
+                                        </DataTrigger.ExitActions>
+                                        <Setter TargetName="StackPanelButtons"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                                        <Setter TargetName="StackPanelButtons"
+                                    Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="300"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+
+
         </Grid>
     </Grid>
 </Page>

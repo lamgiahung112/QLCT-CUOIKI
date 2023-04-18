@@ -348,5 +348,23 @@ namespace CuoiKi.ViewModels
 
         }
         #endregion
+        #region Save current employee to state
+        private ICommand? _CmdSaveEmployeeToCurrentState;
+        public ICommand CmdSaveEmployeeToCurrentState
+        {
+            get
+            {
+                _CmdSaveEmployeeToCurrentState ??= new RelayCommand(
+                    p => true,
+                    p => SaveEmployeeToCurrentState(p));
+                return _CmdSaveEmployeeToCurrentState;
+            }
+        }
+        private void SaveEmployeeToCurrentState(object parameter)
+        {
+            Employee e = (Employee)parameter;
+            TaskAssignmentState.SelectedEmployee = e;
+        }
+        #endregion
     }
 }
