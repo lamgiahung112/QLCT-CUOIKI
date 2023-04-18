@@ -17,10 +17,9 @@ namespace CuoiKi.ViewModels
     public class TeamMembersPageViewModel : ViewModelBase
     {
         private KpiController _controller;
-        private string _CurrentLeaderID = "";
-        private string _CurrentLeaderName = "";
         private string _CurrentManagerName = "";
         private string _CurrentManagerID = "";
+        private string _CurrentEmployeeName = "";
         private string? _CurrentTeamName = "";
         public string? CurrentTeamName
         {
@@ -41,12 +40,6 @@ namespace CuoiKi.ViewModels
         private void InitializeVariables()
         {
             TeamMemberListInit();
-            Employee? currentLeader = _controller.GetTechLeadOfTeam(TaskAssignmentState.SelectedTeam!);
-            if (currentLeader is not null)
-            {
-                CurrentLeaderID = currentLeader.ID;
-                CurrentLeaderName = currentLeader.Name;
-            }
             _CurrentManagerName = LoginInfoState.Name!;
             _CurrentManagerID = LoginInfoState.Id!;
             _CurrentTeamName = _controller.GetTeamName(TaskAssignmentState.SelectedTeam!.ID);
@@ -78,22 +71,16 @@ namespace CuoiKi.ViewModels
         }
         #endregion
         #region Assignee and assigner information property
-        public string CurrentLeaderID
+        public string CurrentEmployeeName
         {
-            get { return _CurrentLeaderID; }
-            set
+            get
             {
-                _CurrentLeaderID = value;
-                OnPropertyChanged(nameof(CurrentLeaderID));
+                return _CurrentEmployeeName;
             }
-        }
-        public string CurrentLeaderName
-        {
-            get { return _CurrentLeaderName; }
             set
             {
-                _CurrentLeaderName = value;
-                OnPropertyChanged(nameof(CurrentLeaderName));
+                _CurrentEmployeeName = value;
+                OnPropertyChanged(nameof(CurrentEmployeeName));
             }
         }
         public string CurrentManagerName
@@ -184,7 +171,7 @@ namespace CuoiKi.ViewModels
         private bool _CanSaveTask = false;
         private void SaveTask()
         {
-            Task task = Task.CreateNewTask(CurrentLeaderID, _CurrentManagerID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
+            Task task = Task.CreateNewTask(TaskAssignmentState.SelectedEmployee!.ID, _CurrentManagerID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
             _controller.Save(task);
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
         }
@@ -203,13 +190,17 @@ namespace CuoiKi.ViewModels
             {
                 _CmdAssignMemberTask ??= new RelayCommand(
                     p => true,
-                    p => AssignTaskToMember());
+                    p => AssignTaskToMember(p));
                 return _CmdAssignMemberTask;
             }
         }
-        private void AssignTaskToMember()
+        private void AssignTaskToMember(object p)
         {
-
+            Employee e = (Employee)p;
+            TaskAssignmentState.SelectedEmployee = e;
+            CurrentEmployeeName = e.Name;
+            var taskForm = new ManagerTaskAssignmentForm(this);
+            taskForm.Show();
         }
         #endregion
 
@@ -346,6 +337,24 @@ namespace CuoiKi.ViewModels
         {
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
 
+        }
+        #endregion
+        #region Save current employee to state
+        private ICommand? _CmdSaveEmployeeToCurrentState;
+        public ICommand CmdSaveEmployeeToCurrentState
+        {
+            get
+            {
+                _CmdSaveEmployeeToCurrentState ??= new RelayCommand(
+                    p => true,
+                    p => SaveEmployeeToCurrentState(p));
+                return _CmdSaveEmployeeToCurrentState;
+            }
+        }
+        private void SaveEmployeeToCurrentState(object parameter)
+        {
+            Employee e = (Employee)parameter;
+            TaskAssignmentState.SelectedEmployee = e;
         }
         #endregion
     }

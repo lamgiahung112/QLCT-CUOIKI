@@ -41,6 +41,8 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
 
         private void btn_ViewTask_Click(object sender, RoutedEventArgs e)
         {
+            var btn = sender as Button;
+            btn.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new ViewTask());
         }
     }
