@@ -1,7 +1,9 @@
-﻿using CuoiKi.Models;
+﻿using CuoiKi.HelperClasses;
+using CuoiKi.Models;
 using CuoiKi.States;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
 {
@@ -55,5 +57,52 @@ namespace CuoiKi.ViewModels
                 FakeTaskList.Add(temp);
             }
         }
+        private ICommand? _CmdDelete { get; set; }
+        public ICommand CmdDelete
+        {
+            get
+            {
+                _CmdDelete ??= new RelayCommand(
+                    p => true,
+                    p => DeleteTask());
+                return _CmdDelete;
+            }
+        }
+        private void DeleteTask()
+        {
+
+        }
+        private ICommand? _CmdReviewRequest { get; set; }
+        public ICommand CmdReviewRequest
+        {
+            get
+            {
+                _CmdReviewRequest ??= new RelayCommand(
+                    p => true,
+                    p => ReviewRequest());
+                return _CmdReviewRequest;
+            }
+        }
+        private void ReviewRequest()
+        {
+
+        }
+
+        private ICommand? _CmdDone { get; set; }
+        public ICommand CmdDone
+        {
+            get
+            {
+                _CmdDone ??= new RelayCommand(
+                    p => true,
+                    p => MarkAsDone());
+                return _CmdDone;
+            }
+        }
+        private void MarkAsDone()
+        {
+
+        }
+
     }
 }

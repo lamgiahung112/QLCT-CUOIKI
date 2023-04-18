@@ -150,15 +150,15 @@
                                 Visibility="Collapsed"
                                 x:Name="StackPanelButtons">
                                     <Button Content="Delete"
-                                            Command="{Binding DataContext.DeleteCommand, ElementName=DataGridview}"
+                                            Command="{Binding DataContext.CmdDelete, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" />
                                     <Button Content="Review Request"
-                                            Command="{Binding DataContext.ReviewRequestCommand, ElementName=DataGridview}"
+                                            Command="{Binding DataContext.CmdReviewRequest, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" />
                                     <Button Content="Done"
-                                            Command="{Binding DataContext.DoneCommand, ElementName=DataGridview}"
+                                            Command="{Binding DataContext.CmdDone, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" />    
                                 </StackPanel>
