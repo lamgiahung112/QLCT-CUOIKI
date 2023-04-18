@@ -1,4 +1,5 @@
-﻿using CuoiKi.Controllers;
+﻿using CuoiKi.Constants;
+using CuoiKi.Controllers;
 using CuoiKi.DAOs;
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
@@ -18,7 +19,7 @@ namespace CuoiKi.ViewModels
     {
         private readonly EmployeeDAO _employeeDAO;
         public string UserId { get; set; }
-        public string UserName { get; set; }    
+        public string UserName { get; set; }
         public string UserAddress { get; set; }
         public string UserBirth { get; set; }
         public string UserRole { get; set; }
@@ -35,6 +36,28 @@ namespace CuoiKi.ViewModels
             UserRole = e.Role.ToString();
             UserGender = e.Gender.ToString();
             UserStatus = e.Status.ToString();
+        }
+
+        private List<string> genderList = new()
+        {
+            nameof(Gender.Male), nameof(Gender.Female)
+        };
+
+        public List<string> GenderList
+        {
+            get => genderList;
+            set => genderList = value;
+        }
+
+        private List<string> roleList = new()
+        {
+            nameof(Role.Dev), nameof(Role.Designer), nameof(Role.Tester), nameof(Role.TechLead), nameof(Role.Manager), nameof(Role.Hr), nameof(Role.Staff)
+        };
+
+        public List<string> RoleList
+        {
+            get => roleList;
+            set => roleList = value;
         }
     }
 }

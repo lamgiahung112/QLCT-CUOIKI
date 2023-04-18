@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:CuoiKi.UI.Staff" 
         xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" 
         mc:Ignorable="d"
@@ -23,6 +24,35 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <!--<Button Style="{StaticResource BtnBack}"
+                x:Name="Back_CLick"
+                Grid.Column="2"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                Margin="0 0 40 0"
+                Background="NavajoWhite"
+                Width="80"
+                Click="Edit_Click">
+            <StackPanel Orientation="Horizontal">
+                <Icon:PackIconMaterial 
+                        Kind="AccountEdit"
+                        Style="{StaticResource menuButtonIcon}" 
+                        Height="22" 
+                        Width="25"
+                        Margin="0 0 0 0"/>
+                <TextBlock Text="Edit" FontSize="20" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Button>-->
+        <Button x:Name="btn_Edit_Or_Save"
+                Grid.Column="2"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                Margin="0 0 40 0"
+                Width="80"
+                Click="Edit_Click"
+            Content="Edit"
+            FontSize="15">
+        </Button>
         <TextBlock
             HorizontalAlignment="Center"
             Margin="0 0 60 0"
@@ -46,7 +76,6 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <TextBlock
-                    
                     VerticalAlignment="Bottom"
                     Margin="40,0,231,96"
                     Text="ID:"
@@ -86,7 +115,7 @@
                     Text="Name:"
                     FontWeight="SemiBold"
                     FontSize="20" Grid.RowSpan="2"/>
-                <TextBox
+                <TextBox x:Name="txt_Name"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     IsReadOnly="True"
@@ -114,13 +143,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBlock
+                <TextBlock 
                     Margin="40,0,214,96"
                     VerticalAlignment="Bottom"
                     Text="Address:"
                     FontWeight="SemiBold"
                     FontSize="20" Grid.RowSpan="2"/>
-                <TextBox
+                <TextBox x:Name="txt_Address"
                     IsReadOnly="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -148,13 +177,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBlock
+                <TextBlock 
                     Margin="40,0,193,96"
                     VerticalAlignment="Bottom"
                     Text="Birth:"
                     FontWeight="SemiBold"
                     FontSize="20" Grid.RowSpan="2"/>
-                <TextBox
+                <TextBox x:Name="txt_Birth"
                     IsReadOnly="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -188,7 +217,7 @@
                     FontWeight="SemiBold"
                     Margin="40,0,0,90"
                     FontSize="20" HorizontalAlignment="Left" Grid.RowSpan="2" Width="65"/>
-                <TextBox
+                <TextBox x:Name="txt_Status"
                     IsReadOnly="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -222,7 +251,31 @@
                     Text="Role:"
                     FontWeight="SemiBold"
                     FontSize="20" Grid.RowSpan="2"/>
-                <TextBox
+                <ComboBox IsEnabled="False"
+                          Name="cbb_Role"
+                          Grid.Row="1"
+                          Width="265"
+                          Height="60"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="40 10 0 0"
+                          FontSize="20"
+                          FontWeight="Light"
+                          BorderThickness="2"
+                          BorderBrush="{DynamicResource MaterialDesignDivider}"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                          ItemsSource="{Binding RoleList}"
+                          SelectedItem="{Binding UserRole}"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--<TextBox x:Name="txt_Role"
                     IsReadOnly="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -234,7 +287,7 @@
                     BorderThickness="2"
                     BorderBrush="{DynamicResource MaterialDesignDivider}" 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Margin="40,10,0,0"/>
+                    Margin="40,10,0,0"/>-->
             </Grid>
         </Border>
 
@@ -266,7 +319,8 @@
                     BorderThickness="2" 
                     BorderBrush="{DynamicResource MaterialDesignDivider}"
                     Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
-                    Margin="40,10,0,0"/>
+                    Margin="40,10,0,0"
+                    IsEnabled="False"/>
             </Grid>
         </Border>
 
@@ -288,7 +342,31 @@
                     Text="Gender:"
                     FontWeight="SemiBold"
                     FontSize="20" Grid.RowSpan="2"/>
-                <TextBox
+                <ComboBox IsEnabled="False"
+                          x:Name="cbb_Gender"
+                          Grid.Row="1"
+                          Width="265"
+                          Height="60"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="40 10 0 0"
+                          FontSize="20"
+                          FontWeight="Light"
+                          BorderThickness="2"
+                          BorderBrush="{DynamicResource MaterialDesignDivider}"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                          ItemsSource="{Binding GenderList}"
+                          SelectedItem="{Binding UserGender}"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--<TextBox x:Name="txt_Gender"
                     IsReadOnly="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -300,7 +378,7 @@
                     BorderThickness="2"
                     BorderBrush="{DynamicResource MaterialDesignDivider}" 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" 
-                    Margin="40,10,0,0"/>
+                    Margin="40,10,0,0"/>-->
             </Grid>
         </Border>
     </Grid>
