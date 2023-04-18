@@ -1,8 +1,4 @@
 ﻿using CuoiKi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CuoiKi.States
 {
@@ -11,5 +7,6 @@ namespace CuoiKi.States
         public static Project? SelectedProject { get; set; }
         public static Stage? SelectedStage { get; set; }
         public static Team? SelectedTeam { get; set; }
+        public static Employee? SelectedEmployee { get; set; }
     }
 }

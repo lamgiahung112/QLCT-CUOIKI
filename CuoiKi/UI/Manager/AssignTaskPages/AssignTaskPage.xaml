@@ -90,7 +90,7 @@
                                 </StackPanel>
                                 <StackPanel x:Name="buttonStackPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Visibility="Collapsed">
                                     <Button Content="Assign task" Margin="5 0 5 0"/>
-                                    <Button Content="View task" Margin="5 0 5 0" Click="btn_ViewTask_Click"/>
+                                    <Button Command="{Binding DataContext.CmdSaveEmployeeToCurrentState, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="View task" Margin="5 0 5 0" Click="btn_ViewTask_Click"/>
                                     <Button Content="View info" Margin="5 0 5 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
                                 </StackPanel>
                             </Grid>
