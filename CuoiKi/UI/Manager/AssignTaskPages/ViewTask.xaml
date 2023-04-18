@@ -21,7 +21,7 @@
             <RowDefinition Height="180"/>
             <RowDefinition Height="240"/>
         </Grid.RowDefinitions>
-        <Label Content="View Task"
+        <Label Content="List of tasks"
                FontSize="36"
                Grid.ColumnSpan="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -111,7 +111,7 @@
                     </Storyboard>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="100">
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -119,7 +119,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Start date" Binding="{Binding StartingTime, StringFormat=d}" Width="100">
+                    <DataGridTextColumn Header="Start date" Binding="{Binding StartingTime, StringFormat=d}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -127,7 +127,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="End date" Binding="{Binding EndingTime, StringFormat=d}" Width="100">
+                    <DataGridTextColumn Header="End date" Binding="{Binding EndingTime, StringFormat=d}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -135,7 +135,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100">
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -149,12 +149,8 @@
                                 <StackPanel Orientation="Horizontal"
                                 Visibility="Collapsed"
                                 x:Name="StackPanelButtons">
-                                    <Button Content="Delete"
-                                            Command="{Binding DataContext.CmdDelete, ElementName=DataGridview}"
-                                            CommandParameter="{Binding}" 
-                                            Margin="5, 0" />
-                                    <Button Content="Review Request"
-                                            Command="{Binding DataContext.CmdReviewRequest, ElementName=DataGridview}"
+                                    <Button Content="Edit"
+                                            Command="{Binding DataContext.CmdEdit, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" />
                                     <Button Content="Done"
@@ -187,8 +183,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-
-
         </Grid>
     </Grid>
 </Page>
