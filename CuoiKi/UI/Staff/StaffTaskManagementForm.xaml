@@ -25,19 +25,6 @@
                FontSize="36"
                Grid.ColumnSpan="3"
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Style="{StaticResource BtnBack}"
-                x:Name="Back_CLick"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Margin="40,0,0,0"
-                Background="NavajoWhite"
-                Click="Back_Click" Width="65">
-            <Icon:PackIconMaterial 
-                        Kind="KeyboardReturn"
-                        Style="{StaticResource menuButtonIcon}"
-                        VerticalAlignment="Top" Height="21" Width="25"/>
-        </Button>
         <Grid Grid.Row="1" 
               Grid.RowSpan="3"
               Grid.ColumnSpan="3">
@@ -120,8 +107,8 @@
                                 <StackPanel Orientation="Horizontal"
                                 Visibility="Collapsed"
                                 x:Name="StackPanelButtons">
-                                    <Button Content="Edit"
-                                            Command="{Binding DataContext.CmdEdit, ElementName=DataGridview}"
+                                    <Button Content="Review request"
+                                            Command="{Binding DataContext.CmdReviewRequest, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" />
                                     <Button Content="Done"

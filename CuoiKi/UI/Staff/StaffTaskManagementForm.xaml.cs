@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using CuoiKi.ViewModels;
 using System.Windows.Controls;
 
 namespace CuoiKi.UI.Staff
@@ -11,11 +11,7 @@ namespace CuoiKi.UI.Staff
         public StaffTaskManagementForm()
         {
             InitializeComponent();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.DataContext = new StaffTaskManagementViewModel();
         }
     }
 }

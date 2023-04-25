@@ -74,7 +74,7 @@
                             <Button x:Name="btn_ViewTask" Style="{StaticResource menuButton}" Click="btn_ViewTask_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="CheckboxMarkedCircleOutline"  Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="View task" FontSize="13"/>
+                                    <TextBlock Text="View my tasks" FontSize="13"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="btn_LeaveOfAbsence" Style="{StaticResource menuButton}" Click="btn_LeaveOfAbsence_Click">
