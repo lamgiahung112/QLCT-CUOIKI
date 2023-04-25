@@ -10,6 +10,36 @@ namespace CuoiKi.ViewModels
 {
     public class StaffTaskManagementViewModel : ViewModelBase
     {
+        private string _seletedFilter;
+        public string SelectedFilter
+        {
+            get { return _seletedFilter; }
+            set
+            {
+                _seletedFilter = value;
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
+        private List<string> _filterOptions;
+        public List<string> FilterOptions
+        {
+            get { return _filterOptions; }
+            set
+            {
+                _filterOptions = value;
+                OnPropertyChanged(nameof(FilterOptions));
+            }
+        }
+        private List<string> _filterList;
+        public List<string> FilterList
+        {
+            get => _filterList;
+            set
+            {
+                _filterList = value;
+                OnPropertyChanged(nameof(FilterList));
+            }
+        }
         private ObservableCollection<Task> _fakeTaskList;
         public ObservableCollection<Task> FakeTaskList
         {
@@ -33,6 +63,10 @@ namespace CuoiKi.ViewModels
 
         public StaffTaskManagementViewModel()
         {
+            _seletedFilter = "";
+            _filterOptions = new List<string>() { "All", "Done", "Need review", "In this year", "In this month", "In this week" };
+            _filterList = new List<string>();
+            FilterOptions.RemoveAll(x => FilterList.Contains(x));
             _fakeTaskList = new ObservableCollection<Task>();
             UpdateTaskList();
         }
@@ -97,6 +131,39 @@ namespace CuoiKi.ViewModels
             // Assign the new list to FakeTaskList
             FakeTaskList = new ObservableCollection<Task>(updatedList);
         }
-
+        private ICommand? _CmdRemoveFilterItem { get; set; }
+        public ICommand CmdRemoveFilterItem
+        {
+            get
+            {
+                _CmdRemoveFilterItem ??= new RelayCommand(
+                    p => true,
+                    p => RemoveFilterItem(p));
+                return _CmdRemoveFilterItem;
+            }
+        }
+        private void RemoveFilterItem(object p)
+        {
+            string currStr = (string)p;
+            FilterList = _filterList.Where(x => x != currStr).ToList();
+            FilterOptions = _filterOptions.Concat(new[] { currStr }).ToList();
+        }
+        private ICommand? _CmdAddFilter;
+        public ICommand CmdAddFilter
+        {
+            get
+            {
+                _CmdAddFilter ??= new RelayCommand(
+                    p => true,
+                    p => addFilter());
+                return _CmdAddFilter;
+            }
+        }
+        private void addFilter()
+        {
+            FilterList = _filterList.Concat(new[] { SelectedFilter.ToString() }).ToList();
+            FilterOptions = _filterOptions.Except(_filterList).ToList();
+            SelectedFilter = FilterOptions.FirstOrDefault();
+        }
     }
 }
