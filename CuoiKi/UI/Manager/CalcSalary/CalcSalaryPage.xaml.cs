@@ -10,18 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CuoiKi.UI.Forms
+namespace CuoiKi.UI.Manager.CalcSalary
 {
     /// <summary>
-    /// Interaction logic for RightClickForm.xaml
+    /// Interaction logic for CalcSalaryPage.xaml
     /// </summary>
-    public partial class RightClickForm : Window
+    public partial class CalcSalaryPage : Page
     {
-        public RightClickForm()
+        public CalcSalaryPage()
         {
             InitializeComponent();
+        }
+        private void dteSelectedMonth_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
+        {
+            dteSelectedMonth.DisplayMode = CalendarMode.Year;
         }
     }
 }

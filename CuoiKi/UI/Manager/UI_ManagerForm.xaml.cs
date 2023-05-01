@@ -25,7 +25,7 @@ namespace CuoiKi.UI.Manager
 
         private void btn_CalcSalary_click(object sender, RoutedEventArgs e)
         {
-            frameContent.Navigate(new CalcSalaryForm());
+            frameContent.Navigate(new CalcSalary.CalcSalaryPage());
         }
 
         private void btn_AssignTask_click(object sender, RoutedEventArgs e)
@@ -44,28 +44,5 @@ namespace CuoiKi.UI.Manager
                 this.DragMove();
             }
         }
-
-        public bool IsMaximized = false;
-        public void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (IsMaximized)
-                {
-                    this.WindowState = WindowState.Normal;
-                    this.Width = 1080;
-                    this.Height = 720;
-
-                    IsMaximized = false;
-                }
-                else
-                {
-                    this.WindowState = WindowState.Maximized;
-
-                    IsMaximized = true;
-                }
-            }
-        }
-
     }
 }

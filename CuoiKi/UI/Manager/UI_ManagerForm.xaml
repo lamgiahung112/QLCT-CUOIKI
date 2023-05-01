@@ -10,7 +10,7 @@
     </Window.Resources>
 
     <Border Background="Linen" CornerRadius="30" BorderThickness="3" BorderBrush="DarkKhaki"
-            MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            MouseDown="Border_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
