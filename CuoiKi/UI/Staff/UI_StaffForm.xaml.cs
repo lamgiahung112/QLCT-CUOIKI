@@ -1,6 +1,5 @@
 ﻿using CuoiKi.ViewModels;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace CuoiKi.UI.Staff
@@ -63,6 +62,11 @@ namespace CuoiKi.UI.Staff
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void btn_ViewTask_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new StaffTaskManagementForm());
         }
     }
 }
