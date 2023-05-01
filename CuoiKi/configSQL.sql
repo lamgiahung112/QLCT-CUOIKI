@@ -91,6 +91,16 @@ CREATE TABLE Tasks (
     UpdatedAt DateTime NOT NULL
 );
 
+GO
+
+
+
+CREATE TABLE Salary(
+    EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    basicPay int NOT NULL,
+    kpiCost int NOT NULL,
+);
+
 -- Add Employees
 Insert into Employees Values (N'dev1', N'staff1', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
 Insert into Employees Values (N'dev2', N'staff2', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Dev');
