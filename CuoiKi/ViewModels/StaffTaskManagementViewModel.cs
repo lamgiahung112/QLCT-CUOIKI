@@ -10,6 +10,8 @@ namespace CuoiKi.ViewModels
 {
     public class StaffTaskManagementViewModel : ViewModelBase
     {
+        private List<Task> _realTaskList;
+        private FilterChain<Task> _taskFilterChain;
         private string _seletedFilter;
         public string SelectedFilter
         {
@@ -63,23 +65,29 @@ namespace CuoiKi.ViewModels
 
         public StaffTaskManagementViewModel()
         {
+            _realTaskList = new List<Task>();
+            _taskFilterChain = new FilterChain<Task>();
             _seletedFilter = "";
-            _filterOptions = new List<string>() { "All", "Done", "Need review", "In this year", "In this month", "In this week" };
+            _filterOptions = new List<string>() { "All", "Done", "WIP", "Need review", "In this year", "In this month", "In this week" };
             _filterList = new List<string>();
             FilterOptions.RemoveAll(x => FilterList.Contains(x));
             _fakeTaskList = new ObservableCollection<Task>();
             UpdateTaskList();
         }
-
+        private void FilterTaskList()
+        {
+            List<Task> filteredTasks = _taskFilterChain.ApplyAllOrLogic(_realTaskList.ToList());
+            FakeTaskList = new ObservableCollection<Task>(filteredTasks as List<Task>);
+        }
         private void UpdateTaskList()
         {
-            FakeTaskList.Clear();
+            _realTaskList.Clear();
             // query from database
             // here I add some fake data to test
             for (int i = 0; i < 10; i++)
             {
                 Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
-                FakeTaskList.Add(temp);
+                _realTaskList.Add(temp);
             }
         }
         private ICommand? _CmdReviewRequest { get; set; }
@@ -96,11 +104,11 @@ namespace CuoiKi.ViewModels
         private void ReviewRequest()
         {
             // Find the index of the task to update
-            int index = _fakeTaskList.IndexOf(_fakeTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
+            int index = _realTaskList.IndexOf(_realTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
             // Create a new list with the updated task
-            var updatedList = new List<Task>(_fakeTaskList);
+            var updatedList = new List<Task>(_realTaskList);
             updatedList[index].Status = Constants.TaskStatus.NeedsReview;
 
             // Assign the new list to FakeTaskList
@@ -121,11 +129,11 @@ namespace CuoiKi.ViewModels
         private void MarkAsDone()
         {
             // Find the index of the task to update
-            int index = _fakeTaskList.IndexOf(_fakeTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
+            int index = _realTaskList.IndexOf(_realTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
             // Create a new list with the updated task
-            var updatedList = new List<Task>(_fakeTaskList);
+            var updatedList = new List<Task>(_realTaskList);
             updatedList[index].Status = Constants.TaskStatus.Done;
 
             // Assign the new list to FakeTaskList
@@ -147,6 +155,8 @@ namespace CuoiKi.ViewModels
             string currStr = (string)p;
             FilterList = _filterList.Where(x => x != currStr).ToList();
             FilterOptions = _filterOptions.Concat(new[] { currStr }).ToList();
+            _taskFilterChain.RemovePredicate(currStr);
+            FilterTaskList();
         }
         private ICommand? _CmdAddFilter;
         public ICommand CmdAddFilter
@@ -162,8 +172,42 @@ namespace CuoiKi.ViewModels
         private void addFilter()
         {
             FilterList = _filterList.Concat(new[] { SelectedFilter.ToString() }).ToList();
+            if (SelectedFilter.ToString() != "All")
+            {
+                FilterList = _filterList.Where(x => x != "All").ToList();
+                FilterOptions = _filterOptions.Concat(new[] { "All" }).ToList();
+                _taskFilterChain.RemovePredicate("All");
+            }
+            else
+            {
+                for (int i = _filterList.Count - 1; i >= 0; i--)
+                {
+                    _taskFilterChain.RemovePredicate(_filterList[i]);
+                    _filterOptions.Add(_filterList[i]);
+                }
+                _filterList = new List<string>() { "All" };
+                FilterList = new List<string>() { "All" };
+            }
+            switch (SelectedFilter.ToString())
+            {
+                case "All":
+                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => true);
+                    break;
+                case "WIP":
+                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.WIP);
+                    break;
+                case "Need review":
+                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.NeedsReview);
+                    break;
+                case "Done":
+                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.Done);
+                    break;
+                default:
+                    break;
+            }
             FilterOptions = _filterOptions.Except(_filterList).ToList();
             SelectedFilter = FilterOptions.FirstOrDefault();
+            FilterTaskList();
         }
     }
 }
