@@ -10,7 +10,7 @@ namespace CuoiKi.ViewModels
 {
     public class StaffTaskManagementViewModel : ViewModelBase
     {
-        private List<Task> _realTaskList;
+        private List<Task> _taskList;
         private FilterChain<Task> _taskFilterChain;
         private string _seletedFilter;
         public string SelectedFilter
