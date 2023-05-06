@@ -1,5 +1,6 @@
 ﻿using CuoiKi.Constants;
 using CuoiKi.Models;
+using System;
 
 namespace CuoiKi.DAOs
 {
@@ -369,6 +370,56 @@ namespace CuoiKi.DAOs
         public static string GetAllMembersOfTeamCommand(Team team)
         {
             return string.Format("SELECT * FROM TeamMembers WHERE TeamID = '{0}'", team.ID);
+        }
+        #endregion
+
+        #region WorkLeave
+        public static string GetAddCommandForWorkLeave(WorkLeave entry)
+        {
+            return string.Format(
+                "INSERT INTO WorkLeaves (" +
+                "ID, [FromDate], [ToDate], ReasonOfLeave, EmployeeID " +
+                "VALUES (" +
+                "N'{0}', " +
+                "'{1}', " +
+                "'{2}', " +
+                "N'{3}', " +
+                "N'{4}',);",
+                entry.ID,
+                entry.FromDate.ToString("s"),
+                entry.ToDate.ToString("s"),
+                entry.ReasonOfLeave,
+                entry.EmployeeID);
+        }
+
+        public static string GetDeleteCommandForWorkLeave(string id)
+        {
+            return string.Format("DELETE FROM WorkLeaves WHERE ID = N'{0}'", id);
+        }
+
+        public static string GetUpdateCommandForWorkLeave(WorkLeave entry)
+        {
+            return string.Format(
+                "UPDATE WorkLeaves " +
+                "SET " +
+                "[FromDate] = '{0}', " +
+                "[ToDate] = '{1}', " +
+                "ReasonOfLeave = '{2}' " +
+                "WHERE ID = N'{3}';",
+                entry.FromDate.ToString("s"),
+                entry.ToDate.ToString("s"),
+                entry.ReasonOfLeave,
+                entry.ID
+                );
+        }
+
+        public static string GetAllLeavesOfAnEmployeeCommand(string employeeID)
+        {
+            return string.Format(
+                "SELECT * FROM WorkLeaves" +
+                "WHERE EmployeeID = M'{0}'",
+                employeeID
+                );
         }
         #endregion
 
