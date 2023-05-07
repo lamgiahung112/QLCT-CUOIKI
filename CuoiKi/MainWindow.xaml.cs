@@ -2,6 +2,7 @@
 using CuoiKi.Controllers;
 using CuoiKi.Models;
 using CuoiKi.States;
+using CuoiKi.UI.HumanResources;
 using CuoiKi.UI.Manager;
 using CuoiKi.UI.Staff;
 using MaterialDesignThemes.Wpf;
@@ -71,6 +72,11 @@ namespace CuoiKi
                 uI_ManagerForm.Show();
                 
             }
+            /*else if (foundEmployee.Role == Role.Hr)
+            {
+                UI_HrForm uI_HrForm = new();
+                uI_HrForm.Show();
+            }*/
             else 
             {
                 UI_StaffForm uI_StaffForm = new();
