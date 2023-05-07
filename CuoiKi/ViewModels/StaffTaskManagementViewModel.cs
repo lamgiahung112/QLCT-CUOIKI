@@ -1,8 +1,8 @@
-﻿using CuoiKi.HelperClasses;
+﻿using CuoiKi.Enum;
+using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -11,47 +11,50 @@ namespace CuoiKi.ViewModels
     public class StaffTaskManagementViewModel : ViewModelBase
     {
         private List<Task> _taskList;
-        private FilterChain<Task> _taskFilterChain;
-        private string _seletedFilter;
-        public string SelectedFilter
+        public List<Task> TaskList
         {
-            get { return _seletedFilter; }
+            get => _taskList;
             set
             {
-                _seletedFilter = value;
-                OnPropertyChanged(nameof(SelectedFilter));
+                _taskList = value;
+                OnPropertyChanged(nameof(TaskList));
             }
         }
-        private List<string> _filterOptions;
-        public List<string> FilterOptions
+        private List<Task> _filteredTaskList;
+        public List<Task> FilteredTaskList
         {
-            get { return _filterOptions; }
+            get => _filteredTaskList;
             set
             {
-                _filterOptions = value;
-                OnPropertyChanged(nameof(FilterOptions));
+                _filteredTaskList = value;
+                OnPropertyChanged(nameof(FilteredTaskList));
             }
         }
-        private List<string> _filterList;
-        public List<string> FilterList
+        public StaffTaskManagementViewModel()
         {
-            get => _filterList;
-            set
-            {
-                _filterList = value;
-                OnPropertyChanged(nameof(FilterList));
-            }
+            _taskList = new List<Task>();
+            _filteredTaskList = new List<Task>();
+            _filterList = new List<FilterName>();
+            _taskFilterChain = new FilterChain<Task>();
+            _filterOptions = new List<FilterName>() { FilterName.Done, FilterName.WIP, FilterName.NeedReview, FilterName.InThisYear, FilterName.InThisMonth };
+            _seletedFilter = (FilterName)0;
+            fetchTaskList();
+            // At first, there is no filter
+            FilteredTaskList = TaskList;
         }
-        private ObservableCollection<Task> _fakeTaskList;
-        public ObservableCollection<Task> FakeTaskList
+        // Use some services to get tasks from database
+        private void fetchTaskList()
         {
-            get => _fakeTaskList;
-            set
+            _taskList.Clear();
+            // query from database
+            // here I add some fake data to test
+            for (int i = 0; i < 10; i++)
             {
-                _fakeTaskList = value;
-                OnPropertyChanged(nameof(FakeTaskList));
+                Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
+                _taskList.Add(temp);
             }
         }
+
         private Task? _selectedTask;
         public Task? SelectedTask
         {
@@ -63,33 +66,6 @@ namespace CuoiKi.ViewModels
             }
         }
 
-        public StaffTaskManagementViewModel()
-        {
-            _realTaskList = new List<Task>();
-            _taskFilterChain = new FilterChain<Task>();
-            _seletedFilter = "";
-            _filterOptions = new List<string>() { "All", "Done", "WIP", "Need review", "In this year", "In this month", "In this week" };
-            _filterList = new List<string>();
-            FilterOptions.RemoveAll(x => FilterList.Contains(x));
-            _fakeTaskList = new ObservableCollection<Task>();
-            UpdateTaskList();
-        }
-        private void FilterTaskList()
-        {
-            List<Task> filteredTasks = _taskFilterChain.ApplyAllOrLogic(_realTaskList.ToList());
-            FakeTaskList = new ObservableCollection<Task>(filteredTasks as List<Task>);
-        }
-        private void UpdateTaskList()
-        {
-            _realTaskList.Clear();
-            // query from database
-            // here I add some fake data to test
-            for (int i = 0; i < 10; i++)
-            {
-                Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
-                _realTaskList.Add(temp);
-            }
-        }
         private ICommand? _CmdReviewRequest { get; set; }
         public ICommand CmdReviewRequest
         {
@@ -104,17 +80,16 @@ namespace CuoiKi.ViewModels
         private void ReviewRequest()
         {
             // Find the index of the task to update
-            int index = _realTaskList.IndexOf(_realTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
+            int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
             // Create a new list with the updated task
-            var updatedList = new List<Task>(_realTaskList);
+            var updatedList = new List<Task>(_taskList);
             updatedList[index].Status = Constants.TaskStatus.NeedsReview;
 
             // Assign the new list to FakeTaskList
-            FakeTaskList = new ObservableCollection<Task>(updatedList);
+            FilteredTaskList = updatedList;
         }
-
         private ICommand? _CmdDone { get; set; }
         public ICommand CmdDone
         {
@@ -129,15 +104,49 @@ namespace CuoiKi.ViewModels
         private void MarkAsDone()
         {
             // Find the index of the task to update
-            int index = _realTaskList.IndexOf(_realTaskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
+            int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
             // Create a new list with the updated task
-            var updatedList = new List<Task>(_realTaskList);
+            var updatedList = new List<Task>(_taskList);
             updatedList[index].Status = Constants.TaskStatus.Done;
 
             // Assign the new list to FakeTaskList
-            FakeTaskList = new ObservableCollection<Task>(updatedList);
+            FilteredTaskList = updatedList;
+        }
+
+
+
+        private FilterChain<Task> _taskFilterChain;
+        private FilterName? _seletedFilter;
+        public FilterName? SelectedFilter
+        {
+            get { return _seletedFilter; }
+            set
+            {
+                _seletedFilter = value;
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
+        private List<FilterName> _filterList;
+        public List<FilterName> FilterList
+        {
+            get => _filterList;
+            set
+            {
+                _filterList = value;
+                OnPropertyChanged(nameof(FilterList));
+            }
+        }
+        private List<FilterName> _filterOptions;
+        public List<FilterName> FilterOptions
+        {
+            get { return _filterOptions; }
+            set
+            {
+                _filterOptions = value;
+                OnPropertyChanged(nameof(FilterOptions));
+            }
         }
         private ICommand? _CmdRemoveFilterItem { get; set; }
         public ICommand CmdRemoveFilterItem
@@ -152,11 +161,13 @@ namespace CuoiKi.ViewModels
         }
         private void RemoveFilterItem(object p)
         {
-            string currStr = (string)p;
-            FilterList = _filterList.Where(x => x != currStr).ToList();
-            FilterOptions = _filterOptions.Concat(new[] { currStr }).ToList();
-            _taskFilterChain.RemovePredicate(currStr);
-            FilterTaskList();
+            FilterName currName = (FilterName)p;
+            FilterList = _filterList.Where(x => x != currName).ToList();
+            FilterOptions = _filterOptions.Concat(new[] { currName }).ToList();
+
+            _taskFilterChain.RemovePredicate(currName);
+
+            ApplyFilter();
         }
         private ICommand? _CmdAddFilter;
         public ICommand CmdAddFilter
@@ -171,43 +182,60 @@ namespace CuoiKi.ViewModels
         }
         private void addFilter()
         {
-            FilterList = _filterList.Concat(new[] { SelectedFilter.ToString() }).ToList();
-            if (SelectedFilter.ToString() != "All")
+            if (SelectedFilter is null) return;
+            FilterName filterName = (FilterName)SelectedFilter;
+            switch (filterName)
             {
-                FilterList = _filterList.Where(x => x != "All").ToList();
-                FilterOptions = _filterOptions.Concat(new[] { "All" }).ToList();
-                _taskFilterChain.RemovePredicate("All");
-            }
-            else
-            {
-                for (int i = _filterList.Count - 1; i >= 0; i--)
-                {
-                    _taskFilterChain.RemovePredicate(_filterList[i]);
-                    _filterOptions.Add(_filterList[i]);
-                }
-                _filterList = new List<string>() { "All" };
-                FilterList = new List<string>() { "All" };
-            }
-            switch (SelectedFilter.ToString())
-            {
-                case "All":
-                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => true);
+                case FilterName.WIP:
+                    _taskFilterChain.AddPredicate(filterName!, FilterLogicType.Or, p => p.Status == Constants.TaskStatus.WIP);
                     break;
-                case "WIP":
-                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.WIP);
+                case FilterName.NeedReview:
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.Or, p => p.Status == Constants.TaskStatus.NeedsReview);
                     break;
-                case "Need review":
-                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.NeedsReview);
+                case FilterName.Done:
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.Or, p => p.Status == Constants.TaskStatus.Done);
                     break;
-                case "Done":
-                    _taskFilterChain.AddPredicate(SelectedFilter.ToString(), p => p.Status == Constants.TaskStatus.Done);
+                case FilterName.InThisYear:
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
+                        p.StartingTime.Year == DateTime.Now.Year
+                        || p.EndingTime.Year == DateTime.Now.Year);
+                    break;
+                case FilterName.InThisMonth:
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
+                        p.StartingTime.Month == DateTime.Now.Month
+                        || p.EndingTime.Month == DateTime.Now.Month);
                     break;
                 default:
                     break;
             }
+            FilterList = _filterList.Concat(new[] { filterName }).ToList();
             FilterOptions = _filterOptions.Except(_filterList).ToList();
             SelectedFilter = FilterOptions.FirstOrDefault();
-            FilterTaskList();
+
+            ApplyFilter();
+        }
+
+        private void ApplyFilter()
+        {
+            bool FilterByStatus = FilterList.Any(f => f == FilterName.WIP || f == FilterName.NeedReview || f == FilterName.Done);
+            bool FilterByTime = FilterList.Any(f => f == FilterName.InThisYear || f == FilterName.InThisMonth);
+            IEnumerable<Task> filteredTasks = _taskList;
+            if (_filterList.ToList().Count > 0)
+            {
+                if (FilterByStatus && FilterByTime)
+                {
+                    filteredTasks = _taskFilterChain.ApplyOrThenAnd(_taskList);
+                }
+                else if (FilterByStatus)
+                {
+                    filteredTasks = _taskFilterChain.ApplyOrLogic(_taskList);
+                }
+                else
+                {
+                    filteredTasks = _taskFilterChain.ApplyAndLogic(_taskList);
+                }
+            }
+            FilteredTaskList = filteredTasks.ToList();
         }
     }
 }
