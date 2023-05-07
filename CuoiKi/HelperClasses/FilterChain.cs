@@ -1,39 +1,60 @@
-﻿using CuoiKi.Models;
+﻿using CuoiKi.Enum;
+using CuoiKi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.HelperClasses
 {
     public class FilterChain<T> where T : ModelBase
     {
-        private Dictionary<string, Predicate<T>> _predicates;
-        public FilterChain() 
+        private Dictionary<FilterKey, Predicate<T>> _predicates;
+        public FilterChain()
         {
             _predicates = new();
         }
-        
-        public void AddPredicate(string key, Predicate<T> predicate)
+
+        public void AddPredicate(FilterName name, FilterLogicType logic, Predicate<T> predicate)
         {
+            FilterKey key = new(name, logic);
             _predicates.Add(key, predicate);
         }
 
-        public void RemovePredicate(string key)
+        public void RemovePredicate(FilterName keyName)
         {
-            _predicates.Remove(key);
+            // Find all predicates with the given filter key
+            var matchingPredicates = _predicates.Where(p => p.Key.Name == keyName).ToList();
+
+            // Remove all matching predicates
+            foreach (var predicate in matchingPredicates)
+            {
+                _predicates.Remove(predicate.Key);
+            }
+        }
+        public IEnumerable<T> ApplyAndLogic(IEnumerable<T> data)
+        {
+            foreach (var predicate in _predicates.Where(p => p.Key.LogicType == FilterLogicType.And).Select(p => p.Value))
+            {
+                data = data.Where(new Func<T, bool>(predicate));
+            }
+            return data;
         }
 
-        public List<T> ApplyAll(List<T> list) 
-        { 
-            List<T> result = list;
-
-            foreach (Predicate<T> filter in _predicates.Values) 
+        public IEnumerable<T> ApplyOrLogic(IEnumerable<T> data)
+        {
+            IEnumerable<T> result = Enumerable.Empty<T>();
+            foreach (var predicate in _predicates.Where(p => p.Key.LogicType == FilterLogicType.Or).Select(p => p.Value))
             {
-                result = result.FindAll(filter);
+                result = result.Concat(data.Where(new Func<T, bool>(predicate)));
             }
             return result;
         }
+        public IEnumerable<T> ApplyOrThenAnd(IEnumerable<T> data)
+        {
+            var orResult = ApplyOrLogic(data);
+            var andResult = ApplyAndLogic(orResult);
+            return andResult;
+        }
+
     }
 }

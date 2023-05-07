@@ -35,10 +35,10 @@ namespace CuoiKi.Models
             this.Name = Name;
             this.Address = Address;
             this.Birth = Birth;
-            this.Status = (EmployeeStatus)Enum.Parse(typeof(EmployeeStatus), EmployeeStatus);
+            this.Status = (EmployeeStatus)System.Enum.Parse(typeof(EmployeeStatus), EmployeeStatus);
             this.Password = Password;
-            this.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
-            this.Role = (Role)Enum.Parse(typeof(Role), Role);
+            this.Gender = (Gender)System.Enum.Parse(typeof(Gender), Gender);
+            this.Role = (Role)System.Enum.Parse(typeof(Role), Role);
         }
     }
 }
