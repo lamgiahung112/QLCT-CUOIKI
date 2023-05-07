@@ -93,12 +93,20 @@ CREATE TABLE Tasks (
 
 GO
 
-
-
 CREATE TABLE Salary(
     EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
     basicPay int NOT NULL,
     kpiCost int NOT NULL,
+);
+
+GO
+
+CREATE TABLE WorkLeaves(
+    ID NVARCHAR(50) NOT NULL PRIMARY KEY,
+    EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    FromDate DateTime NOT NULL,
+    ToDate DateTime NOT NULL,
+    ReasonOfLeave NVARCHAR(255) NOT NULL
 );
 
 -- Add Employees

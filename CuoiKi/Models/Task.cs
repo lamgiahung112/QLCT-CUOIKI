@@ -1,8 +1,5 @@
 ﻿using CuoiKi.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CuoiKi.Models
 {
@@ -22,9 +19,10 @@ namespace CuoiKi.Models
         /// <summary>
         /// Constructor method used to map data from SQL to Work
         /// </summary>
-        public Task(string ID, string Assignee, string Assigner, 
-            string Description, string Title, DateTime StartingTime, 
-            DateTime EndingTime, string Status, DateTime CreatedAt, DateTime UpdatedAt) { 
+        public Task(string ID, string Assignee, string Assigner,
+            string Description, string Title, DateTime StartingTime,
+            DateTime EndingTime, string Status, DateTime CreatedAt, DateTime UpdatedAt)
+        {
             this.ID = ID;
             this.Assignee = Assignee;
             this.Assigner = Assigner;
@@ -32,7 +30,7 @@ namespace CuoiKi.Models
             this.Title = Title;
             this.StartingTime = StartingTime;
             this.EndingTime = EndingTime;
-            this.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), Status);
+            this.Status = (TaskStatus)System.Enum.Parse(typeof(TaskStatus), Status);
             this.CreatedAt = CreatedAt;
             this.UpdatedAt = UpdatedAt;
         }
