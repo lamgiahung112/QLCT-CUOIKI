@@ -72,11 +72,11 @@ namespace CuoiKi
                 uI_ManagerForm.Show();
                 
             }
-            /*else if (foundEmployee.Role == Role.Hr)
+            else if (foundEmployee.Role == Role.Hr)
             {
                 UI_HrForm uI_HrForm = new();
                 uI_HrForm.Show();
-            }*/
+            }
             else 
             {
                 UI_StaffForm uI_StaffForm = new();
