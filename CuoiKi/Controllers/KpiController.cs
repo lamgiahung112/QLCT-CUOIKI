@@ -3,6 +3,7 @@ using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace CuoiKi.Controllers
 {
@@ -14,15 +15,17 @@ namespace CuoiKi.Controllers
         private readonly TeamDAO teamDAO;
         private readonly TeamMemberDAO teamMemberDAO;
         private readonly EmployeeDAO employeeDAO;
+        private readonly WorkLeaveDAO workLeaveDAO;
 
         public KpiController()
         {
-            projectDAO = new ProjectDAO();
-            stageDAO = new StageDAO();
-            taskDAO = new TaskDAO();
-            teamDAO = new TeamDAO();
-            employeeDAO = new EmployeeDAO();
-            teamMemberDAO = new TeamMemberDAO();
+            projectDAO = new();
+            stageDAO = new();
+            taskDAO = new();
+            teamDAO = new();
+            employeeDAO = new();
+            teamMemberDAO = new();
+            workLeaveDAO = new();
         }
 
         /// <summary>
@@ -48,6 +51,12 @@ namespace CuoiKi.Controllers
             {
                 existingRecord = taskDAO.GetOne(entry.ID);
                 dao = (IDAO<T>)taskDAO;
+            }
+            else if (entry is WorkLeave)
+            {
+                MessageBox.Show("HEre");
+                existingRecord = workLeaveDAO.GetOne(entry.ID);
+                dao = (IDAO<T>)workLeaveDAO;
             }
             else
             {

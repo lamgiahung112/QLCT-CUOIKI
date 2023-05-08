@@ -378,13 +378,13 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "INSERT INTO WorkLeaves (" +
-                "ID, [FromDate], [ToDate], ReasonOfLeave, EmployeeID " +
+                "ID, [FromDate], [ToDate], ReasonOfLeave, EmployeeID ) " +
                 "VALUES (" +
                 "N'{0}', " +
                 "'{1}', " +
                 "'{2}', " +
                 "N'{3}', " +
-                "N'{4}',);",
+                "N'{4}');",
                 entry.ID,
                 entry.FromDate.ToString("s"),
                 entry.ToDate.ToString("s"),
