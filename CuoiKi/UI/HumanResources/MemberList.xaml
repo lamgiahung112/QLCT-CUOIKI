@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CuoiKi.UI.HumanResources"
+      xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:SalaryOfMember}"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="850">
 
@@ -96,7 +98,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Header="Action" Width="450">
+                <DataGridTemplateColumn Header="Action" Width="500">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
@@ -108,10 +110,6 @@
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" 
                                         Click="btn_ViewSalary_Click"/>
-                                <Button Content="Done"
-                                            Command="{Binding DataContext.CmdDone, ElementName=DataGridview}"
-                                            CommandParameter="{Binding}" 
-                                            Margin="5, 0" />
                             </StackPanel>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"
