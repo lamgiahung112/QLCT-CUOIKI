@@ -1,11 +1,4 @@
-﻿using CuoiKi.Constants;
-using CuoiKi.DAOs;
-using CuoiKi.Models;
-using CuoiKi.States;
-using System.Collections.Generic;
-using System.Windows;
-
-namespace CuoiKi.Controllers
+﻿namespace CuoiKi.Controllers
 {
     public class KpiController
     {
@@ -189,6 +182,16 @@ namespace CuoiKi.Controllers
         {
             Team currentTeam = teamDAO.GetOne(teamID);
             return currentTeam?.Name;
+        }
+        public List<Task>? GetAllTaskOfEmployee(string employeeID)
+        {
+            List<Task>? tasks = taskDAO.GetAll();
+            if (tasks is not null)
+            {
+                List<Task>? employeeTask = tasks.Where(task => task.Assignee == employeeID).ToList();
+                return employeeTask;
+            }
+            return tasks;
         }
     }
 }

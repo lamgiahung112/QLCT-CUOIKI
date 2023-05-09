@@ -1,6 +1,5 @@
 ﻿using CuoiKi.Constants;
 using CuoiKi.Models;
-using System;
 
 namespace CuoiKi.DAOs
 {
@@ -132,7 +131,7 @@ namespace CuoiKi.DAOs
         public static string GetAddCommandForTask(Task task)
         {
             return string.Format(
-                "INSERT INTO Tasks "+
+                "INSERT INTO Tasks " +
                 "(ID, Assignee, Assigner, [Description], Title, StartingTime, EndingTime, [Status], CreatedAt, UpdatedAt) " +
                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}','{8}','{9}')",
                 task.ID,
@@ -183,7 +182,10 @@ namespace CuoiKi.DAOs
                 task.ID
                 );
         }
-
+        public static string GetAllTaskCommand()
+        {
+            return string.Format("SELECT * FROM Tasks");
+        }
         public static string GetOneByIdCommandForTask(string id)
         {
             return string.Format("SELECT * FROM Tasks WHERE ID = '{0}'", id);
@@ -321,7 +323,7 @@ namespace CuoiKi.DAOs
         public static string GetDeleteCommandForStage(string id)
         {
             return string.Format(
-                "DELETE FROM Stages WHERE ID = '{0}'", id    
+                "DELETE FROM Stages WHERE ID = '{0}'", id
             );
         }
 
@@ -339,7 +341,7 @@ namespace CuoiKi.DAOs
                 stage.Description, stage.ID
             );
         }
-        
+
         public static string GetStagesOfAProjectCommand(Project project)
         {
             return string.Format("SELECT * FROM Stages WHERE ProjectID = '{0}'", project.ID);
