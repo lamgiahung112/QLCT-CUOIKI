@@ -22,5 +22,10 @@ namespace CuoiKi.Models
             this.ReasonOfLeave = ReasonOfLeave;
         }
 
+        public static WorkLeave GetNewWorkLeave(string EmployeeID, DateTime FromDate, DateTime ToDate,string ReasonOfLeave)
+        {
+            return new("LEAVE"+ new Random().NextInt64().ToString(), EmployeeID, FromDate, ToDate, ReasonOfLeave);
+        }
+
     }
 }

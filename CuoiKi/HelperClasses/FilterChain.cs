@@ -55,6 +55,5 @@ namespace CuoiKi.HelperClasses
             var andResult = ApplyAndLogic(orResult);
             return andResult;
         }
-
     }
 }

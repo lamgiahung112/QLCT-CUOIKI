@@ -12,10 +12,10 @@ namespace CuoiKi.ViewModels
 {
     public class StagesPageViewModel : ViewModelBase
     {
-        private readonly KpiController _controller;
+        private readonly DbController _controller;
         public StagesPageViewModel()
         {
-            _controller = new KpiController();
+            _controller = new DbController();
             _stageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
             Title = "Add New Stage";
             StageID = "";

@@ -1,6 +1,8 @@
-﻿using CuoiKi.Enum;
+﻿using CuoiKi.Controllers;
+using CuoiKi.Enum;
 using CuoiKi.HelperClasses;
 using CuoiKi.Models;
+using CuoiKi.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,9 @@ namespace CuoiKi.ViewModels
 {
     public class StaffTaskManagementViewModel : ViewModelBase
     {
-        private List<Task> _taskList;
-        public List<Task> TaskList
+        private DbController _dbController;
+        private List<Task>? _taskList;
+        public List<Task>? TaskList
         {
             get => _taskList;
             set
@@ -32,11 +35,12 @@ namespace CuoiKi.ViewModels
         }
         public StaffTaskManagementViewModel()
         {
+            _dbController = new DbController();
             _taskList = new List<Task>();
             _filteredTaskList = new List<Task>();
             _filterList = new List<FilterName>();
             _taskFilterChain = new FilterChain<Task>();
-            _filterOptions = new List<FilterName>() { FilterName.Done, FilterName.WIP, FilterName.NeedReview, FilterName.InThisYear, FilterName.InThisMonth };
+            _filterOptions = new List<FilterName>() { FilterName.Done, FilterName.WIP, FilterName.NeedReview, FilterName.InThisYear, FilterName.InThisMonth, FilterName.InThisDay };
             _seletedFilter = (FilterName)0;
             fetchTaskList();
             // At first, there is no filter
@@ -45,14 +49,8 @@ namespace CuoiKi.ViewModels
         // Use some services to get tasks from database
         private void fetchTaskList()
         {
-            _taskList.Clear();
-            // query from database
-            // here I add some fake data to test
-            for (int i = 0; i < 10; i++)
-            {
-                Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
-                _taskList.Add(temp);
-            }
+            _taskList!.Clear();
+            _taskList = _dbController.GetAllTaskOfEmployee(LoginInfoState.Id!);
         }
 
         private Task? _selectedTask;
@@ -83,11 +81,22 @@ namespace CuoiKi.ViewModels
             int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
+            // Get the task to update
+            Task taskToUpdate = _taskList[index];
+
+            // Update the task's status
+            taskToUpdate.Status = Constants.TaskStatus.NeedsReview;
+
+            // Save the updated task using the _dbController
+            _dbController.Save(taskToUpdate);
+
+            fetchTaskList();
+
             // Create a new list with the updated task
             var updatedList = new List<Task>(_taskList);
-            updatedList[index].Status = Constants.TaskStatus.NeedsReview;
+            updatedList[index] = taskToUpdate;
 
-            // Assign the new list to FakeTaskList
+            // Assign the new list to FilteredTaskList
             FilteredTaskList = updatedList;
         }
         private ICommand? _CmdDone { get; set; }
@@ -107,11 +116,22 @@ namespace CuoiKi.ViewModels
             int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
+            // Get the task to update
+            Task taskToUpdate = _taskList[index];
+
+            // Update the task's status
+            taskToUpdate.Status = Constants.TaskStatus.Done;
+
+            // Save the updated task using the _dbController
+            _dbController.Save(taskToUpdate);
+
+            fetchTaskList();
+
             // Create a new list with the updated task
             var updatedList = new List<Task>(_taskList);
-            updatedList[index].Status = Constants.TaskStatus.Done;
+            updatedList[index] = taskToUpdate;
 
-            // Assign the new list to FakeTaskList
+            // Assign the new list to FilteredTaskList
             FilteredTaskList = updatedList;
         }
 
@@ -196,14 +216,22 @@ namespace CuoiKi.ViewModels
                     _taskFilterChain.AddPredicate(filterName, FilterLogicType.Or, p => p.Status == Constants.TaskStatus.Done);
                     break;
                 case FilterName.InThisYear:
+                    RemoveTimeFilter();
                     _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
                         p.StartingTime.Year == DateTime.Now.Year
                         || p.EndingTime.Year == DateTime.Now.Year);
                     break;
                 case FilterName.InThisMonth:
+                    RemoveTimeFilter();
                     _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
                         p.StartingTime.Month == DateTime.Now.Month
                         || p.EndingTime.Month == DateTime.Now.Month);
+                    break;
+                case FilterName.InThisDay:
+                    RemoveTimeFilter();
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
+                        p.StartingTime.Date == DateTime.Now.Date
+                        || p.EndingTime.Date == DateTime.Now.Date);
                     break;
                 default:
                     break;
@@ -214,7 +242,29 @@ namespace CuoiKi.ViewModels
 
             ApplyFilter();
         }
+        private void RemoveTimeFilter()
+        {
+            _taskFilterChain.RemovePredicate(FilterName.InThisYear);
+            _taskFilterChain.RemovePredicate(FilterName.InThisMonth);
+            _taskFilterChain.RemovePredicate(FilterName.InThisDay);
+            _filterList.RemoveAll(filter => filter == FilterName.InThisYear || filter == FilterName.InThisMonth || filter == FilterName.InThisDay);
+            FilterList = _filterList;
+            if (!FilterOptions.Contains(FilterName.InThisYear))
+            {
+                FilterOptions.Add(FilterName.InThisYear);
+            }
 
+            if (!FilterOptions.Contains(FilterName.InThisMonth))
+            {
+                FilterOptions.Add(FilterName.InThisMonth);
+            }
+
+            if (!FilterOptions.Contains(FilterName.InThisDay))
+            {
+                FilterOptions.Add(FilterName.InThisDay);
+            }
+
+        }
         private void ApplyFilter()
         {
             bool FilterByStatus = FilterList.Any(f => f == FilterName.WIP || f == FilterName.NeedReview || f == FilterName.Done);

@@ -1,8 +1,5 @@
 ﻿using CuoiKi.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CuoiKi.DAOs
 {
@@ -28,7 +25,8 @@ namespace CuoiKi.DAOs
 
         public List<Task>? GetAll()
         {
-            throw new NotImplementedException();
+            string cmd = SqlConverter.GetAllTaskCommand();
+            return dbc.ExecuteWithResults<Task>(cmd);
         }
 
         public Task? GetOne(string id)
