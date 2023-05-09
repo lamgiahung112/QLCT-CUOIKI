@@ -5,66 +5,82 @@ using CuoiKi.States;
 using CuoiKi.UI.Forms;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.ViewModels
 {
     public class LeaveOfAbsencePageViewModel : ViewModelBase
     {
-        KpiController _controller;
+        private DbController _controller;
+        private List<WorkLeave>? _workLeaves;
+        public List<WorkLeave>? WorkLeaves
+        {
+            get => _workLeaves;
+            set
+            {
+                _workLeaves = value;
+                OnPropertyChanged(nameof(WorkLeaves));
+            }
+        }
         public LeaveOfAbsencePageViewModel()
         {
             _controller = new();
+            _workLeaves = new List<WorkLeave>();
+            fetchWorkLeaves();
+            WorkLeaves = _workLeaves;
+        }
+
+        private void fetchWorkLeaves()
+        {
+            _workLeaves!.Clear();
+            _workLeaves = _controller.GetAllWorkLeaveOfEmployeeInMonth(_employeeID);
         }
 
         #region UI Binding
-        private string _EmployeeID = LoginInfoState.Id!;
-        public string EmployeeID 
+        private string _employeeID = LoginInfoState.Id!;
+        public string EmployeeID
         {
-            get { return _EmployeeID; }
+            get { return _employeeID; }
             set { }
         }
 
-        private DateTime _FromDate = DateTime.Now;
+        private DateTime _fromDate = DateTime.Now;
         public DateTime FromDate
         {
             get
             {
-                return _FromDate;
+                return _fromDate;
             }
             set
             {
-                _FromDate = value;
+                _fromDate = value;
                 OnPropertyChanged(nameof(FromDate));
             }
         }
 
-        private DateTime _ToDate = DateTime.Now;
+        private DateTime _toDate = DateTime.Now;
         public DateTime ToDate
         {
             get
             {
-                return _ToDate;
+                return _toDate;
             }
             set
             {
-                _ToDate = value;
+                _toDate = value;
                 OnPropertyChanged(nameof(ToDate));
             }
         }
 
-        private string _Reason = string.Empty;
+        private string _reason = string.Empty;
         public string Reason
         {
             get
             {
-                return _Reason;
+                return _reason;
             }
             set
             {
-                _Reason = value;
+                _reason = value;
                 OnPropertyChanged(nameof(Reason));
             }
         }
@@ -84,8 +100,8 @@ namespace CuoiKi.ViewModels
         #endregion
 
         private RelayCommand? _CmdAddWorkLeave;
-        public RelayCommand CmdAddWorkLeave 
-        { 
+        public RelayCommand CmdAddWorkLeave
+        {
             get
             {
                 _CmdAddWorkLeave ??= new(
@@ -109,6 +125,8 @@ namespace CuoiKi.ViewModels
                 return;
             }
             _controller.Save(WorkLeave.GetNewWorkLeave(EmployeeID, FromDate, ToDate, Reason));
+            fetchWorkLeaves();
+            WorkLeaves = _workLeaves;
         }
     }
 }

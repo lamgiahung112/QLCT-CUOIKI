@@ -6,6 +6,7 @@
         NeedReview,
         Done,
         InThisYear,
-        InThisMonth
+        InThisMonth,
+        InThisDay
     }
 }

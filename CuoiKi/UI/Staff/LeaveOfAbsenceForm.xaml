@@ -91,7 +91,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="DataGridview" ItemsSource="{Binding FilteredTaskList}"
+            <DataGrid x:Name="DataGridview" ItemsSource="{Binding WorkLeaves}"
           AutoGenerateColumns="False"
           IsReadOnly="True"
           Width="745"

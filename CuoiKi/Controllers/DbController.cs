@@ -3,11 +3,12 @@ using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace CuoiKi.Controllers
 {
-    public class KpiController
+    public class DbController
     {
         private readonly ProjectDAO projectDAO;
         private readonly StageDAO stageDAO;
@@ -17,7 +18,7 @@ namespace CuoiKi.Controllers
         private readonly EmployeeDAO employeeDAO;
         private readonly WorkLeaveDAO workLeaveDAO;
 
-        public KpiController()
+        public DbController()
         {
             projectDAO = new();
             stageDAO = new();
@@ -189,6 +190,20 @@ namespace CuoiKi.Controllers
         {
             Team currentTeam = teamDAO.GetOne(teamID);
             return currentTeam?.Name;
+        }
+        public List<Task>? GetAllTaskOfEmployee(string employeeID)
+        {
+            List<Task>? tasks = taskDAO.GetAll();
+            if (tasks is not null)
+            {
+                List<Task>? employeeTask = tasks.Where(task => task.Assignee == employeeID).ToList();
+                return employeeTask;
+            }
+            return tasks;
+        }
+        public List<WorkLeave>? GetAllWorkLeaveOfEmployeeInMonth(string employeeID)
+        {
+            return workLeaveDAO.GetAllOfAnEmployeeInMonth(employeeID);
         }
     }
 }
