@@ -31,10 +31,14 @@
     <Compile Update="UI\Forms\TeamMemberForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\HumanResources\MemberList.xaml.cs">
     <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\HumanResources\UI_HrForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\HumanResources\ViewSalary.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Manager\AssignTaskPages\AssignTaskPage.xaml.cs">
@@ -96,10 +100,14 @@
     <Page Update="UI\Forms\TeamMemberForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\HumanResources\MemberList.xaml">
     <Page Update="UI\Forms\WorkLeaveForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\HumanResources\UI_HrForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\HumanResources\ViewSalary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\AssignTaskPages\AssignTaskPage.xaml">

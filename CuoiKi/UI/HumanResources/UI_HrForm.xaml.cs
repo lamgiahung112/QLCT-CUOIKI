@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CuoiKi.UI.Manager.AssignTaskPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CuoiKi.UI.HumanResources
@@ -34,6 +36,11 @@ namespace CuoiKi.UI.HumanResources
         private void LogOut_click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void btn_CalcSalary_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new MemberList());
         }
     }
 }
