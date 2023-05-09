@@ -1,4 +1,12 @@
-﻿namespace CuoiKi.Controllers
+﻿using CuoiKi.Constants;
+using CuoiKi.DAOs;
+using CuoiKi.Models;
+using CuoiKi.States;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+
+namespace CuoiKi.Controllers
 {
     public class KpiController
     {
