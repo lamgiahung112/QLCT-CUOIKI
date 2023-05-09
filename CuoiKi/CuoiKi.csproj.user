@@ -32,6 +32,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\HumanResources\MemberList.xaml.cs">
+    <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\HumanResources\UI_HrForm.xaml.cs">
@@ -52,9 +53,6 @@
     <Compile Update="UI\Manager\AssignTaskPages\ViewTask.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\Manager\CalcSalary\CalcSalaryPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UI\Manager\InformationManagerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -68,9 +66,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Staff\LeaveOfAbsenceForm.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Staff\StaffTaskManagementForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Staff\UI_StaffForm.xaml.cs">
@@ -106,6 +101,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\HumanResources\MemberList.xaml">
+    <Page Update="UI\Forms\WorkLeaveForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\HumanResources\UI_HrForm.xaml">
@@ -126,9 +122,6 @@
     <Page Update="UI\Manager\AssignTaskPages\ViewTask.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UI\Manager\CalcSalary\CalcSalaryPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="UI\Manager\InformationManagerForm.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -142,9 +135,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Staff\LeaveOfAbsenceForm.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Staff\StaffTaskManagementForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Staff\UI_StaffForm.xaml">

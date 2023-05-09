@@ -13,14 +13,14 @@ namespace CuoiKi.ViewModels
 {
     public class ProjectsPageViewModel : ViewModelBase
     {
-        private readonly KpiController kpiController;
+        private readonly DbController dbController;
         private ObservableCollection<Project> _projectList;
         private string _projectID = "";
         private Visibility _VisID = Visibility.Collapsed;
         private string _currentManagerID = "";
         public ProjectsPageViewModel()
         {
-            kpiController = new KpiController();
+            dbController = new DbController();
             _currentManagerID = LoginInfoState.Id!;
             _projectList = new ObservableCollection<Project>();
             fetchProjectListToObservableCollection();
@@ -28,7 +28,7 @@ namespace CuoiKi.ViewModels
         private void fetchProjectListToObservableCollection()
         {
             _projectList.Clear();
-            List<Project>? projects = kpiController.GetProjectsOfCurrentAccount();
+            List<Project>? projects = dbController.GetProjectsOfCurrentAccount();
             if (projects is null) return;
             foreach (var project in projects)
             {
@@ -101,7 +101,7 @@ namespace CuoiKi.ViewModels
             Project project = TaskAssignmentState.SelectedProject ?? Project.CreateNewProject(ToBeSavedProjectName, ToBeSavedProjectDescription);
             project.Name = ToBeSavedProjectName;
             project.Description = ToBeSavedProjectDescription;
-            kpiController.Save(project);
+            dbController.Save(project);
             fetchProjectListToObservableCollection();
         }
 
