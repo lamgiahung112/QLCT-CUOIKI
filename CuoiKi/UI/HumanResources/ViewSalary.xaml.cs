@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CuoiKi.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace CuoiKi.UI.HumanResources
     /// </summary>
     public partial class ViewSalary : Page
     {
-        public ViewSalary()
+        public ViewSalary(SalaryOfMember som)
         {
             InitializeComponent();
+            this.DataContext = som;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

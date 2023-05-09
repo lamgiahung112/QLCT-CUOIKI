@@ -35,6 +35,9 @@
     <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\HumanResources\UI_HrForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,6 +104,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\HumanResources\MemberList.xaml">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Forms\WorkLeaveForm.xaml">
       <SubType>Designer</SubType>
     </Page>
