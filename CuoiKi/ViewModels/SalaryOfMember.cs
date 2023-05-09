@@ -14,7 +14,6 @@ namespace CuoiKi.ViewModels
     {
         DbController _controller;
         public List<Employee> StaffList { get; set; }
-
         public SalaryOfMember()
         {
             _controller = new();
