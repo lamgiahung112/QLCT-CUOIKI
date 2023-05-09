@@ -6,7 +6,6 @@ using CuoiKi.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -52,14 +51,6 @@ namespace CuoiKi.ViewModels
         {
             _taskList!.Clear();
             _taskList = _kpiController.GetAllTaskOfEmployee(LoginInfoState.Id!);
-            MessageBox.Show(LoginInfoState.Id!);
-            // query from database
-            // here I add some fake data to test
-            /*for (int i = 0; i < 10; i++)
-            {
-                Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
-                _taskList.Add(temp);
-            }*/
         }
 
         private Task? _selectedTask;
@@ -90,11 +81,22 @@ namespace CuoiKi.ViewModels
             int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
+            // Get the task to update
+            Task taskToUpdate = _taskList[index];
+
+            // Update the task's status
+            taskToUpdate.Status = Constants.TaskStatus.NeedsReview;
+
+            // Save the updated task using the _kpiController
+            _kpiController.Save(taskToUpdate);
+
+            fetchTaskList();
+
             // Create a new list with the updated task
             var updatedList = new List<Task>(_taskList);
-            updatedList[index].Status = Constants.TaskStatus.NeedsReview;
+            updatedList[index] = taskToUpdate;
 
-            // Assign the new list to FakeTaskList
+            // Assign the new list to FilteredTaskList
             FilteredTaskList = updatedList;
         }
         private ICommand? _CmdDone { get; set; }
@@ -114,11 +116,22 @@ namespace CuoiKi.ViewModels
             int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
             if (index == -1) return;
 
+            // Get the task to update
+            Task taskToUpdate = _taskList[index];
+
+            // Update the task's status
+            taskToUpdate.Status = Constants.TaskStatus.Done;
+
+            // Save the updated task using the _kpiController
+            _kpiController.Save(taskToUpdate);
+
+            fetchTaskList();
+
             // Create a new list with the updated task
             var updatedList = new List<Task>(_taskList);
-            updatedList[index].Status = Constants.TaskStatus.Done;
+            updatedList[index] = taskToUpdate;
 
-            // Assign the new list to FakeTaskList
+            // Assign the new list to FilteredTaskList
             FilteredTaskList = updatedList;
         }
 
