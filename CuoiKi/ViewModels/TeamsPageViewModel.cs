@@ -14,13 +14,13 @@ namespace CuoiKi.ViewModels
 {
     public class TeamsPageViewModel : ViewModelBase
     {
-        private KpiController _controller;
+        private DbController _controller;
         private EmployeeDAO _employeeDAO;
 
         public TeamsPageViewModel()
         {
             StageID = TaskAssignmentState.SelectedStage!.ID;
-            _controller = new KpiController();
+            _controller = new DbController();
             _employeeDAO = new EmployeeDAO();
             _Title = "";
             _TeamID = "";

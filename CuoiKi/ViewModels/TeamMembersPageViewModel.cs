@@ -16,7 +16,7 @@ namespace CuoiKi.ViewModels
 {
     public class TeamMembersPageViewModel : ViewModelBase
     {
-        private KpiController _controller;
+        private DbController _controller;
         private string _CurrentManagerName = "";
         private string _CurrentManagerID = "";
         private string _CurrentEmployeeName = "";
@@ -33,7 +33,7 @@ namespace CuoiKi.ViewModels
 
         public TeamMembersPageViewModel()
         {
-            _controller = new KpiController();
+            _controller = new DbController();
             InitializeVariables();
         }
 

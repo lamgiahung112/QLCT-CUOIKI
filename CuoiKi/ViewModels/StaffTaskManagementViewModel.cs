@@ -12,7 +12,7 @@ namespace CuoiKi.ViewModels
 {
     public class StaffTaskManagementViewModel : ViewModelBase
     {
-        private KpiController _kpiController;
+        private DbController _dbController;
         private List<Task>? _taskList;
         public List<Task>? TaskList
         {
@@ -35,12 +35,12 @@ namespace CuoiKi.ViewModels
         }
         public StaffTaskManagementViewModel()
         {
-            _kpiController = new KpiController();
+            _dbController = new DbController();
             _taskList = new List<Task>();
             _filteredTaskList = new List<Task>();
             _filterList = new List<FilterName>();
             _taskFilterChain = new FilterChain<Task>();
-            _filterOptions = new List<FilterName>() { FilterName.Done, FilterName.WIP, FilterName.NeedReview, FilterName.InThisYear, FilterName.InThisMonth };
+            _filterOptions = new List<FilterName>() { FilterName.Done, FilterName.WIP, FilterName.NeedReview, FilterName.InThisYear, FilterName.InThisMonth, FilterName.InThisDay };
             _seletedFilter = (FilterName)0;
             fetchTaskList();
             // At first, there is no filter
@@ -50,7 +50,7 @@ namespace CuoiKi.ViewModels
         private void fetchTaskList()
         {
             _taskList!.Clear();
-            _taskList = _kpiController.GetAllTaskOfEmployee(LoginInfoState.Id!);
+            _taskList = _dbController.GetAllTaskOfEmployee(LoginInfoState.Id!);
         }
 
         private Task? _selectedTask;
@@ -87,8 +87,8 @@ namespace CuoiKi.ViewModels
             // Update the task's status
             taskToUpdate.Status = Constants.TaskStatus.NeedsReview;
 
-            // Save the updated task using the _kpiController
-            _kpiController.Save(taskToUpdate);
+            // Save the updated task using the _dbController
+            _dbController.Save(taskToUpdate);
 
             fetchTaskList();
 
@@ -122,8 +122,8 @@ namespace CuoiKi.ViewModels
             // Update the task's status
             taskToUpdate.Status = Constants.TaskStatus.Done;
 
-            // Save the updated task using the _kpiController
-            _kpiController.Save(taskToUpdate);
+            // Save the updated task using the _dbController
+            _dbController.Save(taskToUpdate);
 
             fetchTaskList();
 
@@ -227,6 +227,12 @@ namespace CuoiKi.ViewModels
                         p.StartingTime.Month == DateTime.Now.Month
                         || p.EndingTime.Month == DateTime.Now.Month);
                     break;
+                case FilterName.InThisDay:
+                    RemoveTimeFilter();
+                    _taskFilterChain.AddPredicate(filterName, FilterLogicType.And, p =>
+                        p.StartingTime.Date == DateTime.Now.Date
+                        || p.EndingTime.Date == DateTime.Now.Date);
+                    break;
                 default:
                     break;
             }
@@ -240,7 +246,8 @@ namespace CuoiKi.ViewModels
         {
             _taskFilterChain.RemovePredicate(FilterName.InThisYear);
             _taskFilterChain.RemovePredicate(FilterName.InThisMonth);
-            _filterList.RemoveAll(filter => filter == FilterName.InThisYear || filter == FilterName.InThisMonth);
+            _taskFilterChain.RemovePredicate(FilterName.InThisDay);
+            _filterList.RemoveAll(filter => filter == FilterName.InThisYear || filter == FilterName.InThisMonth || filter == FilterName.InThisDay);
             FilterList = _filterList;
             if (!FilterOptions.Contains(FilterName.InThisYear))
             {
@@ -250,6 +257,11 @@ namespace CuoiKi.ViewModels
             if (!FilterOptions.Contains(FilterName.InThisMonth))
             {
                 FilterOptions.Add(FilterName.InThisMonth);
+            }
+
+            if (!FilterOptions.Contains(FilterName.InThisDay))
+            {
+                FilterOptions.Add(FilterName.InThisDay);
             }
 
         }

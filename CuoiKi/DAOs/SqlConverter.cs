@@ -418,8 +418,8 @@ namespace CuoiKi.DAOs
         public static string GetAllLeavesOfAnEmployeeCommand(string employeeID)
         {
             return string.Format(
-                "SELECT * FROM WorkLeaves" +
-                "WHERE EmployeeID = M'{0}'",
+                "SELECT * FROM WorkLeaves " +
+                "WHERE EmployeeID = N'{0}'",
                 employeeID
                 );
         }

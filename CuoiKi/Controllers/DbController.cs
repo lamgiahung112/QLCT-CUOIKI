@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace CuoiKi.Controllers
 {
-    public class KpiController
+    public class DbController
     {
         private readonly ProjectDAO projectDAO;
         private readonly StageDAO stageDAO;
@@ -18,7 +18,7 @@ namespace CuoiKi.Controllers
         private readonly EmployeeDAO employeeDAO;
         private readonly WorkLeaveDAO workLeaveDAO;
 
-        public KpiController()
+        public DbController()
         {
             projectDAO = new();
             stageDAO = new();
@@ -200,6 +200,10 @@ namespace CuoiKi.Controllers
                 return employeeTask;
             }
             return tasks;
+        }
+        public List<WorkLeave>? GetAllWorkLeaveOfEmployeeInMonth(string employeeID)
+        {
+            return workLeaveDAO.GetAllOfAnEmployeeInMonth(employeeID);
         }
     }
 }
