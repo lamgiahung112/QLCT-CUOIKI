@@ -31,7 +31,9 @@
     <Compile Update="UI\Forms\TeamMemberForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\HumanResources\MemberList.xaml.cs">
+	<Compile Update="UI\HumanResources\MemberList.xaml.cs">
+	  <SubType>Code</SubType>
+	</Compile>
     <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,7 +102,9 @@
     <Page Update="UI\Forms\TeamMemberForm.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UI\HumanResources\MemberList.xaml">
+	<Page Update="UI\HumanResources\MemberList.xaml">
+		<SubType>Designer</SubType>
+	</Page>
     <Page Update="UI\Forms\WorkLeaveForm.xaml">
       <SubType>Designer</SubType>
     </Page>

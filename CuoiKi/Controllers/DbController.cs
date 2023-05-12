@@ -201,9 +201,9 @@ namespace CuoiKi.Controllers
             }
             return tasks;
         }
-        public List<WorkLeave>? GetAllWorkLeaveOfEmployeeInMonth(string employeeID)
+        public List<WorkLeave>? GetAllWorkLeaveOfEmployee(string employeeID)
         {
-            return workLeaveDAO.GetAllOfAnEmployeeInMonth(employeeID);
+            return workLeaveDAO.GetAllOfAnEmployee(employeeID);
         }
     }
 }
