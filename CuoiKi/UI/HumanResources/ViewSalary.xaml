@@ -78,6 +78,7 @@
                              FontSize="20"
                              Width="265"
                              BorderThickness="2"
+                             Text="{Binding Name}"
                              BorderBrush="{DynamicResource MaterialDesignDivider}" 
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
