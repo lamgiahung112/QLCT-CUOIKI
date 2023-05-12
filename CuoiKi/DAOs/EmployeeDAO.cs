@@ -28,9 +28,8 @@ namespace CuoiKi.DAOs
         }
         public List<Employee>? GetAll()
         {
-            //string command = SqlConverter.getCommand();
-            //return dbc.ExecuteWithResults(command);
-            return null;
+            string command = SqlConverter.GetAllEmployeesCommand();
+            return dbc.ExecuteWithResults<Employee>(command);
         }
         public List<Employee>? GetAllManagers()
         {

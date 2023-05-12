@@ -166,6 +166,11 @@ namespace CuoiKi.Controllers
             return employeeDAO.GetOne(teamMember.EmployeeID);
         }
 
+        public List<Employee>? GetAllEmployees()
+        {
+            return employeeDAO.GetAll();
+        }
+
         public Employee? GetTechLeadOfTeam(Team team)
         {
             return employeeDAO.GetOne(team.TechLeadID);

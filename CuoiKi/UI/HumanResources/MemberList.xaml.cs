@@ -27,9 +27,9 @@ namespace CuoiKi.UI.HumanResources
             this.DataContext = new SalaryOfMember();
         }
 
-        private void btn_ViewSalary_Click(object sender, RoutedEventArgs e)
+        /*private void btn_ViewSalary_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ViewSalary());
-        }
+        }*/
     }
 }

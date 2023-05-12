@@ -7,6 +7,11 @@ namespace CuoiKi.DAOs
     {
         public SqlConverter() { }
         #region Employee
+
+        public static string GetAllEmployeesCommand()
+        {
+            return "SELECT * FROM EMPLOYEES";
+        }
         public static string GetAddCommandForEmployee(Employee employee)
         {
             return string.Format(
