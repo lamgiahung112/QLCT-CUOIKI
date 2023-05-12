@@ -190,6 +190,10 @@ namespace CuoiKi.DAOs
         {
             return string.Format("SELECT * FROM Tasks WHERE ID = '{0}'", id);
         }
+        public static string GetAssignedJobsByManagerToEmployeeCommand(string assignerID, string assigneeID)
+        {
+            return string.Format("SELECT * FROM Tasks WHERE Assigner = '{0}' AND Assignee = '{1}';", assignerID, assigneeID);
+        }
         #endregion
 
         #region Project
@@ -423,6 +427,7 @@ namespace CuoiKi.DAOs
                 employeeID
                 );
         }
+
         #endregion
 
     }

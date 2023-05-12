@@ -205,5 +205,9 @@ namespace CuoiKi.Controllers
         {
             return workLeaveDAO.GetAllOfAnEmployee(employeeID);
         }
+        public List<Task>? GetAssignedJobsByManagerToEmployee(string assignerID, string assigneeID)
+        {
+            return taskDAO.GetAssignedJobsByManagerToEmployee(assignerID, assigneeID);
+        }
     }
 }

@@ -46,5 +46,11 @@ namespace CuoiKi.DAOs
             string cmd = SqlConverter.GetTasksOfATeamMemberCommand(member);
             return dbc.ExecuteWithResults<Task>(cmd);
         }
+
+        internal List<Task>? GetAssignedJobsByManagerToEmployee(string assignerID, string assigneeID)
+        {
+            string cmd = SqlConverter.GetAssignedJobsByManagerToEmployeeCommand(assignerID, assigneeID);
+            return dbc.ExecuteWithResults<Task>(cmd);
+        }
     }
 }

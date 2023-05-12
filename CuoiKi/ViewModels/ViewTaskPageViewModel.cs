@@ -1,8 +1,8 @@
-﻿using CuoiKi.HelperClasses;
+﻿using CuoiKi.Controllers;
+using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
@@ -11,14 +11,25 @@ namespace CuoiKi.ViewModels
     {
         private string employeeName = string.Empty;
         private string employeeID = string.Empty;
-        private ObservableCollection<Task> _fakeTaskList = new ObservableCollection<Task>();
-        public ObservableCollection<Task> FakeTaskList
+        private List<Task>? _assignedTasks;
+        private DbController _dbController;
+        private Task? _selectedTask;
+        public Task? SelectedTask
         {
-            get { return _fakeTaskList; }
+            get => _selectedTask;
             set
             {
-                _fakeTaskList = value;
-                OnPropertyChanged(nameof(FakeTaskList));
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+            }
+        }
+        public List<Task>? AssignedTasks
+        {
+            get => _assignedTasks;
+            set
+            {
+                _assignedTasks = value;
+                OnPropertyChanged(nameof(AssignedTasks));
             }
         }
         public string EmployeeName
@@ -43,19 +54,14 @@ namespace CuoiKi.ViewModels
         {
             EmployeeName = TaskAssignmentState.SelectedEmployee.Name;
             EmployeeID = TaskAssignmentState.SelectedEmployee.ID;
-            UpdateTaskList();
+            _assignedTasks = new List<Task>();
+            _dbController = new DbController();
+            FetchAssignedTasks();
         }
-
-        private void UpdateTaskList()
+        void FetchAssignedTasks()
         {
-            FakeTaskList.Clear();
-            // query from database
-            // here I add some fake data to test
-            for (int i = 0; i < 10; i++)
-            {
-                Task temp = Task.CreateNewTask("Assignee" + i.ToString(), "Assigner" + i.ToString(), "This is task " + i.ToString(), "Task" + i.ToString(), DateTime.Now, DateTime.Now);
-                FakeTaskList.Add(temp);
-            }
+            AssignedTasks!.Clear();
+            AssignedTasks = _dbController.GetAssignedJobsByManagerToEmployee(LoginInfoState.Id!, employeeID);
         }
         private ICommand? _CmdEdit { get; set; }
         public ICommand CmdEdit
@@ -86,7 +92,9 @@ namespace CuoiKi.ViewModels
         }
         private void MarkAsDone()
         {
-
+            SelectedTask!.Status = Constants.TaskStatus.Done;
+            _dbController.Save(SelectedTask);
+            FetchAssignedTasks();
         }
 
     }

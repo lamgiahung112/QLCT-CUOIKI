@@ -76,7 +76,7 @@
                          Text="{Binding EmployeeID}"/>
                 </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="DataGridview" ItemsSource="{Binding FakeTaskList}"
+            <DataGrid x:Name="DataGridview" ItemsSource="{Binding AssignedTasks}"
           AutoGenerateColumns="False"
           IsReadOnly="True"
           Grid.Row="1" Grid.RowSpan="2"
