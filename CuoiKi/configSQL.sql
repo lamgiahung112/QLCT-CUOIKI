@@ -121,4 +121,10 @@ Insert into Employees Values (N'mng1', N'manager3', N'UTE', '2023-03-04', 'Activ
 Insert into Employees Values (N'mng2', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr');
 
-Select * From WorkLeaves;
+use companydb;
+select * from tasks;
+select * from projects;
+SELECT t.*
+FROM Tasks t
+JOIN Projects p ON t.Assigner = p.ManagerID
+WHERE p.ID = N'Prj51320234351'

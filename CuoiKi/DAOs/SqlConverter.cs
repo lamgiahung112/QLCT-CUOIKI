@@ -194,6 +194,14 @@ namespace CuoiKi.DAOs
         {
             return string.Format("SELECT * FROM Tasks WHERE Assigner = '{0}' AND Assignee = '{1}';", assignerID, assigneeID);
         }
+        // This method is not checked yet
+        public static string GetAllTaskOfProjectCommand(string projectID)
+        {
+            return string.Format("SELECT t.ID, t.Assignee, t.Assigner, t.[Description], t.Title, t.StartingTime, t.EndingTime, t.[Status], t.CreatedAt, t.UpdatedAt" +
+                " FROM Tasks t" +
+                " JOIN Projects p ON t.Assigner = p.ManagerID" +
+                " WHERE p.ID = N'{0}'", projectID);
+        }
         #endregion
 
         #region Project
@@ -427,6 +435,8 @@ namespace CuoiKi.DAOs
                 employeeID
                 );
         }
+
+
 
         #endregion
 

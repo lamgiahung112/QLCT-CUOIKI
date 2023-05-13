@@ -3,8 +3,8 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
+using CuoiKi.Wrappers;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +14,17 @@ namespace CuoiKi.ViewModels
     public class ProjectsPageViewModel : ViewModelBase
     {
         private readonly DbController dbController;
-        private ObservableCollection<Project> _projectList;
+        private List<Project>? _projectList;
+        private List<ProjectWrapper>? _projectWrappers;
+        public List<ProjectWrapper>? ProjectWrappers
+        {
+            get => _projectWrappers;
+            set
+            {
+                _projectWrappers = value;
+                OnPropertyChanged(nameof(ProjectWrapper));
+            }
+        }
         private string _projectID = "";
         private Visibility _VisID = Visibility.Collapsed;
         private string _currentManagerID = "";
@@ -22,17 +32,25 @@ namespace CuoiKi.ViewModels
         {
             dbController = new DbController();
             _currentManagerID = LoginInfoState.Id!;
-            _projectList = new ObservableCollection<Project>();
-            fetchProjectListToObservableCollection();
+            _projectList = new List<Project>();
+            _projectWrappers = new List<ProjectWrapper>();
+            ProjectWrappers = new List<ProjectWrapper>();
+            fetchProjectList();
         }
-        private void fetchProjectListToObservableCollection()
+        private void fetchProjectList()
         {
-            _projectList.Clear();
-            List<Project>? projects = dbController.GetProjectsOfCurrentAccount();
-            if (projects is null) return;
-            foreach (var project in projects)
+            _projectList!.Clear();
+            _projectList = dbController.GetProjectsOfCurrentAccount();
+            ProjectWrappers!.Clear();
+            for (int i = 0; i < _projectList!.Count; i++)
             {
-                _projectList.Add(project);
+                ProjectWrapper projectWrapper = new ProjectWrapper(_projectList[i]);
+                List<Task>? tasks = new List<Task>();
+                tasks = dbController.GetAllTaskOfProject(projectWrapper.ID);
+                int percentDone = 0;
+                if (tasks is not null && tasks.Count != 0) percentDone = (tasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / tasks.Count);
+                projectWrapper.InitializeUI(percentDone);
+                ProjectWrappers.Add(projectWrapper);
             }
         }
         public string ProjectID
@@ -53,15 +71,6 @@ namespace CuoiKi.ViewModels
         {
             get { return _VisID; }
             set { _VisID = value; OnPropertyChanged(nameof(VisID)); }
-        }
-        public ObservableCollection<Project> ProjectList
-        {
-            get { return _projectList; }
-            set
-            {
-                _projectList = value;
-                OnPropertyChanged(nameof(ProjectList));
-            }
         }
         public string CurrentManagerID
         {
@@ -102,7 +111,7 @@ namespace CuoiKi.ViewModels
             project.Name = ToBeSavedProjectName;
             project.Description = ToBeSavedProjectDescription;
             dbController.Save(project);
-            fetchProjectListToObservableCollection();
+            fetchProjectList();
         }
 
         private bool canSaveProject = false;
@@ -184,11 +193,11 @@ namespace CuoiKi.ViewModels
         private bool canDeleteProject = true;
         private void ViewProject()
         {
-            TaskAssignmentState.SelectedProject = ProjectList.Where(x => x.ID == ProjectID).ElementAt(0);
+            TaskAssignmentState.SelectedProject = _projectList!.Where(x => x.ID == ProjectID).ElementAt(0);
         }
         private void EditProject()
         {
-            var prjForm = new ProjectForm(this); 
+            var prjForm = new ProjectForm(this);
             prjForm.Show();
         }
         private void DeleteProject()
