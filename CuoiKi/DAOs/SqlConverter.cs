@@ -132,11 +132,12 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "INSERT INTO Tasks " +
-                "(ID, Assignee, Assigner, [Description], Title, StartingTime, EndingTime, [Status], CreatedAt, UpdatedAt) " +
-                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}','{8}','{9}')",
+                "(ID, Assignee, Assigner, TeamID, [Description], Title, StartingTime, EndingTime, [Status], CreatedAt, UpdatedAt) " +
+                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}','{8}','{9}', '{10}')",
                 task.ID,
                 task.Assignee,
                 task.Assigner,
+                task.TeamID,
                 task.Description,
                 task.Title,
                 task.StartingTime.ToShortDateString(),
@@ -154,7 +155,7 @@ namespace CuoiKi.DAOs
         {
             return string.Format(
                 "SELECT " +
-                "Tasks.ID, Tasks.Assignee, Task.Assigner, Task.[Description], " +
+                "Tasks.ID, Tasks.Assignee, Task.Assigner, Task.TeamID, Task.[Description], " +
                 "Task.Title, Task.StartingTime, Task.EndingTime, Task.[Status], " +
                 "Task.CreatedAt, Task.UpdatedAt " +
                 "FROM Tasks INNER JOIN TeamMembers on Tasks.Assignee = '{0}'"
@@ -194,13 +195,29 @@ namespace CuoiKi.DAOs
         {
             return string.Format("SELECT * FROM Tasks WHERE Assigner = '{0}' AND Assignee = '{1}';", assignerID, assigneeID);
         }
-        // This method is not checked yet
         public static string GetAllTaskOfProjectCommand(string projectID)
         {
-            return string.Format("SELECT t.ID, t.Assignee, t.Assigner, t.[Description], t.Title, t.StartingTime, t.EndingTime, t.[Status], t.CreatedAt, t.UpdatedAt" +
-                " FROM Tasks t" +
-                " JOIN Projects p ON t.Assigner = p.ManagerID" +
-                " WHERE p.ID = N'{0}'", projectID);
+            return string.Format("SELECT Tasks.*" +
+                " FROM Projects" +
+                " JOIN Stages ON Projects.ID = Stages.ProjectID" +
+                " JOIN Teams ON Stages.ID = Teams.StageID" +
+                " JOIN Tasks ON Teams.ID = Tasks.TeamID" +
+                " WHERE Projects.ID = '{0}';", projectID);
+        }
+        public static string GetAllTaskOfStageCommand(string stageID)
+        {
+            return string.Format("SELECT Tasks.*" +
+                " FROM Stages" +
+                " JOIN Teams ON Stages.ID = Teams.StageID" +
+                " JOIN Tasks ON Teams.ID = Tasks.TeamID" +
+                " WHERE Stages.ID = '{0}';", stageID);
+        }
+        public static string GetAllTaskOfTeamCommand(string teamID)
+        {
+            return string.Format("SELECT Tasks.*" +
+                " FROM Teams" +
+                " JOIN Tasks ON Teams.ID = Tasks.TeamID" +
+                " WHERE Teams.ID = '{0}';", teamID);
         }
         #endregion
 

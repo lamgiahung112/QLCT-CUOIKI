@@ -56,5 +56,15 @@ namespace CuoiKi.DAOs
             string cmd = SqlConverter.GetAllTaskOfProjectCommand(projectID);
             return dbc.ExecuteWithResults<Task>(cmd);
         }
+        public List<Task>? GetAllTaskOfStage(string stageID)
+        {
+            string cmd = SqlConverter.GetAllTaskOfStageCommand(stageID);
+            return dbc.ExecuteWithResults<Task>(cmd);
+        }
+        public List<Task>? GetAllTaskOfTeam(string teamID)
+        {
+            string cmd = SqlConverter.GetAllTaskOfTeamCommand(teamID);
+            return dbc.ExecuteWithResults<Task>(cmd);
+        }
     }
 }

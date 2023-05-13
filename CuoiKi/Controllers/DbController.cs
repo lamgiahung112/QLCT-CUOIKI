@@ -213,5 +213,13 @@ namespace CuoiKi.Controllers
         {
             return taskDAO.GetAllTaskOfProject(projectID);
         }
+        public List<Task>? GetAllTaskOfStage(string stageID)
+        {
+            return taskDAO.GetAllTaskOfStage(stageID);
+        }
+        public List<Task>? GetAllTaskOfTeam(string teamID)
+        {
+            return taskDAO.GetAllTaskOfTeam(teamID);
+        }
     }
 }

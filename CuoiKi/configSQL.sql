@@ -82,6 +82,7 @@ CREATE TABLE Tasks (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
     Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    TeamID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Teams(ID),
     [Description] NVARCHAR(255) NOT NULL,
     Title NVARCHAR(255) NOT NULL,
     StartingTime DateTime NOT NULL,
@@ -123,8 +124,6 @@ Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a
 
 use companydb;
 select * from tasks;
+select * from teams;
+select * from stages;
 select * from projects;
-SELECT t.*
-FROM Tasks t
-JOIN Projects p ON t.Assigner = p.ManagerID
-WHERE p.ID = N'Prj51320234351'

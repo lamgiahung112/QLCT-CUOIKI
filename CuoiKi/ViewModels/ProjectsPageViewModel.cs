@@ -22,7 +22,7 @@ namespace CuoiKi.ViewModels
             set
             {
                 _projectWrappers = value;
-                OnPropertyChanged(nameof(ProjectWrapper));
+                OnPropertyChanged(nameof(ProjectWrappers));
             }
         }
         private string _projectID = "";
@@ -41,17 +41,18 @@ namespace CuoiKi.ViewModels
         {
             _projectList!.Clear();
             _projectList = dbController.GetProjectsOfCurrentAccount();
+            _projectWrappers!.Clear();
             ProjectWrappers!.Clear();
             for (int i = 0; i < _projectList!.Count; i++)
             {
                 ProjectWrapper projectWrapper = new ProjectWrapper(_projectList[i]);
-                List<Task>? tasks = new List<Task>();
-                tasks = dbController.GetAllTaskOfProject(projectWrapper.ID);
+                List<Task>? tasks = dbController.GetAllTaskOfProject(projectWrapper.ID);
                 int percentDone = 0;
                 if (tasks is not null && tasks.Count != 0) percentDone = (tasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / tasks.Count);
                 projectWrapper.InitializeUI(percentDone);
-                ProjectWrappers.Add(projectWrapper);
+                _projectWrappers.Add(projectWrapper);
             }
+            ProjectWrappers = new List<ProjectWrapper>(_projectWrappers);
         }
         public string ProjectID
         {

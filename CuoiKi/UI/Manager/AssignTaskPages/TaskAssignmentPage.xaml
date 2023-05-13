@@ -10,8 +10,38 @@
       d:DataContext="{d:DesignInstance Type=viewmodels:TeamsPageViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskAssignmentPage">
-
-
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2196F3" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="12 8" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1565C0" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#0D47A1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -38,7 +68,7 @@
                       x:Name="MyScrollViewer" 
                       HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
                       Margin="0,5,0,5">
-            <ItemsControl ItemsSource="{Binding TeamList}">
+            <ItemsControl ItemsSource="{Binding TeamWrappers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -46,8 +76,9 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 10 10 10" 
-                                Width="300" 
+                        <Button Margin="10 10 10 10"
+                                Style="{StaticResource CustomButtonStyle}"
+                                Width="250" 
                                 Height="100" 
                                 Name="BtnTeamItem"
                                 Click="Team_Click"
@@ -82,6 +113,10 @@
                                     <TextBlock Text="{Binding TechLeadID}" 
                                                Margin="5,0"
                                                HorizontalAlignment="Left"/>
+                                    <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
+                                              Value="{Binding PercentDone}" 
+                                              Style="{x:Null}" 
+                                              Foreground="{Binding BarColor}"></ProgressBar>
                                 </WrapPanel>
                                 
                             </StackPanel>

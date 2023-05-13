@@ -1,16 +1,13 @@
 ﻿using CuoiKi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.DAOs
 {
     public class TeamDAO : IDAO<Team>
     {
         private readonly DBConnection dbc;
-        public TeamDAO() 
+        public TeamDAO()
         {
             dbc = new DBConnection();
         }

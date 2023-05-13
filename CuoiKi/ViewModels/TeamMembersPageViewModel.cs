@@ -171,7 +171,7 @@ namespace CuoiKi.ViewModels
         private bool _CanSaveTask = false;
         private void SaveTask()
         {
-            Task task = Task.CreateNewTask(TaskAssignmentState.SelectedEmployee!.ID, _CurrentManagerID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
+            Task task = Task.CreateNewTask(TaskAssignmentState.SelectedEmployee!.ID, _CurrentManagerID, TaskAssignmentState.SelectedTeam!.ID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
             _controller.Save(task);
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
         }

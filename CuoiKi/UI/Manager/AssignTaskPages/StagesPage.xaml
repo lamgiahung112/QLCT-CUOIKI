@@ -8,7 +8,38 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProjectPage">
-
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2196F3" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="12 8" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1565C0" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#0D47A1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -23,7 +54,7 @@
         <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddStageClickCommand}"/>
         <ScrollViewer  Width="800" Height="350" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-            <ItemsControl ItemsSource="{Binding StageList}">
+            <ItemsControl ItemsSource="{Binding StageWrappers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="800"/>
@@ -32,6 +63,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button 
+                            Style="{StaticResource CustomButtonStyle}"
                             Margin="10 20 10 20" 
                             Width="200" Height="100" 
                             Name="BtnStageItem"
@@ -55,6 +87,10 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
                                 <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>
+                                <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
+                                              Value="{Binding PercentDone}" 
+                                              Style="{x:Null}" 
+                                              Foreground="{Binding BarColor}"></ProgressBar>
                             </StackPanel>
                         </Button>
                     </DataTemplate>
