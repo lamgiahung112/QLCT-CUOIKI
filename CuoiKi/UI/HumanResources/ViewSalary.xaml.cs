@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -9,9 +9,10 @@ namespace CuoiKi.UI.HumanResources
     /// </summary>
     public partial class ViewSalary : Page
     {
-        public ViewSalary()
+        public ViewSalary(SalaryOfMember som)
         {
             InitializeComponent();
+            this.DataContext = som;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
