@@ -1,20 +1,6 @@
-﻿using CuoiKi.Constants;
-using CuoiKi.ViewModels;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuoiKi.UI.Staff
 {
@@ -29,7 +15,7 @@ namespace CuoiKi.UI.Staff
             InitializeComponent();
             this.DataContext = new UserInformationViewModel();
         }
-        
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             if (isEditMode)
@@ -49,16 +35,16 @@ namespace CuoiKi.UI.Staff
                 cbb_Gender.IsReadOnly = false;
                 txt_Name.IsReadOnly = true;
                 cbb_Role.IsEnabled = false;
-/*                string address = txt_Address.Text;
-                string birth = txt_Birth.Text;
-                string name = txt_Name.Text;
-                string role = cbb_Role.Text;
-                string status = txt_Status.Text;
-                string gender = txt_Gender.Text;*/
+                /*                string address = txt_Address.Text;
+                                string birth = txt_Birth.Text;
+                                string name = txt_Name.Text;
+                                string role = cbb_Role.Text;
+                                string status = txt_Status.Text;
+                                string gender = txt_Gender.Text;*/
                 btn_Edit_Or_Save.Content = "Edit";
                 isEditMode = true;
             }
-            
-    }
+
+        }
     }
 }

@@ -82,6 +82,7 @@ CREATE TABLE Tasks (
     ID NVARCHAR(50) NOT NULL PRIMARY KEY,
     Assignee NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
     Assigner NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    TeamID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Teams(ID),
     [Description] NVARCHAR(255) NOT NULL,
     Title NVARCHAR(255) NOT NULL,
     StartingTime DateTime NOT NULL,
@@ -121,4 +122,8 @@ Insert into Employees Values (N'mng1', N'manager3', N'UTE', '2023-03-04', 'Activ
 Insert into Employees Values (N'mng2', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr');
 
-Select * From WorkLeaves;
+use companydb;
+select * from tasks;
+select * from teams;
+select * from stages;
+select * from projects;

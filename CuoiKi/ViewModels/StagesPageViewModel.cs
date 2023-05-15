@@ -3,6 +3,7 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
+using CuoiKi.Wrappers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -17,11 +18,14 @@ namespace CuoiKi.ViewModels
         {
             _controller = new DbController();
             _stageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
+            _stageWrappers = new List<StageWrapper>();
+            StageWrappers = new List<StageWrapper>();
             Title = "Add New Stage";
             StageID = "";
             _tobeSavedStageDescription = "";
             ShowID = Visibility.Collapsed;
             ProjectID = TaskAssignmentState.SelectedProject!.ID;
+            FetchStageList();
         }
 
         public Visibility ShowID { get; set; }
@@ -31,14 +35,15 @@ namespace CuoiKi.ViewModels
 
 
         #region Stage list binding
-        private List<Stage> _stageList;
-        public List<Stage> StageList
+        private List<Stage>? _stageList;
+        private List<StageWrapper>? _stageWrappers;
+        public List<StageWrapper>? StageWrappers
         {
-            get { return _stageList; }
+            get => _stageWrappers;
             set
             {
-                _stageList = value;
-                OnPropertyChanged(nameof(StageList));
+                _stageWrappers = value;
+                OnPropertyChanged(nameof(StageWrappers));
             }
         }
         #endregion
@@ -111,7 +116,7 @@ namespace CuoiKi.ViewModels
         {
             if (param == null) return;
             string stageID = (param as string)!;
-            TaskAssignmentState.SelectedStage = StageList.Where(x => x.ID == stageID).FirstOrDefault();
+            TaskAssignmentState.SelectedStage = _stageList.Where(x => x.ID == stageID).FirstOrDefault();
             Title = "Edit Stage";
             StageID = TaskAssignmentState.SelectedStage!.ID;
             ToBeSavedStageDescription = TaskAssignmentState.SelectedStage!.Description;
@@ -120,7 +125,18 @@ namespace CuoiKi.ViewModels
 
         private void FetchStageList()
         {
-            StageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
+            _stageList = _controller.GetStagesOfProject(TaskAssignmentState.SelectedProject!) ?? new List<Stage>();
+            _stageWrappers!.Clear();
+            for (int i = 0; i < _stageList.Count; i++)
+            {
+                StageWrapper stageWrapper = new StageWrapper(_stageList[i]);
+                List<Task>? tasks = _controller.GetAllTaskOfStage(stageWrapper.ID);
+                int percentDone = 0;
+                if (tasks is not null && tasks.Count != 0) percentDone = (tasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / tasks.Count);
+                stageWrapper.InitializeUI(percentDone);
+                _stageWrappers.Add(stageWrapper);
+            }
+            StageWrappers = new List<StageWrapper>(_stageWrappers);
         }
 
         public void SaveStage()
@@ -154,7 +170,7 @@ namespace CuoiKi.ViewModels
         private bool canDeleteStage = true;
         private void ViewStage()
         {
-            TaskAssignmentState.SelectedStage = StageList.Where(x => x.ID == StageID).FirstOrDefault();
+            TaskAssignmentState.SelectedStage = _stageList.Where(x => x.ID == StageID).FirstOrDefault();
         }
         private void EditStage()
         {

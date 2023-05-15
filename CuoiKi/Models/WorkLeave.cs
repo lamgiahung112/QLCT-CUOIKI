@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.Models
 {
@@ -22,9 +18,9 @@ namespace CuoiKi.Models
             this.ReasonOfLeave = ReasonOfLeave;
         }
 
-        public static WorkLeave GetNewWorkLeave(string EmployeeID, DateTime FromDate, DateTime ToDate,string ReasonOfLeave)
+        public static WorkLeave GetNewWorkLeave(string EmployeeID, DateTime FromDate, DateTime ToDate, string ReasonOfLeave)
         {
-            return new("LEAVE"+ new Random().NextInt64().ToString(), EmployeeID, FromDate, ToDate, ReasonOfLeave);
+            return new("LEAVE" + new Random().NextInt64().ToString(), EmployeeID, FromDate, ToDate, ReasonOfLeave);
         }
 
     }

@@ -206,9 +206,25 @@ namespace CuoiKi.Controllers
             }
             return tasks;
         }
-        public List<WorkLeave>? GetAllWorkLeaveOfEmployeeInMonth(string employeeID)
+        public List<WorkLeave>? GetAllWorkLeaveOfEmployee(string employeeID)
         {
-            return workLeaveDAO.GetAllOfAnEmployeeInMonth(employeeID);
+            return workLeaveDAO.GetAllOfAnEmployee(employeeID);
+        }
+        public List<Task>? GetAssignedJobsByManagerToEmployee(string assignerID, string assigneeID)
+        {
+            return taskDAO.GetAssignedJobsByManagerToEmployee(assignerID, assigneeID);
+        }
+        public List<Task>? GetAllTaskOfProject(string projectID)
+        {
+            return taskDAO.GetAllTaskOfProject(projectID);
+        }
+        public List<Task>? GetAllTaskOfStage(string stageID)
+        {
+            return taskDAO.GetAllTaskOfStage(stageID);
+        }
+        public List<Task>? GetAllTaskOfTeam(string teamID)
+        {
+            return taskDAO.GetAllTaskOfTeam(teamID);
         }
     }
 }

@@ -4,7 +4,7 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
-using System;
+using CuoiKi.Wrappers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -28,24 +28,38 @@ namespace CuoiKi.ViewModels
             _TechLead = null;
             _TeamName = "";
             _techLeadsFromDB = _employeeDAO.GetAllTechLeads() ?? new();
+            _teamList = new List<Team>();
+            _teamWrappers = new List<TeamWrapper>();
+            TeamWrappers = new List<TeamWrapper>();
             FetchTeamList();
         }
 
         #region List Team Binding
-        private List<Team> _teamList;
-        public List<Team> TeamList
+        private List<Team>? _teamList;
+        private List<TeamWrapper>? _teamWrappers;
+        public List<TeamWrapper>? TeamWrappers
         {
-            get { return _teamList; }
+            get => _teamWrappers;
             set
             {
-                _teamList = value;
-                OnPropertyChanged(nameof(TeamList));
+                _teamWrappers = value;
+                OnPropertyChanged(nameof(TeamWrappers));
             }
         }
-
         private void FetchTeamList()
         {
-            TeamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
+            _teamList = _controller.GetTeamsOfStage(TaskAssignmentState.SelectedStage!) ?? new();
+            _teamWrappers!.Clear();
+            for (int i = 0; i < _teamList.Count; i++)
+            {
+                TeamWrapper teamWrapper = new TeamWrapper(_teamList[i]);
+                List<Task>? tasks = _controller.GetAllTaskOfTeam(teamWrapper.ID);
+                int percentDone = 0;
+                if (tasks is not null && tasks.Count != 0) percentDone = (tasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / tasks.Count);
+                teamWrapper.InitializeUI(percentDone);
+                _teamWrappers.Add(teamWrapper);
+                TeamWrappers = new List<TeamWrapper>(_teamWrappers);
+            }
         }
 
         #endregion
@@ -232,7 +246,7 @@ namespace CuoiKi.ViewModels
             {
                 return;
             }
-            TaskAssignmentState.SelectedTeam = TeamList.Where(x => x.ID == id).FirstOrDefault();
+            TaskAssignmentState.SelectedTeam = _teamList.Where(x => x.ID == id).FirstOrDefault();
             TeamID = id;
         }
         #endregion

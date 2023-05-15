@@ -1,10 +1,5 @@
-﻿using CuoiKi.Constants;
-using CuoiKi.Models;
-using System;
+﻿using CuoiKi.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CuoiKi.DAOs
 {
@@ -37,11 +32,10 @@ namespace CuoiKi.DAOs
             return null;
         }
 
-        public List<WorkLeave>? GetAllOfAnEmployeeInMonth(string employeeID)
+        public List<WorkLeave>? GetAllOfAnEmployee(string employeeID)
         {
             string cmd = SqlConverter.GetAllLeavesOfAnEmployeeCommand(employeeID);
-            List<WorkLeave>? allLeaves = dbc.ExecuteWithResults<WorkLeave>(cmd);
-            return allLeaves?.FindAll(x => x.FromDate.Month == DateTime.Now.Month && x.FromDate.Year == DateTime.Now.Year);
+            return dbc.ExecuteWithResults<WorkLeave>(cmd);
         }
 
         public void Modify(WorkLeave entry)

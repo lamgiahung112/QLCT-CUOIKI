@@ -1,17 +1,8 @@
 ﻿using CuoiKi.Constants;
-using CuoiKi.Controllers;
 using CuoiKi.DAOs;
-using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CuoiKi.ViewModels
 {
