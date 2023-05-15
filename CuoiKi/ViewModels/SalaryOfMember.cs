@@ -1,3 +1,5 @@
+using CuoiKi.Controllers;
+using CuoiKi.Models;
 using System.Collections.Generic;
 
 namespace CuoiKi.ViewModels
