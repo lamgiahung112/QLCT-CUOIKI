@@ -274,6 +274,11 @@ namespace CuoiKi.DAOs
             );
         }
 
+        public static string GetAllProjectsOfATechLeadCommand(string techleadID)
+        {
+            return string.Format("SELECT Projects.* FROM Projects INNER JOIN Stages ON Projects.ID = Stages.ProjectID INNER JOIN Teams ON Teams.StageID = Stages.ID WHERE Teams.TechLeadID = '{0}'", techleadID);
+        }
+
         public static string GetAllProjectsOfEmployeeCommand(string employeeID)
         {
             return string.Format(

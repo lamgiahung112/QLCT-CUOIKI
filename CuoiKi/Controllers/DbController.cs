@@ -226,5 +226,9 @@ namespace CuoiKi.Controllers
         {
             return taskDAO.GetAllTaskOfTeam(teamID);
         }
+        public List<Project>? GetAllProjectsOfTechLead(string techLeadID)
+        {
+            return projectDAO.GetAllProjectsOfTechLead(techLeadID);
+        }
     }
 }
