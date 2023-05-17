@@ -31,9 +31,9 @@
     <Compile Update="UI\Forms\TeamMemberForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-	<Compile Update="UI\HumanResources\MemberList.xaml.cs">
-	  <SubType>Code</SubType>
-	</Compile>
+    <Compile Update="UI\HumanResources\MemberList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Forms\WorkLeaveForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
