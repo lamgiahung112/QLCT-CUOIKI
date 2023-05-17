@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CuoiKi.UI.Forms;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.UI.Techlead
@@ -26,6 +27,10 @@ namespace CuoiKi.UI.Techlead
         private void LogOut_click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+        private void btn_CalcSalary_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new SalaryPage());
         }
     }
 }

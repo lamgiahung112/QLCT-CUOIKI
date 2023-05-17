@@ -467,5 +467,11 @@ namespace CuoiKi.DAOs
 
         #endregion
 
+        #region Salary
+        public static string GetAllSalaryCommand()
+        {
+            return "SELECT * FROM SALARY";
+        }
+        #endregion
     }
 }

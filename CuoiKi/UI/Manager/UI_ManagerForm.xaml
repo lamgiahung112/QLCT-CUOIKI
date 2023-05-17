@@ -75,13 +75,6 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button x:Name="btn_KPI" Style="{StaticResource menuButton}" Click="btn_KPI_click">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Walk" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="KPI" FontSize="15"/>
-                                </StackPanel>
-                            </Button>
-
                         </StackPanel>
 
                         <Button x:Name="btnLogOut" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="LogOut_click">

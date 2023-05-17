@@ -1,4 +1,5 @@
-﻿using CuoiKi.UI.Manager.AssignTaskPages;
+﻿using CuoiKi.UI.Forms;
+using CuoiKi.UI.Manager.AssignTaskPages;
 using System.Windows;
 using System.Windows.Input;
 namespace CuoiKi.UI.Manager
@@ -25,7 +26,7 @@ namespace CuoiKi.UI.Manager
 
         private void btn_CalcSalary_click(object sender, RoutedEventArgs e)
         {
-            frameContent.Navigate(new CalcSalary.CalcSalaryPage());
+            frameContent.Navigate(new SalaryPage());
         }
 
         private void btn_AssignTask_click(object sender, RoutedEventArgs e)

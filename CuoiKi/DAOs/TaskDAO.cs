@@ -41,6 +41,11 @@ namespace CuoiKi.DAOs
             dbc.Execute(cmd);
         }
 
+        public List<Task>? GetAllTasksOfAnEmployee(string id)
+        {
+            return GetAll()?.FindAll(x => x.Assigner == id);
+        }
+
         public List<Task>? GetTasksOfATeamMember(TeamMember member)
         {
             string cmd = SqlConverter.GetTasksOfATeamMemberCommand(member);
