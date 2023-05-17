@@ -6,10 +6,12 @@ namespace CuoiKi.Wrappers
     {
         public int PercentDone { get; set; }
         public SolidColorBrush BarColor { get; set; }
+        public string TooltipString { get; set; }
         public Wrapper()
         {
             PercentDone = 0;
             BarColor = Brushes.Gray;
+            TooltipString = string.Empty;
         }
         public virtual void InitializeUI(int percentDone)
         {
@@ -30,6 +32,7 @@ namespace CuoiKi.Wrappers
             {
                 BarColor = new SolidColorBrush(Color.FromRgb(0, 255, 25));
             }
+            TooltipString = string.Format("{0} % complete", percentDone);
         }
     }
 }

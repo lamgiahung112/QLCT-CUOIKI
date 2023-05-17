@@ -13,6 +13,7 @@
     <None Remove="UI\logo.png" />
     <None Remove="UI\Manager\manager.png" />
     <None Remove="UI\Staff\account.png" />
+    <None Remove="UI\Techlead\manager.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
     <Resource Include="UI\HumanResources\account.png" />
     <Resource Include="UI\Manager\manager.png" />
     <Resource Include="UI\Staff\account.png" />
+    <Resource Include="UI\Techlead\manager.png" />
   </ItemGroup>
 
 </Project>

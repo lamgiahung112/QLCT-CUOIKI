@@ -16,12 +16,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="160"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="240"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-
         <Label Content="{Binding CurrentTeamName}"
                FontSize="36"
                Grid.ColumnSpan="2"
@@ -30,114 +27,68 @@
                 Content="Add"
                 Command="{Binding CmdOpenTeamMemberManagementForm}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
-              Width="820" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"
-              >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70" />
-                <RowDefinition Height="470"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.75*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" 
-                        Width="745" HorizontalAlignment="Left" Margin="45,0,0,90"
-                        BorderThickness="3" BorderBrush="DarkKhaki">
-                <ListView ItemsSource="{Binding TeamMemberList}">
-                    <ListView.Resources>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="#4CAF50"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Padding" Value="10"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="Margin" Value="0"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#2bff00"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="#2bff00"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.Resources>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="700">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal" Grid.Column="0">
-                                    <TextBlock Text="{Binding ID}" Margin="10"/>
-                                    <TextBlock Text="{Binding Name}" Margin="10"/>
-                                    <TextBlock Text="{Binding Role, StringFormat='({0})'}" Margin="10"/>
-                                </StackPanel>
-                                <StackPanel x:Name="buttonStackPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Visibility="Collapsed">
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="800" Height="450">
+            <DataGrid ItemsSource="{Binding EmployeeWrappers}" AutoGenerateColumns="False">
+                <DataGrid.Resources>
+                    <Storyboard x:Key="SlideInFromRight">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                           Storyboard.TargetName="StackPanelButtons">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="70" Header="ID" Binding="{Binding ID}" />
+                    <DataGridTextColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="70" Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="70" Header="Role" Binding="{Binding Role}" />
+                    <DataGridTemplateColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="220" Header="Progress">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <ProgressBar Value="{Binding PercentDone}" Foreground="{Binding BarColor}" Height="25"  Minimum="0" Maximum="100" Margin="5 0" />
+                                    <TextBlock Text="{Binding TooltipString}" FontWeight="Bold" Foreground="Black" Margin="10 0"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="370" Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" x:Name="StackPanelButtons" Visibility="Collapsed">
                                     <Button 
                                         Content="Assign task" 
-                                        Margin="5 0 5 0"
-                                        Command="{Binding DataContext.CmdAssignMemberTask, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" 
+                                        Margin="10 0"
+                                        Command="{Binding DataContext.CmdAssignMemberTask, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                                         CommandParameter="{Binding}"/>
-                                    <Button Command="{Binding DataContext.CmdSaveEmployeeToCurrentState, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="View task" Margin="5 0 5 0" Click="btn_ViewTask_Click"/>
-                                    <Button Content="View info" Margin="5 0 5 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
+                                    <Button Command="{Binding DataContext.CmdSaveEmployeeToCurrentState, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Content="View task" Margin="10 0" Click="btn_ViewTask_Click"/>
+                                    <Button Content="View info" Margin="10 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
                                 </StackPanel>
-                            </Grid>
-                            <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStackPanel"
-                                                   Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <DoubleAnimation Storyboard.TargetName="buttonStackPanel"
-                                     Storyboard.TargetProperty="(UIElement.Opacity)"
-                                     From="0" To="1" Duration="0:0:0.2"/>
-                                                <ThicknessAnimation Storyboard.TargetName="buttonStackPanel"
-                                         Storyboard.TargetProperty="Margin"
-                                         From="100,0,0,0" To="0" Duration="0:0:0.4"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="buttonStackPanel"
-                                     Storyboard.TargetProperty="(UIElement.Opacity)"
-                                     From="1" To="0" Duration="0:0:0.2"/>
-                                                <ThicknessAnimation Storyboard.TargetName="buttonStackPanel"
-                                         Storyboard.TargetProperty="Margin"
-                                         From="0" To="100,0,0,0" Duration="0:0:0.4"/>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStackPanel"
-                                                   Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Collapsed}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.ExitActions>
-                                </DataTrigger>
-                            </DataTemplate.Triggers>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"
+                                     Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard Name="SlideInFromRight_BeginStoryboard" Storyboard="{StaticResource SlideInFromRight}"/>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="SlideInFromRight_BeginStoryboard"/>
+                                        </DataTrigger.ExitActions>
+                                        <Setter TargetName="StackPanelButtons"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                                        <Setter TargetName="StackPanelButtons"
+                                    Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="300"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Button x:Name="Back_CLick"
                 Grid.Column="0"
