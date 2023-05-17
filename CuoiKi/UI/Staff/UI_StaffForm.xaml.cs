@@ -1,4 +1,5 @@
-﻿using CuoiKi.ViewModels;
+﻿using CuoiKi.UI.Forms;
+using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,6 +44,11 @@ namespace CuoiKi.UI.Staff
         //        }
         //    }
         //}
+
+        private void btn_CalcSalary_click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new SalaryPage());
+        }
 
         private void btn_Information_click(object sender, RoutedEventArgs e)
         {

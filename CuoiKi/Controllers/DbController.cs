@@ -2,6 +2,7 @@
 using CuoiKi.DAOs;
 using CuoiKi.Models;
 using CuoiKi.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace CuoiKi.Controllers
         private readonly TeamMemberDAO teamMemberDAO;
         private readonly EmployeeDAO employeeDAO;
         private readonly WorkLeaveDAO workLeaveDAO;
+        private readonly SalaryDAO salaryDAO;
 
         public DbController()
         {
@@ -27,6 +29,7 @@ namespace CuoiKi.Controllers
             employeeDAO = new();
             teamMemberDAO = new();
             workLeaveDAO = new();
+            salaryDAO = new();
         }
 
         /// <summary>
@@ -229,6 +232,16 @@ namespace CuoiKi.Controllers
         public List<Project>? GetAllProjectsOfTechLead(string techLeadID)
         {
             return projectDAO.GetAllProjectsOfTechLead(techLeadID);
+        }
+
+        public Salary? GetSalaryOfCurrentUser()
+        {
+            return salaryDAO.GetAll()?.Where(x => x.ID == LoginInfoState.Id!).FirstOrDefault();
+        }
+
+        public List<Task>? GetDelayedTasksOfCurrentUser(DateTime startTime, DateTime endTime)
+        {
+            return taskDAO.GetAllTasksOfAnEmployee(LoginInfoState.Id!)?.Where(x => x.Status == TaskStatus.WIP && x.EndingTime < endTime && x.StartingTime > startTime).ToList();
         }
     }
 }

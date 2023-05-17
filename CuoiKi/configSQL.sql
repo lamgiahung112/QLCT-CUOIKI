@@ -95,7 +95,7 @@ CREATE TABLE Tasks (
 GO
 
 CREATE TABLE Salary(
-    EmployeeID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID),
+    ID NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Employees(ID) PRIMARY KEY,
     basicPay int NOT NULL,
     kpiCost int NOT NULL,
 );
@@ -121,6 +121,18 @@ Insert into Employees Values (N'tl2', N'techlead2', N'UTE', '2023-03-04', 'Activ
 Insert into Employees Values (N'mng1', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'mng2', N'manager3', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Manager');
 Insert into Employees Values (N'hr', N'hr', N'UTE', '2023-03-04', 'Active', '$2a$11$n8.PUKAHT1KhQfHVYiY8ZOsdgcOh2YvH9eRbeSyNHSr5U/Or70IQ6', 'Male', 'Hr');
+
+-- Add Salary
+Insert into Salary Values (N'dev1', 300000000, 300000);
+Insert into Salary Values (N'dev2', 50000000, 50000);
+Insert into Salary Values (N'dev3',124283818, 424222);
+Insert into Salary Values (N'des', 32131288, 2131223)
+Insert into Salary Values (N'tester',3213281, 23813821)
+Insert into Salary Values (N'tl1', 31223172, 231883218)
+Insert into Salary Values (N'tl2', 123812828, 2393219)
+Insert into Salary Values (N'mng1',231321321, 3123312);
+Insert into Salary Values (N'mng2', 12312332, 3123222);
+Insert into Salary Values (N'hr', 1231231231, 5532523);
 
 use companydb;
 select * from tasks;

@@ -65,6 +65,12 @@
                                     <TextBlock Text="Information" FontSize="14"/>
                                 </StackPanel>
                             </Button>
+                            <Button x:Name="btn_CalcSalary" Style="{StaticResource menuButton}" Click="btn_CalcSalary_click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Sale" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Calculate Salary" FontSize="15"/>
+                                </StackPanel>
+                            </Button>
 
                             <Button x:Name="btn_WorkSession" Style="{StaticResource menuButton}" Click="btn_WorkSession_Click">
                                 <StackPanel Orientation="Horizontal">

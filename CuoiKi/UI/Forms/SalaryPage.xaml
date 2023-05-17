@@ -1,11 +1,11 @@
-﻿<Page x:Class="CuoiKi.UI.Manager.CalcSalary.CalcSalaryPage"
+﻿<Page x:Class="CuoiKi.UI.Forms.SalaryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CuoiKi.UI.Forms"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:local="clr-namespace:CuoiKi.UI.Manager.CalcSalary"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:viewmodels="clr-namespace:CuoiKi.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SalaryPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="850"
       Title="CalcSalaryPage">
@@ -20,7 +20,7 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Salary"
+        <Label Content="Your Salary"
                FontSize="36"
                Grid.ColumnSpan="2"
                HorizontalAlignment="Center" 
@@ -39,7 +39,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" 
                         Grid.Row="0" 
-                        Margin="80,0,0,0"
+                        Margin="80,0,80,0"
                         Grid.ColumnSpan="3">
                 <StackPanel VerticalAlignment="Top"
                             HorizontalAlignment="Left">
@@ -49,13 +49,14 @@
                        FontSize="20"
                        FontWeight="Medium"
                        Margin="0 5 0 10"/>
-                    <ComboBox 
-                          Width="200"
-                          FontSize="20"
-                          FontWeight="Light"
-                          BorderThickness="2"
-                          BorderBrush="{DynamicResource MaterialDesignDivider}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                    <TextBox FontWeight="Light"
+                             FontSize="20"
+                             Width="265"
+                             Text="{Binding EmployeeID}"
+                             IsEnabled="False"
+                             BorderThickness="2"
+                             BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -69,6 +70,8 @@
                         Margin="0 5 0 10"/>
                     <TextBox FontWeight="Light"
                              FontSize="20"
+                             IsEnabled="False"
+                             Text="{Binding EmployeeName}"
                              Width="265"
                              BorderThickness="2"
                              BorderBrush="{DynamicResource MaterialDesignDivider}" 
@@ -92,8 +95,10 @@
                            VerticalAlignment="Center"/>
                     <Calendar Name="dteSelectedMonth" 
                           DisplayMode="Year" 
-                          SelectionMode="None" 
-                          DisplayModeChanged="dteSelectedMonth_DisplayModeChanged" 
+                          SelectionMode="SingleDate" 
+                          DisplayDate="{Binding PickedDate}"
+                          SelectedDatesChanged="dteSelectedMonth_SelectedDatesChanged"
+                          DisplayModeChanged="dteSelectedMonth_DisplayModeChanged"
                           Width="228" 
                           Height="267" 
                           Margin="0 10 0 0"/>
@@ -110,6 +115,8 @@
                            VerticalAlignment="Center"/>
                 <TextBox FontWeight="Light"
                          FontSize="20"
+                         IsEnabled="False"
+                         Text="{Binding BasicPay}"
                          Width="250"
                          Margin="20 0 0 0"
                          BorderThickness="2"
@@ -130,6 +137,8 @@
                          FontSize="20"
                          Width="115"
                          Margin="20 0 0 0"
+                         IsEnabled="False"
+                         Text="{Binding DelayedTasksCnt}"
                          BorderThickness="2"
                          BorderBrush="{DynamicResource MaterialDesignDivider}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -148,6 +157,8 @@
                          FontWeight="Light"
                          Width="230"
                          Margin="20 0 0 0"
+                         IsEnabled="False"
+                         Text="{Binding TotalPay}"
                          BorderThickness="2"
                          BorderBrush="{DynamicResource MaterialDesignDivider}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
