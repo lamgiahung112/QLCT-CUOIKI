@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CuoiKi.ViewModels
 {
@@ -14,6 +15,17 @@ namespace CuoiKi.ViewModels
     {
         private DbController _dbController;
         private List<Task>? _taskList;
+        private int _percentDone;
+        public int PercentDone
+        {
+            get => _percentDone;
+            set
+            {
+                _percentDone = value;
+                OnPropertyChanged(nameof(PercentDone));
+            }
+        }
+        public SolidColorBrush BarColor { get; set; }
         public List<Task>? TaskList
         {
             get => _taskList;
@@ -45,6 +57,29 @@ namespace CuoiKi.ViewModels
             fetchTaskList();
             // At first, there is no filter
             FilteredTaskList = TaskList;
+            BarColor = Brushes.Gray;
+            UpdateProgressBar();
+        }
+        private void UpdateProgressBar()
+        {
+            PercentDone = 0;
+            if (FilteredTaskList is not null && FilteredTaskList.Count != 0) PercentDone = (FilteredTaskList!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / FilteredTaskList.Count);
+            if (PercentDone < 30)
+            {
+                BarColor = Brushes.Red;
+            }
+            else if (PercentDone < 50)
+            {
+                BarColor = new SolidColorBrush(Color.FromRgb(255, 172, 0));
+            }
+            else if (PercentDone < 80)
+            {
+                BarColor = new SolidColorBrush(Color.FromRgb(249, 255, 85));
+            }
+            else
+            {
+                BarColor = new SolidColorBrush(Color.FromRgb(0, 255, 25));
+            }
         }
         // Use some services to get tasks from database
         private void fetchTaskList()
@@ -62,42 +97,6 @@ namespace CuoiKi.ViewModels
                 _selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
             }
-        }
-
-        private ICommand? _CmdReviewRequest { get; set; }
-        public ICommand CmdReviewRequest
-        {
-            get
-            {
-                _CmdReviewRequest ??= new RelayCommand(
-                    p => true,
-                    p => ReviewRequest());
-                return _CmdReviewRequest;
-            }
-        }
-        private void ReviewRequest()
-        {
-            // Find the index of the task to update
-            int index = _taskList.IndexOf(_taskList.FirstOrDefault(t => t.ID == _selectedTask?.ID));
-            if (index == -1) return;
-
-            // Get the task to update
-            Task taskToUpdate = _taskList[index];
-
-            // Update the task's status
-            taskToUpdate.Status = Constants.TaskStatus.NeedsReview;
-
-            // Save the updated task using the _dbController
-            _dbController.Save(taskToUpdate);
-
-            fetchTaskList();
-
-            // Create a new list with the updated task
-            var updatedList = new List<Task>(_taskList);
-            updatedList[index] = taskToUpdate;
-
-            // Assign the new list to FilteredTaskList
-            FilteredTaskList = updatedList;
         }
         private ICommand? _CmdDone { get; set; }
         public ICommand CmdDone
@@ -133,6 +132,9 @@ namespace CuoiKi.ViewModels
 
             // Assign the new list to FilteredTaskList
             FilteredTaskList = updatedList;
+            ApplyFilter();
+            UpdateProgressBar();
+
         }
 
 
@@ -286,6 +288,8 @@ namespace CuoiKi.ViewModels
                 }
             }
             FilteredTaskList = filteredTasks.ToList();
+            UpdateProgressBar();
+
         }
     }
 }
