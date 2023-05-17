@@ -127,3 +127,5 @@ select * from tasks;
 select * from teams;
 select * from stages;
 select * from projects;
+
+select Projects.* from Projects inner join Stages on Projects.ID = Stages.ProjectID inner join Teams on Teams.StageID = Stages.ID where Teams.TechLeadID = 'tl1';

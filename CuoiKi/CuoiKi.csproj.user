@@ -31,6 +31,12 @@
     <Compile Update="UI\Forms\TeamMemberForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Forms\TechLeadTaskAssignmentForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\TechLeadTeamMembersForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\HumanResources\MemberList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +85,21 @@
     <Compile Update="UI\Staff\WorkSessionForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Techlead\TechLeadProjectPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Techlead\TechLeadStagePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Techlead\TechLeadTeamMemberPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Techlead\TechLeadTeamPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Techlead\TechLeadViewTask.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Techlead\UI_TechLeadForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,6 +127,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Forms\TeamMemberForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Forms\TechLeadTaskAssignmentForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Forms\TechLeadTeamMembersForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\HumanResources\MemberList.xaml">
@@ -151,6 +178,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Staff\WorkSessionForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\TechLeadProjectPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\TechLeadStagePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\TechLeadTeamMemberPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\TechLeadTeamPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\TechLeadViewTask.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Techlead\UI_TechLeadForm.xaml">

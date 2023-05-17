@@ -36,7 +36,8 @@ namespace CuoiKi.DAOs
 
         public List<Project>? GetAllProjectsOfTechLead(string techleadID)
         {
-            return null;
+            string cmd = SqlConverter.GetAllProjectsOfATechLeadCommand(techleadID);
+            return dbc.ExecuteWithResults<Project>(cmd);
         }
 
         public List<Project>? GetAllProjectsOfEmployee(string employeeID)

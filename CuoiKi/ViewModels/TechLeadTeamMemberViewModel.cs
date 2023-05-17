@@ -7,23 +7,28 @@ using CuoiKi.UI.Forms;
 using CuoiKi.Wrappers;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
 namespace CuoiKi.ViewModels
 {
-    public class TeamMembersPageViewModel : ViewModelBase
+    public class TechLeadTeamMemberViewModel : ViewModelBase
     {
-        private DbController _controller;
-        private string _CurrentManagerName = "";
-        private string _CurrentManagerID = "";
-        private string _CurrentEmployeeName = "";
-        private string? _CurrentTeamName = "";
-        private List<Employee> _teamMembers;
-        private List<EmployeeWrapper> _employeeWrappers;
-        public List<EmployeeWrapper> EmployeeWrappers
+        private readonly DbController _dbController;
+        private List<Employee>? _employees;
+        private List<EmployeeWrapper>? _employeeWrappers;
+        private string? _currentTeamName;
+        public string? CurrentTeamName
+        {
+            get => _currentTeamName;
+            set
+            {
+                _currentTeamName = value;
+                OnPropertyChanged(nameof(_currentTeamName));
+            }
+        }
+        public List<EmployeeWrapper>? EmployeeWrappers
         {
             get => _employeeWrappers;
             set
@@ -32,46 +37,28 @@ namespace CuoiKi.ViewModels
                 OnPropertyChanged(nameof(EmployeeWrappers));
             }
         }
-
-        public string? CurrentTeamName
+        public TechLeadTeamMemberViewModel()
         {
-            get => _CurrentTeamName;
-            set
-            {
-                _CurrentTeamName = value;
-                OnPropertyChanged(nameof(CurrentTeamName));
-            }
-        }
-
-        public TeamMembersPageViewModel()
-        {
-            _controller = new DbController();
-            _teamMembers = new List<Employee>();
+            _dbController = new DbController();
+            _employees = new List<Employee>();
             _employeeWrappers = new List<EmployeeWrapper>();
-            EmployeeWrappers = new List<EmployeeWrapper>();
-            InitializeVariables();
-            UpdateTeamMemberList();
+            _currentTeamName = _dbController.GetTeamName(TaskAssignmentState.SelectedTeam!.ID);
+            _CurrentTechLeadName = LoginInfoState.Name;
+            UpdateEmployees();
         }
-
-        private void InitializeVariables()
+        private void UpdateEmployees()
         {
-            _CurrentManagerName = LoginInfoState.Name!;
-            _CurrentManagerID = LoginInfoState.Id!;
-            _CurrentTeamName = _controller.GetTeamName(TaskAssignmentState.SelectedTeam!.ID);
-        }
-        #region Team member list
-        private void UpdateTeamMemberList()
-        {
-            _teamMembers.Clear();
-            List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
+            _employees!.Clear();
+            _employeeWrappers!.Clear();
+            List<TeamMember>? teamMembers = _dbController.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             foreach (TeamMember member in teamMembers)
             {
-                _teamMembers.Add(_controller.GetTeamMemberDetails(member));
+                _employees.Add(_dbController.GetTeamMemberDetails(member));
             }
-            for (int i = 0; i < _teamMembers!.Count; i++)
+            for (int i = 0; i < _employees!.Count; i++)
             {
-                EmployeeWrapper employeeWrapper = new EmployeeWrapper(_teamMembers[i]);
-                List<Task>? teamTasks = _controller.GetAllTaskOfTeam(TaskAssignmentState.SelectedTeam!.ID);
+                EmployeeWrapper employeeWrapper = new EmployeeWrapper(_employees[i]);
+                List<Task>? teamTasks = _dbController.GetAllTaskOfTeam(TaskAssignmentState.SelectedTeam!.ID);
                 List<Task>? employeeTasks = teamTasks.Where(task => task.Assignee == employeeWrapper.ID).ToList();
                 int percentDone = 0;
                 if (employeeTasks is not null && employeeTasks.Count != 0) percentDone = (employeeTasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / employeeTasks.Count);
@@ -81,49 +68,67 @@ namespace CuoiKi.ViewModels
             EmployeeWrappers = new List<EmployeeWrapper>(_employeeWrappers);
         }
 
-        #endregion
-        #region Assignee and assigner information property
-        public string CurrentEmployeeName
+        #region Assign member's task command
+        private ICommand? _CmdAssignMemberTask;
+        public ICommand CmdAssignMemberTask
         {
             get
             {
-                return _CurrentEmployeeName;
-            }
-            set
-            {
-                _CurrentEmployeeName = value;
-                OnPropertyChanged(nameof(CurrentEmployeeName));
+                _CmdAssignMemberTask ??= new RelayCommand(
+                    p => true,
+                    p => AssignTaskToMember(p));
+                return _CmdAssignMemberTask;
             }
         }
-        public string CurrentManagerName
+        private void AssignTaskToMember(object p)
         {
-            get { return _CurrentManagerName; }
-            set
-            {
-                _CurrentManagerName = value;
-                OnPropertyChanged(nameof(CurrentManagerName));
-            }
+            EmployeeWrapper ew = (EmployeeWrapper)p;
+            Employee e = ew.Employee;
+            TaskAssignmentState.SelectedEmployee = e;
+            CurrentEmployeeName = e.Name;
+            var taskForm = new TechLeadTaskAssignmentForm(this);
+            taskForm.Show();
         }
         #endregion
 
-        #region Open task assigment form command
-        private ICommand? _CmdOpenTaskAssignmentForm;
-        public ICommand CmdOpenTaskAssignmentForm
+        #region View member's task
+        private ICommand? _CmdViewMemberTask;
+        public ICommand CmdViewMemberTask
         {
             get
             {
-                _CmdOpenTaskAssignmentForm ??= new RelayCommand(
+                _CmdViewMemberTask ??= new RelayCommand(
                     p => true,
-                    p => OpenTaskAssignmentForm());
-                return _CmdOpenTaskAssignmentForm;
+                    p => ViewMemberTask());
+                return _CmdViewMemberTask;
             }
         }
-        private void OpenTaskAssignmentForm()
+        private void ViewMemberTask()
         {
-            var taskAssignmentForm = new ManagerTaskAssignmentForm(this);
-            taskAssignmentForm.Show();
+
         }
         #endregion
+
+        #region View member's information
+        private ICommand? _CmdViewMemberInformation;
+        public ICommand CmdViewMemberInformation
+        {
+            get
+            {
+                _CmdViewMemberInformation ??= new RelayCommand(
+                    p => true,
+                    p => ViewMemberInformation(p));
+                return _CmdViewMemberInformation;
+            }
+        }
+        private void ViewMemberInformation(object p)
+        {
+            EmployeeWrapper ew = (EmployeeWrapper)p;
+            Employee e = ew.Employee;
+            MessageBox.Show("View member's information" + e.ID.ToString());
+        }
+        #endregion
+
         #region Form input
         private string _ToBeSavedTaskTitle = "";
         private string _ToBeSavedTaskDescription = "";
@@ -168,6 +173,33 @@ namespace CuoiKi.ViewModels
             }
         }
         #endregion
+
+        #region Assignee and assigner information property
+        private string _CurrentEmployeeName;
+        private string _CurrentTechLeadName;
+        public string CurrentEmployeeName
+        {
+            get
+            {
+                return _CurrentEmployeeName;
+            }
+            set
+            {
+                _CurrentEmployeeName = value;
+                OnPropertyChanged(nameof(CurrentEmployeeName));
+            }
+        }
+        public string CurrentTechLeadName
+        {
+            get { return _CurrentTechLeadName; }
+            set
+            {
+                _CurrentTechLeadName = value;
+                OnPropertyChanged(nameof(CurrentTechLeadName));
+            }
+        }
+        #endregion
+
         #region Save task command
         private ICommand? _CmdSaveTask;
         public ICommand CmdSaveTask
@@ -183,8 +215,8 @@ namespace CuoiKi.ViewModels
         private bool _CanSaveTask = false;
         private void SaveTask()
         {
-            Task task = Task.CreateNewTask(TaskAssignmentState.SelectedEmployee!.ID, _CurrentManagerID, TaskAssignmentState.SelectedTeam!.ID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
-            _controller.Save(task);
+            Task task = Task.CreateNewTask(TaskAssignmentState.SelectedEmployee!.ID, LoginInfoState.Id!, TaskAssignmentState.SelectedTeam!.ID, ToBeSavedTaskDescription, ToBeSavedTaskTitle, ToBeSavedTaskStartingTime, ToBeSavedTaskEndingTime); ;
+            _dbController.Save(task);
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
         }
         private void CheckValidTaskInput()
@@ -194,64 +226,23 @@ namespace CuoiKi.ViewModels
         }
         #endregion
 
-        #region Assign member's task command
-        private ICommand? _CmdAssignMemberTask;
-        public ICommand CmdAssignMemberTask
+        #region Save current employee to state
+        private ICommand? _CmdSaveEmployeeToCurrentState;
+        public ICommand CmdSaveEmployeeToCurrentState
         {
             get
             {
-                _CmdAssignMemberTask ??= new RelayCommand(
+                _CmdSaveEmployeeToCurrentState ??= new RelayCommand(
                     p => true,
-                    p => AssignTaskToMember(p));
-                return _CmdAssignMemberTask;
+                    p => SaveEmployeeToCurrentState(p));
+                return _CmdSaveEmployeeToCurrentState;
             }
         }
-        private void AssignTaskToMember(object p)
+        private void SaveEmployeeToCurrentState(object parameter)
         {
-            EmployeeWrapper ew = (EmployeeWrapper)p;
+            EmployeeWrapper ew = (EmployeeWrapper)parameter;
             Employee e = ew.Employee;
             TaskAssignmentState.SelectedEmployee = e;
-            CurrentEmployeeName = e.Name;
-            var taskForm = new ManagerTaskAssignmentForm(this);
-            taskForm.Show();
-        }
-        #endregion
-
-        #region View member's task
-        private ICommand? _CmdViewMemberTask;
-        public ICommand CmdViewMemberTask
-        {
-            get
-            {
-                _CmdViewMemberTask ??= new RelayCommand(
-                    p => true,
-                    p => ViewMemberTask());
-                return _CmdViewMemberTask;
-            }
-        }
-        private void ViewMemberTask()
-        {
-
-        }
-        #endregion
-
-        #region View member's information
-        private ICommand? _CmdViewMemberInformation;
-        public ICommand CmdViewMemberInformation
-        {
-            get
-            {
-                _CmdViewMemberInformation ??= new RelayCommand(
-                    p => true,
-                    p => ViewMemberInformation(p));
-                return _CmdViewMemberInformation;
-            }
-        }
-        private void ViewMemberInformation(object p)
-        {
-            EmployeeWrapper ew = (EmployeeWrapper)p;
-            Employee e = ew.Employee;
-            MessageBox.Show("View member's information" + e.ID.ToString());
         }
         #endregion
 
@@ -270,12 +261,11 @@ namespace CuoiKi.ViewModels
         private void OpenTeamMemberManagementForm()
         {
             UpdateWorkerList();
-            var teamMemberManagementForm = new ManageTeamMembersForm(this);
+            var teamMemberManagementForm = new TechLeadTeamMembersForm(this);
             teamMemberManagementForm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             teamMemberManagementForm.Show();
         }
         #endregion
-
         #region Team member management logic
         private List<WorkerDTO>? _workerList;
         public List<WorkerDTO>? WorkerList
@@ -290,8 +280,8 @@ namespace CuoiKi.ViewModels
 
         private void UpdateWorkerList()
         {
-            List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
-            List<Employee>? allWorkers = _controller.GetAllWorkers();
+            List<TeamMember>? teamMembers = _dbController.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
+            List<Employee>? allWorkers = _dbController.GetAllWorkers();
             _workerList = allWorkers.Select(x => new WorkerDTO()
             {
                 Name = x.Name,
@@ -316,7 +306,7 @@ namespace CuoiKi.ViewModels
         }
         private void SaveTeamMemberChanges()
         {
-            List<TeamMember>? currentTeamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
+            List<TeamMember>? currentTeamMembers = _dbController.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             // Get the IDs of selected workers who are not already team members
             List<string> newMemberIDs = _workerList
                 .Where(w => w.IsSelected && !currentTeamMembers.Any(m => m.EmployeeID == w.EmployeeID))
@@ -327,10 +317,10 @@ namespace CuoiKi.ViewModels
                 .Where(w => !w.IsSelected && currentTeamMembers.Any(m => m.EmployeeID == w.EmployeeID))
                 .Select(w => currentTeamMembers.First(m => m.EmployeeID == w.EmployeeID).ID)
                 .ToList();
-            _controller.AddTeamMembersToTeam(TaskAssignmentState.SelectedTeam!.ID, newMemberIDs);
-            _controller.RemoveTeamMembers(toBeRemovedTeamMemberIDs);
+            _dbController.AddTeamMembersToTeam(TaskAssignmentState.SelectedTeam!.ID, newMemberIDs);
+            _dbController.RemoveTeamMembers(toBeRemovedTeamMemberIDs);
             UpdateWorkerList();
-            UpdateTeamMemberList();
+            UpdateEmployees();
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
         }
         #endregion
@@ -351,25 +341,6 @@ namespace CuoiKi.ViewModels
         {
             Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive == true)!.Close();
 
-        }
-        #endregion
-        #region Save current employee to state
-        private ICommand? _CmdSaveEmployeeToCurrentState;
-        public ICommand CmdSaveEmployeeToCurrentState
-        {
-            get
-            {
-                _CmdSaveEmployeeToCurrentState ??= new RelayCommand(
-                    p => true,
-                    p => SaveEmployeeToCurrentState(p));
-                return _CmdSaveEmployeeToCurrentState;
-            }
-        }
-        private void SaveEmployeeToCurrentState(object parameter)
-        {
-            EmployeeWrapper ew = (EmployeeWrapper)parameter;
-            Employee e = ew.Employee;
-            TaskAssignmentState.SelectedEmployee = e;
         }
         #endregion
     }

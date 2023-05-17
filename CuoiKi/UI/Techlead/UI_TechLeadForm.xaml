@@ -65,11 +65,12 @@
                                    Background="#7e5fdc"/>
                         <StackPanel DockPanel.Dock="Top">
                             <Button x:Name="btn_Information"
-                                    Style="{StaticResource menuButton}">
+                                    Style="{StaticResource menuButton}"
+                                    Click="MyProjectsClick">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Information"
                                                            Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Information"
+                                    <TextBlock Text="My Projects"
                                                FontSize="15"/>
                                 </StackPanel>
                             </Button>
