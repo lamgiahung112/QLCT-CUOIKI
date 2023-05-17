@@ -13,8 +13,8 @@
             <Setter Property="Background" Value="#2196F3" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Padding" Value="12 8" />
+            <Setter Property="FontFamily" Value="Open Sans"/>
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
@@ -53,7 +53,7 @@
         </Grid.ColumnDefinitions>
         <Label Content="Stages" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button x:Name="BtnAddStage" Grid.Column="3" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddStageClickCommand}"/>
-        <ScrollViewer  Width="800" Height="350" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+        <ScrollViewer  Width="800" Height="480" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="MyScrollViewer" VerticalScrollBarVisibility="Visible">
             <ItemsControl ItemsSource="{Binding StageWrappers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -63,6 +63,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button 
+                            ToolTip="{Binding TooltipString}"
                             Style="{StaticResource CustomButtonStyle}"
                             Margin="10 20 10 20" 
                             Width="200" Height="100" 
@@ -85,12 +86,15 @@
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding ID}" Margin="5,0"></TextBlock>
-                                <TextBlock Text="{Binding Description}" Margin="5,0"></TextBlock>
-                                <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
-                                              Value="{Binding PercentDone}" 
-                                              Style="{x:Null}" 
-                                              Foreground="{Binding BarColor}"></ProgressBar>
+                                <TextBlock Text="{Binding ID}" TextTrimming="CharacterEllipsis" Margin="5,0"></TextBlock>
+                                <TextBlock Text="{Binding Description}" TextTrimming="CharacterEllipsis" Margin="5,0"></TextBlock>
+                                <Grid>
+                                    <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
+                                                      Value="{Binding PercentDone}" 
+                                                      Style="{x:Null}" 
+                                                      Foreground="{Binding BarColor}"></ProgressBar>
+                                    <TextBlock FontWeight="Bold" FontSize="12" Padding="10" Foreground="Black" Text="{Binding TooltipString}"></TextBlock>
+                                </Grid>
                             </StackPanel>
                         </Button>
                     </DataTemplate>

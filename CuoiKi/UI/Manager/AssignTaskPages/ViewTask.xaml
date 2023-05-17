@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CuoiKi.UI.Manager.AssignTaskPages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="800"
@@ -81,12 +80,23 @@
           IsReadOnly="True"
           Grid.Row="1" Grid.RowSpan="2"
           Width="745"
-          Background="LightGray"
+          Background="#F4F4F4"
           CanUserResizeColumns="False"
           ScrollViewer.CanContentScroll="False"
           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
           SelectedItem="{Binding SelectedTask}">
                 <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Done">
+                                <Setter Property="Background" Value="#A1EFA1"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="WIP">
+                                <Setter Property="Background" Value="#FFDFA5"/>
+                            </DataTrigger>
+                            <!-- Add more DataTriggers for other status values -->
+                        </Style.Triggers>
+                    </Style>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderThickness" Value="0" />
                         <Setter Property="Template">
@@ -111,7 +121,7 @@
                     </Storyboard>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                    <DataGridTextColumn CanUserResize="False" CanUserReorder="False" CanUserSort="False" Header="Title" Binding="{Binding Title}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -119,7 +129,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Start date" Binding="{Binding StartingTime, StringFormat=d}" Width="120">
+                    <DataGridTextColumn CanUserResize="False" CanUserReorder="False" CanUserSort="False" Header="Start date" Binding="{Binding StartingTime, StringFormat=d}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -127,7 +137,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="End date" Binding="{Binding EndingTime, StringFormat=d}" Width="120">
+                    <DataGridTextColumn CanUserResize="False" CanUserReorder="False" CanUserSort="False" Header="End date" Binding="{Binding EndingTime, StringFormat=d}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -135,7 +145,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120">
+                    <DataGridTextColumn CanUserResize="False" CanUserReorder="False" CanUserSort="False" Header="Status" Binding="{Binding Status}" Width="120">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Padding" Value="15"/>
@@ -143,7 +153,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Action" Width="500">
+                    <DataGridTemplateColumn CanUserResize="False" CanUserReorder="False" CanUserSort="False" Header="Action" Width="500">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal"

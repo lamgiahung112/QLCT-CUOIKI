@@ -16,7 +16,7 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Padding" Value="12 8" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Open Sans"/>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
@@ -63,10 +63,10 @@
                 Command="{Binding CmdAddTeam}"        
         />
 
-        <ScrollViewer Width="800" Height="350" 
+        <ScrollViewer Width="800" Height="480" 
                       Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" 
                       x:Name="MyScrollViewer" 
-                      HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
+                      VerticalScrollBarVisibility="Visible" 
                       Margin="0,5,0,5">
             <ItemsControl ItemsSource="{Binding TeamWrappers}">
                 <ItemsControl.ItemsPanel>
@@ -76,9 +76,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="10 10 10 10"
+                        <Button ToolTip="{Binding TooltipString}"
+                                Margin="10 20 10 20"
                                 Style="{StaticResource CustomButtonStyle}"
-                                Width="250" 
+                                Width="200" 
                                 Height="100" 
                                 Name="BtnTeamItem"
                                 Click="Team_Click"
@@ -99,24 +100,24 @@
                             </Button.ContextMenu>
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                 <WrapPanel>
-                                    <TextBlock Text="Name:"  
-                                               Margin="5,0"
-                                               HorizontalAlignment="Left"/>
-                                    <TextBlock Text="{Binding Name}"  
-                                               Margin="5,0"
-                                               HorizontalAlignment="Left"/>
+                                    <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Name, StringFormat='{}Name: {0}'}" Margin="5,0" HorizontalAlignment="Left">
+                                    </TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Text="Tech Lead:"  
                                                Margin="5,0"
                                                HorizontalAlignment="Left"/>
                                     <TextBlock Text="{Binding TechLeadID}" 
+                                               TextTrimming="CharacterEllipsis"
                                                Margin="5,0"
                                                HorizontalAlignment="Left"/>
-                                    <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
-                                              Value="{Binding PercentDone}" 
-                                              Style="{x:Null}" 
-                                              Foreground="{Binding BarColor}"></ProgressBar>
+                                    <Grid>
+                                        <ProgressBar  Margin="5 5" Width="160" MinHeight="14" Minimum="0" Maximum="100" 
+                                                      Value="{Binding PercentDone}" 
+                                                      Style="{x:Null}" 
+                                                      Foreground="{Binding BarColor}"></ProgressBar>
+                                        <TextBlock FontWeight="Bold" FontSize="12" Padding="10" Foreground="Black" Text="{Binding TooltipString}"></TextBlock>
+                                    </Grid>
                                 </WrapPanel>
                                 
                             </StackPanel>

@@ -4,9 +4,9 @@ using CuoiKi.HelperClasses;
 using CuoiKi.Models;
 using CuoiKi.States;
 using CuoiKi.UI.Forms;
+using CuoiKi.Wrappers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Windows;
@@ -21,6 +21,18 @@ namespace CuoiKi.ViewModels
         private string _CurrentManagerID = "";
         private string _CurrentEmployeeName = "";
         private string? _CurrentTeamName = "";
+        private List<Employee> _teamMembers;
+        private List<EmployeeWrapper> _employeeWrappers;
+        public List<EmployeeWrapper> EmployeeWrappers
+        {
+            get => _employeeWrappers;
+            set
+            {
+                _employeeWrappers = value;
+                OnPropertyChanged(nameof(EmployeeWrappers));
+            }
+        }
+
         public string? CurrentTeamName
         {
             get => _CurrentTeamName;
@@ -34,41 +46,41 @@ namespace CuoiKi.ViewModels
         public TeamMembersPageViewModel()
         {
             _controller = new DbController();
+            _teamMembers = new List<Employee>();
+            _employeeWrappers = new List<EmployeeWrapper>();
+            EmployeeWrappers = new List<EmployeeWrapper>();
             InitializeVariables();
+            UpdateTeamMemberList();
         }
 
         private void InitializeVariables()
         {
-            TeamMemberListInit();
             _CurrentManagerName = LoginInfoState.Name!;
             _CurrentManagerID = LoginInfoState.Id!;
             _CurrentTeamName = _controller.GetTeamName(TaskAssignmentState.SelectedTeam!.ID);
         }
-        #region Team member list 
-        private void TeamMemberListInit()
-        {
-            _TeamMemberList = new ObservableCollection<Employee>();
-            UpdateTeamMemberList();
-        }
+        #region Team member list
         private void UpdateTeamMemberList()
         {
-            _TeamMemberList.Clear();
+            _teamMembers.Clear();
             List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             foreach (TeamMember member in teamMembers)
             {
-                _TeamMemberList.Add(_controller.GetTeamMemberDetails(member));
+                _teamMembers.Add(_controller.GetTeamMemberDetails(member));
             }
-        }
-        private ObservableCollection<Employee> _TeamMemberList;
-        public ObservableCollection<Employee> TeamMemberList
-        {
-            get { return _TeamMemberList; }
-            set
+            for (int i = 0; i < _teamMembers!.Count; i++)
             {
-                _TeamMemberList = value;
-                OnPropertyChanged(nameof(TeamMemberList));
+                EmployeeWrapper employeeWrapper = new EmployeeWrapper(_teamMembers[i]);
+                List<Task>? teamTasks = _controller.GetAllTaskOfTeam(TaskAssignmentState.SelectedTeam!.ID);
+                List<Task>? employeeTasks = teamTasks.Where(task => task.Assignee == employeeWrapper.ID).ToList();
+                int percentDone = 0;
+                if (employeeTasks is not null && employeeTasks.Count != 0) percentDone = (employeeTasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / employeeTasks.Count);
+                employeeWrapper.InitializeUI(percentDone);
+                _employeeWrappers.Add(employeeWrapper);
             }
+            EmployeeWrappers = new List<EmployeeWrapper>(_employeeWrappers);
         }
+
         #endregion
         #region Assignee and assigner information property
         public string CurrentEmployeeName
@@ -196,7 +208,8 @@ namespace CuoiKi.ViewModels
         }
         private void AssignTaskToMember(object p)
         {
-            Employee e = (Employee)p;
+            EmployeeWrapper ew = (EmployeeWrapper)p;
+            Employee e = ew.Employee;
             TaskAssignmentState.SelectedEmployee = e;
             CurrentEmployeeName = e.Name;
             var taskForm = new ManagerTaskAssignmentForm(this);
@@ -236,7 +249,8 @@ namespace CuoiKi.ViewModels
         }
         private void ViewMemberInformation(object p)
         {
-            Employee e = (Employee)p;
+            EmployeeWrapper ew = (EmployeeWrapper)p;
+            Employee e = ew.Employee;
             MessageBox.Show("View member's information" + e.ID.ToString());
         }
         #endregion
@@ -353,7 +367,8 @@ namespace CuoiKi.ViewModels
         }
         private void SaveEmployeeToCurrentState(object parameter)
         {
-            Employee e = (Employee)parameter;
+            EmployeeWrapper ew = (EmployeeWrapper)parameter;
+            Employee e = ew.Employee;
             TaskAssignmentState.SelectedEmployee = e;
         }
         #endregion
