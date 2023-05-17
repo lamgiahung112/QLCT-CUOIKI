@@ -5,6 +5,7 @@ using CuoiKi.States;
 using CuoiKi.UI.HumanResources;
 using CuoiKi.UI.Manager;
 using CuoiKi.UI.Staff;
+using CuoiKi.UI.Techlead;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Input;
@@ -76,6 +77,11 @@ namespace CuoiKi
             {
                 UI_HrForm uI_HrForm = new();
                 uI_HrForm.Show();
+            }
+            else if (foundEmployee.Role == Role.TechLead)
+            {
+                UI_TechLeadForm uI_TechLeadForm = new();
+                uI_TechLeadForm.Show();
             }
             else 
             {

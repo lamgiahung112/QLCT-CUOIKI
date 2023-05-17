@@ -79,6 +79,9 @@
     <Compile Update="UI\Staff\WorkSessionForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Techlead\UI_TechLeadForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Staff\WorkSessionForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Techlead\UI_TechLeadForm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
