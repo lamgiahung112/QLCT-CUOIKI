@@ -50,6 +50,7 @@ namespace CuoiKi.ViewModels
             {
                 _workSessionsInSelectedMonth.Add(item);
             }
+            WorkSessionsInSelectedMonth = new ObservableCollection<WorkSession>(_workSessionsInSelectedMonth);
         }
 
         #region Binding calendar current selected date
@@ -223,6 +224,7 @@ namespace CuoiKi.ViewModels
             workSessionController.CheckOutAndReturnSuccessOrNot(LoginInfoState.Id!);
             CurrentStatus = EnumMapper.mapToString(workSessionController.GetWorkSessionStatus(_currentUserId));
             UpdateLastestWorkSessionPanelVariables();
+            UpdateWorkSessionsInSelectedMonth(_currentUserId, DateTime.Now);
         }
         private readonly bool canCheckOut = true;
         public ICommand CheckOutCommand

@@ -94,7 +94,6 @@ namespace CuoiKi.Controllers
             DateTime endDate = new DateTime(dateInMonth.Year, dateInMonth.Month, DateTime.DaysInMonth(dateInMonth.Year, dateInMonth.Month));
             TimeSpan ts = new TimeSpan(23, 59, 59);
             endDate = endDate.Date + ts;
-            MessageBox.Show(endDate.ToString());
             var result = from workSession in workSessionDAO.GetAll() ?? new List<WorkSession>()
                          where workSession.EmployeeID == employeeID &&
                          workSession.StartingTime >= startDate &&
