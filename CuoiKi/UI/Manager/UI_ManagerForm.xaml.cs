@@ -21,7 +21,7 @@ namespace CuoiKi.UI.Manager
 
         private void btn_information_click(object sender, RoutedEventArgs e)
         {
-            frameContent.Navigate(new InformationManagerForm());
+            frameContent.Navigate(new UI.Staff.InformationForm());
         }
 
         private void btn_CalcSalary_click(object sender, RoutedEventArgs e)

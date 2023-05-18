@@ -29,5 +29,10 @@ namespace CuoiKi.UI.HumanResources
         {
             frameContent.Navigate(new MemberList());
         }
+
+        private void btn_Information_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new UI.Staff.InformationForm());
+        }
     }
 }

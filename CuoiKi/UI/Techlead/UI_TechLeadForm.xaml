@@ -64,11 +64,21 @@
                                    Height="0.8"
                                    Background="#7e5fdc"/>
                         <StackPanel DockPanel.Dock="Top">
+                            <Button 
+                                    Style="{StaticResource menuButton}"
+                                    Click="btn_Information_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Information"
+                                                           Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Information"
+                                               FontSize="15"/>
+                                </StackPanel>
+                            </Button>
                             <Button x:Name="btn_Information"
                                     Style="{StaticResource menuButton}"
                                     Click="MyProjectsClick">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Information"
+                                    <Icon:PackIconMaterial Kind="Projector"
                                                            Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="My Projects"
                                                FontSize="15"/>
