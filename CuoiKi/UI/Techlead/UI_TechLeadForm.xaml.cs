@@ -32,5 +32,10 @@ namespace CuoiKi.UI.Techlead
         {
             frameContent.Navigate(new SalaryPage());
         }
+
+        private void btn_Information_Click(object sender, RoutedEventArgs e)
+        {
+            frameContent.Navigate(new UI.Staff.InformationForm());
+        }
     }
 }
