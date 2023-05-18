@@ -3,10 +3,7 @@ using CuoiKi.Models;
 using CuoiKi.States;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Media;
 
 namespace CuoiKi.ViewModels
 {
@@ -51,13 +48,14 @@ namespace CuoiKi.ViewModels
         public int BasicPay
         {
             get => _BasicPay;
-            set 
-            { 
-                _BasicPay = value; 
-                OnPropertyChanged(nameof(BasicPay)); 
+            set
+            {
+                _BasicPay = value;
+                OnPropertyChanged(nameof(BasicPay));
             }
         }
 
+        private int leaveCost;
         private int kpiCost;
 
         private int _DelayedTasksCnt;
@@ -71,9 +69,20 @@ namespace CuoiKi.ViewModels
             }
         }
 
+        private int _WorkLeaveCnt;
+        public int WorkLeaveCnt
+        {
+            get => _WorkLeaveCnt;
+            set
+            {
+                _WorkLeaveCnt = value;
+                OnPropertyChanged(nameof(WorkLeaveCnt));
+            }
+        }
+
         public int TotalPay
         {
-            get => BasicPay - DelayedTasksCnt * kpiCost;
+            get => BasicPay - DelayedTasksCnt * kpiCost - (WorkLeaveCnt > 2 ? WorkLeaveCnt - 2 : 0) * leaveCost;
             set { }
         }
 
@@ -82,10 +91,12 @@ namespace CuoiKi.ViewModels
         {
             DateTime firstDayOfMonth = new(PickedDate.Year, PickedDate.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            WorkLeaveCnt = db.GetAllWorkLeaveOfAnEmployee(LoginInfoState.Id!, firstDayOfMonth, lastDayOfMonth)?.Count ?? 0;
             Salary? s = db.GetSalaryOfCurrentUser();
             List<Task>? delayedTasks = db.GetDelayedTasksOfCurrentUser(firstDayOfMonth, lastDayOfMonth);
             BasicPay = s?.BasicPay ?? 0;
             kpiCost = s?.KPICost ?? 0;
+            leaveCost = s?.LeaveCost ?? 0;
             DelayedTasksCnt = delayedTasks?.Count ?? 0;
         }
     }

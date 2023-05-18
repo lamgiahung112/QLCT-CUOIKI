@@ -124,45 +124,60 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             </WrapPanel>
 
-            <WrapPanel Grid.Row="2"
+            <StackPanel Grid.Row="2"
                        Grid.ColumnSpan="2"
-                       Margin="80 10 0 0"
+                       Margin="80,0,0,0">
+                <WrapPanel Margin="0 0 0 30"
                        Height="65"
                        VerticalAlignment="Top" Grid.RowSpan="2">
-                <TextBlock Text="Number of delayed KPIs: "
+                    <TextBlock Text="Number of delayed KPIs: "
                            FontSize="20"
                            FontWeight="Medium"
                            VerticalAlignment="Center"/>
-                <TextBox FontWeight="Light"
+                    <TextBox FontWeight="Light"
                          FontSize="20"
                          Width="115"
-                         Margin="20 0 0 0"
-                         IsEnabled="False"
                          Text="{Binding DelayedTasksCnt}"
+                         Margin="20 0 0 0"
                          BorderThickness="2"
                          BorderBrush="{DynamicResource MaterialDesignDivider}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            </WrapPanel>
+                </WrapPanel>
 
-            <WrapPanel Grid.Row="2"
-                       Grid.ColumnSpan="2"
-                       Margin="80,0,0,0"
+                <WrapPanel Margin="0 0 0 30"
                        Height="65"
-                       Grid.RowSpan="2">
-                <TextBlock Text="Total Salary: "
+                       VerticalAlignment="Top" Grid.RowSpan="2">
+                    <TextBlock Text="Day off: "
                            FontSize="20"
                            FontWeight="Medium"
                            VerticalAlignment="Center"/>
-                <TextBox FontSize="20"
-                         FontWeight="Light"
-                         Width="230"
+                    <TextBox FontWeight="Light"
+                         FontSize="20"
+                         Text="{Binding WorkLeaveCnt}"
+                         Width="268"
                          Margin="20 0 0 0"
-                         IsEnabled="False"
-                         Text="{Binding TotalPay}"
                          BorderThickness="2"
                          BorderBrush="{DynamicResource MaterialDesignDivider}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            </WrapPanel>
+                </WrapPanel>
+
+                <WrapPanel 
+                       Height="65"
+                       Grid.RowSpan="2">
+                    <TextBlock Text="Total Salary: "
+                           FontSize="20"
+                           FontWeight="Medium"
+                           VerticalAlignment="Center"/>
+                    <TextBox FontSize="20"
+                         FontWeight="Light"
+                         Width="230"
+                         Text="{Binding TotalPay}"
+                         Margin="20 0 0 0"
+                         BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

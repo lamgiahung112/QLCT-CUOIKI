@@ -250,5 +250,9 @@ namespace CuoiKi.Controllers
         {
             return taskDAO.GetAllTasksOfAnEmployee(employee.ID)?.Where(x => x.Status == TaskStatus.WIP && x.EndingTime < endTime && x.StartingTime > startTime).ToList();
         }
+        public List<WorkLeave>? GetAllWorkLeaveOfAnEmployee(string employeeID, DateTime startingTime, DateTime endingTime)
+        {
+            return workLeaveDAO.GetAllOfAnEmployee(employeeID).Where(x => x.FromDate >= startingTime && x.FromDate <= endingTime).ToList();
+        }
     }
 }
