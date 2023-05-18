@@ -1,4 +1,6 @@
-﻿using CuoiKi.ViewModels;
+﻿using CuoiKi.Models;
+using CuoiKi.UI.Forms;
+using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,9 +17,10 @@ namespace CuoiKi.UI.HumanResources
             this.DataContext = new SalaryOfMember();
         }
 
-        private void btn_ViewSalary_Click(object sender, RoutedEventArgs e)
+        private void ViewSalaryClick(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new ViewSalary());
+            var btn = sender as Button;
+            NavigationService.Navigate(new EmployeeSalaryPage(btn.CommandParameter as Employee));
         }
     }
 }

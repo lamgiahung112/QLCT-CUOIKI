@@ -106,10 +106,10 @@
                                 x:Name="StackPanelButtons">
                                 <Button x:Name="btn_ViewSalary"
                                         Content="View Salary"
-                                            Command="{Binding DataContext.CmdReviewRequest, ElementName=DataGridview}"
+                                            Command="{Binding DataContext.CmdViewSalary, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 
                                             Margin="5, 0" 
-                                        Click="btn_ViewSalary_Click"/>
+                                        Click="ViewSalaryClick"/>
                             </StackPanel>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"

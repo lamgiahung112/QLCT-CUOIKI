@@ -238,10 +238,17 @@ namespace CuoiKi.Controllers
         {
             return salaryDAO.GetAll()?.Where(x => x.ID == LoginInfoState.Id!).FirstOrDefault();
         }
-
+        public Salary? GetSalaryOfUser(Employee e)
+        {
+            return salaryDAO.GetAll()?.Where(x => x.ID == e.ID!).FirstOrDefault();
+        }
         public List<Task>? GetDelayedTasksOfCurrentUser(DateTime startTime, DateTime endTime)
         {
             return taskDAO.GetAllTasksOfAnEmployee(LoginInfoState.Id!)?.Where(x => x.Status == TaskStatus.WIP && x.EndingTime < endTime && x.StartingTime > startTime).ToList();
+        }
+        public List<Task>? GetDelayedTasksOfUser(DateTime startTime, DateTime endTime, Employee employee)
+        {
+            return taskDAO.GetAllTasksOfAnEmployee(employee.ID)?.Where(x => x.Status == TaskStatus.WIP && x.EndingTime < endTime && x.StartingTime > startTime).ToList();
         }
     }
 }
