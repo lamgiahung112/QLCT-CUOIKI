@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CuoiKi.UI.Techlead"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="800"
       Title="TechLeadViewTask">
 
     <Grid>
@@ -25,18 +25,13 @@
                FontSize="36"
                Grid.ColumnSpan="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Style="{StaticResource BtnBack}"
-                x:Name="Back_CLick"
+        <Button x:Name="Back_CLick"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                Margin="40,0,0,0"
-                Background="NavajoWhite"
-                Click="Back_Click" Width="65">
-            <Icon:PackIconMaterial 
-                        Kind="KeyboardReturn"
-                        Style="{StaticResource menuButtonIcon}"
-                        VerticalAlignment="Top" Height="21" Width="25"/>
+                Margin="40 0 0 0"
+                Click="Back_Click">
+            <TextBlock Text="←" FontSize="30" Margin="0 -11 0 0"/>
         </Button>
         <Grid Grid.Row="1" 
               Grid.RowSpan="3"

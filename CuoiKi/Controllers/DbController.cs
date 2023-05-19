@@ -58,7 +58,6 @@ namespace CuoiKi.Controllers
             }
             else if (entry is WorkLeave)
             {
-                MessageBox.Show("HEre");
                 existingRecord = workLeaveDAO.GetOne(entry.ID);
                 dao = (IDAO<T>)workLeaveDAO;
             }
