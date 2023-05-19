@@ -179,7 +179,9 @@ namespace CuoiKi.ViewModels
         }
         private void DeleteStage()
         {
-            MessageBox.Show("Delete stage");
+            MessageBox.Show(string.Format("Delete stage {0}", TaskAssignmentState.SelectedStage!.ID.ToString()));
+            _controller.Delete(TaskAssignmentState.SelectedStage!);
+            FetchStageList();
         }
         #endregion
 
