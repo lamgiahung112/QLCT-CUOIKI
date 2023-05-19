@@ -125,7 +125,7 @@ namespace CuoiKi.ViewModels
         {
             EmployeeWrapper ew = (EmployeeWrapper)p;
             Employee e = ew.Employee;
-            MessageBox.Show("View member's information" + e.ID.ToString());
+            TaskAssignmentState.SelectedEmployee = e;
         }
         #endregion
 

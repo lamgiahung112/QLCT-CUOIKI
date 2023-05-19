@@ -1,9 +1,7 @@
 ﻿using CuoiKi.States;
-using CuoiKi.UI.Forms;
 using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace CuoiKi.UI.Manager.AssignTaskPages
@@ -36,6 +34,12 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             var btn = sender as Button;
             btn.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new ViewTask());
+        }
+        private void ViewInformationClick(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            btn.Command.Execute(btn.CommandParameter);
+            NavigationService.Navigate(new ManagerViewInfomationPage());
         }
     }
 }
