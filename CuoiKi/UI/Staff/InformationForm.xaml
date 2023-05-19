@@ -324,19 +324,6 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <!--<TextBox x:Name="txt_Gender"
-                    IsReadOnly="True"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Text="{Binding UserGender}"
-                    FontWeight="Light"
-                    Width="265"
-                    FontSize="20"
-                    Grid.Row="1"
-                    BorderThickness="2"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}" 
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" 
-                    Margin="40,10,0,0"/>-->
             </Grid>
         </Border>
     </Grid>

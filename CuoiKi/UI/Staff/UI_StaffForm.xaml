@@ -58,7 +58,7 @@
                         <!--Menu button-->
 
                         <StackPanel DockPanel.Dock="Top">
-          
+
                             <Button x:Name="btn_Information" Style="{StaticResource menuButton}" Click="btn_Information_click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Information" Style="{StaticResource menuButtonIcon}"/>
@@ -92,20 +92,6 @@
                             </Button>
 
                         </StackPanel>
-
-                        <!--<StackPanel Orientation="Horizontal" Margin="10 0 010 15" VerticalAlignment="Center" 
-                                    Width="auto" Height="35">
-                            <materialDesign:PackIcon Kind="MoonAndStars" 
-                                                     VerticalAlignment="Center"
-                                                     Margin="0 0 10 0"/>
-                            <TextBlock VerticalAlignment="Center" Text="Dark Mode" FontWeight="SemiBold"/>
-                            <ToggleButton x:Name="themeToggle"
-                                          IsChecked="False"
-                                          Cursor="Hand" 
-                                          ToolTip="Enable Dark Mode"
-                                          Margin=" 12 0 8 0"/>
-
-                        </StackPanel>-->
 
                         <Button x:Name="btnLogOut" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="LogOut_Click">
                             <StackPanel Orientation="Horizontal">

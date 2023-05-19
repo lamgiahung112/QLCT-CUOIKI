@@ -24,14 +24,6 @@ namespace CuoiKi.UI.Manager.AssignTaskPages
             NavigationService.GoBack();
         }
 
-        //private void MouseRight_Click(object sender, MouseButtonEventArgs e)
-        //{
-        //    RightClickForm rightClickForm = new RightClickForm();
-        //    rightClickForm.Left = e.GetPosition(this).X + 440;
-        //    rightClickForm.Top = e.GetPosition(this).Y + 60;
-        //    rightClickForm.Show();
-
-        //}
 
         private void Open_TaskMng(object sender, RoutedEventArgs e)
         {
