@@ -57,7 +57,8 @@
         <WrapPanel Grid.Column="2" VerticalAlignment="Center">
             <Button Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddProjectClickCommand}"/>
             <Button
-                HorizontalAlignment="Center" Margin="30 0 0 0">
+                HorizontalAlignment="Center" Margin="30 0 0 0"
+                Command="{Binding ReloadCommand}">
                 <Icon:PackIconMaterial 
                 Kind="Reload" 
                 HorizontalAlignment="Center" Height="12" />

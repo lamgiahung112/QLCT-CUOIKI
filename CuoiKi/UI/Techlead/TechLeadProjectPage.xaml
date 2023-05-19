@@ -55,6 +55,7 @@
             <ColumnDefinition Width=".25*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="4"
+                Command="{Binding ReloadCommand}"
                 HorizontalAlignment="Left" >
             <Icon:PackIconMaterial 
                 Kind="Reload" 

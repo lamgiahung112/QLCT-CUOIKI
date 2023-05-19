@@ -63,6 +63,7 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding CmdAddTeam}"/>
             <Button
+                Command="{Binding ReloadCommand}"
                 HorizontalAlignment="Center" Margin="30 0 0 0">
                 <Icon:PackIconMaterial 
                 Kind="Reload" 

@@ -268,5 +268,22 @@ namespace CuoiKi.ViewModels
             FetchTeamList();
         }
         #endregion
+
+        private ICommand? _reloadCommand;
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                _reloadCommand ??= new RelayCommand(
+                    p => true,
+                    p => Reload());
+                return _reloadCommand;
+            }
+        }
+
+        private void Reload()
+        {
+            FetchTeamList();
+        }
     }
 }

@@ -63,5 +63,22 @@ namespace CuoiKi.ViewModels
             string teamID = p as string;
             TaskAssignmentState.SelectedTeam = _teams.Where(team => team.ID == teamID).FirstOrDefault();
         }
+
+        private ICommand? _reloadCommand;
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                _reloadCommand ??= new RelayCommand(
+                    p => true,
+                    p => Reload());
+                return _reloadCommand;
+            }
+        }
+
+        private void Reload()
+        {
+            UpdateTeams();
+        }
     }
 }

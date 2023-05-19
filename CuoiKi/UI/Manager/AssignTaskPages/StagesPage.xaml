@@ -55,6 +55,7 @@
         <WrapPanel Grid.Column="2" VerticalAlignment="Center">
             <Button x:Name="BtnAddStage" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddStageClickCommand}"/>
             <Button
+                Command="{Binding ReloadCommand}"
                 HorizontalAlignment="Center" Margin="30 0 0 0">
                 <Icon:PackIconMaterial 
                 Kind="Reload" 
