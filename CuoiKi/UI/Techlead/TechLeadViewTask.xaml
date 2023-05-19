@@ -155,10 +155,7 @@
                                 <StackPanel Orientation="Horizontal"
                                 Visibility="Collapsed"
                                 x:Name="StackPanelButtons">
-                                    <Button Content="Edit"
-                                            Command="{Binding DataContext.CmdEdit, ElementName=DataGridview}"
-                                            CommandParameter="{Binding}" 
-                                            Margin="5, 0" />
+                                    
                                     <Button Content="Done"
                                             Command="{Binding DataContext.CmdDone, ElementName=DataGridview}"
                                             CommandParameter="{Binding}" 

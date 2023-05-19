@@ -63,6 +63,7 @@ namespace CuoiKi.ViewModels
         private void UpdateTeamMemberList()
         {
             _teamMembers.Clear();
+            _employeeWrappers!.Clear();
             List<TeamMember>? teamMembers = _controller.GetAllMembersOfTeam(TaskAssignmentState.SelectedTeam!);
             foreach (TeamMember member in teamMembers)
             {
@@ -373,5 +374,22 @@ namespace CuoiKi.ViewModels
             TaskAssignmentState.SelectedEmployee = e;
         }
         #endregion
+
+        private ICommand? _reloadCommand;
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                _reloadCommand ??= new RelayCommand(
+                    p => true,
+                    p => Reload());
+                return _reloadCommand;
+            }
+        }
+
+        private void Reload()
+        {
+            UpdateTeamMemberList();
+        }
     }
 }

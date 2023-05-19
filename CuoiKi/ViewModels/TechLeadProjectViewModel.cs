@@ -66,6 +66,21 @@ namespace CuoiKi.ViewModels
             string projectID = p as string;
             TaskAssignmentState.SelectedProject = _projects.Where(x => x.ID == projectID).ElementAt(0);
         }
+        private ICommand? _reloadCommand;
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                _reloadCommand ??= new RelayCommand(
+                    p => true,
+                    p => Reload());
+                return _reloadCommand;
+            }
+        }
 
+        private void Reload()
+        {
+            UpdateProjects();
+        }
     }
 }

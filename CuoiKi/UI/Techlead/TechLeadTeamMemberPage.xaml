@@ -28,6 +28,7 @@
                 Command="{Binding CmdOpenTeamMemberManagementForm}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button
+                Command="{Binding ReloadCommand}"
                 HorizontalAlignment="Center" Margin="30 0 0 0">
                 <Icon:PackIconMaterial 
                 Kind="Reload" 
