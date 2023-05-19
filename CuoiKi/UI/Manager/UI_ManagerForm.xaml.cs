@@ -33,11 +33,6 @@ namespace CuoiKi.UI.Manager
         {
             frameContent.Navigate(new ProjectsPage());
         }
-
-        private void btn_KPI_click(object sender, RoutedEventArgs e)
-        {
-            frameContent.Navigate(new KPIForm());
-        }
         public void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)

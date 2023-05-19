@@ -70,9 +70,6 @@
     <Compile Update="UI\Manager\AssignTaskPages\ViewTask.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\Manager\KPIForm.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UI\Manager\UI_ManagerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -166,9 +163,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\AssignTaskPages\ViewTask.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Manager\KPIForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\UI_ManagerForm.xaml">
