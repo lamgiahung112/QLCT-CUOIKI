@@ -90,11 +90,6 @@
         <Viewbox Grid.Row="4">
             <Calendar DisplayDate="{Binding CalendarSelectedDate}" Name="dteSelectedMonth" DisplayMode="Year" SelectionMode="SingleDate" 
           DisplayModeChanged="dteSelectedMonth_DisplayModeChanged"  Width="800" Height="524">
-                <Calendar.CalendarDayButtonStyle>
-                    <Style TargetType="{x:Type CalendarDayButton}">
-                        <Setter Property="FontSize" Value="30" />
-                    </Style>
-                </Calendar.CalendarDayButtonStyle>
             </Calendar>
         </Viewbox>
         <ListView ItemsSource="{Binding WorkSessionsInSelectedMonth}" Style="{DynamicResource ListViewStyle1}" Grid.Row="4" Grid.Column="1" Width="375" Margin="0,11,0,10">
