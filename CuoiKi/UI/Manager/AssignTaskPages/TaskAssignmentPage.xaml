@@ -57,11 +57,19 @@
                FontSize="36" 
                Grid.ColumnSpan="2" 
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Column="3" 
+        <WrapPanel Grid.Column="2" VerticalAlignment="Center">
+            <Button Grid.Column="3" 
                 Content="Add" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding CmdAddTeam}"        
-        />
+                Command="{Binding CmdAddTeam}"/>
+            <Button
+                HorizontalAlignment="Center" Margin="30 0 0 0">
+                <Icon:PackIconMaterial 
+                Kind="Reload" 
+                HorizontalAlignment="Center" Height="12" />
+            </Button>
+        </WrapPanel>
+        
 
         <ScrollViewer Width="800" Height="480" 
                       Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" 
