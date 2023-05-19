@@ -58,8 +58,8 @@ namespace CuoiKi.ViewModels
                 if (tasks is not null && tasks.Count != 0) percentDone = (tasks!.Where(t => t.Status == Constants.TaskStatus.Done).Count() * 100 / tasks.Count);
                 teamWrapper.InitializeUI(percentDone);
                 _teamWrappers.Add(teamWrapper);
-                TeamWrappers = new List<TeamWrapper>(_teamWrappers);
             }
+            TeamWrappers = new List<TeamWrapper>(_teamWrappers);
         }
 
         #endregion
@@ -248,6 +248,24 @@ namespace CuoiKi.ViewModels
             }
             TaskAssignmentState.SelectedTeam = _teamList.Where(x => x.ID == id).FirstOrDefault();
             TeamID = id;
+        }
+
+        private ICommand? _cmdDeleteTeam;
+        public ICommand CmdDeleteTeam
+        {
+            get
+            {
+                _cmdDeleteTeam ??= new RelayCommand(
+                    p => true,
+                    p => DeleteTeam());
+                return _cmdDeleteTeam;
+            }
+        }
+
+        private void DeleteTeam()
+        {
+            _controller.Delete(TaskAssignmentState.SelectedTeam!);
+            FetchTeamList();
         }
         #endregion
     }

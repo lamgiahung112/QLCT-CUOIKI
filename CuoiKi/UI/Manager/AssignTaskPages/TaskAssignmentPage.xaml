@@ -95,7 +95,7 @@
                                         Click="ViewMenuItem_Click"
                                         Header="View"/>
                                     <MenuItem Command="{Binding DataContext.CmdEditTeam}" Header="Edit"/>
-                                    <MenuItem Header="Delete"/>
+                                    <MenuItem Command="{Binding DataContext.CmdDeleteTeam}"  Header="Delete"/>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
