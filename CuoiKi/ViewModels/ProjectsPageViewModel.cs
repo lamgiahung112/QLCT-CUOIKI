@@ -203,7 +203,8 @@ namespace CuoiKi.ViewModels
         }
         private void DeleteProject()
         {
-            MessageBox.Show("Delete project");
+            dbController.Delete(TaskAssignmentState.SelectedProject!);
+            fetchProjectList();
         }
         #endregion
 

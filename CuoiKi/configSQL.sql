@@ -136,9 +136,6 @@ Insert into Salary Values (N'mng2', 12312332, 3123222, 50000);
 Insert into Salary Values (N'hr', 1231231231, 5532523, 50000);
 
 use companydb;
-select * from tasks;
-select * from teams;
-select * from stages;
-select * from projects;
 
-select Projects.* from Projects inner join Stages on Projects.ID = Stages.ProjectID inner join Teams on Teams.StageID = Stages.ID where Teams.TechLeadID = 'tl1';
+select * from teams;
+
