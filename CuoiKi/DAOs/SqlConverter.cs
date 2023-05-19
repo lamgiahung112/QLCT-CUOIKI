@@ -145,11 +145,11 @@ namespace CuoiKi.DAOs
                 task.TeamID,
                 task.Description,
                 task.Title,
-                task.StartingTime.ToShortDateString(),
-                task.EndingTime.ToShortDateString(),
+                task.StartingTime.ToString("s"),
+                task.EndingTime.ToString("s"),
                 EnumMapper.mapToString(task.Status),
-                task.CreatedAt.ToShortDateString(),
-                task.UpdatedAt.ToShortDateString());
+                task.CreatedAt.ToString("s"),
+                task.UpdatedAt.ToString("s"));
         }
         public static string GetDeleteCommandForTask(string id)
         {
@@ -181,10 +181,10 @@ namespace CuoiKi.DAOs
                 "WHERE ID = '{6}'",
                 task.Description,
                 task.Title,
-                task.StartingTime.ToShortDateString(),
-                task.EndingTime.ToShortDateString(),
+                task.StartingTime.ToString("s"),
+                task.EndingTime.ToString("s"),
                 EnumMapper.mapToString(task.Status),
-                task.UpdatedAt.ToShortDateString(),
+                task.UpdatedAt.ToString("s"),
                 task.ID
                 );
         }
