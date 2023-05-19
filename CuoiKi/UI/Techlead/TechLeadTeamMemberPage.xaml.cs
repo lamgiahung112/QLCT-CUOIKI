@@ -1,4 +1,5 @@
-﻿using CuoiKi.ViewModels;
+﻿using CuoiKi.UI.Manager.AssignTaskPages;
+using CuoiKi.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 namespace CuoiKi.UI.Techlead
@@ -22,6 +23,12 @@ namespace CuoiKi.UI.Techlead
             var btn = sender as Button;
             btn!.Command.Execute(btn.CommandParameter);
             NavigationService.Navigate(new TechLeadViewTask());
+        }
+        private void ViewMemberInformationClick(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            btn!.Command.Execute(btn.CommandParameter);
+            NavigationService.Navigate(new ManagerViewInfomationPage());
         }
     }
 }

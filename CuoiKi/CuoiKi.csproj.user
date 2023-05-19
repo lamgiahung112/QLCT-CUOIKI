@@ -61,6 +61,9 @@
     <Compile Update="UI\Manager\AssignTaskPages\AssignTaskPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Manager\AssignTaskPages\ManagerViewInfomationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Manager\AssignTaskPages\ProjectsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -154,6 +157,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\AssignTaskPages\AssignTaskPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Manager\AssignTaskPages\ManagerViewInfomationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Manager\AssignTaskPages\ProjectsPage.xaml">

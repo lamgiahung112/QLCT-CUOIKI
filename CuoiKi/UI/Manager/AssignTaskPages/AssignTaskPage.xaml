@@ -64,7 +64,7 @@
                                         Command="{Binding DataContext.CmdAssignMemberTask, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                                         CommandParameter="{Binding}"/>
                                     <Button Command="{Binding DataContext.CmdSaveEmployeeToCurrentState, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Content="View task" Margin="10 0" Click="btn_ViewTask_Click"/>
-                                    <Button Content="View info" Margin="10 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                                    <Button Content="View info" Margin="10 0" Command="{Binding DataContext.CmdViewMemberInformation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Click="ViewInformationClick"/>
                                 </StackPanel>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"
