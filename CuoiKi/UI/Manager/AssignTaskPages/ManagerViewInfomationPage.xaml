@@ -19,19 +19,32 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width=".01*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.ColumnSpan="5">Member infomation</TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding ID, StringFormat='{}ID: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Name, StringFormat='{}Name: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Gender, StringFormat='{}Gender: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Address, StringFormat='{}Address: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Birthday, StringFormat='{}Birthday: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Status, StringFormat='{}Status: {0}'}"></TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Role, StringFormat='{}Role: {0}'}"></TextBlock>
-
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding ID, StringFormat='{}ID: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Name, StringFormat='{}Name: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Gender, StringFormat='{}Gender: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Address, StringFormat='{}Address: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Birthday, StringFormat='{}Birthday: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Status, StringFormat='{}Status: {0}'}"></TextBlock>
+        </Border>
+        <Border CornerRadius="10" Margin="25 25" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White">
+            <TextBlock Margin="50 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{Binding Role, StringFormat='{}Role: {0}'}"></TextBlock>
+        </Border>
         <Button Content="Back" Width="70" Click="BackClick"></Button>
     </Grid>
 </Page>
